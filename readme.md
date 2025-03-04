@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ilyasmohetna/human-vision/main/docs/logo.png" height="300" alt="Human Vision Banner">
+    <img src="https://raw.githubusercontent.com/ilyasmohetna/human-vision/main/docs/cover.png" height="300" alt="Human Vision Banner">
 </p>
 
 ---
