@@ -12,7 +12,8 @@ services:
     volumes:
       - ./core:/var/www
     depends_on:
-      - db
+      - mysqldb
+      - mongodb
     networks:
       - app_network
 
@@ -47,7 +48,7 @@ services:
     networks:
       - app_network
 
-  db:
+  mysqldb:
     image: mysql:8
     container_name: mysql_db
     restart: unless-stopped
@@ -59,12 +60,27 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - db_data:/var/lib/mysql
+      - mysqldb_data:/var/lib/mysql
+    networks:
+      - app_network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
     networks:
       - app_network
 
 volumes:
-  db_data:
+  mysqldb_data:
+  mongodb_data:
 
 networks:
   app_network:
