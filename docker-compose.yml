@@ -78,6 +78,17 @@ services:
     networks:
       - app_network
 
+  ai-api:
+    build:
+      context: ./ai-api
+      dockerfile: Dockerfile
+    ports:
+      - "3423:8000"
+    volumes:
+      - .:/app
+    environment:
+      - ENV=development
+
 volumes:
   mysqldb_data:
   mongodb_data:
