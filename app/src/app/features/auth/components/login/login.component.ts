@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [ButtonModule, CheckboxModule],
   templateUrl: './login.component.html',
   standalone: true,
   styleUrl: './login.component.css',
