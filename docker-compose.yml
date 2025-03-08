@@ -25,7 +25,6 @@ services:
     working_dir: /usr/src/app
     volumes:
       - ./app:/usr/src/app
-      - /usr/src/app/node_modules
     command: npm start
     networks:
       - app_network
