@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.2.0",
+    "@angular/cdk": "^19.2.2",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
@@ -19,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
     "@primeng/themes": "^19.0.9",
+    "@spartan-ng/brain": "^0.0.1-alpha.420",
     "@tailwindcss/postcss": "^4.0.9",
     "postcss": "^8.5.3",
     "primeng": "^19.0.9",
@@ -31,6 +33,7 @@
     "@angular-devkit/build-angular": "^19.2.0",
     "@angular/cli": "^19.2.0",
     "@angular/compiler-cli": "^19.2.0",
+    "@spartan-ng/cli": "^0.0.1-alpha.420",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",

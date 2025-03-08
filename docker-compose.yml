@@ -1,27 +1,29 @@
+version: "3.8"
+
 services:
-  app:
+  humanvision_app:
     build:
       context: ./core
       dockerfile: Dockerfile
       args:
         WWWUSER: "${UID:-1000}"
         WWWGROUP: "${GID:-1000}"
-    container_name: laravel_app
+    container_name: humanvision_laravel_app
     restart: unless-stopped
     working_dir: /var/www
     volumes:
       - ./core:/var/www
     depends_on:
-      - mysqldb
-      - mongodb
+      - humanvision_mysqldb
+      - humanvision_mongodb
     networks:
-      - app_network
+      - humanvision_network
 
-  angular:
+  humanvision_angular:
     build:
       context: ./app
       dockerfile: Dockerfile
-    container_name: angular_app
+    container_name: humanvision_angular_app
     restart: unless-stopped
     working_dir: /usr/src/app
     ports:
@@ -30,11 +32,11 @@ services:
       - ./app:/usr/src/app
     command: npm start
     networks:
-      - app_network
+      - humanvision_network
 
-  nginx:
+  humanvision_nginx:
     image: nginx:alpine
-    container_name: nginx
+    container_name: humanvision_nginx
     restart: unless-stopped
     ports:
       - "2002:2002"
@@ -42,14 +44,14 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./core:/var/www
     depends_on:
-      - app
-      - angular
+      - humanvision_app
+      - humanvision_angular
     networks:
-      - app_network
+      - humanvision_network
 
-  mysqldb:
+  humanvision_mysqldb:
     image: mysql:8
-    container_name: mysql_db
+    container_name: humanvision_mysql_db
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: humanvision
@@ -59,13 +61,13 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mysqldb_data:/var/lib/mysql
+      - humanvision_mysqldb_data:/var/lib/mysql
     networks:
-      - app_network
+      - humanvision_network
 
-  mongodb:
+  humanvision_mongodb:
     image: mongo:latest
-    container_name: mongodb
+    container_name: humanvision_mongodb
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -73,25 +75,28 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
+      - humanvision_mongodb_data:/data/db
     networks:
-      - app_network
+      - humanvision_network
 
-  ai-api:
+  humanvision_ai_api:
     build:
       context: ./ai-api
       dockerfile: Dockerfile
+    container_name: humanvision_ai_api
     ports:
       - "3423:8000"
     volumes:
       - .:/app
     environment:
       - ENV=development
+    networks:
+      - humanvision_network
 
 volumes:
-  mysqldb_data:
-  mongodb_data:
+  humanvision_mysqldb_data:
+  humanvision_mongodb_data:
 
 networks:
-  app_network:
+  humanvision_network:
     driver: bridge
