@@ -1,16 +1,34 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
-import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
+import { FormsModule } from '@angular/forms';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import {
+  HlmCardDirective,
+  HlmCardContentDirective,
+  HlmCardDescriptionDirective,
+  HlmCardFooterDirective,
+  HlmCardHeaderDirective,
+  HlmCardTitleDirective,
+} from '@spartan-ng/ui-card-helm';
 
 @Component({
   selector: 'app-login',
-  imports: [ButtonModule, CheckboxModule, HlmBadgeDirective],
-  templateUrl: './login.component.html',
   standalone: true,
-  styleUrl: './login.component.css',
+  imports: [
+    FormsModule,
+    HlmInputDirective,
+    HlmButtonDirective,
+    HlmCardDirective,
+    HlmCardContentDirective,
+    HlmCardDescriptionDirective,
+    HlmCardFooterDirective,
+    HlmCardHeaderDirective,
+    HlmCardTitleDirective,
+  ],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   email: string = '';
