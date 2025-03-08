@@ -1,8 +1,9 @@
 /* @import "@angular/cdk/overlay-prebuilt.css"; */
-@import "@spartan-ng/brain/hlm-tailwind-preset.css";
 
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+@import "@spartan-ng/brain/hlm-tailwind-preset.css";
 
 :root {
   --font-sans: "";
@@ -54,3 +55,5 @@
   --ring: 212.7 26.8% 83.9;
   color-scheme: dark;
 }
+
+@custom-variant dark (&:where(.dark, .dark *));

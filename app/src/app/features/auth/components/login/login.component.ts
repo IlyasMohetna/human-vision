@@ -3,10 +3,11 @@ import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
+import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 
 @Component({
   selector: 'app-login',
-  imports: [ButtonModule, CheckboxModule],
+  imports: [ButtonModule, CheckboxModule, HlmBadgeDirective],
   templateUrl: './login.component.html',
   standalone: true,
   styleUrl: './login.component.css',
