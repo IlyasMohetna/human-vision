@@ -6,54 +6,58 @@
     <div class="max-w-md w-full">
       <div hlmCardHeader>
         <h3 hlmCardTitle class="text-3xl font-bold">Welcome Back!</h3>
-        <p hlmCardDescription>Log in to your account</p>
       </div>
 
-      <div *ngIf="errorMessages.length > 0" class="text-red-500 text-sm mb-4">
-        <p *ngFor="let error of errorMessages">{{ error }}</p>
-      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div hlmCardContent>
+          <label for="email" class="block text-gray-700 font-semibold"
+            >Email</label
+          >
+          <input
+            id="email"
+            hlmInput
+            type="email"
+            placeholder="Enter your email"
+            class="w-full p-2 border rounded-lg mb-4"
+            formControlName="email"
+            [error]="
+              loginForm.controls['email'].invalid &&
+              loginForm.controls['email'].touched
+            "
+          />
 
-      <div hlmCardContent>
-        <label for="email" class="block text-gray-700 font-semibold"
-          >Email</label
-        >
-        <input
-          id="email"
-          hlmInput
-          type="email"
-          placeholder="Enter your email"
-          class="w-full p-2 border rounded-lg mb-4"
-          [(ngModel)]="email"
-        />
+          <label for="password" class="block text-gray-700 font-semibold"
+            >Password</label
+          >
+          <input
+            id="password"
+            hlmInput
+            type="password"
+            placeholder="Enter your password"
+            class="w-full p-2 border rounded-lg mb-4"
+            formControlName="password"
+            [error]="
+              loginForm.controls['password'].invalid &&
+              loginForm.controls['password'].touched
+            "
+          />
+        </div>
 
-        <label for="password" class="block text-gray-700 font-semibold"
-          >Password</label
-        >
-        <input
-          id="password"
-          hlmInput
-          type="password"
-          placeholder="Enter your password"
-          class="w-full p-2 border rounded-lg mb-4"
-          [(ngModel)]="password"
-        />
+        <div hlmCardFooter class="mt-4">
+          <button
+            hlmButton
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+          >
+            Sign In
+          </button>
+        </div>
+      </form>
 
-        <label class="flex items-center">
-          <input type="checkbox" hlmInput class="mr-2" />
-          Remember me
-        </label>
-      </div>
-
-      <div hlmCardFooter class="mt-4">
-        <button
-          hlmBtn
-          variant="default"
-          class="w-full"
-          size="sm"
-          (click)="login()"
-        >
-          Sign In
-        </button>
+      <div class="mt-4 text-center">
+        <a href="#" class="text-blue-500 hover:underline">Forgot password?</a>
+        <span class="mx-2">|</span>
+        <a href="#" class="text-blue-500 hover:underline">Sign up</a>
       </div>
     </div>
   </section>
