@@ -30,8 +30,14 @@ WORKDIR /var/www
 COPY --chown=core:core . .
 
 # Fix permissions on storage & cache
-RUN chown -R core:core /var/www/storage /var/www/bootstrap/cache
-RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+RUN chown -R core:core /var/www/storage /var/www/bootstrap/cache \
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
+# Copy the entrypoint script and make it executable
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Set non-root user for running the container
 USER core

@@ -28,7 +28,6 @@ services:
       - "4200:4200"
     volumes:
       - ./app:/usr/src/app
-      - /usr/src/app/node_modules
     command: npm start
     networks:
       - app_network
