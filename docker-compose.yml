@@ -39,7 +39,7 @@ services:
     container_name: humanvision_nginx
     restart: unless-stopped
     ports:
-      - "2002:2002"
+      - "9400:2002"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./core:/var/www
@@ -90,6 +90,20 @@ services:
       - .:/app
     environment:
       - ENV=development
+    networks:
+      - humanvision_network
+
+  humanvision_phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: humanvision_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: humanvision_mysqldb
+      PMA_PORT: 3306
+    ports:
+      - "9800:80"
+    depends_on:
+      - humanvision_mysqldb
     networks:
       - humanvision_network
 

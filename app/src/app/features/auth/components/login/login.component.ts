@@ -17,13 +17,21 @@ import {
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
+import {
+  HlmAlertDescriptionDirective,
+  HlmAlertDirective,
+  HlmAlertIconDirective,
+  HlmAlertTitleDirective,
+} from '@spartan-ng/ui-alert-helm';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule, // <-- Added ReactiveFormsModule here
+    ReactiveFormsModule,
     HlmInputDirective,
     HlmButtonDirective,
     HlmCardDirective,
@@ -31,6 +39,11 @@ import {
     HlmCardFooterDirective,
     HlmCardHeaderDirective,
     HlmCardTitleDirective,
+    HlmAlertDescriptionDirective,
+    HlmAlertDirective,
+    HlmAlertIconDirective,
+    HlmAlertTitleDirective,
+    FontAwesomeModule,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
@@ -38,6 +51,7 @@ import {
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
+  faTriangleExclamation = faTriangleExclamation;
 
   constructor(
     private fb: FormBuilder,
@@ -65,8 +79,10 @@ export class LoginComponent {
           this.authService.storeToken(response.token);
           this.router.navigate(['/dashboard']);
         },
-        error: () => {
-          this.errorMessage = 'Invalid email or password';
+        error: (error) => {
+          if (error.error.message) {
+            this.errorMessage = error.error.message;
+          }
         },
       });
     } else {
