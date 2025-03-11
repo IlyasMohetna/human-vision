@@ -4,22 +4,21 @@
     class="w-1/2 flex items-center justify-center p-10 bg-white shadow-lg rounded-lg"
   >
     <div class="max-w-md w-full">
-      <div hlmCardHeader>
-        <h3 hlmCardTitle class="text-3xl font-bold">Welcome Back!</h3>
+      <div>
+        <h3 class="text-3xl font-bold">Welcome Back!</h3>
       </div>
 
-      <!-- Alert message properly aligned -->
-      <div hlmCardContent *ngIf="errorMessage">
-        <div hlmAlert class="w-full" variant="destructive">
-          <fa-icon hlm hlmAlertIcon [icon]="faTriangleExclamation"></fa-icon>
-          <p hlmAlertDesc>
+      <div *ngIf="errorMessage">
+        <div class="w-full" variant="destructive">
+          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          <p>
             {{ errorMessage }}
           </p>
         </div>
       </div>
 
       <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <div hlmCardContent>
+        <div>
           <label for="email" class="block text-gray-700 font-semibold"
             >Email</label
           >
@@ -53,9 +52,8 @@
           />
         </div>
 
-        <div hlmCardFooter class="mt-4">
+        <div class="mt-4">
           <button
-            hlmButton
             type="submit"
             class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer"
           >

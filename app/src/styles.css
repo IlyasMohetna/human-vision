@@ -1,11 +1,26 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import "@spartan-ng/brain/hlm-tailwind-preset.css";
+/* @theme {
+  --color-primary: #4f46e5;
+  --color-secondary: #22d3ee;
+  --font-sans: "Exo 2", sans-serif;
+} */
 
+/* :root {
+  color-scheme: light;
+} */
+/* @import "@spartan-ng/brain/hlm-tailwind-preset.css"; */
+/* 
 @theme {
   --color-primary: #4f46e5;
   --color-secondary: #22d3ee;
   --font-sans: "Exo 2", sans-serif;
+}
+
+body {
+  @apply text-black dark:text-white;
 }
 
 input:-webkit-autofill {
@@ -62,4 +77,6 @@ input:-webkit-autofill {
   color-scheme: dark;
 }
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *)); */
+
+/* Enable dark mode based on class */
