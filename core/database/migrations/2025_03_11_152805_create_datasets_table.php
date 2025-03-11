@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('path');
             $table->foreignId('status_id')->constrained('datasets__status');
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
             $table->string('mongo_annotation_id');
             $table->timestamps();
         });
