@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../../services/auth.service';
 
 interface MenuItem {
   name: string;
@@ -11,13 +11,12 @@ interface MenuItem {
 }
 
 @Component({
-  selector: 'app-sidebar-menu',
-  standalone: true,
-  imports: [RouterModule, CommonModule],
-  templateUrl: './sidebar-menu.component.html',
-  styleUrl: './sidebar-menu.component.css',
+  selector: 'app-sidebar',
+  imports: [CommonModule, RouterModule],
+  templateUrl: './sidebar.component.html',
+  styles: ``,
 })
-export class SidebarMenuComponent implements OnInit {
+export class SidebarComponent implements OnInit {
   isOpen = false;
   darkMode = false;
   currentUrl = '';
