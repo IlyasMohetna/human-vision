@@ -118,26 +118,28 @@
       </div>
 
       <nav class="space-y-2">
-        <ng-container *ngFor="let item of menuItems">
-          <a
-            [routerLink]="item.route"
-            class="flex items-center justify-start gap-2 w-full rounded px-2 py-1.5 text-sm transition-[box-shadow,_background-color,_color]"
-            [class.bg-white]="isActive(item.route)"
-            [class.text-stone-950]="isActive(item.route)"
-            [class.shadow]="isActive(item.route)"
-            [class.hover:bg-stone-200]="!isActive(item.route)"
-            [class.bg-transparent]="!isActive(item.route)"
-            [class.text-stone-500]="!isActive(item.route)"
-            [class.shadow-none]="!isActive(item.route)"
-            [class.dark:bg-stone-800]="
-              isActive(item.route) && (darkMode$ | async)
-            "
-            [class.dark:text-white]="
-              isActive(item.route) && (darkMode$ | async)
-            "
-          >
-            <span>{{ item.name }}</span>
-          </a>
+        <ng-container *ngIf="menuItems$ | async as menuItems">
+          <ng-container *ngFor="let item of menuItems">
+            <a
+              [routerLink]="item.route"
+              class="flex items-center justify-start gap-2 w-full rounded px-2 py-1.5 text-sm transition-[box-shadow,_background-color,_color]"
+              [class.bg-white]="isActive(item.route)"
+              [class.text-stone-950]="isActive(item.route)"
+              [class.shadow]="isActive(item.route)"
+              [class.hover:bg-stone-200]="!isActive(item.route)"
+              [class.bg-transparent]="!isActive(item.route)"
+              [class.text-stone-500]="!isActive(item.route)"
+              [class.shadow-none]="!isActive(item.route)"
+              [class.dark:bg-stone-800]="
+                isActive(item.route) && (darkMode$ | async)
+              "
+              [class.dark:text-white]="
+                isActive(item.route) && (darkMode$ | async)
+              "
+            >
+              <span>{{ item.name }}</span>
+            </a>
+          </ng-container>
         </ng-container>
       </nav>
 
