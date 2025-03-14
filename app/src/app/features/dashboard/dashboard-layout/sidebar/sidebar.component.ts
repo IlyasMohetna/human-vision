@@ -1,23 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+
 import { AuthService } from '../../../auth/services/auth.service';
 import { UserService } from '../../../auth/services/user.service';
-import { Observable } from 'rxjs';
+import { ThemeService } from '../../../../core/services/theme.service';
 import { User } from '../../../auth/models/user.model';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  imports: [RouterModule, CommonModule],
   styleUrls: ['./sidebar.component.css'],
+  standalone: true,
+  imports: [RouterModule, CommonModule],
 })
 export class SidebarComponent implements OnInit {
   isOpen = false;
-  darkMode = false;
   currentUrl = '';
   user$: Observable<User | null>;
+  darkMode$: Observable<boolean>;
 
   menuItems = [
     { name: 'Dashboard Home', route: '/dashboard', icon: 'home' },
@@ -27,9 +30,11 @@ export class SidebarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
+    private themeService: ThemeService,
     private router: Router
   ) {
     this.user$ = this.userService.user$;
+    this.darkMode$ = this.themeService.darkMode$;
 
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -41,18 +46,10 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.isOpen = window.innerWidth >= 768;
-
-    this.darkMode =
-      localStorage.getItem('darkMode') === 'true' ||
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    this.applyTheme();
   }
 
   toggleDarkMode() {
-    this.darkMode = !this.darkMode;
-    localStorage.setItem('darkMode', this.darkMode.toString());
-    this.applyTheme();
+    this.themeService.toggleDarkMode();
   }
 
   logout() {
@@ -61,14 +58,6 @@ export class SidebarComponent implements OnInit {
 
   toggleSidebar() {
     this.isOpen = !this.isOpen;
-  }
-
-  private applyTheme() {
-    if (this.darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
   }
 
   isActive(route: string): boolean {
