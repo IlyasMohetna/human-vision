@@ -14,7 +14,9 @@
         <path d="M12 2a9.715 9.715 0 00-7 3l7 7 7-7a9.715 9.715 0 00-7-3z" />
         <path d="M2 12l7 7 7-7" />
       </svg>
-      <span class="font-semibold text-gray-900 dark:text-gray-100">My App</span>
+      <span class="font-semibold text-gray-900 dark:text-gray-100"
+        >My App
+      </span>
     </div>
 
     <button
@@ -70,6 +72,8 @@
         </button>
       </div>
     </ng-container>
+
+    <div></div>
 
     <ng-template #loading>
       <div
@@ -137,7 +141,8 @@
                 isActive(item.route) && (darkMode$ | async)
               "
             >
-              <span>{{ item.name }}</span>
+              <fa-icon [icon]="item.icon"></fa-icon>
+              <span> {{ item.name }}</span>
             </a>
           </ng-container>
         </ng-container>

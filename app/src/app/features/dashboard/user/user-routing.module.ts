@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 export const USER_MENU = [
-  { name: 'User Dashboard', route: '/user', icon: 'home' },
-  { name: 'Profile', route: '/user/profile', icon: 'user' },
-  { name: 'Orders', route: '/user/orders', icon: 'shopping-cart' },
+  { name: 'Analytics', route: '/user', icon: 'home' },
+  { name: 'Studio', route: '/user/orders', icon: 'shopping-cart' },
+  { name: 'Reviews', route: '/user/profile', icon: 'user' },
+  { name: 'Settings', route: '/user/settings', icon: 'user-cog' },
 ];
 
 const routes: Routes = [];

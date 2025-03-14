@@ -11,13 +11,15 @@ import { User } from '../../../auth/models/user.model';
 import { ADMIN_MENU } from '../../admin/admin-routing.module';
 import { USER_MENU } from '../../user/user-routing.module';
 import { Role } from '../../../auth/enums/role';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, FontAwesomeModule],
 })
 export class SidebarComponent implements OnInit {
   isOpen = false;
@@ -28,6 +30,7 @@ export class SidebarComponent implements OnInit {
     { name: string; route: string; icon: string }[]
   >([]);
   menuItems$ = this.menuItemsSubject.asObservable();
+  faCoffee = faCoffee;
 
   constructor(
     private authService: AuthService,

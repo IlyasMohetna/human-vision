@@ -29,7 +29,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "src/styles.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+            ],
             "scripts": []
           },
           "configurations": {
