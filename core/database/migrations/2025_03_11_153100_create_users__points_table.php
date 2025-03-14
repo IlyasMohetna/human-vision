@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('points');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('review_id')->constrained('reviews');
+            $table->foreignId('dataset_id')->constrained('datasets');
             $table->timestamps();
         });
     }

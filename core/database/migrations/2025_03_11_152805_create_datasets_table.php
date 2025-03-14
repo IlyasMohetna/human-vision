@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('status_id')->constrained('datasets__status');
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('admin_id')->nullable()->constrained('users');
             $table->string('mongo_annotation_id');
             $table->timestamps();
         });
