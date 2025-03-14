@@ -1,7 +1,6 @@
 <div class="flex h-screen">
   <section
-    hlmCard
-    class="w-1/2 flex items-center justify-center p-10 bg-white shadow-lg rounded-lg"
+    class="w-1/2 flex items-center justify-center p-10 bg-white dark:bg-gray-900 shadow-lg dark:shadow-gray-700 rounded-lg"
   >
     <div class="max-w-md w-full">
       <div>
@@ -24,15 +23,10 @@
           >
           <input
             id="email"
-            hlmInput
             type="email"
             placeholder="Enter your email"
             class="w-full p-2 border rounded-lg mb-4"
             formControlName="email"
-            [error]="
-              loginForm.controls['email'].invalid &&
-              loginForm.controls['email'].touched
-            "
           />
 
           <label for="password" class="block text-gray-700 font-semibold"
@@ -40,15 +34,10 @@
           >
           <input
             id="password"
-            hlmInput
             type="password"
             placeholder="Enter your password"
             class="w-full p-2 border rounded-lg mb-4"
             formControlName="password"
-            [error]="
-              loginForm.controls['password'].invalid &&
-              loginForm.controls['password'].touched
-            "
           />
         </div>
 
