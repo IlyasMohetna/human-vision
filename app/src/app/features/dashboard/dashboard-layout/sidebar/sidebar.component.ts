@@ -1,53 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, Router, NavigationEnd } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { AuthService } from '../../../../services/auth.service';
-
-interface MenuItem {
-  name: string;
-  route: string;
-  icon?: string;
-}
+import { AuthService } from '../../../auth/services/auth.service';
+import { UserService } from '../../../auth/services/user.service';
+import { Observable } from 'rxjs';
+import { User } from '../../../auth/models/user.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule, RouterModule],
   templateUrl: './sidebar.component.html',
-  styles: ``,
+  imports: [RouterModule, CommonModule],
+  styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
   isOpen = false;
   darkMode = false;
   currentUrl = '';
+  user$: Observable<User | null>;
 
-  menuItems: MenuItem[] = [
-    { name: 'Dashboard Home', route: '/dashboard' },
-    { name: 'Settings', route: '/dashboard/settings' },
+  menuItems = [
+    { name: 'Dashboard Home', route: '/dashboard', icon: 'home' },
+    { name: 'Settings', route: '/dashboard/settings', icon: 'settings' },
   ];
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private router: Router
+  ) {
+    this.user$ = this.userService.user$;
+
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        this.currentUrl = event.urlAfterRedirects || event.url;
+      .subscribe((event) => {
+        this.currentUrl =
+          (event as NavigationEnd).urlAfterRedirects || this.router.url;
       });
   }
 
   ngOnInit() {
     this.isOpen = window.innerWidth >= 768;
 
-    this.currentUrl = this.router.url;
-
     this.darkMode =
       localStorage.getItem('darkMode') === 'true' ||
       window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     this.applyTheme();
-  }
-
-  toggleSidebar() {
-    this.isOpen = !this.isOpen;
   }
 
   toggleDarkMode() {
@@ -57,8 +56,11 @@ export class SidebarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.clearToken();
-    this.router.navigate(['/login']);
+    this.authService.logout().subscribe();
+  }
+
+  toggleSidebar() {
+    this.isOpen = !this.isOpen;
   }
 
   private applyTheme() {
@@ -70,18 +72,6 @@ export class SidebarComponent implements OnInit {
   }
 
   isActive(route: string): boolean {
-    if (
-      route === '/dashboard' &&
-      (this.currentUrl === '/dashboard' ||
-        this.currentUrl === '/dashboard/home')
-    ) {
-      return true;
-    }
-
-    if (route !== '/dashboard' && this.currentUrl.startsWith(route)) {
-      return true;
-    }
-
-    return false;
+    return this.currentUrl.startsWith(route);
   }
 }
