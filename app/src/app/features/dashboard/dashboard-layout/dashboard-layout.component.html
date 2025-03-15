@@ -1,7 +1,8 @@
-<div class="flex h-screen text-stone-950 bg-stone-100">
+<div *ngIf="showLayout" class="flex h-screen text-stone-950 bg-stone-100">
   <app-sidebar></app-sidebar>
-
   <main class="flex-1 p-6 overflow-y-auto">
     <router-outlet></router-outlet>
   </main>
 </div>
+
+<router-outlet *ngIf="!showLayout"></router-outlet>
