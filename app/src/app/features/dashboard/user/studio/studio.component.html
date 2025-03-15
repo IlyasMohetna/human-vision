@@ -59,7 +59,7 @@
 </style>
 <div class="flex h-screen">
   <!-- Left Sidebar -->
-  <aside class="w-1/6 bg-gray-900 text-white p-4">
+  <aside class="w-1/6 bg-[#282828] text-white p-4">
     <h2 class="text-lg font-bold mb-4">Menu</h2>
     <nav class="flex flex-col space-y-2">
       <a href="#" class="hover:bg-gray-700 p-2 rounded">Home</a>
@@ -69,13 +69,20 @@
   </aside>
 
   <!-- Main Content -->
-  <main class="flex-1 relative bg-gray-800 flex items-center justify-center">
-    <div class="relative w-full h-[90vh] border-2 border-gray-700">
+  <main class="flex-1 relative bg-[#4C4C4C] flex items-center justify-center">
+    <div
+      class="relative w-full h-[90vh]"
+      (mousedown)="onMouseDownContainer($event)"
+      (mousemove)="onMouseMoveContainer($event)"
+      (mouseup)="onMouseUpContainer($event)"
+      (mouseenter)="handleMouseEnterContainer()"
+      (mouseleave)="handleMouseLeaveContainer()"
+      (mousemove)="updateCrosshairPosition($event)"
+    >
       <!-- Image Viewer with Simple Zoom -->
       <div
         #imageContainer
         class="image-container"
-        (mousemove)="updateCrosshairPosition($event)"
         tabindex="0"
         (keydown)="handleKeyboardShortcuts($event)"
       >
@@ -90,49 +97,60 @@
             (load)="onImageLoad()"
           />
         </div>
-
-        <!-- Crosshair guides -->
-        <div
-          class="crosshair-container"
-          [style.display]="showCrosshair ? 'block' : 'none'"
-        >
-          <div class="crosshair-h" [style.top.px]="crosshairY"></div>
-          <div class="crosshair-v" [style.left.px]="crosshairX"></div>
-        </div>
       </div>
 
-      <!-- Overlay Canvas for Drawing Polygons -->
-      <canvas
-        #annotationCanvas
-        class="absolute top-0 left-0 w-full h-full"
-        [class.pointer-events-none]="!drawMode"
-        style="z-index: 500"
-        (mousedown)="startDrawing($event)"
-        (mousemove)="drawPolygon($event)"
-        (mouseup)="finishDrawing()"
-      ></canvas>
-
-      <!-- Cursor Tracker -->
+      <!-- Crosshair guides now span entire parent -->
       <div
-        class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"
-        style="z-index: 2000"
+        class="crosshair-container"
+        [style.display]="showCrosshair && isMouseInContainer ? 'block' : 'none'"
       >
-        X: {{ mouseX }}, Y: {{ mouseY }} | Zoom: {{ zoomLevel.toFixed(1) }}x
+        <div class="crosshair-h" [style.top.px]="crosshairY"></div>
+        <div class="crosshair-v" [style.left.px]="crosshairX"></div>
       </div>
 
-      <!-- Hidden controls info -->
+      <!-- Small label near the crosshair position -->
       <div
-        class="absolute top-2 right-2 bg-gray-900 text-white px-2 py-1 text-xs rounded opacity-70"
-        style="z-index: 2000"
+        class="coordinate-label"
+        [style.display]="isMouseInContainer ? 'block' : 'none'"
+        [style.left.px]="crosshairX + 10"
+        [style.top.px]="crosshairY + 10"
       >
-        Ctrl+/- or Ctrl+Wheel to zoom | G to toggle grid | C to clear polygons |
-        D to toggle drawing
+        {{
+          showCoordinates
+            ? displayedCoordinateX + ", " + displayedCoordinateY
+            : "No Coordinates"
+        }}
       </div>
+    </div>
+
+    <canvas
+      #annotationCanvas
+      class="absolute top-0 left-0 w-full h-full"
+      [class.pointer-events-none]="!drawMode"
+      style="z-index: 500"
+      (mousedown)="startDrawing($event)"
+      (mousemove)="drawPolygon($event)"
+      (mouseup)="finishDrawing()"
+    ></canvas>
+
+    <div
+      class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"
+      style="z-index: 2000"
+    >
+      X: {{ mouseX }}, Y: {{ mouseY }} | Zoom: {{ zoomLevel.toFixed(1) }}x
+    </div>
+
+    <div
+      class="absolute top-2 right-2 bg-gray-900 text-white px-2 py-1 text-xs rounded opacity-70"
+      style="z-index: 2000"
+    >
+      Ctrl+/- or Ctrl+Wheel to zoom | G to toggle grid | C to clear polygons | D
+      to toggle drawing
     </div>
   </main>
 
   <!-- Right Sidebar -->
-  <aside class="w-1/6 bg-gray-700 text-white p-4">
+  <aside class="w-1/6 bg-[#282828] text-white p-4">
     <h2 class="text-lg font-bold mb-4">Tools</h2>
     <nav class="flex flex-col space-y-2">
       <button (click)="toggleDrawMode()" class="hover:bg-gray-600 p-2 rounded">

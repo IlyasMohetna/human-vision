@@ -62,20 +62,28 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   // Keyboard shortcuts - global scope
   @HostListener('window:keydown', ['$event'])
   handleGlobalKeyboardShortcuts(event: KeyboardEvent) {
-    // Only process if Ctrl key is pressed for zoom
     if (event.ctrlKey) {
-      if (event.key === '+' || event.key === '=') {
-        event.preventDefault(); // Prevent browser zoom
+      // Support multiple key values for '+' or '-'
+      if (event.key === '+' || event.key === '=' || event.key === 'Add') {
+        event.preventDefault();
         this.zoomIn();
-      } else if (event.key === '-') {
-        event.preventDefault(); // Prevent browser zoom
+      } else if (
+        event.key === '-' ||
+        event.key === 'Subtract' ||
+        event.key === '_'
+      ) {
+        event.preventDefault();
         this.zoomOut();
       } else if (event.key === '0') {
         event.preventDefault();
         this.resetZoom();
       }
     } else {
-      // Other shortcuts without Ctrl
+      // Remove direct panning = true
+      if (event.key === ' ') {
+        event.preventDefault();
+        this.spacePressed = true;
+      }
       if (event.key.toLowerCase() === 'g') {
         this.toggleCrosshair();
       } else if (event.key.toLowerCase() === 'd') {
@@ -83,6 +91,15 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       } else if (event.key.toLowerCase() === 'c') {
         this.clearPolygons();
       }
+    }
+  }
+
+  // Listen for space release
+  @HostListener('window:keyup', ['$event'])
+  handleGlobalKeyboardShortcutsUp(event: KeyboardEvent) {
+    if (event.key === ' ') {
+      event.preventDefault();
+      this.spacePressed = false;
     }
   }
 
@@ -94,6 +111,19 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       return false;
     }
     return true;
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMoveDocument(event: MouseEvent) {
+    if (!this.panning) return;
+    this.translateX = event.clientX - this.panningStartX;
+    this.translateY = event.clientY - this.panningStartY;
+    this.applyTransform();
+  }
+
+  @HostListener('document:mouseup', ['$event'])
+  onMouseUpDocument() {
+    this.panning = false;
   }
 
   ngAfterViewInit() {
@@ -267,10 +297,38 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     this.showCrosshair = !this.showCrosshair;
   }
 
+  showCoordinates = false;
+  displayedCoordinateX = 0;
+  displayedCoordinateY = 0;
+
   updateCrosshairPosition(event: MouseEvent) {
-    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
-    this.crosshairX = event.clientX - rect.left;
-    this.crosshairY = event.clientY - rect.top;
+    // Calculate position relative to the parent div
+    const parentRect = (
+      event.currentTarget as HTMLElement
+    ).getBoundingClientRect();
+    this.crosshairX = event.clientX - parentRect.left;
+    this.crosshairY = event.clientY - parentRect.top;
+
+    // Check if the cursor is inside the scaled image
+    if (!this.imageElementRef) return;
+    const imageRect =
+      this.imageElementRef.nativeElement.getBoundingClientRect();
+    const isInsideImage =
+      event.clientX >= imageRect.left &&
+      event.clientX <= imageRect.right &&
+      event.clientY >= imageRect.top &&
+      event.clientY <= imageRect.bottom;
+
+    if (isInsideImage) {
+      const scale = this.zoomLevel;
+      const offsetX = event.clientX - imageRect.left;
+      const offsetY = event.clientY - imageRect.top;
+      this.displayedCoordinateX = Math.round(offsetX / scale);
+      this.displayedCoordinateY = Math.round(offsetY / scale);
+      this.showCoordinates = true;
+    } else {
+      this.showCoordinates = false;
+    }
   }
 
   // Check if the event occurred inside the image container
@@ -387,6 +445,57 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         0,
         this.canvasRef.nativeElement.width,
         this.canvasRef.nativeElement.height
+      );
+    }
+  }
+
+  public isMouseInContainer = false;
+
+  handleMouseEnterContainer() {
+    this.isMouseInContainer = true;
+  }
+
+  handleMouseLeaveContainer() {
+    this.isMouseInContainer = false;
+    this.showCoordinates = false; // Hide coordinates once we leave
+  }
+
+  // Add panning state & offsets
+  panning = false;
+  private panningStartX = 0;
+  private panningStartY = 0;
+  private translateX = 0;
+  private translateY = 0;
+  private spacePressed = false;
+
+  // Handle mousedown on our parent container
+  onMouseDownContainer(event: MouseEvent) {
+    if (this.spacePressed) {
+      this.panning = true; // Only start panning if space is pressed & mouse is down
+      this.panningStartX = event.clientX - this.translateX;
+      this.panningStartY = event.clientY - this.translateY;
+    } else {
+      this.startDrawing(event);
+    }
+  }
+
+  onMouseMoveContainer(event: MouseEvent) {
+    if (!this.panning) {
+      this.drawPolygon(event);
+    }
+  }
+
+  onMouseUpContainer(event: MouseEvent) {
+    this.finishDrawing();
+  }
+
+  // Apply both translate + scale
+  private applyTransform() {
+    if (this.imageElementRef) {
+      this.renderer.setStyle(
+        this.imageElementRef.nativeElement,
+        'transform',
+        `translate(${this.translateX}px, ${this.translateY}px) scale(${this.zoomLevel})`
       );
     }
   }
