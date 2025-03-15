@@ -1,1 +1,162 @@
-<p>studio works!</p>
+<style>
+  .image-container {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    width: 95%; /* Increased from original */
+    height: 95%; /* Increased from original */
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .zoomable-image {
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 50%; /* Ensures image is never too small */
+    min-height: 50%; /* Ensures image is never too small */
+    object-fit: contain;
+    transform-origin: center;
+    transition: transform 0.1s ease-in-out;
+  }
+
+  /* Crosshair styling with very high z-index */
+  .crosshair-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  .crosshair-h {
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+  }
+
+  .crosshair-v {
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+  }
+</style>
+<div class="flex h-screen">
+  <!-- Left Sidebar -->
+  <aside class="w-1/6 bg-gray-900 text-white p-4">
+    <h2 class="text-lg font-bold mb-4">Menu</h2>
+    <nav class="flex flex-col space-y-2">
+      <a href="#" class="hover:bg-gray-700 p-2 rounded">Home</a>
+      <a href="#" class="hover:bg-gray-700 p-2 rounded">Actions</a>
+      <a href="#" class="hover:bg-gray-700 p-2 rounded">Community</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 relative bg-gray-800 flex items-center justify-center">
+    <div class="relative w-full h-[90vh] border-2 border-gray-700">
+      <!-- Image Viewer with Simple Zoom -->
+      <div
+        #imageContainer
+        class="image-container"
+        (mousemove)="updateCrosshairPosition($event)"
+        tabindex="0"
+        (keydown)="handleKeyboardShortcuts($event)"
+      >
+        <div class="image-wrapper">
+          <img
+            #imageElement
+            *ngIf="imageUrl"
+            [src]="imageUrl"
+            alt="Zoomable Image"
+            class="zoomable-image"
+            draggable="false"
+            (load)="onImageLoad()"
+          />
+        </div>
+
+        <!-- Crosshair guides -->
+        <div
+          class="crosshair-container"
+          [style.display]="showCrosshair ? 'block' : 'none'"
+        >
+          <div class="crosshair-h" [style.top.px]="crosshairY"></div>
+          <div class="crosshair-v" [style.left.px]="crosshairX"></div>
+        </div>
+      </div>
+
+      <!-- Overlay Canvas for Drawing Polygons -->
+      <canvas
+        #annotationCanvas
+        class="absolute top-0 left-0 w-full h-full"
+        [class.pointer-events-none]="!drawMode"
+        style="z-index: 500"
+        (mousedown)="startDrawing($event)"
+        (mousemove)="drawPolygon($event)"
+        (mouseup)="finishDrawing()"
+      ></canvas>
+
+      <!-- Cursor Tracker -->
+      <div
+        class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"
+        style="z-index: 2000"
+      >
+        X: {{ mouseX }}, Y: {{ mouseY }} | Zoom: {{ zoomLevel.toFixed(1) }}x
+      </div>
+
+      <!-- Hidden controls info -->
+      <div
+        class="absolute top-2 right-2 bg-gray-900 text-white px-2 py-1 text-xs rounded opacity-70"
+        style="z-index: 2000"
+      >
+        Ctrl+/- or Ctrl+Wheel to zoom | G to toggle grid | C to clear polygons |
+        D to toggle drawing
+      </div>
+    </div>
+  </main>
+
+  <!-- Right Sidebar -->
+  <aside class="w-1/6 bg-gray-700 text-white p-4">
+    <h2 class="text-lg font-bold mb-4">Tools</h2>
+    <nav class="flex flex-col space-y-2">
+      <button (click)="toggleDrawMode()" class="hover:bg-gray-600 p-2 rounded">
+        {{ drawMode ? "Disable Drawing" : "Enable Drawing" }}
+      </button>
+      <button (click)="toggleCrosshair()" class="hover:bg-gray-600 p-2 rounded">
+        {{ showCrosshair ? "Hide Grid" : "Show Grid" }}
+      </button>
+      <button (click)="clearPolygons()" class="hover:bg-gray-600 p-2 rounded">
+        Clear Polygons
+      </button>
+
+      <div class="my-2 border-t border-gray-600"></div>
+
+      <div class="text-sm text-gray-400 mb-2">Zoom Controls:</div>
+      <button (click)="zoomIn()" class="hover:bg-gray-600 p-2 rounded">
+        Zoom In (+)
+      </button>
+      <button (click)="zoomOut()" class="hover:bg-gray-600 p-2 rounded">
+        Zoom Out (-)
+      </button>
+      <button (click)="resetZoom()" class="hover:bg-gray-600 p-2 rounded">
+        Reset Zoom (0)
+      </button>
+    </nav>
+  </aside>
+</div>
