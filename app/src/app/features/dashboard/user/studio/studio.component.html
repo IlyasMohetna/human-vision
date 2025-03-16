@@ -13,74 +13,20 @@
     class="flex-1 relative bg-[#4C4C4C] flex flex-col items-center justify-center"
   >
     <div class="w-full bg-[#383838] text-white py-2 px-4 shadow-md">
-      <div class="flex items-center space-x-1 max-w-6xl w-full">
-        <div
-          class="flex items-center space-x-1 mr-4 border-r pr-4 border-gray-600"
-        >
-          <button
-            aria-label="Zoom In"
-            (click)="zoomIn()"
-            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
-          >
-            <fa-icon icon="magnifying-glass-plus"></fa-icon>
-          </button>
-
-          <button
-            aria-label="Zoom Out"
-            (click)="zoomOut()"
-            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
-          >
-            <fa-icon icon="magnifying-glass-minus"></fa-icon>
-          </button>
-
-          <button
-            aria-label="Fit Image"
-            (click)="resetZoom()"
-            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
-          >
-            <fa-icon icon="minimize"></fa-icon>
-          </button>
-
-          <button
-            aria-label="Max Zoom"
-            (click)="zoomLevel = 5.0; applyTransform()"
-            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
-          >
-            <fa-icon icon="maximize"></fa-icon>
-          </button>
-        </div>
-
-        <!-- Tools Group -->
-        <div class="flex items-center space-x-1">
-          <button
-            aria-label="Panning Mode"
-            [class.bg-blue-600]="spacePressed"
-            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
-          >
-            <fa-icon icon="hand-paper"></fa-icon>
-          </button>
-
-          <button
-            aria-label="Toggle Crosshair"
-            (click)="toggleCrosshair()"
-            [class.bg-blue-600]="showCrosshair"
-            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
-          >
-            <fa-icon icon="crosshairs"></fa-icon>
-          </button>
-        </div>
-
-        <!-- Zoom Level Display -->
-        <div
-          class="ml-4 py-1 px-2 bg-gray-700 rounded text-sm flex items-center"
-        >
-          <span class="text-gray-300 mr-1">Zoom:</span>
-          <span class="font-medium">{{ zoomLevel.toFixed(1) }}x</span>
-        </div>
-      </div>
+      <app-control-bar
+        [zoomLevel]="zoomLevel"
+        [isPanning]="spacePressed"
+        (zoomIn)="zoomIn()"
+        (zoomOut)="zoomOut()"
+        (resetZoom)="resetZoom()"
+        (toggleCrosshair)="toggleCrosshair()"
+        [isCrosshair]="showCrosshair"
+        (togglePanning)="togglePanning()"
+        (maxZoom)="maxZoom()"
+      >
+      </app-control-bar>
     </div>
 
-    <!-- Rest of the main content -->
     <div class="flex-1 w-full relative flex items-center justify-center">
       <div
         class="relative w-full h-[90vh]"
@@ -110,7 +56,6 @@
           </div>
         </div>
 
-        <!-- Crosshair guides now span entire parent -->
         <div
           class="crosshair-container"
           [style.display]="
@@ -121,7 +66,6 @@
           <div class="crosshair-v" [style.left.px]="crosshairX"></div>
         </div>
 
-        <!-- Small label near the crosshair position -->
         <div
           class="coordinate-label"
           [style.display]="isMouseInContainer ? 'block' : 'none'"
@@ -150,7 +94,14 @@
         class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"
         style="z-index: 2000"
       >
-        X: {{ mouseX }}, Y: {{ mouseY }} | Zoom: {{ zoomLevel.toFixed(1) }}x
+        {{
+          showCoordinates
+            ? "X: " + displayedCoordinateX + ", Y: " + displayedCoordinateY
+            : "No Coordinates"
+        }}
+
+        | Zoom:
+        {{ zoomLevel.toFixed(1) }}x
       </div>
     </div>
   </main>

@@ -1,0 +1,60 @@
+<div class="flex items-center space-x-1 max-w-6xl w-full">
+  <div class="flex items-center space-x-1 mr-4 border-r pr-4 border-gray-600">
+    <button
+      aria-label="Zoom In"
+      class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+      (click)="zoomIn.emit()"
+    >
+      <fa-icon icon="magnifying-glass-plus"></fa-icon>
+    </button>
+
+    <button
+      aria-label="Zoom Out"
+      class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+      (click)="zoomOut.emit()"
+    >
+      <fa-icon icon="magnifying-glass-minus"></fa-icon>
+    </button>
+
+    <button
+      aria-label="Fit Image"
+      class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+      (click)="resetZoom.emit()"
+    >
+      <fa-icon icon="minimize"></fa-icon>
+    </button>
+
+    <button
+      aria-label="Max Zoom"
+      class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+      (click)="maxZoom.emit()"
+    >
+      <fa-icon icon="maximize"></fa-icon>
+    </button>
+  </div>
+
+  <div class="flex items-center space-x-1">
+    <button
+      aria-label="Panning Mode"
+      [class.bg-blue-600]="isPanning"
+      class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+      (click)="togglePanning.emit()"
+    >
+      <fa-icon icon="hand-paper"></fa-icon>
+    </button>
+
+    <button
+      aria-label="Toggle Crosshair"
+      [class.bg-blue-600]="isCrosshair"
+      class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+      (click)="toggleCrosshair.emit()"
+    >
+      <fa-icon icon="crosshairs"></fa-icon>
+    </button>
+  </div>
+
+  <!-- Zoom Level Display -->
+  <div class="ml-4 py-1 px-2 bg-gray-700 rounded text-sm flex items-center">
+    <span class="text-gray-300 mr-1">Zoom:</span>
+  </div>
+</div>

@@ -12,11 +12,12 @@ import {
 import { FormsModule } from '@angular/forms';
 import POLYGONS, { PolygonData } from './data';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ControlBarComponent } from './components/control-bar/control-bar.component';
 
 @Component({
   selector: 'app-studio',
   standalone: true,
-  imports: [CommonModule, FormsModule, FontAwesomeModule],
+  imports: [CommonModule, FormsModule, FontAwesomeModule, ControlBarComponent],
   templateUrl: './studio.component.html',
   styleUrls: ['./studio.component.css'],
 })
@@ -957,5 +958,14 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     );
     console.log('Transformed polygons:', Object.keys(this.polygons).length);
     console.log('Active flags:', this.activePolygons);
+  }
+
+  maxZoom() {
+    this.zoomLevel = 5.0;
+    this.applyTransform();
+  }
+
+  togglePanning() {
+    this.panning = !this.panning;
   }
 }
