@@ -1,6 +1,5 @@
 <style></style>
 <div class="flex h-screen">
-  <!-- Left Sidebar -->
   <aside class="w-1/6 bg-[#282828] text-white p-4">
     <h2 class="text-lg font-bold mb-4">Menu</h2>
     <nav class="flex flex-col space-y-2">
@@ -10,84 +9,149 @@
     </nav>
   </aside>
 
-  <!-- Main Content -->
-  <main class="flex-1 relative bg-[#4C4C4C] flex items-center justify-center">
-    <div
-      class="relative w-full h-[90vh]"
-      (mousedown)="onMouseDownContainer($event)"
-      (mousemove)="onMouseMoveContainer($event)"
-      (mouseup)="onMouseUpContainer($event)"
-      (mouseenter)="handleMouseEnterContainer()"
-      (mouseleave)="handleMouseLeaveContainer()"
-      (mousemove)="updateCrosshairPosition($event)"
-    >
-      <!-- Image Viewer with Simple Zoom -->
+  <main
+    class="flex-1 relative bg-[#4C4C4C] flex flex-col items-center justify-center"
+  >
+    <div class="w-full bg-[#383838] text-white py-2 px-4 shadow-md">
+      <div class="flex items-center space-x-1 max-w-6xl w-full">
+        <div
+          class="flex items-center space-x-1 mr-4 border-r pr-4 border-gray-600"
+        >
+          <button
+            aria-label="Zoom In"
+            (click)="zoomIn()"
+            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <fa-icon icon="magnifying-glass-plus"></fa-icon>
+          </button>
+
+          <button
+            aria-label="Zoom Out"
+            (click)="zoomOut()"
+            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <fa-icon icon="magnifying-glass-minus"></fa-icon>
+          </button>
+
+          <button
+            aria-label="Fit Image"
+            (click)="resetZoom()"
+            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <fa-icon icon="minimize"></fa-icon>
+          </button>
+
+          <button
+            aria-label="Max Zoom"
+            (click)="zoomLevel = 5.0; applyTransform()"
+            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <fa-icon icon="maximize"></fa-icon>
+          </button>
+        </div>
+
+        <!-- Tools Group -->
+        <div class="flex items-center space-x-1">
+          <button
+            aria-label="Panning Mode"
+            [class.bg-blue-600]="spacePressed"
+            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <fa-icon icon="hand-paper"></fa-icon>
+          </button>
+
+          <button
+            aria-label="Toggle Crosshair"
+            (click)="toggleCrosshair()"
+            [class.bg-blue-600]="showCrosshair"
+            class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <fa-icon icon="crosshairs"></fa-icon>
+          </button>
+        </div>
+
+        <!-- Zoom Level Display -->
+        <div
+          class="ml-4 py-1 px-2 bg-gray-700 rounded text-sm flex items-center"
+        >
+          <span class="text-gray-300 mr-1">Zoom:</span>
+          <span class="font-medium">{{ zoomLevel.toFixed(1) }}x</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rest of the main content -->
+    <div class="flex-1 w-full relative flex items-center justify-center">
       <div
-        #imageContainer
-        class="image-container"
-        tabindex="0"
-        (keydown)="handleKeyboardShortcuts($event)"
+        class="relative w-full h-[90vh]"
+        (mousedown)="onMouseDownContainer($event)"
+        (mousemove)="onMouseMoveContainer($event)"
+        (mouseup)="onMouseUpContainer($event)"
+        (mouseenter)="handleMouseEnterContainer()"
+        (mouseleave)="handleMouseLeaveContainer()"
+        (mousemove)="updateCrosshairPosition($event)"
       >
-        <div class="image-wrapper">
-          <img
-            #imageElement
-            *ngIf="imageUrl"
-            [src]="imageUrl"
-            alt="Zoomable Image"
-            class="zoomable-image"
-            draggable="false"
-            (load)="onImageLoad()"
-          />
+        <div
+          #imageContainer
+          class="image-container"
+          tabindex="0"
+          (keydown)="handleKeyboardShortcuts($event)"
+        >
+          <div class="image-wrapper">
+            <img
+              #imageElement
+              *ngIf="imageUrl"
+              [src]="imageUrl"
+              alt="Zoomable Image"
+              class="zoomable-image"
+              draggable="false"
+              (load)="onImageLoad()"
+            />
+          </div>
+        </div>
+
+        <!-- Crosshair guides now span entire parent -->
+        <div
+          class="crosshair-container"
+          [style.display]="
+            showCrosshair && isMouseInContainer ? 'block' : 'none'
+          "
+        >
+          <div class="crosshair-h" [style.top.px]="crosshairY"></div>
+          <div class="crosshair-v" [style.left.px]="crosshairX"></div>
+        </div>
+
+        <!-- Small label near the crosshair position -->
+        <div
+          class="coordinate-label"
+          [style.display]="isMouseInContainer ? 'block' : 'none'"
+          [style.left.px]="crosshairX + 10"
+          [style.top.px]="crosshairY + 10"
+        >
+          {{
+            showCoordinates
+              ? displayedCoordinateX + ", " + displayedCoordinateY
+              : "No Coordinates"
+          }}
         </div>
       </div>
 
-      <!-- Crosshair guides now span entire parent -->
+      <canvas
+        #annotationCanvas
+        class="absolute top-0 left-0 w-full h-full"
+        [class.pointer-events-none]="!drawMode"
+        style="z-index: 500"
+        (mousedown)="startDrawing($event)"
+        (mousemove)="drawPolygon($event)"
+        (mouseup)="finishDrawing()"
+      ></canvas>
+
       <div
-        class="crosshair-container"
-        [style.display]="showCrosshair && isMouseInContainer ? 'block' : 'none'"
+        class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"
+        style="z-index: 2000"
       >
-        <div class="crosshair-h" [style.top.px]="crosshairY"></div>
-        <div class="crosshair-v" [style.left.px]="crosshairX"></div>
+        X: {{ mouseX }}, Y: {{ mouseY }} | Zoom: {{ zoomLevel.toFixed(1) }}x
       </div>
-
-      <!-- Small label near the crosshair position -->
-      <div
-        class="coordinate-label"
-        [style.display]="isMouseInContainer ? 'block' : 'none'"
-        [style.left.px]="crosshairX + 10"
-        [style.top.px]="crosshairY + 10"
-      >
-        {{
-          showCoordinates
-            ? displayedCoordinateX + ", " + displayedCoordinateY
-            : "No Coordinates"
-        }}
-      </div>
-    </div>
-
-    <canvas
-      #annotationCanvas
-      class="absolute top-0 left-0 w-full h-full"
-      [class.pointer-events-none]="!drawMode"
-      style="z-index: 500"
-      (mousedown)="startDrawing($event)"
-      (mousemove)="drawPolygon($event)"
-      (mouseup)="finishDrawing()"
-    ></canvas>
-
-    <div
-      class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"
-      style="z-index: 2000"
-    >
-      X: {{ mouseX }}, Y: {{ mouseY }} | Zoom: {{ zoomLevel.toFixed(1) }}x
-    </div>
-
-    <div
-      class="absolute top-2 right-2 bg-gray-900 text-white px-2 py-1 text-xs rounded opacity-70"
-      style="z-index: 2000"
-    >
-      Ctrl+/- or Ctrl+Wheel to zoom | G to toggle grid | C to clear polygons | D
-      to toggle drawing
     </div>
   </main>
 

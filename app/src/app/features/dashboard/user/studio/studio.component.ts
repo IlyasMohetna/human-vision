@@ -10,11 +10,12 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import POLYGONS, { PolygonData } from './data';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-studio',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, FontAwesomeModule],
   templateUrl: './studio.component.html',
   styleUrls: ['./studio.component.css'],
 })
@@ -886,7 +887,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private panningStartY = 0;
   private translateX = 0;
   private translateY = 0;
-  private spacePressed = false;
+  public spacePressed = false;
 
   // Handle mousedown on our parent container
   onMouseDownContainer(event: MouseEvent) {

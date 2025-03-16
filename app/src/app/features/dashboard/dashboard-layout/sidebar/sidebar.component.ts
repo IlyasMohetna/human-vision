@@ -12,7 +12,6 @@ import { ADMIN_MENU } from '../../admin/admin-routing.module';
 import { USER_MENU } from '../../user/user-routing.module';
 import { Role } from '../../../auth/enums/role';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -30,7 +29,6 @@ export class SidebarComponent implements OnInit {
     { name: string; route: string; icon: string }[]
   >([]);
   menuItems$ = this.menuItemsSubject.asObservable();
-  faCoffee = faCoffee;
 
   constructor(
     private authService: AuthService,
