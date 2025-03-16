@@ -7,6 +7,7 @@ import {
   OnDestroy,
   HostListener,
   Renderer2,
+  NgZone,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import POLYGONS, { PolygonData } from './data';
@@ -121,7 +122,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private lastZoomTime = 0;
   private readonly ZOOM_THROTTLE_MS = 10; // Throttle to improve performance
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private ngZone: NgZone) {
     // Initialize all polygons as active
     this.polygonDataList.forEach((poly) => {
       this.activePolygons[poly.id] = true;
@@ -260,7 +261,12 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   }
 
   private loadImportedPolygons() {
-    if (!this.ctx || !this.imageElementRef || !this.canvasRef) return;
+    if (!this.ctx || !this.imageElementRef || !this.canvasRef) {
+      console.warn("Can't load polygons - dependencies not ready");
+      return;
+    }
+
+    console.log('Loading polygons...');
 
     // Wait a bit to ensure everything is rendered
     setTimeout(() => {
@@ -622,25 +628,12 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         'transition',
         'none'
       );
-
-      // Ensure the canvas is properly aligned during panning
-      this.animationFrameId = requestAnimationFrame(() => {
-        this.updatePolygonsForTransform();
-        this.redrawAllPolygons();
-        this.animationFrameId = null;
-      });
     } else {
       this.renderer.setStyle(
         this.imageElementRef.nativeElement,
         'transition',
         'transform 0.05s ease-out'
       );
-
-      // Use requestAnimationFrame for smoother polygon updates
-      this.animationFrameId = requestAnimationFrame(() => {
-        this.updatePolygonsForTransform();
-        this.animationFrameId = null;
-      });
     }
 
     this.renderer.setStyle(
@@ -649,6 +642,21 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       transform
     );
     this.lastTransformApplied = transform;
+
+    // Always ensure polygons are properly updated
+    this.animationFrameId = requestAnimationFrame(() => {
+      // Make sure originalPolygons exists before trying to update
+      if (
+        this.originalPolygons &&
+        Object.keys(this.originalPolygons).length > 0
+      ) {
+        this.updatePolygonsForTransform();
+      } else {
+        // If we don't have polygon data, try to reload
+        this.loadImportedPolygons();
+      }
+      this.animationFrameId = null;
+    });
   }
 
   // New method to update polygon positions based on current transform
@@ -908,5 +916,46 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   onMouseUpContainer(event: MouseEvent) {
     this.finishDrawing();
+  }
+
+  // Add this new method to refresh polygons after saving
+  refreshPolygons() {
+    // First check if there's anything to refresh
+    if (Object.keys(this.originalPolygons).length === 0) {
+      // If original data is empty, reload from data source
+      this.loadImportedPolygons();
+      return;
+    }
+
+    // If we have polygon data, recalculate positions and redraw
+    this.updatePolygonsForTransform();
+
+    // Force a redraw of the canvas
+    if (this.ctx) {
+      // Request animation frame for smooth rendering
+      requestAnimationFrame(() => {
+        this.redrawAllPolygons();
+      });
+    }
+  }
+
+  // Use this when saving (call this at the end of your save method)
+  saveChanges() {
+    // Your existing save logic here...
+
+    // After saving, refresh the polygons to ensure they remain visible
+    setTimeout(() => {
+      this.refreshPolygons();
+    }, 100); // Small delay to ensure any state changes have settled
+  }
+
+  // Add a method to check polygon visibility for debugging
+  checkPolygonsVisibility() {
+    console.log(
+      'Original polygons:',
+      Object.keys(this.originalPolygons).length
+    );
+    console.log('Transformed polygons:', Object.keys(this.polygons).length);
+    console.log('Active flags:', this.activePolygons);
   }
 }
