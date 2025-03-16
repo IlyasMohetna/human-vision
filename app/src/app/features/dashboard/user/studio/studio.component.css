@@ -169,3 +169,262 @@ canvas {
 [tabindex="0"]:focus {
   outline: none !important;
 }
+
+/* Add these new sidebar styles */
+
+.SideNavigationBar {
+  display: flex;
+  width: 16.666%; /* Same as previous w-1/6 */
+  background-color: #282828;
+  border-right: 1px solid #3a3a3a;
+}
+
+/* Update CompanionBar styles to create a truly vertical navigation */
+
+.CompanionBar {
+  width: 40px; /* Make narrower */
+  background-color: #1e1e1e;
+  border-right: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.VerticalEditorButton {
+  height: 80px; /* Taller to fit vertical text */
+  padding: 8px 0;
+  color: #b3b3b3;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+  transition: background-color 0.2s;
+  user-select: none;
+  position: relative;
+}
+
+/* Create vertical text */
+.nav-text {
+  writing-mode: vertical-lr; /* Write text vertically */
+  transform: rotate(180deg); /* Rotate to make it readable from top to bottom */
+  text-orientation: mixed;
+  white-space: nowrap;
+  font-size: 12px;
+  position: absolute;
+  left: 40%;
+  top: 0;
+  height: 100%;
+  transform-origin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -6px; /* Center the text */
+}
+
+.VerticalEditorButton.active {
+  background-color: #383838;
+  color: white;
+  border-left: 3px solid #0078d7;
+  padding-left: 5px; /* Adjust for the border */
+}
+
+.VerticalEditorButton:hover {
+  background-color: #333;
+}
+
+.NavigationBarContentWrapper {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #282828;
+}
+
+.ImagesList {
+  padding: 8px;
+}
+
+.ImagePreview {
+  border: 1px solid transparent;
+}
+
+.ImagePreview.selected {
+  border-color: #0078d7;
+}
+
+.Foreground,
+.Background {
+  position: absolute;
+}
+
+.CheckBox {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.NavigationBarContentWrapper {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #282828;
+}
+
+.VerticalEditorButton {
+  padding: 12px 10px;
+  color: #b3b3b3;
+  font-size: 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+  transition: background-color 0.2s;
+  user-select: none;
+}
+
+.VerticalEditorButton:hover {
+  background-color: #333;
+}
+
+.VerticalEditorButton.active {
+  background-color: #383838;
+  color: white;
+  border-left: 3px solid #0078d7;
+  font-weight: 500;
+}
+
+.ContentPanel {
+  padding: 16px;
+}
+
+.PanelTitle {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: white;
+  border-bottom: 1px solid #3a3a3a;
+  padding-bottom: 8px;
+}
+
+.MenuItems {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.MenuItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  color: #e0e0e0;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  border: 1px solid transparent;
+}
+
+.MenuItem:hover {
+  background-color: #3a3a3a;
+  border: 1px solid #4a4a4a;
+}
+
+.MenuItem.with-status {
+  display: flex;
+  align-items: center;
+}
+
+.StatusIndicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #666;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.StatusIndicator.active {
+  background-color: #0078d7;
+  border-color: #0078d7;
+}
+
+.MenuItemIcon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.ZoomStatus {
+  margin-top: 12px;
+  padding: 8px;
+  background-color: #333;
+  border-radius: 4px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.ZoomLabel {
+  color: #999;
+  margin-right: 8px;
+}
+
+.ZoomValue {
+  color: white;
+  font-weight: bold;
+}
+
+.AnnotationsList {
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+}
+
+.AnnotationItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #3a3a3a;
+  transition: background-color 0.2s;
+}
+
+.AnnotationItem:hover,
+.AnnotationItem.selected {
+  background-color: #3a3a3a;
+}
+
+.AnnotationCheckbox {
+  margin-right: 10px;
+}
+
+.AnnotationDetails {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AnnotationName {
+  font-weight: medium;
+  color: white;
+}
+
+.AnnotationBadge {
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.AnnotationBadge.high {
+  background-color: #e53935;
+}
+
+.AnnotationBadge.medium {
+  background-color: #ffb300;
+}
+
+.AnnotationBadge.low {
+  background-color: #43a047;
+}
+
+/* Keep existing styles below */
+/* ...existing code... */

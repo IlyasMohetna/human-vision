@@ -123,6 +123,24 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private lastZoomTime = 0;
   private readonly ZOOM_THROTTLE_MS = 10; // Throttle to improve performance
 
+  // Add these properties to your StudioComponent class:
+
+  // Navigation items for the sidebar
+  sidebarNavItems = [
+    { icon: '📁', label: 'Project' },
+    { icon: '🔧', label: 'Tools' },
+    { icon: '🔍', label: 'Zoom' },
+    { icon: '📋', label: 'Annotations' },
+  ];
+
+  // Currently selected sidebar item (default to Tools)
+  selectedSidebarItem = 1; // Start with Tools selected
+
+  // Method to handle sidebar navigation selection
+  selectSidebarItem(index: number) {
+    this.selectedSidebarItem = index;
+  }
+
   constructor(private renderer: Renderer2, private ngZone: NgZone) {
     // Initialize all polygons as active
     this.polygonDataList.forEach((poly) => {
