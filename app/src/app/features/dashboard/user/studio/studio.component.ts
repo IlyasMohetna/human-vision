@@ -9,6 +9,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import POLYGONS from './data';
 
 @Component({
   selector: 'app-studio',
@@ -56,6 +57,15 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private isDrawing = false;
   private polygon: { x: number; y: number }[] = [];
   private resizeObserver?: ResizeObserver;
+
+  private polygonData = POLYGONS;
+
+  // Add these constants near the top of the class
+  private readonly POLYGON_BORDER_COLOR = 'yellow';
+  private readonly POLYGON_BORDER_WIDTH = 3;
+  private readonly POLYGON_FILL_COLOR = 'rgba(255, 255, 0, 0.2)'; // semi-transparent yellow
+  private readonly VERTEX_COLOR = 'yellow';
+  private readonly VERTEX_RADIUS = 4;
 
   constructor(private renderer: Renderer2) {}
 
@@ -180,7 +190,47 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         this.initialZoomLevel = this.zoomLevel; // Store the initial zoom level
         this.initialZoomSet = true;
         console.log('Initial zoom set to: ', this.initialZoomLevel);
+        this.loadImportedPolygon();
       }
+    }
+  }
+
+  private loadImportedPolygon() {
+    if (!this.ctx || !this.imageElementRef || !this.canvasRef) return;
+
+    // Wait a bit to ensure everything is rendered
+    setTimeout(() => {
+      // Get image and canvas dimensions
+      const imageElement = this.imageElementRef.nativeElement;
+      const canvas = this.canvasRef.nativeElement;
+
+      // Get image position within viewport
+      const imageRect = imageElement.getBoundingClientRect();
+      const canvasRect = canvas.getBoundingClientRect();
+
+      // Calculate offset from canvas to image
+      const offsetX = imageRect.left - canvasRect.left;
+      const offsetY = imageRect.top - canvasRect.top;
+
+      // Calculate scale factor between natural image size and displayed image
+      const scaleX = imageElement.clientWidth / this.imageNaturalWidth;
+      const scaleY = imageElement.clientHeight / this.imageNaturalHeight;
+
+      // Map coordinates from data to canvas space
+      this.polygon = this.polygonData.map(([x, y]) => ({
+        x: offsetX + x * scaleX,
+        y: offsetY + y * scaleY,
+      }));
+
+      console.log('Drawing polygon:', this.polygon);
+      this.redrawPolygons();
+    }, 500); // Give it 500ms to render properly
+  }
+
+  ngAfterViewChecked() {
+    if (this.polygon.length > 0 && this.ctx) {
+      // Redraw polygons after view updates to ensure they remain visible
+      this.redrawPolygons();
     }
   }
 
@@ -371,9 +421,12 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     // Draw the first point
     if (this.ctx) {
       this.ctx.beginPath();
-      this.ctx.arc(x, y, 3, 0, 2 * Math.PI);
-      this.ctx.fillStyle = 'yellow';
+      this.ctx.arc(x, y, this.VERTEX_RADIUS, 0, 2 * Math.PI);
+      this.ctx.fillStyle = this.VERTEX_COLOR;
       this.ctx.fill();
+      this.ctx.strokeStyle = 'black';
+      this.ctx.lineWidth = 1;
+      this.ctx.stroke();
     }
   }
 
@@ -395,8 +448,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       this.ctx.beginPath();
       this.ctx.moveTo(lastPoint.x, lastPoint.y);
       this.ctx.lineTo(offsetX, offsetY);
-      this.ctx.strokeStyle = 'yellow';
-      this.ctx.lineWidth = 2;
+      this.ctx.strokeStyle = this.POLYGON_BORDER_COLOR;
+      this.ctx.lineWidth = this.POLYGON_BORDER_WIDTH;
       this.ctx.stroke();
     }
   }
@@ -409,7 +462,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
     if (this.polygon.length < 2) return;
 
-    // Draw all polygon lines
+    // First draw the filled area
     this.ctx.beginPath();
     this.ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
 
@@ -417,18 +470,29 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       this.ctx.lineTo(this.polygon[i].x, this.polygon[i].y);
     }
 
+    // Close the polygon path
+    this.ctx.closePath();
+
+    // Fill with semi-transparent color
+    this.ctx.fillStyle = this.POLYGON_FILL_COLOR;
+    this.ctx.fill();
+
+    // Then draw the border with thicker line
+    this.ctx.strokeStyle = this.POLYGON_BORDER_COLOR;
+    this.ctx.lineWidth = this.POLYGON_BORDER_WIDTH;
+    this.ctx.lineJoin = 'round';
+    this.ctx.stroke();
+
     // Draw points at each vertex
     this.polygon.forEach((point) => {
       this.ctx!.beginPath();
-      this.ctx!.arc(point.x, point.y, 3, 0, 2 * Math.PI);
-      this.ctx!.fillStyle = 'yellow';
+      this.ctx!.arc(point.x, point.y, this.VERTEX_RADIUS, 0, 2 * Math.PI);
+      this.ctx!.fillStyle = this.VERTEX_COLOR;
       this.ctx!.fill();
+      this.ctx!.strokeStyle = 'black';
+      this.ctx!.lineWidth = 1;
+      this.ctx!.stroke();
     });
-
-    // Connect lines
-    this.ctx.strokeStyle = 'yellow';
-    this.ctx.lineWidth = 2;
-    this.ctx.stroke();
   }
 
   finishDrawing() {
