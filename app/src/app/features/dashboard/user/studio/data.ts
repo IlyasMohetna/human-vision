@@ -3,6 +3,7 @@ export interface PolygonData {
   type: 'high' | 'medium' | 'low';
   points: [number, number][];
   label?: string;
+  priority?: 'high' | 'medium' | 'low'; // Add priority property
 }
 
 const POLYGONS: PolygonData[] = [

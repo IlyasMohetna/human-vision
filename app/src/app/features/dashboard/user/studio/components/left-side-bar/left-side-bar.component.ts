@@ -11,16 +11,12 @@ import { CommonModule } from '@angular/common';
 export class LeftSideBarComponent {
   selectedSidebarItem = 1;
 
-  // Simple navigation items - just labels
   sidebarNavItems = [
-    { label: 'Project' },
-    { label: 'Tools' },
-    { label: 'Zoom' },
-    { label: 'Annotations' },
     { label: 'Images' },
+    { label: 'Traffic sign' },
+    { label: 'IA' },
   ];
 
-  // Navigation selection without re-rendering
   selectSidebarItem(index: number) {
     this.selectedSidebarItem = index;
   }

@@ -14,6 +14,12 @@ import POLYGONS, { PolygonData } from './data';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { LeftSideBarComponent } from './components/left-side-bar/left-side-bar.component';
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-studio',
@@ -24,12 +30,13 @@ import { LeftSideBarComponent } from './components/left-side-bar/left-side-bar.c
     FontAwesomeModule,
     ControlBarComponent,
     LeftSideBarComponent,
+    DragDropModule,
   ],
   templateUrl: './studio.component.html',
   styleUrls: ['./studio.component.css'],
 })
 export class StudioComponent implements AfterViewInit, OnDestroy {
-  imageUrl = 'assets/test.png'; // Replace with dynamic backend data when ready
+  imageUrl = 'assets/test4.png'; // Replace with dynamic backend data when ready
   drawMode = false; // To toggle drawing mode
   mouseX = 0;
   mouseY = 0;
@@ -81,6 +88,10 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     low: {
       border: 'rgba(0, 255, 0, 1)', // Solid green
       fill: 'rgba(0, 255, 0, 0.2)', // Semi-transparent green
+    },
+    blue: {
+      border: 'rgba(0, 120, 255, 1)', // Solid blue
+      fill: 'rgba(0, 120, 255, 0.2)', // Semi-transparent blue
     },
   };
 
@@ -148,10 +159,28 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     this.selectedSidebarItem = index;
   }
 
+  // Lists for different priority annotations
+  highPriorityAnnotations: PolygonData[] = [];
+  mediumPriorityAnnotations: PolygonData[] = [];
+  lowPriorityAnnotations: PolygonData[] = [];
+  unassignedAnnotations: PolygonData[] = [];
+
   constructor(private renderer: Renderer2, private ngZone: NgZone) {
     // Initialize all polygons as active
     this.polygonDataList.forEach((poly) => {
       this.activePolygons[poly.id] = true;
+
+      // Distribute polygons to priority lists based on their priority
+      if (poly.priority === 'high') {
+        this.highPriorityAnnotations.push(poly);
+      } else if (poly.priority === 'medium') {
+        this.mediumPriorityAnnotations.push(poly);
+      } else if (poly.priority === 'low') {
+        this.lowPriorityAnnotations.push(poly);
+      } else {
+        // No priority assigned - put in unassigned
+        this.unassignedAnnotations.push(poly);
+      }
     });
   }
 
@@ -386,7 +415,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         id !== this.hoveredPolygonId &&
         poly.points.length >= 2
       ) {
-        const colors = this.TYPE_COLORS[poly.type];
+        // Get the corresponding polygon data with priority info
+        const polygonData = this.polygonDataList.find((p) => p.id === id);
+        // Use priority for color if it exists, otherwise use blue
+        const colorType = polygonData?.priority || 'blue';
+        const colors = this.TYPE_COLORS[colorType];
 
         this.ctx!.beginPath();
         this.ctx!.moveTo(poly.points[0].x, poly.points[0].y);
@@ -412,7 +445,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     if (this.hoveredPolygonId && this.activePolygons[this.hoveredPolygonId]) {
       const poly = this.polygons[this.hoveredPolygonId];
       if (poly && poly.points.length >= 2) {
-        this.drawSinglePolygon(poly.points, poly.type, true);
+        const polygonData = this.polygonDataList.find(
+          (p) => p.id === this.hoveredPolygonId
+        );
+        const colorType = polygonData?.priority || 'blue';
+        this.drawSinglePolygon(poly.points, colorType, true);
       }
     }
 
@@ -422,7 +459,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   // New method to draw a single polygon with the correct color
   private drawSinglePolygon(
     points: { x: number; y: number }[],
-    type: 'high' | 'medium' | 'low',
+    type: 'high' | 'medium' | 'low' | 'blue',
     isHovered: boolean = false
   ) {
     if (!this.ctx || points.length < 2) return;
@@ -992,5 +1029,91 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   togglePanning() {
     this.panning = !this.panning;
+  }
+
+  // Add property to store the currently dragged polygon
+  private draggedPolygonId: string | null = null;
+
+  // Add these new methods for drag-and-drop functionality
+  onDragStart(event: DragEvent, polygon: PolygonData) {
+    if (!event.dataTransfer) return;
+    this.draggedPolygonId = polygon.id;
+    event.dataTransfer.setData('text/plain', polygon.id);
+    event.dataTransfer.effectAllowed = 'move';
+  }
+
+  onDragOver(event: DragEvent) {
+    // This is needed to allow dropping
+    event.preventDefault();
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = 'move';
+    }
+  }
+
+  onDrop(event: DragEvent, priority: 'high' | 'medium' | 'low') {
+    event.preventDefault();
+    const polygonId = event.dataTransfer?.getData('text/plain');
+
+    if (polygonId && this.draggedPolygonId) {
+      // Find the polygon and update its priority
+      const polygon = this.polygonDataList.find((p) => p.id === polygonId);
+      if (polygon) {
+        polygon.priority = priority;
+        console.log(`Changed polygon ${polygonId} priority to ${priority}`);
+
+        // Also update the polygon in the rendering map
+        if (this.polygons[polygonId]) {
+          // Update original polygon data
+          this.redrawAllPolygons();
+        }
+      }
+      this.draggedPolygonId = null;
+    }
+  }
+
+  // Modify the clearPriority method to handle undefined values
+  clearPriority(polygonId: string | undefined | null) {
+    if (!polygonId) return; // Skip if polygonId is undefined or null
+
+    const polygon = this.polygonDataList.find((p) => p.id === polygonId);
+    if (polygon) {
+      polygon.priority = undefined;
+      this.redrawAllPolygons();
+    }
+  }
+
+  // Handle drop between containers
+  onAnnotationDrop(event: CdkDragDrop<PolygonData[]>) {
+    if (event.previousContainer === event.container) {
+      // If dropped in the same container, just reorder
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      // If moved to a different container, transfer the item
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+
+      // Update the priority based on the container
+      const droppedItem = event.container.data[event.currentIndex];
+      if (event.container.id === 'high-priority') {
+        droppedItem.priority = 'high';
+      } else if (event.container.id === 'medium-priority') {
+        droppedItem.priority = 'medium';
+      } else if (event.container.id === 'low-priority') {
+        droppedItem.priority = 'low';
+      } else {
+        droppedItem.priority = undefined; // Unassigned
+      }
+
+      // Redraw to reflect color changes
+      this.redrawAllPolygons();
+    }
   }
 }

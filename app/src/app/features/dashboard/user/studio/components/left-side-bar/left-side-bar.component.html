@@ -1,5 +1,4 @@
 <aside class="SideNavigationBar left">
-  <!-- CompanionBar for navigation buttons -->
   <div class="CompanionBar">
     <div
       *ngFor="let item of sidebarNavItems; let i = index"
@@ -8,16 +7,12 @@
       (click)="selectSidebarItem(i)"
       [attr.title]="item.label"
     >
-      <!-- Only display the label in vertical orientation -->
       <span class="nav-text">{{ item.label }}</span>
     </div>
   </div>
 
-  <!-- Update content wrapper to handle overflow properly -->
   <div class="NavigationBarContentWrapper">
-    <!-- Use ngSwitch instead of multiple ngIf for better performance -->
     <ng-container [ngSwitch]="selectedSidebarItem">
-      <!-- Project Panel -->
       <div *ngSwitchCase="0" class="ContentPanel">
         <h2 class="PanelTitle">Project</h2>
         <nav class="MenuItems">
@@ -27,25 +22,21 @@
         </nav>
       </div>
 
-      <!-- Tools Panel -->
       <div *ngSwitchCase="1" class="ContentPanel">
         <h2 class="PanelTitle">Tools</h2>
         <p>Blabla</p>
       </div>
 
-      <!-- Zoom Controls Panel -->
       <div *ngSwitchCase="2" class="ContentPanel">
         <h2 class="PanelTitle">Zoom Controls</h2>
         <p>Ok</p>
       </div>
 
-      <!-- Annotations Panel -->
       <div *ngSwitchCase="3" class="ContentPanel">
         <h2 class="PanelTitle">Annotations</h2>
         <p>oKKK</p>
       </div>
 
-      <!-- Images Panel -->
       <div *ngSwitchCase="4" class="ContentPanel">
         <h2 class="PanelTitle">Images</h2>
       </div>
