@@ -13,11 +13,18 @@ import { FormsModule } from '@angular/forms';
 import POLYGONS, { PolygonData } from './data';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
+import { LeftSideBarComponent } from './components/left-side-bar/left-side-bar.component';
 
 @Component({
   selector: 'app-studio',
   standalone: true,
-  imports: [CommonModule, FormsModule, FontAwesomeModule, ControlBarComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    FontAwesomeModule,
+    ControlBarComponent,
+    LeftSideBarComponent,
+  ],
   templateUrl: './studio.component.html',
   styleUrls: ['./studio.component.css'],
 })
