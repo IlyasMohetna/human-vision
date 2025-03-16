@@ -169,6 +169,7 @@
                             <code>FontAwesomeModule</code>
                                 <code><a href="../components/ControlBarComponent.html" target="_self" >ControlBarComponent</a></code>
                                 <code><a href="../components/LeftSideBarComponent.html" target="_self" >LeftSideBarComponent</a></code>
+                            <code>DragDropModule</code>
                 </td>
             </tr>
 
@@ -243,7 +244,14 @@
                                 <a href="#displayedCoordinateY" >displayedCoordinateY</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#draggedPolygonId" >draggedPolygonId</a>
+                            </li>
+                            <li>
                                 <a href="#drawMode" >drawMode</a>
+                            </li>
+                            <li>
+                                <a href="#highPriorityAnnotations" >highPriorityAnnotations</a>
                             </li>
                             <li>
                                 <a href="#hoveredPolygonId" >hoveredPolygonId</a>
@@ -294,6 +302,12 @@
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#lastZoomTime" >lastZoomTime</a>
+                            </li>
+                            <li>
+                                <a href="#lowPriorityAnnotations" >lowPriorityAnnotations</a>
+                            </li>
+                            <li>
+                                <a href="#mediumPriorityAnnotations" >mediumPriorityAnnotations</a>
                             </li>
                             <li>
                                 <a href="#minZoomLevel" >minZoomLevel</a>
@@ -381,6 +395,9 @@
                                 <a href="#TYPE_COLORS" >TYPE_COLORS</a>
                             </li>
                             <li>
+                                <a href="#unassignedAnnotations" >unassignedAnnotations</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#VERTEX_COLOR" >VERTEX_COLOR</a>
@@ -433,6 +450,9 @@
                                 <a href="#clearPolygons" >clearPolygons</a>
                             </li>
                             <li>
+                                <a href="#clearPriority" >clearPriority</a>
+                            </li>
+                            <li>
                                 <a href="#drawPolygon" >drawPolygon</a>
                             </li>
                             <li>
@@ -480,6 +500,18 @@
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#onAnnotationDrop" >onAnnotationDrop</a>
+                            </li>
+                            <li>
+                                <a href="#onDragOver" >onDragOver</a>
+                            </li>
+                            <li>
+                                <a href="#onDragStart" >onDragStart</a>
+                            </li>
+                            <li>
+                                <a href="#onDrop" >onDrop</a>
                             </li>
                             <li>
                                 <a href="#onImageLoad" >onImageLoad</a>
@@ -612,7 +644,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:149</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:166</a></div>
                             </td>
                         </tr>
 
@@ -691,8 +723,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="213"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:213</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="242"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:242</a></div>
                         </td>
                     </tr>
 
@@ -724,8 +756,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="221"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:221</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="250"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:250</a></div>
                         </td>
                     </tr>
 
@@ -757,8 +789,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:160</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:189</a></div>
                         </td>
                     </tr>
 
@@ -790,8 +822,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:195</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:224</a></div>
                         </td>
                     </tr>
 
@@ -823,8 +855,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="204"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:204</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:233</a></div>
                         </td>
                     </tr>
 
@@ -857,8 +889,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="639"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:639</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="676"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:676</a></div>
                         </td>
                     </tr>
 
@@ -894,8 +926,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="629"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:629</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="666"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:666</a></div>
                         </td>
                     </tr>
 
@@ -931,8 +963,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="979"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:979</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1016"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:1016</a></div>
                         </td>
                     </tr>
 
@@ -968,8 +1000,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="479"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:479</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="516"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:516</a></div>
                         </td>
                     </tr>
 
@@ -1005,8 +1037,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="895"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:895</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="932"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:932</a></div>
                         </td>
                     </tr>
 
@@ -1018,6 +1050,73 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearPriority"></a>
+                    <span class="name">
+                        <span ><b>clearPriority</b></span>
+                        <a href="#clearPriority"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearPriority(polygonId: string | undefined | null)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1075"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:1075</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>polygonId</td>
+                                            <td>
+                                                        <code>string | undefined | null</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1042,8 +1141,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="830"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:830</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="867"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:867</a></div>
                         </td>
                     </tr>
 
@@ -1104,15 +1203,15 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>drawSinglePolygon(points: literal type[], type: "high" | "medium" | "low", isHovered: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                    <code>drawSinglePolygon(points: literal type[], type: "high" | "medium" | "low" | "blue", isHovered: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="423"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:423</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="460"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:460</a></div>
                         </td>
                     </tr>
 
@@ -1150,7 +1249,7 @@
                                         <tr>
                                                 <td>type</td>
                                             <td>
-                                                        <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+                                                        <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot; | &quot;blue&quot;</code>
                                             </td>
 
                                             <td>
@@ -1210,8 +1309,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="889"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:889</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="926"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:926</a></div>
                         </td>
                     </tr>
 
@@ -1247,8 +1346,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="616"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:616</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="653"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:653</a></div>
                         </td>
                     </tr>
 
@@ -1293,8 +1392,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:160</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:189</a></div>
                         </td>
                     </tr>
 
@@ -1369,8 +1468,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:195</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:224</a></div>
                         </td>
                     </tr>
 
@@ -1436,8 +1535,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="788"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:788</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="825"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:825</a></div>
                         </td>
                     </tr>
 
@@ -1503,8 +1602,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="909"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:909</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="946"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:946</a></div>
                         </td>
                     </tr>
 
@@ -1540,8 +1639,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="913"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:913</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="950"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:950</a></div>
                         </td>
                     </tr>
 
@@ -1577,8 +1676,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="514"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:514</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="551"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:551</a></div>
                         </td>
                     </tr>
 
@@ -1644,8 +1743,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="777"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:777</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="814"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:814</a></div>
                         </td>
                     </tr>
 
@@ -1713,8 +1812,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="289"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:289</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="318"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:318</a></div>
                         </td>
                     </tr>
 
@@ -1750,8 +1849,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="988"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:988</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1025"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:1025</a></div>
                         </td>
                     </tr>
 
@@ -1787,8 +1886,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="225"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:225</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="254"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:254</a></div>
                         </td>
                     </tr>
 
@@ -1824,8 +1923,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="252"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:252</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="281"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:281</a></div>
                         </td>
                     </tr>
 
@@ -1837,6 +1936,298 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onAnnotationDrop"></a>
+                    <span class="name">
+                        <span ><b>onAnnotationDrop</b></span>
+                        <a href="#onAnnotationDrop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onAnnotationDrop(event: <a href="../interfaces/PolygonData.html" target="_self">CdkDragDrop&lt;PolygonData[]&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1086"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:1086</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="../interfaces/PolygonData.html" target="_self" >CdkDragDrop&lt;PolygonData[]&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDragOver"></a>
+                    <span class="name">
+                        <span ><b>onDragOver</b></span>
+                        <a href="#onDragOver"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDragOver(event: DragEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1045"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:1045</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>DragEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDragStart"></a>
+                    <span class="name">
+                        <span ><b>onDragStart</b></span>
+                        <a href="#onDragStart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDragStart(event: DragEvent, polygon: <a href="../interfaces/PolygonData.html" target="_self">PolygonData</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1038"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:1038</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>DragEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>polygon</td>
+                                            <td>
+                                                            <code><a href="../interfaces/PolygonData.html" target="_self" >PolygonData</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDrop"></a>
+                    <span class="name">
+                        <span ><b>onDrop</b></span>
+                        <a href="#onDrop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDrop(event: DragEvent, priority: "high" | "medium" | "low")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1053"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:1053</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>DragEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>priority</td>
+                                            <td>
+                                                        <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1861,8 +2252,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="272"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:272</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="301"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:301</a></div>
                         </td>
                     </tr>
 
@@ -1898,8 +2289,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="927"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:927</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="964"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:964</a></div>
                         </td>
                     </tr>
 
@@ -1965,8 +2356,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="937"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:937</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="974"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:974</a></div>
                         </td>
                     </tr>
 
@@ -2041,8 +2432,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="213"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:213</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="242"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:242</a></div>
                         </td>
                     </tr>
 
@@ -2108,8 +2499,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="943"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:943</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="980"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:980</a></div>
                         </td>
                     </tr>
 
@@ -2184,8 +2575,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="221"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:221</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="250"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:250</a></div>
                         </td>
                     </tr>
 
@@ -2230,8 +2621,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="204"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:204</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:233</a></div>
                         </td>
                     </tr>
 
@@ -2299,8 +2690,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="359"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:359</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="388"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:388</a></div>
                         </td>
                     </tr>
 
@@ -2338,8 +2729,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="854"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:854</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="891"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:891</a></div>
                         </td>
                     </tr>
 
@@ -2375,8 +2766,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="948"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:948</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="985"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:985</a></div>
                         </td>
                     </tr>
 
@@ -2412,8 +2803,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="607"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:607</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="644"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:644</a></div>
                         </td>
                     </tr>
 
@@ -2451,8 +2842,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="792"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:792</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="829"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:829</a></div>
                         </td>
                     </tr>
 
@@ -2488,8 +2879,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="969"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:969</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1006"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:1006</a></div>
                         </td>
                     </tr>
 
@@ -2525,8 +2916,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="147"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:147</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:158</a></div>
                         </td>
                     </tr>
 
@@ -2592,8 +2983,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="474"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:474</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="511"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:511</a></div>
                         </td>
                     </tr>
 
@@ -2659,8 +3050,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="810"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:810</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="847"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:847</a></div>
                         </td>
                     </tr>
 
@@ -2726,8 +3117,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="738"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:738</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="775"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:775</a></div>
                         </td>
                     </tr>
 
@@ -2763,8 +3154,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="806"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:806</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="843"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:843</a></div>
                         </td>
                     </tr>
 
@@ -2800,8 +3191,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="993"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:993</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="1030"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:1030</a></div>
                         </td>
                     </tr>
 
@@ -2837,8 +3228,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="353"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:353</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="382"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:382</a></div>
                         </td>
                     </tr>
 
@@ -2904,8 +3295,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="746"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:746</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="783"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:783</a></div>
                         </td>
                     </tr>
 
@@ -2971,8 +3362,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="484"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:484</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="521"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:521</a></div>
                         </td>
                     </tr>
 
@@ -3010,8 +3401,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="689"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:689</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="726"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:726</a></div>
                         </td>
                     </tr>
 
@@ -3047,8 +3438,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="550"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:550</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="587"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:587</a></div>
                         </td>
                     </tr>
 
@@ -3084,8 +3475,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="571"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:571</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="608"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:608</a></div>
                         </td>
                     </tr>
 
@@ -3131,7 +3522,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:91</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -3163,7 +3554,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:128</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:139</a></div>
                         </td>
                     </tr>
 
@@ -3199,7 +3590,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -3231,7 +3622,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -3263,7 +3654,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -3294,7 +3685,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -3325,7 +3716,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -3352,7 +3743,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -3383,7 +3774,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="743" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:743</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="780" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:780</a></div>
                         </td>
                     </tr>
 
@@ -3414,7 +3805,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="744" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:744</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="781" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:781</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="draggedPolygonId"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>draggedPolygonId</b></span>
+                        <a href="#draggedPolygonId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="1035" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:1035</a></div>
                         </td>
                     </tr>
 
@@ -3439,7 +3862,38 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="highPriorityAnnotations"></a>
+                    <span class="name">
+                        <span ><b>highPriorityAnnotations</b></span>
+                        <a href="#highPriorityAnnotations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/PolygonData.html" target="_self" >PolygonData[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="163" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:163</a></div>
                         </td>
                     </tr>
 
@@ -3470,7 +3924,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:110</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:121</a></div>
                         </td>
                     </tr>
 
@@ -3502,7 +3956,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:122</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:133</a></div>
                         </td>
                     </tr>
 
@@ -3538,7 +3992,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -3574,7 +4028,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:71</a></div>
                         </td>
                     </tr>
 
@@ -3606,7 +4060,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -3638,7 +4092,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:59</a></div>
                         </td>
                     </tr>
 
@@ -3669,7 +4123,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -3701,7 +4155,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -3727,7 +4181,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -3753,7 +4207,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -3779,7 +4233,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="907" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:907</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="944" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:944</a></div>
                         </td>
                     </tr>
 
@@ -3811,7 +4265,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:125</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:136</a></div>
                         </td>
                     </tr>
 
@@ -3843,7 +4297,69 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:130</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:141</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lowPriorityAnnotations"></a>
+                    <span class="name">
+                        <span ><b>lowPriorityAnnotations</b></span>
+                        <a href="#lowPriorityAnnotations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/PolygonData.html" target="_self" >PolygonData[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="165" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:165</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mediumPriorityAnnotations"></a>
+                    <span class="name">
+                        <span ><b>mediumPriorityAnnotations</b></span>
+                        <a href="#mediumPriorityAnnotations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/PolygonData.html" target="_self" >PolygonData[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:164</a></div>
                         </td>
                     </tr>
 
@@ -3874,7 +4390,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -3905,7 +4421,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -3936,7 +4452,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -3968,7 +4484,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:113</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:124</a></div>
                         </td>
                     </tr>
 
@@ -3993,7 +4509,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="919" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:919</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="956" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:956</a></div>
                         </td>
                     </tr>
 
@@ -4025,7 +4541,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="920" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:920</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="957" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:957</a></div>
                         </td>
                     </tr>
 
@@ -4057,7 +4573,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="921" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:921</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="958" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:958</a></div>
                         </td>
                     </tr>
 
@@ -4089,7 +4605,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -4122,7 +4638,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:103</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:114</a></div>
                         </td>
                     </tr>
 
@@ -4155,7 +4671,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:104</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:115</a></div>
                         </td>
                     </tr>
 
@@ -4188,7 +4704,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:105</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:116</a></div>
                         </td>
                     </tr>
 
@@ -4220,7 +4736,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:88</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -4252,7 +4768,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:94</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:105</a></div>
                         </td>
                     </tr>
 
@@ -4280,7 +4796,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:69</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -4311,7 +4827,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:144</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="155" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:155</a></div>
                         </td>
                     </tr>
 
@@ -4336,7 +4852,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="742" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:742</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="779" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:779</a></div>
                         </td>
                     </tr>
 
@@ -4361,7 +4877,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -4397,7 +4913,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:136</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:147</a></div>
                         </td>
                     </tr>
 
@@ -4423,7 +4939,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="924" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:924</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="961" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:961</a></div>
                         </td>
                     </tr>
 
@@ -4455,7 +4971,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="922" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:922</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="959" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:959</a></div>
                         </td>
                     </tr>
 
@@ -4487,7 +5003,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="923" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:923</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="960" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:960</a></div>
                         </td>
                     </tr>
 
@@ -4528,12 +5044,47 @@
       border: &#x27;rgba(0, 255, 0, 1)&#x27;, // Solid green
       fill: &#x27;rgba(0, 255, 0, 0.2)&#x27;, // Semi-transparent green
     },
+    blue: {
+      border: &#x27;rgba(0, 120, 255, 1)&#x27;, // Solid blue
+      fill: &#x27;rgba(0, 120, 255, 0.2)&#x27;, // Semi-transparent blue
+    },
   }</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:72</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unassignedAnnotations"></a>
+                    <span class="name">
+                        <span ><b>unassignedAnnotations</b></span>
+                        <a href="#unassignedAnnotations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/PolygonData.html" target="_self" >PolygonData[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:166</a></div>
                         </td>
                     </tr>
 
@@ -4566,7 +5117,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:106</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:117</a></div>
                         </td>
                     </tr>
 
@@ -4599,7 +5150,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:107</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:118</a></div>
                         </td>
                     </tr>
 
@@ -4632,7 +5183,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:131</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:142</a></div>
                         </td>
                     </tr>
 
@@ -4663,7 +5214,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -4694,7 +5245,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -4720,7 +5271,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:129</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/features/dashboard/user/studio/studio.component.ts:140</a></div>
                         </td>
                     </tr>
 
@@ -4749,6 +5300,12 @@ import POLYGONS, { PolygonData } from &#x27;./data&#x27;;
 import { FontAwesomeModule } from &#x27;@fortawesome/angular-fontawesome&#x27;;
 import { ControlBarComponent } from &#x27;./components/control-bar/control-bar.component&#x27;;
 import { LeftSideBarComponent } from &#x27;./components/left-side-bar/left-side-bar.component&#x27;;
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray,
+  transferArrayItem,
+} from &#x27;@angular/cdk/drag-drop&#x27;;
 
 @Component({
   selector: &#x27;app-studio&#x27;,
@@ -4759,6 +5316,7 @@ import { LeftSideBarComponent } from &#x27;./components/left-side-bar/left-side-
     FontAwesomeModule,
     ControlBarComponent,
     LeftSideBarComponent,
+    DragDropModule,
   ],
   templateUrl: &#x27;./studio.component.html&#x27;,
   styleUrls: [&#x27;./studio.component.css&#x27;],
@@ -4816,6 +5374,10 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     low: {
       border: &#x27;rgba(0, 255, 0, 1)&#x27;, // Solid green
       fill: &#x27;rgba(0, 255, 0, 0.2)&#x27;, // Semi-transparent green
+    },
+    blue: {
+      border: &#x27;rgba(0, 120, 255, 1)&#x27;, // Solid blue
+      fill: &#x27;rgba(0, 120, 255, 0.2)&#x27;, // Semi-transparent blue
     },
   };
 
@@ -4883,10 +5445,28 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     this.selectedSidebarItem &#x3D; index;
   }
 
+  // Lists for different priority annotations
+  highPriorityAnnotations: PolygonData[] &#x3D; [];
+  mediumPriorityAnnotations: PolygonData[] &#x3D; [];
+  lowPriorityAnnotations: PolygonData[] &#x3D; [];
+  unassignedAnnotations: PolygonData[] &#x3D; [];
+
   constructor(private renderer: Renderer2, private ngZone: NgZone) {
     // Initialize all polygons as active
     this.polygonDataList.forEach((poly) &#x3D;&gt; {
       this.activePolygons[poly.id] &#x3D; true;
+
+      // Distribute polygons to priority lists based on their priority
+      if (poly.priority &#x3D;&#x3D;&#x3D; &#x27;high&#x27;) {
+        this.highPriorityAnnotations.push(poly);
+      } else if (poly.priority &#x3D;&#x3D;&#x3D; &#x27;medium&#x27;) {
+        this.mediumPriorityAnnotations.push(poly);
+      } else if (poly.priority &#x3D;&#x3D;&#x3D; &#x27;low&#x27;) {
+        this.lowPriorityAnnotations.push(poly);
+      } else {
+        // No priority assigned - put in unassigned
+        this.unassignedAnnotations.push(poly);
+      }
     });
   }
 
@@ -5121,7 +5701,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         id !&#x3D;&#x3D; this.hoveredPolygonId &amp;&amp;
         poly.points.length &gt;&#x3D; 2
       ) {
-        const colors &#x3D; this.TYPE_COLORS[poly.type];
+        // Get the corresponding polygon data with priority info
+        const polygonData &#x3D; this.polygonDataList.find((p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; id);
+        // Use priority for color if it exists, otherwise use blue
+        const colorType &#x3D; polygonData?.priority || &#x27;blue&#x27;;
+        const colors &#x3D; this.TYPE_COLORS[colorType];
 
         this.ctx!.beginPath();
         this.ctx!.moveTo(poly.points[0].x, poly.points[0].y);
@@ -5147,7 +5731,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     if (this.hoveredPolygonId &amp;&amp; this.activePolygons[this.hoveredPolygonId]) {
       const poly &#x3D; this.polygons[this.hoveredPolygonId];
       if (poly &amp;&amp; poly.points.length &gt;&#x3D; 2) {
-        this.drawSinglePolygon(poly.points, poly.type, true);
+        const polygonData &#x3D; this.polygonDataList.find(
+          (p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; this.hoveredPolygonId
+        );
+        const colorType &#x3D; polygonData?.priority || &#x27;blue&#x27;;
+        this.drawSinglePolygon(poly.points, colorType, true);
       }
     }
 
@@ -5157,7 +5745,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   // New method to draw a single polygon with the correct color
   private drawSinglePolygon(
     points: { x: number; y: number }[],
-    type: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27;,
+    type: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27; | &#x27;blue&#x27;,
     isHovered: boolean &#x3D; false
   ) {
     if (!this.ctx || points.length &lt; 2) return;
@@ -5728,6 +6316,92 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   togglePanning() {
     this.panning &#x3D; !this.panning;
   }
+
+  // Add property to store the currently dragged polygon
+  private draggedPolygonId: string | null &#x3D; null;
+
+  // Add these new methods for drag-and-drop functionality
+  onDragStart(event: DragEvent, polygon: PolygonData) {
+    if (!event.dataTransfer) return;
+    this.draggedPolygonId &#x3D; polygon.id;
+    event.dataTransfer.setData(&#x27;text/plain&#x27;, polygon.id);
+    event.dataTransfer.effectAllowed &#x3D; &#x27;move&#x27;;
+  }
+
+  onDragOver(event: DragEvent) {
+    // This is needed to allow dropping
+    event.preventDefault();
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect &#x3D; &#x27;move&#x27;;
+    }
+  }
+
+  onDrop(event: DragEvent, priority: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27;) {
+    event.preventDefault();
+    const polygonId &#x3D; event.dataTransfer?.getData(&#x27;text/plain&#x27;);
+
+    if (polygonId &amp;&amp; this.draggedPolygonId) {
+      // Find the polygon and update its priority
+      const polygon &#x3D; this.polygonDataList.find((p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; polygonId);
+      if (polygon) {
+        polygon.priority &#x3D; priority;
+        console.log(&#x60;Changed polygon ${polygonId} priority to ${priority}&#x60;);
+
+        // Also update the polygon in the rendering map
+        if (this.polygons[polygonId]) {
+          // Update original polygon data
+          this.redrawAllPolygons();
+        }
+      }
+      this.draggedPolygonId &#x3D; null;
+    }
+  }
+
+  // Modify the clearPriority method to handle undefined values
+  clearPriority(polygonId: string | undefined | null) {
+    if (!polygonId) return; // Skip if polygonId is undefined or null
+
+    const polygon &#x3D; this.polygonDataList.find((p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; polygonId);
+    if (polygon) {
+      polygon.priority &#x3D; undefined;
+      this.redrawAllPolygons();
+    }
+  }
+
+  // Handle drop between containers
+  onAnnotationDrop(event: CdkDragDrop&lt;PolygonData[]&gt;) {
+    if (event.previousContainer &#x3D;&#x3D;&#x3D; event.container) {
+      // If dropped in the same container, just reorder
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      // If moved to a different container, transfer the item
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+
+      // Update the priority based on the container
+      const droppedItem &#x3D; event.container.data[event.currentIndex];
+      if (event.container.id &#x3D;&#x3D;&#x3D; &#x27;high-priority&#x27;) {
+        droppedItem.priority &#x3D; &#x27;high&#x27;;
+      } else if (event.container.id &#x3D;&#x3D;&#x3D; &#x27;medium-priority&#x27;) {
+        droppedItem.priority &#x3D; &#x27;medium&#x27;;
+      } else if (event.container.id &#x3D;&#x3D;&#x3D; &#x27;low-priority&#x27;) {
+        droppedItem.priority &#x3D; &#x27;low&#x27;;
+      } else {
+        droppedItem.priority &#x3D; undefined; // Unassigned
+      }
+
+      // Redraw to reflect color changes
+      this.redrawAllPolygons();
+    }
+  }
 }
 </code></pre>
     </div>
@@ -5739,7 +6413,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   &lt;main
     class&#x3D;&quot;flex-1 relative bg-[#4C4C4C] flex flex-col items-center justify-center&quot;
   &gt;
-    &lt;div class&#x3D;&quot;w-full bg-[#383838] text-white py-2 px-4 shadow-md&quot;&gt;
+    &lt;div class&#x3D;&quot;w-full bg-[#262C2F] text-white py-2 px-4 shadow-md&quot;&gt;
       &lt;app-control-bar
         [zoomLevel]&#x3D;&quot;zoomLevel&quot;
         [isPanning]&#x3D;&quot;spacePressed&quot;
@@ -5834,73 +6508,149 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     &lt;/div&gt;
   &lt;/main&gt;
 
-  &lt;!-- Right Sidebar --&gt;
-  &lt;aside class&#x3D;&quot;w-1/6 bg-[#282828] text-white p-4&quot;&gt;
-    &lt;h2 class&#x3D;&quot;text-lg font-bold mb-4&quot;&gt;Tools&lt;/h2&gt;
-    &lt;nav class&#x3D;&quot;flex flex-col space-y-2&quot;&gt;
-      &lt;button (click)&#x3D;&quot;toggleDrawMode()&quot; class&#x3D;&quot;hover:bg-gray-600 p-2 rounded&quot;&gt;
-        {{ drawMode ? &quot;Disable Drawing&quot; : &quot;Enable Drawing&quot; }}
-      &lt;/button&gt;
-      &lt;button (click)&#x3D;&quot;toggleCrosshair()&quot; class&#x3D;&quot;hover:bg-gray-600 p-2 rounded&quot;&gt;
-        {{ showCrosshair ? &quot;Hide Grid&quot; : &quot;Show Grid&quot; }}
-      &lt;/button&gt;
-      &lt;button (click)&#x3D;&quot;clearPolygons()&quot; class&#x3D;&quot;hover:bg-gray-600 p-2 rounded&quot;&gt;
-        Clear Polygons
-      &lt;/button&gt;
+  &lt;!-- Right Sidebar with Priority Containers --&gt;
+  &lt;aside class&#x3D;&quot;w-1/6 bg-[#282828] text-white p-4 overflow-y-auto&quot;&gt;
+    &lt;h2 class&#x3D;&quot;text-lg font-bold mb-4&quot;&gt;Annotations&lt;/h2&gt;
 
-      &lt;div class&#x3D;&quot;my-2 border-t border-gray-600&quot;&gt;&lt;/div&gt;
-
-      &lt;!-- Zoom Controls --&gt;
-      &lt;div class&#x3D;&quot;text-sm text-gray-400 mb-2&quot;&gt;Zoom Controls:&lt;/div&gt;
-      &lt;button (click)&#x3D;&quot;zoomIn()&quot; class&#x3D;&quot;hover:bg-gray-600 p-2 rounded&quot;&gt;
-        Zoom In (+)
-      &lt;/button&gt;
-      &lt;button (click)&#x3D;&quot;zoomOut()&quot; class&#x3D;&quot;hover:bg-gray-600 p-2 rounded&quot;&gt;
-        Zoom Out (-)
-      &lt;/button&gt;
-      &lt;button (click)&#x3D;&quot;resetZoom()&quot; class&#x3D;&quot;hover:bg-gray-600 p-2 rounded&quot;&gt;
-        Reset Zoom (0)
-      &lt;/button&gt;
-
-      &lt;div class&#x3D;&quot;my-2 border-t border-gray-600&quot;&gt;&lt;/div&gt;
-
-      &lt;!-- Annotations List --&gt;
-      &lt;div class&#x3D;&quot;text-sm text-gray-400 mb-2&quot;&gt;Annotations:&lt;/div&gt;
-      &lt;div class&#x3D;&quot;max-h-64 overflow-y-auto&quot;&gt;
+    &lt;!-- High Priority Container --&gt;
+    &lt;div class&#x3D;&quot;mb-4&quot;&gt;
+      &lt;div class&#x3D;&quot;text-sm text-white font-bold bg-red-600 p-2 rounded-t&quot;&gt;
+        High Priority
+      &lt;/div&gt;
+      &lt;div
+        cdkDropList
+        id&#x3D;&quot;high-priority&quot;
+        [cdkDropListData]&#x3D;&quot;highPriorityAnnotations&quot;
+        [cdkDropListConnectedTo]&#x3D;&quot;[
+          &#x27;medium-priority&#x27;,
+          &#x27;low-priority&#x27;,
+          &#x27;unassigned&#x27;
+        ]&quot;
+        class&#x3D;&quot;bg-red-500 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b&quot;
+        (cdkDropListDropped)&#x3D;&quot;onAnnotationDrop($event)&quot;
+      &gt;
         &lt;div
-          *ngFor&#x3D;&quot;let poly of polygonDataList&quot;
-          class&#x3D;&quot;flex items-center mb-2 p-2 rounded&quot;
-          [ngClass]&#x3D;&quot;{
-            &#x27;bg-gray-700&#x27;: hoveredPolygonId &#x3D;&#x3D;&#x3D; poly.id,
-            &#x27;hover:bg-gray-700&#x27;: hoveredPolygonId !&#x3D;&#x3D; poly.id
-          }&quot;
-          (mouseenter)&#x3D;&quot;setHoveredPolygon(poly.id)&quot;
+          *ngFor&#x3D;&quot;let item of highPriorityAnnotations&quot;
+          class&#x3D;&quot;bg-red-500 text-white p-2 mb-1 rounded cursor-move flex items-center&quot;
+          cdkDrag
+          (mouseenter)&#x3D;&quot;setHoveredPolygon(item.id)&quot;
           (mouseleave)&#x3D;&quot;clearHoveredPolygon()&quot;
         &gt;
           &lt;input
             type&#x3D;&quot;checkbox&quot;
-            [checked]&#x3D;&quot;activePolygons[poly.id]&quot;
-            (change)&#x3D;&quot;togglePolygon(poly.id)&quot;
+            [checked]&#x3D;&quot;activePolygons[item.id]&quot;
+            (change)&#x3D;&quot;togglePolygon(item.id)&quot;
             class&#x3D;&quot;mr-2&quot;
           /&gt;
-          &lt;div class&#x3D;&quot;flex-1&quot;&gt;
-            &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
-              &lt;span class&#x3D;&quot;font-medium&quot;&gt;{{ poly.label || &quot;Unnamed&quot; }}&lt;/span&gt;
-              &lt;span
-                class&#x3D;&quot;ml-auto px-2 py-1 text-xs rounded-full&quot;
-                [ngClass]&#x3D;&quot;{
-                  &#x27;bg-red-500&#x27;: poly.type &#x3D;&#x3D;&#x3D; &#x27;high&#x27;,
-                  &#x27;bg-yellow-500&#x27;: poly.type &#x3D;&#x3D;&#x3D; &#x27;medium&#x27;,
-                  &#x27;bg-green-500&#x27;: poly.type &#x3D;&#x3D;&#x3D; &#x27;low&#x27;
-                }&quot;
-              &gt;
-                {{ poly.type | uppercase }}
-              &lt;/span&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
+          &lt;span&gt;{{ item.label || &quot;Unnamed&quot; }}&lt;/span&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-    &lt;/nav&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Medium Priority Container --&gt;
+    &lt;div class&#x3D;&quot;mb-4&quot;&gt;
+      &lt;div class&#x3D;&quot;text-sm text-black font-bold bg-yellow-400 p-2 rounded-t&quot;&gt;
+        Medium Priority
+      &lt;/div&gt;
+      &lt;div
+        cdkDropList
+        id&#x3D;&quot;medium-priority&quot;
+        [cdkDropListData]&#x3D;&quot;mediumPriorityAnnotations&quot;
+        [cdkDropListConnectedTo]&#x3D;&quot;[
+          &#x27;high-priority&#x27;,
+          &#x27;low-priority&#x27;,
+          &#x27;unassigned&#x27;
+        ]&quot;
+        class&#x3D;&quot;bg-yellow-400 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b&quot;
+        (cdkDropListDropped)&#x3D;&quot;onAnnotationDrop($event)&quot;
+      &gt;
+        &lt;div
+          *ngFor&#x3D;&quot;let item of mediumPriorityAnnotations&quot;
+          class&#x3D;&quot;bg-yellow-400 text-black p-2 mb-1 rounded cursor-move flex items-center&quot;
+          cdkDrag
+          (mouseenter)&#x3D;&quot;setHoveredPolygon(item.id)&quot;
+          (mouseleave)&#x3D;&quot;clearHoveredPolygon()&quot;
+        &gt;
+          &lt;input
+            type&#x3D;&quot;checkbox&quot;
+            [checked]&#x3D;&quot;activePolygons[item.id]&quot;
+            (change)&#x3D;&quot;togglePolygon(item.id)&quot;
+            class&#x3D;&quot;mr-2&quot;
+          /&gt;
+          &lt;span&gt;{{ item.label || &quot;Unnamed&quot; }}&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Low Priority Container --&gt;
+    &lt;div class&#x3D;&quot;mb-4&quot;&gt;
+      &lt;div class&#x3D;&quot;text-sm text-white font-bold bg-green-600 p-2 rounded-t&quot;&gt;
+        Low Priority
+      &lt;/div&gt;
+      &lt;div
+        cdkDropList
+        id&#x3D;&quot;low-priority&quot;
+        [cdkDropListData]&#x3D;&quot;lowPriorityAnnotations&quot;
+        [cdkDropListConnectedTo]&#x3D;&quot;[
+          &#x27;high-priority&#x27;,
+          &#x27;medium-priority&#x27;,
+          &#x27;unassigned&#x27;
+        ]&quot;
+        class&#x3D;&quot;bg-green-500 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b&quot;
+        (cdkDropListDropped)&#x3D;&quot;onAnnotationDrop($event)&quot;
+      &gt;
+        &lt;div
+          *ngFor&#x3D;&quot;let item of lowPriorityAnnotations&quot;
+          class&#x3D;&quot;bg-green-500 text-white p-2 mb-1 rounded cursor-move flex items-center&quot;
+          cdkDrag
+          (mouseenter)&#x3D;&quot;setHoveredPolygon(item.id)&quot;
+          (mouseleave)&#x3D;&quot;clearHoveredPolygon()&quot;
+        &gt;
+          &lt;input
+            type&#x3D;&quot;checkbox&quot;
+            [checked]&#x3D;&quot;activePolygons[item.id]&quot;
+            (change)&#x3D;&quot;togglePolygon(item.id)&quot;
+            class&#x3D;&quot;mr-2&quot;
+          /&gt;
+          &lt;span&gt;{{ item.label || &quot;Unnamed&quot; }}&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Unassigned Annotations Container --&gt;
+    &lt;div&gt;
+      &lt;div class&#x3D;&quot;text-sm text-white font-bold bg-blue-600 p-2 rounded-t&quot;&gt;
+        Unassigned
+      &lt;/div&gt;
+      &lt;div
+        cdkDropList
+        id&#x3D;&quot;unassigned&quot;
+        [cdkDropListData]&#x3D;&quot;unassignedAnnotations&quot;
+        [cdkDropListConnectedTo]&#x3D;&quot;[
+          &#x27;high-priority&#x27;,
+          &#x27;medium-priority&#x27;,
+          &#x27;low-priority&#x27;
+        ]&quot;
+        class&#x3D;&quot;bg-blue-500 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b&quot;
+        (cdkDropListDropped)&#x3D;&quot;onAnnotationDrop($event)&quot;
+      &gt;
+        &lt;div
+          *ngFor&#x3D;&quot;let item of unassignedAnnotations&quot;
+          class&#x3D;&quot;bg-blue-500 text-white p-2 mb-1 rounded cursor-move flex items-center&quot;
+          cdkDrag
+          (mouseenter)&#x3D;&quot;setHoveredPolygon(item.id)&quot;
+          (mouseleave)&#x3D;&quot;clearHoveredPolygon()&quot;
+        &gt;
+          &lt;input
+            type&#x3D;&quot;checkbox&quot;
+            [checked]&#x3D;&quot;activePolygons[item.id]&quot;
+            (change)&#x3D;&quot;togglePolygon(item.id)&quot;
+            class&#x3D;&quot;mr-2&quot;
+          /&gt;
+          &lt;span&gt;{{ item.label || &quot;Unnamed&quot; }}&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
   &lt;/aside&gt;
 &lt;/div&gt;
 </code></pre>
@@ -6322,6 +7072,27 @@ canvas {
 .AnnotationBadge.low {
   background-color: #43a047;
 }
+
+/* Drag preview styles */
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  opacity: 0.8;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
 </code></pre>
     </div>
 
@@ -6350,7 +7121,7 @@ canvas {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="flex h-screen">  <!-- Left Sidebar with SideNavigationBar structure -->  <app-left-side-bar></app-left-side-bar>  <main    class="flex-1 relative bg-[#4C4C4C] flex flex-col items-center justify-center"  >    <div class="w-full bg-[#383838] text-white py-2 px-4 shadow-md">      <app-control-bar        [zoomLevel]="zoomLevel"        [isPanning]="spacePressed"        (zoomIn)="zoomIn()"        (zoomOut)="zoomOut()"        (resetZoom)="resetZoom()"        (toggleCrosshair)="toggleCrosshair()"        [isCrosshair]="showCrosshair"        (togglePanning)="togglePanning()"        (maxZoom)="maxZoom()"        [zoomLevel]="zoomLevel"      >      </app-control-bar>    </div>    <div class="flex-1 w-full relative flex items-center justify-center">      <div        class="relative w-full h-[90vh]"        (mousedown)="onMouseDownContainer($event)"        (mousemove)="onMouseMoveContainer($event)"        (mouseup)="onMouseUpContainer($event)"        (mouseenter)="handleMouseEnterContainer()"        (mouseleave)="handleMouseLeaveContainer()"        (mousemove)="updateCrosshairPosition($event)"      >        <div          #imageContainer          class="image-container"          tabindex="0"          (keydown)="handleKeyboardShortcuts($event)"        >          <div class="image-wrapper">            <img              #imageElement              *ngIf="imageUrl"              [src]="imageUrl"              alt="Zoomable Image"              class="zoomable-image"              draggable="false"              (load)="onImageLoad()"            />          </div>        </div>        <div          class="crosshair-container"          [style.display]="            showCrosshair && isMouseInContainer ? \'block\' : \'none\'          "        >          <div class="crosshair-h" [style.top.px]="crosshairY"></div>          <div class="crosshair-v" [style.left.px]="crosshairX"></div>        </div>        <div          class="coordinate-label"          [style.display]="isMouseInContainer ? \'block\' : \'none\'"          [style.left.px]="crosshairX + 10"          [style.top.px]="crosshairY + 10"        >          {{            showCoordinates              ? displayedCoordinateX + ", " + displayedCoordinateY              : "No Coordinates"          }}        </div>      </div>      <canvas        #annotationCanvas        class="absolute top-0 left-0 w-full h-full"        [class.pointer-events-none]="!drawMode"        style="z-index: 500"        (mousedown)="startDrawing($event)"        (mousemove)="drawPolygon($event)"        (mouseup)="finishDrawing()"      ></canvas>      <div        class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"        style="z-index: 2000"      >        {{          showCoordinates            ? "X: " + displayedCoordinateX + ", Y: " + displayedCoordinateY            : "No Coordinates"        }}        | Zoom:        {{ zoomLevel.toFixed(1) }}x      </div>    </div>  </main>  <!-- Right Sidebar -->  <aside class="w-1/6 bg-[#282828] text-white p-4">    <h2 class="text-lg font-bold mb-4">Tools</h2>    <nav class="flex flex-col space-y-2">      <button (click)="toggleDrawMode()" class="hover:bg-gray-600 p-2 rounded">        {{ drawMode ? "Disable Drawing" : "Enable Drawing" }}      </button>      <button (click)="toggleCrosshair()" class="hover:bg-gray-600 p-2 rounded">        {{ showCrosshair ? "Hide Grid" : "Show Grid" }}      </button>      <button (click)="clearPolygons()" class="hover:bg-gray-600 p-2 rounded">        Clear Polygons      </button>      <div class="my-2 border-t border-gray-600"></div>      <!-- Zoom Controls -->      <div class="text-sm text-gray-400 mb-2">Zoom Controls:</div>      <button (click)="zoomIn()" class="hover:bg-gray-600 p-2 rounded">        Zoom In (+)      </button>      <button (click)="zoomOut()" class="hover:bg-gray-600 p-2 rounded">        Zoom Out (-)      </button>      <button (click)="resetZoom()" class="hover:bg-gray-600 p-2 rounded">        Reset Zoom (0)      </button>      <div class="my-2 border-t border-gray-600"></div>      <!-- Annotations List -->      <div class="text-sm text-gray-400 mb-2">Annotations:</div>      <div class="max-h-64 overflow-y-auto">        <div          *ngFor="let poly of polygonDataList"          class="flex items-center mb-2 p-2 rounded"          [ngClass]="{            \'bg-gray-700\': hoveredPolygonId === poly.id,            \'hover:bg-gray-700\': hoveredPolygonId !== poly.id          }"          (mouseenter)="setHoveredPolygon(poly.id)"          (mouseleave)="clearHoveredPolygon()"        >          <input            type="checkbox"            [checked]="activePolygons[poly.id]"            (change)="togglePolygon(poly.id)"            class="mr-2"          />          <div class="flex-1">            <div class="flex items-center">              <span class="font-medium">{{ poly.label || "Unnamed" }}</span>              <span                class="ml-auto px-2 py-1 text-xs rounded-full"                [ngClass]="{                  \'bg-red-500\': poly.type === \'high\',                  \'bg-yellow-500\': poly.type === \'medium\',                  \'bg-green-500\': poly.type === \'low\'                }"              >                {{ poly.type | uppercase }}              </span>            </div>          </div>        </div>      </div>    </nav>  </aside></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="flex h-screen">  <!-- Left Sidebar with SideNavigationBar structure -->  <app-left-side-bar></app-left-side-bar>  <main    class="flex-1 relative bg-[#4C4C4C] flex flex-col items-center justify-center"  >    <div class="w-full bg-[#262C2F] text-white py-2 px-4 shadow-md">      <app-control-bar        [zoomLevel]="zoomLevel"        [isPanning]="spacePressed"        (zoomIn)="zoomIn()"        (zoomOut)="zoomOut()"        (resetZoom)="resetZoom()"        (toggleCrosshair)="toggleCrosshair()"        [isCrosshair]="showCrosshair"        (togglePanning)="togglePanning()"        (maxZoom)="maxZoom()"        [zoomLevel]="zoomLevel"      >      </app-control-bar>    </div>    <div class="flex-1 w-full relative flex items-center justify-center">      <div        class="relative w-full h-[90vh]"        (mousedown)="onMouseDownContainer($event)"        (mousemove)="onMouseMoveContainer($event)"        (mouseup)="onMouseUpContainer($event)"        (mouseenter)="handleMouseEnterContainer()"        (mouseleave)="handleMouseLeaveContainer()"        (mousemove)="updateCrosshairPosition($event)"      >        <div          #imageContainer          class="image-container"          tabindex="0"          (keydown)="handleKeyboardShortcuts($event)"        >          <div class="image-wrapper">            <img              #imageElement              *ngIf="imageUrl"              [src]="imageUrl"              alt="Zoomable Image"              class="zoomable-image"              draggable="false"              (load)="onImageLoad()"            />          </div>        </div>        <div          class="crosshair-container"          [style.display]="            showCrosshair && isMouseInContainer ? \'block\' : \'none\'          "        >          <div class="crosshair-h" [style.top.px]="crosshairY"></div>          <div class="crosshair-v" [style.left.px]="crosshairX"></div>        </div>        <div          class="coordinate-label"          [style.display]="isMouseInContainer ? \'block\' : \'none\'"          [style.left.px]="crosshairX + 10"          [style.top.px]="crosshairY + 10"        >          {{            showCoordinates              ? displayedCoordinateX + ", " + displayedCoordinateY              : "No Coordinates"          }}        </div>      </div>      <canvas        #annotationCanvas        class="absolute top-0 left-0 w-full h-full"        [class.pointer-events-none]="!drawMode"        style="z-index: 500"        (mousedown)="startDrawing($event)"        (mousemove)="drawPolygon($event)"        (mouseup)="finishDrawing()"      ></canvas>      <div        class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"        style="z-index: 2000"      >        {{          showCoordinates            ? "X: " + displayedCoordinateX + ", Y: " + displayedCoordinateY            : "No Coordinates"        }}        | Zoom:        {{ zoomLevel.toFixed(1) }}x      </div>    </div>  </main>  <!-- Right Sidebar with Priority Containers -->  <aside class="w-1/6 bg-[#282828] text-white p-4 overflow-y-auto">    <h2 class="text-lg font-bold mb-4">Annotations</h2>    <!-- High Priority Container -->    <div class="mb-4">      <div class="text-sm text-white font-bold bg-red-600 p-2 rounded-t">        High Priority      </div>      <div        cdkDropList        id="high-priority"        [cdkDropListData]="highPriorityAnnotations"        [cdkDropListConnectedTo]="[          \'medium-priority\',          \'low-priority\',          \'unassigned\'        ]"        class="bg-red-500 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b"        (cdkDropListDropped)="onAnnotationDrop($event)"      >        <div          *ngFor="let item of highPriorityAnnotations"          class="bg-red-500 text-white p-2 mb-1 rounded cursor-move flex items-center"          cdkDrag          (mouseenter)="setHoveredPolygon(item.id)"          (mouseleave)="clearHoveredPolygon()"        >          <input            type="checkbox"            [checked]="activePolygons[item.id]"            (change)="togglePolygon(item.id)"            class="mr-2"          />          <span>{{ item.label || "Unnamed" }}</span>        </div>      </div>    </div>    <!-- Medium Priority Container -->    <div class="mb-4">      <div class="text-sm text-black font-bold bg-yellow-400 p-2 rounded-t">        Medium Priority      </div>      <div        cdkDropList        id="medium-priority"        [cdkDropListData]="mediumPriorityAnnotations"        [cdkDropListConnectedTo]="[          \'high-priority\',          \'low-priority\',          \'unassigned\'        ]"        class="bg-yellow-400 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b"        (cdkDropListDropped)="onAnnotationDrop($event)"      >        <div          *ngFor="let item of mediumPriorityAnnotations"          class="bg-yellow-400 text-black p-2 mb-1 rounded cursor-move flex items-center"          cdkDrag          (mouseenter)="setHoveredPolygon(item.id)"          (mouseleave)="clearHoveredPolygon()"        >          <input            type="checkbox"            [checked]="activePolygons[item.id]"            (change)="togglePolygon(item.id)"            class="mr-2"          />          <span>{{ item.label || "Unnamed" }}</span>        </div>      </div>    </div>    <!-- Low Priority Container -->    <div class="mb-4">      <div class="text-sm text-white font-bold bg-green-600 p-2 rounded-t">        Low Priority      </div>      <div        cdkDropList        id="low-priority"        [cdkDropListData]="lowPriorityAnnotations"        [cdkDropListConnectedTo]="[          \'high-priority\',          \'medium-priority\',          \'unassigned\'        ]"        class="bg-green-500 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b"        (cdkDropListDropped)="onAnnotationDrop($event)"      >        <div          *ngFor="let item of lowPriorityAnnotations"          class="bg-green-500 text-white p-2 mb-1 rounded cursor-move flex items-center"          cdkDrag          (mouseenter)="setHoveredPolygon(item.id)"          (mouseleave)="clearHoveredPolygon()"        >          <input            type="checkbox"            [checked]="activePolygons[item.id]"            (change)="togglePolygon(item.id)"            class="mr-2"          />          <span>{{ item.label || "Unnamed" }}</span>        </div>      </div>    </div>    <!-- Unassigned Annotations Container -->    <div>      <div class="text-sm text-white font-bold bg-blue-600 p-2 rounded-t">        Unassigned      </div>      <div        cdkDropList        id="unassigned"        [cdkDropListData]="unassignedAnnotations"        [cdkDropListConnectedTo]="[          \'high-priority\',          \'medium-priority\',          \'low-priority\'        ]"        class="bg-blue-500 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b"        (cdkDropListDropped)="onAnnotationDrop($event)"      >        <div          *ngFor="let item of unassignedAnnotations"          class="bg-blue-500 text-white p-2 mb-1 rounded cursor-move flex items-center"          cdkDrag          (mouseenter)="setHoveredPolygon(item.id)"          (mouseleave)="clearHoveredPolygon()"        >          <input            type="checkbox"            [checked]="activePolygons[item.id]"            (change)="togglePolygon(item.id)"            class="mr-2"          />          <span>{{ item.label || "Unnamed" }}</span>        </div>      </div>    </div>  </aside></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ControlBarComponent', 'selector': 'app-control-bar'},{'name': 'ControlBarItemComponent', 'selector': 'app-control-bar-item'},{'name': 'DashboardLayoutComponent', 'selector': 'app-dashboard-layout'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LeftSideBarComponent', 'selector': 'app-left-side-bar'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StudioComponent', 'selector': 'app-studio'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'StudioComponent'};

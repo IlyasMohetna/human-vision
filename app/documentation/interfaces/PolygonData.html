@@ -160,6 +160,13 @@
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#priority" 
+>
+                                            priority
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#type" 
 >
                                             type
@@ -284,6 +291,44 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="priority"></a>
+                                        <span class="name "><b>priority</b>
+                                            <a href="#priority">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>priority:     <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="type"></a>
                                         <span class="name "><b>type</b>
                                             <a href="#type">
@@ -323,6 +368,7 @@
   type: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27;;
   points: [number, number][];
   label?: string;
+  priority?: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27;; // Add priority property
 }
 
 const POLYGONS: PolygonData[] &#x3D; [
@@ -472,6 +518,60 @@ const POLYGONS: PolygonData[] &#x3D; [
       [1746, 479],
       [1771, 476],
       [1797, 473],
+    ],
+  },
+  {
+    id: &#x27;poly22&#x27;,
+    type: &#x27;medium&#x27;,
+    label: &#x27;Defect Region&#x27;,
+    points: [
+      [1052, 410],
+      [1036, 410],
+      [1024, 410],
+      [1021, 410],
+      [1017, 411],
+      [1014, 415],
+      [1012, 419],
+      [1010, 425],
+      [1008, 425],
+      [1004, 425],
+      [1003, 426],
+      [1002, 428],
+      [1004, 430],
+      [1005, 431],
+      [1007, 432],
+      [1005, 435],
+      [1004, 440],
+      [1003, 444],
+      [1004, 449],
+      [1004, 455],
+      [1005, 456],
+      [1007, 458],
+      [1010, 459],
+      [1014, 459],
+      [1017, 458],
+      [1020, 455],
+      [1021, 452],
+      [1043, 451],
+      [1051, 426],
+    ],
+  },
+  {
+    id: &#x27;poly5&#x27;,
+    type: &#x27;medium&#x27;,
+    label: &#x27;Defect Region&#x27;,
+    points: [
+      [843, 310],
+      [850, 319],
+      [851, 329],
+      [849, 334],
+      [840, 340],
+      [832, 340],
+      [826, 338],
+      [819, 330],
+      [819, 320],
+      [824, 313],
+      [830, 308],
     ],
   },
   {

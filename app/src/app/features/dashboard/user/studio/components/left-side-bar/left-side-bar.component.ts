@@ -14,10 +14,16 @@ export class LeftSideBarComponent {
   sidebarNavItems = [
     { label: 'Images' },
     { label: 'Traffic sign' },
+    { label: 'Maps', href: 'https://maps.google.com' },
     { label: 'IA' },
   ];
 
-  selectSidebarItem(index: number) {
-    this.selectedSidebarItem = index;
+  selectSidebarItem(item: any): void {
+    const selectedItem = this.sidebarNavItems[item];
+    if (selectedItem.href) {
+      window.open(selectedItem.href, '_blank');
+    } else {
+      this.selectedSidebarItem = item;
+    }
   }
 }

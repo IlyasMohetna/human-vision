@@ -259,8 +259,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -363,17 +363,15 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>[
-    { label: &#x27;Project&#x27; },
-    { label: &#x27;Tools&#x27; },
-    { label: &#x27;Zoom&#x27; },
-    { label: &#x27;Annotations&#x27; },
     { label: &#x27;Images&#x27; },
+    { label: &#x27;Traffic sign&#x27; },
+    { label: &#x27;IA&#x27; },
   ]</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -399,16 +397,12 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 export class LeftSideBarComponent {
   selectedSidebarItem &#x3D; 1;
 
-  // Simple navigation items - just labels
   sidebarNavItems &#x3D; [
-    { label: &#x27;Project&#x27; },
-    { label: &#x27;Tools&#x27; },
-    { label: &#x27;Zoom&#x27; },
-    { label: &#x27;Annotations&#x27; },
     { label: &#x27;Images&#x27; },
+    { label: &#x27;Traffic sign&#x27; },
+    { label: &#x27;IA&#x27; },
   ];
 
-  // Navigation selection without re-rendering
   selectSidebarItem(index: number) {
     this.selectedSidebarItem &#x3D; index;
   }
@@ -418,7 +412,6 @@ export class LeftSideBarComponent {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;aside class&#x3D;&quot;SideNavigationBar left&quot;&gt;
-  &lt;!-- CompanionBar for navigation buttons --&gt;
   &lt;div class&#x3D;&quot;CompanionBar&quot;&gt;
     &lt;div
       *ngFor&#x3D;&quot;let item of sidebarNavItems; let i &#x3D; index&quot;
@@ -427,16 +420,12 @@ export class LeftSideBarComponent {
       (click)&#x3D;&quot;selectSidebarItem(i)&quot;
       [attr.title]&#x3D;&quot;item.label&quot;
     &gt;
-      &lt;!-- Only display the label in vertical orientation --&gt;
       &lt;span class&#x3D;&quot;nav-text&quot;&gt;{{ item.label }}&lt;/span&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
-  &lt;!-- Update content wrapper to handle overflow properly --&gt;
   &lt;div class&#x3D;&quot;NavigationBarContentWrapper&quot;&gt;
-    &lt;!-- Use ngSwitch instead of multiple ngIf for better performance --&gt;
     &lt;ng-container [ngSwitch]&#x3D;&quot;selectedSidebarItem&quot;&gt;
-      &lt;!-- Project Panel --&gt;
       &lt;div *ngSwitchCase&#x3D;&quot;0&quot; class&#x3D;&quot;ContentPanel&quot;&gt;
         &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Project&lt;/h2&gt;
         &lt;nav class&#x3D;&quot;MenuItems&quot;&gt;
@@ -446,25 +435,21 @@ export class LeftSideBarComponent {
         &lt;/nav&gt;
       &lt;/div&gt;
 
-      &lt;!-- Tools Panel --&gt;
       &lt;div *ngSwitchCase&#x3D;&quot;1&quot; class&#x3D;&quot;ContentPanel&quot;&gt;
         &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Tools&lt;/h2&gt;
         &lt;p&gt;Blabla&lt;/p&gt;
       &lt;/div&gt;
 
-      &lt;!-- Zoom Controls Panel --&gt;
       &lt;div *ngSwitchCase&#x3D;&quot;2&quot; class&#x3D;&quot;ContentPanel&quot;&gt;
         &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Zoom Controls&lt;/h2&gt;
         &lt;p&gt;Ok&lt;/p&gt;
       &lt;/div&gt;
 
-      &lt;!-- Annotations Panel --&gt;
       &lt;div *ngSwitchCase&#x3D;&quot;3&quot; class&#x3D;&quot;ContentPanel&quot;&gt;
         &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Annotations&lt;/h2&gt;
         &lt;p&gt;oKKK&lt;/p&gt;
       &lt;/div&gt;
 
-      &lt;!-- Images Panel --&gt;
       &lt;div *ngSwitchCase&#x3D;&quot;4&quot; class&#x3D;&quot;ContentPanel&quot;&gt;
         &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Images&lt;/h2&gt;
       &lt;/div&gt;
@@ -782,7 +767,7 @@ export class LeftSideBarComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><aside class="SideNavigationBar left">  <!-- CompanionBar for navigation buttons -->  <div class="CompanionBar">    <div      *ngFor="let item of sidebarNavItems; let i = index"      class="VerticalEditorButton"      [class.active]="selectedSidebarItem === i"      (click)="selectSidebarItem(i)"      [attr.title]="item.label"    >      <!-- Only display the label in vertical orientation -->      <span class="nav-text">{{ item.label }}</span>    </div>  </div>  <!-- Update content wrapper to handle overflow properly -->  <div class="NavigationBarContentWrapper">    <!-- Use ngSwitch instead of multiple ngIf for better performance -->    <ng-container [ngSwitch]="selectedSidebarItem">      <!-- Project Panel -->      <div *ngSwitchCase="0" class="ContentPanel">        <h2 class="PanelTitle">Project</h2>        <nav class="MenuItems">          <a href="#" class="MenuItem">Dashboard</a>          <a href="#" class="MenuItem">Settings</a>          <a href="#" class="MenuItem">Export</a>        </nav>      </div>      <!-- Tools Panel -->      <div *ngSwitchCase="1" class="ContentPanel">        <h2 class="PanelTitle">Tools</h2>        <p>Blabla</p>      </div>      <!-- Zoom Controls Panel -->      <div *ngSwitchCase="2" class="ContentPanel">        <h2 class="PanelTitle">Zoom Controls</h2>        <p>Ok</p>      </div>      <!-- Annotations Panel -->      <div *ngSwitchCase="3" class="ContentPanel">        <h2 class="PanelTitle">Annotations</h2>        <p>oKKK</p>      </div>      <!-- Images Panel -->      <div *ngSwitchCase="4" class="ContentPanel">        <h2 class="PanelTitle">Images</h2>      </div>    </ng-container>  </div></aside></div>'
+        var COMPONENT_TEMPLATE = '<div><aside class="SideNavigationBar left">  <div class="CompanionBar">    <div      *ngFor="let item of sidebarNavItems; let i = index"      class="VerticalEditorButton"      [class.active]="selectedSidebarItem === i"      (click)="selectSidebarItem(i)"      [attr.title]="item.label"    >      <span class="nav-text">{{ item.label }}</span>    </div>  </div>  <div class="NavigationBarContentWrapper">    <ng-container [ngSwitch]="selectedSidebarItem">      <div *ngSwitchCase="0" class="ContentPanel">        <h2 class="PanelTitle">Project</h2>        <nav class="MenuItems">          <a href="#" class="MenuItem">Dashboard</a>          <a href="#" class="MenuItem">Settings</a>          <a href="#" class="MenuItem">Export</a>        </nav>      </div>      <div *ngSwitchCase="1" class="ContentPanel">        <h2 class="PanelTitle">Tools</h2>        <p>Blabla</p>      </div>      <div *ngSwitchCase="2" class="ContentPanel">        <h2 class="PanelTitle">Zoom Controls</h2>        <p>Ok</p>      </div>      <div *ngSwitchCase="3" class="ContentPanel">        <h2 class="PanelTitle">Annotations</h2>        <p>oKKK</p>      </div>      <div *ngSwitchCase="4" class="ContentPanel">        <h2 class="PanelTitle">Images</h2>      </div>    </ng-container>  </div></aside></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ControlBarComponent', 'selector': 'app-control-bar'},{'name': 'ControlBarItemComponent', 'selector': 'app-control-bar-item'},{'name': 'DashboardLayoutComponent', 'selector': 'app-dashboard-layout'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LeftSideBarComponent', 'selector': 'app-left-side-bar'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StudioComponent', 'selector': 'app-studio'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LeftSideBarComponent'};
