@@ -9,7 +9,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import POLYGONS from './data';
+import POLYGONS, { PolygonData } from './data';
 
 @Component({
   selector: 'app-studio',
@@ -58,7 +58,36 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private polygon: { x: number; y: number }[] = [];
   private resizeObserver?: ResizeObserver;
 
-  private polygonData = POLYGONS;
+  // New: Type colors map
+  private readonly TYPE_COLORS = {
+    high: {
+      border: 'rgba(255, 0, 0, 1)', // Solid red
+      fill: 'rgba(255, 0, 0, 0.2)', // Semi-transparent red
+    },
+    medium: {
+      border: 'rgba(255, 255, 0, 1)', // Solid yellow
+      fill: 'rgba(255, 255, 0, 0.2)', // Semi-transparent yellow
+    },
+    low: {
+      border: 'rgba(0, 255, 0, 1)', // Solid green
+      fill: 'rgba(0, 255, 0, 0.2)', // Semi-transparent green
+    },
+  };
+
+  // Replace polygonData with this
+  public polygonDataList: PolygonData[] = POLYGONS;
+
+  // The currently active/displayed polygons
+  activePolygons: { [id: string]: boolean } = {};
+
+  // Modified polygon storage to include type information
+  private polygons: {
+    [id: string]: {
+      points: { x: number; y: number }[];
+      type: 'high' | 'medium' | 'low';
+      label?: string;
+    };
+  } = {};
 
   // Add these constants near the top of the class
   private readonly POLYGON_BORDER_COLOR = 'yellow';
@@ -67,7 +96,36 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private readonly VERTEX_COLOR = 'yellow';
   private readonly VERTEX_RADIUS = 4;
 
-  constructor(private renderer: Renderer2) {}
+  // Add this property to track which polygon is being hovered
+  hoveredPolygonId: string | null = null;
+
+  // Add these properties to store original polygon coordinates
+  private originalPolygons: {
+    [id: string]: {
+      points: { x: number; y: number }[];
+      type: 'high' | 'medium' | 'low';
+      label?: string;
+    };
+  } = {};
+
+  // Add this property to store image center
+  private imageCenter = { x: 0, y: 0 };
+
+  // Add this property to better track and debug the transforms
+  private lastTransformApplied = '';
+
+  // Add these properties for smoother animations
+  private animationFrameId: number | null = null;
+  private zoomUpdatePending = false;
+  private lastZoomTime = 0;
+  private readonly ZOOM_THROTTLE_MS = 10; // Throttle to improve performance
+
+  constructor(private renderer: Renderer2) {
+    // Initialize all polygons as active
+    this.polygonDataList.forEach((poly) => {
+      this.activePolygons[poly.id] = true;
+    });
+  }
 
   // Keyboard shortcuts - global scope
   @HostListener('window:keydown', ['$event'])
@@ -176,6 +234,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         this.handleWheel.bind(this)
       );
     }
+
+    // Cancel any pending animations
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
   }
 
   onImageLoad() {
@@ -190,12 +253,12 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         this.initialZoomLevel = this.zoomLevel; // Store the initial zoom level
         this.initialZoomSet = true;
         console.log('Initial zoom set to: ', this.initialZoomLevel);
-        this.loadImportedPolygon();
+        this.loadImportedPolygons();
       }
     }
   }
 
-  private loadImportedPolygon() {
+  private loadImportedPolygons() {
     if (!this.ctx || !this.imageElementRef || !this.canvasRef) return;
 
     // Wait a bit to ensure everything is rendered
@@ -208,7 +271,13 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       const imageRect = imageElement.getBoundingClientRect();
       const canvasRect = canvas.getBoundingClientRect();
 
-      // Calculate offset from canvas to image
+      // Store image center coordinates - relative to canvas
+      this.imageCenter = {
+        x: (imageRect.left + imageRect.right) / 2 - canvasRect.left,
+        y: (imageRect.top + imageRect.bottom) / 2 - canvasRect.top,
+      };
+
+      // Now that we have the image center, calculate offsets from center
       const offsetX = imageRect.left - canvasRect.left;
       const offsetY = imageRect.top - canvasRect.top;
 
@@ -216,22 +285,167 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       const scaleX = imageElement.clientWidth / this.imageNaturalWidth;
       const scaleY = imageElement.clientHeight / this.imageNaturalHeight;
 
-      // Map coordinates from data to canvas space
-      this.polygon = this.polygonData.map(([x, y]) => ({
-        x: offsetX + x * scaleX,
-        y: offsetY + y * scaleY,
-      }));
+      // Process all polygons
+      this.originalPolygons = {}; // Store the original coordinates
+      this.polygons = {};
 
-      console.log('Drawing polygon:', this.polygon);
-      this.redrawPolygons();
-    }, 500); // Give it 500ms to render properly
+      this.polygonDataList.forEach((polyData) => {
+        // Map coordinates from data to canvas space
+        const points = polyData.points.map(([x, y]) => ({
+          x: offsetX + x * scaleX,
+          y: offsetY + y * scaleY,
+        }));
+
+        // Store both original and transformed coordinates
+        this.originalPolygons[polyData.id] = {
+          points: [...points], // Clone the points
+          type: polyData.type,
+          label: polyData.label,
+        };
+
+        this.polygons[polyData.id] = {
+          points: [...points], // Clone the points
+          type: polyData.type,
+          label: polyData.label,
+        };
+      });
+
+      console.log('Image center:', this.imageCenter);
+      console.log('Loaded polygons:', this.polygons);
+      this.redrawAllPolygons();
+    }, 500);
   }
 
-  ngAfterViewChecked() {
-    if (this.polygon.length > 0 && this.ctx) {
-      // Redraw polygons after view updates to ensure they remain visible
-      this.redrawPolygons();
+  // Toggle a specific polygon's visibility
+  togglePolygon(id: string) {
+    this.activePolygons[id] = !this.activePolygons[id];
+    this.redrawAllPolygons();
+  }
+
+  // New method to draw all polygons
+  private redrawAllPolygons() {
+    if (!this.ctx || !this.imageElementRef) return;
+
+    const canvas = this.canvasRef.nativeElement;
+
+    // Clear with a single operation for better performance
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Setup clipping once outside the loop
+    const imageRect =
+      this.imageElementRef.nativeElement.getBoundingClientRect();
+    const canvasRect = canvas.getBoundingClientRect();
+
+    this.ctx.save();
+    this.ctx.beginPath();
+    this.ctx.rect(
+      imageRect.left - canvasRect.left,
+      imageRect.top - canvasRect.top,
+      imageRect.width,
+      imageRect.height
+    );
+    this.ctx.clip();
+
+    // Batch all non-hovered polygons first to minimize state changes
+    Object.entries(this.polygons).forEach(([id, poly]) => {
+      if (
+        this.activePolygons[id] &&
+        id !== this.hoveredPolygonId &&
+        poly.points.length >= 2
+      ) {
+        const colors = this.TYPE_COLORS[poly.type];
+
+        this.ctx!.beginPath();
+        this.ctx!.moveTo(poly.points[0].x, poly.points[0].y);
+
+        for (let i = 1; i < poly.points.length; i++) {
+          this.ctx!.lineTo(poly.points[i].x, poly.points[i].y);
+        }
+
+        this.ctx!.closePath();
+        this.ctx!.fillStyle = colors.fill;
+        this.ctx!.fill();
+
+        this.ctx!.strokeStyle = colors.border;
+        this.ctx!.lineWidth = this.POLYGON_BORDER_WIDTH;
+        this.ctx!.lineJoin = 'round';
+        this.ctx!.stroke();
+
+        // We removed the code that draws vertex points here
+      }
+    });
+
+    // Draw the hovered polygon with special effects
+    if (this.hoveredPolygonId && this.activePolygons[this.hoveredPolygonId]) {
+      const poly = this.polygons[this.hoveredPolygonId];
+      if (poly && poly.points.length >= 2) {
+        this.drawSinglePolygon(poly.points, poly.type, true);
+      }
     }
+
+    this.ctx.restore();
+  }
+
+  // New method to draw a single polygon with the correct color
+  private drawSinglePolygon(
+    points: { x: number; y: number }[],
+    type: 'high' | 'medium' | 'low',
+    isHovered: boolean = false
+  ) {
+    if (!this.ctx || points.length < 2) return;
+
+    const colors = this.TYPE_COLORS[type];
+
+    // Draw filled area
+    this.ctx.beginPath();
+    this.ctx.moveTo(points[0].x, points[0].y);
+
+    for (let i = 1; i < points.length; i++) {
+      this.ctx.lineTo(points[i].x, points[i].y);
+    }
+
+    // Close the polygon path
+    this.ctx.closePath();
+
+    // For hovered polygons, use more opaque fill and add shadow
+    if (isHovered) {
+      // Add shadow for highlight effect
+      this.ctx.shadowColor = colors.border;
+      this.ctx.shadowBlur = 15;
+
+      // Use more opaque fill for hover
+      this.ctx.fillStyle = colors.fill.replace('0.2', '0.4'); // Make fill more opaque
+    } else {
+      this.ctx.shadowBlur = 0;
+      this.ctx.fillStyle = colors.fill;
+    }
+
+    this.ctx.fill();
+
+    // Draw the border with thicker line for hovered polygons
+    this.ctx.strokeStyle = colors.border;
+    this.ctx.lineWidth = isHovered
+      ? this.POLYGON_BORDER_WIDTH + 2
+      : this.POLYGON_BORDER_WIDTH;
+    this.ctx.lineJoin = 'round';
+    this.ctx.stroke();
+
+    // Reset shadow
+    this.ctx.shadowBlur = 0;
+
+    // Don't draw vertex points for any polygons - remove this section entirely
+    // We're removing the code that draws points at each vertex
+  }
+
+  // Add these methods to handle hover events
+  setHoveredPolygon(id: string) {
+    this.hoveredPolygonId = id;
+    this.redrawAllPolygons();
+  }
+
+  clearHoveredPolygon() {
+    this.hoveredPolygonId = null;
+    this.redrawAllPolygons();
   }
 
   updateMinZoomLevel() {
@@ -274,16 +488,22 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    // Ctrl + wheel for zoom
+    // Ctrl + wheel for zoom with improved throttling
     if (event.ctrlKey) {
-      if (event.deltaY < 0) {
-        this.zoomIn();
-      } else if (event.deltaY > 0) {
-        // Only zoom out if we're not already at the initial zoom level
-        if (this.zoomLevel > this.initialZoomLevel) {
+      event.preventDefault();
+
+      // Calculate zoom amount based on wheel delta for smoother zooming
+      const zoomDelta = event.deltaY * -0.001; // Smaller increments for smoother zoom
+
+      if (zoomDelta > 0) {
+        // Don't create a new zoom operation if we have one pending
+        if (!this.zoomUpdatePending) {
+          this.zoomIn();
+        }
+      } else if (zoomDelta < 0) {
+        if (!this.zoomUpdatePending && this.zoomLevel > this.initialZoomLevel) {
           this.zoomOut();
-        } else {
-          // If we're already at initial zoom, make it obvious we can't zoom out further
+        } else if (this.zoomLevel <= this.initialZoomLevel) {
           this.flashZoomLimitReached();
         }
       }
@@ -295,28 +515,68 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   // Zoom control methods
   zoomIn() {
+    // Throttle the zoom operations
+    const now = Date.now();
+    if (now - this.lastZoomTime < this.ZOOM_THROTTLE_MS) {
+      if (!this.zoomUpdatePending) {
+        this.zoomUpdatePending = true;
+        setTimeout(() => {
+          this.zoomLevel = Math.min(5.0, this.zoomLevel + this.zoomFactor);
+          this.applyTransform();
+          this.zoomUpdatePending = false;
+          this.lastZoomTime = Date.now();
+        }, this.ZOOM_THROTTLE_MS);
+      }
+      return;
+    }
+
     this.zoomLevel = Math.min(5.0, this.zoomLevel + this.zoomFactor);
-    this.applyZoom();
+    this.applyTransform();
+    this.lastZoomTime = now;
   }
 
   zoomOut() {
+    // Throttle the zoom operations
+    const now = Date.now();
+    if (now - this.lastZoomTime < this.ZOOM_THROTTLE_MS) {
+      if (!this.zoomUpdatePending) {
+        this.zoomUpdatePending = true;
+        setTimeout(() => {
+          if (this.zoomLevel > this.initialZoomLevel + this.zoomFactor / 2) {
+            this.zoomLevel = Math.max(
+              this.initialZoomLevel,
+              this.zoomLevel - this.zoomFactor
+            );
+            this.applyTransform();
+          } else {
+            this.flashZoomLimitReached();
+          }
+          this.zoomUpdatePending = false;
+          this.lastZoomTime = Date.now();
+        }, this.ZOOM_THROTTLE_MS);
+      }
+      return;
+    }
+
     // Don't allow zooming out smaller than the initial zoom level
     if (this.zoomLevel > this.initialZoomLevel + this.zoomFactor / 2) {
-      // Add a small buffer
       this.zoomLevel = Math.max(
         this.initialZoomLevel,
         this.zoomLevel - this.zoomFactor
       );
-      this.applyZoom();
+      this.applyTransform();
     } else {
       this.flashZoomLimitReached();
     }
+    this.lastZoomTime = now;
   }
 
   resetZoom() {
     // Reset to initial zoom level
     this.zoomLevel = this.initialZoomLevel;
-    this.applyZoom();
+    this.translateX = 0; // Also reset translation
+    this.translateY = 0;
+    this.applyTransform();
   }
 
   // Add a visual feedback when trying to zoom beyond limits
@@ -341,6 +601,103 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         `scale(${this.zoomLevel})`
       );
     }
+  }
+
+  applyTransform() {
+    if (!this.imageElementRef) return;
+
+    // Cancel any pending animation frame to prevent multiple redraws
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
+
+    const transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.zoomLevel})`;
+
+    // Apply transforms to image element immediately for responsiveness
+    if (this.panning) {
+      this.renderer.setStyle(
+        this.imageElementRef.nativeElement,
+        'transition',
+        'none'
+      );
+
+      // Ensure the canvas is properly aligned during panning
+      this.animationFrameId = requestAnimationFrame(() => {
+        this.updatePolygonsForTransform();
+        this.redrawAllPolygons();
+        this.animationFrameId = null;
+      });
+    } else {
+      this.renderer.setStyle(
+        this.imageElementRef.nativeElement,
+        'transition',
+        'transform 0.05s ease-out'
+      );
+
+      // Use requestAnimationFrame for smoother polygon updates
+      this.animationFrameId = requestAnimationFrame(() => {
+        this.updatePolygonsForTransform();
+        this.animationFrameId = null;
+      });
+    }
+
+    this.renderer.setStyle(
+      this.imageElementRef.nativeElement,
+      'transform',
+      transform
+    );
+    this.lastTransformApplied = transform;
+  }
+
+  // New method to update polygon positions based on current transform
+  private updatePolygonsForTransform() {
+    if (
+      !this.originalPolygons ||
+      Object.keys(this.originalPolygons).length === 0 ||
+      !this.imageElementRef
+    )
+      return;
+
+    // Get the current image position and dimensions
+    const imageRect =
+      this.imageElementRef.nativeElement.getBoundingClientRect();
+    const canvasRect = this.canvasRef.nativeElement.getBoundingClientRect();
+
+    // Calculate image to canvas offset - IMPORTANT for proper positioning
+    const offsetX = imageRect.left - canvasRect.left;
+    const offsetY = imageRect.top - canvasRect.top;
+
+    // For each polygon, apply the current transform to its original coordinates
+    Object.keys(this.originalPolygons).forEach((id) => {
+      const original = this.originalPolygons[id];
+
+      // Apply the transform to each point more accurately
+      this.polygons[id] = {
+        ...original,
+        points: original.points.map((point) => {
+          // Calculate position relative to image center for scaling
+          const relativeX = point.x - this.imageCenter.x;
+          const relativeY = point.y - this.imageCenter.y;
+
+          // Apply scaling to relative coordinates
+          const scaledX = relativeX * this.zoomLevel;
+          const scaledY = relativeY * this.zoomLevel;
+
+          // Translate back to absolute coordinates (from center)
+          return {
+            x: this.imageCenter.x + scaledX + this.translateX,
+            y: this.imageCenter.y + scaledY + this.translateY,
+          };
+        }),
+      };
+    });
+
+    // Store transform applied for debugging
+    this.lastTransformApplied = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.zoomLevel})`;
+
+    // Redraw with the updated positions
+    this.redrawAllPolygons();
   }
 
   toggleCrosshair() {
@@ -404,6 +761,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       canvas.width = container.clientWidth;
       canvas.height = container.clientHeight;
     }
+
+    // If we have polygons, reload them to adjust to new canvas size
+    if (this.polygonDataList.length > 0 && this.imageElementRef) {
+      this.loadImportedPolygons();
+    }
   }
 
   toggleDrawMode() {
@@ -455,44 +817,38 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   }
 
   private redrawPolygons() {
-    if (!this.ctx) return;
+    // First redraw all the saved polygons
+    this.redrawAllPolygons();
 
-    const canvas = this.canvasRef.nativeElement;
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Then draw the current active polygon being created
+    if (this.polygon.length >= 2 && this.ctx) {
+      // For active drawing, use yellow (or any preferred color)
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
 
-    if (this.polygon.length < 2) return;
+      for (let i = 1; i < this.polygon.length; i++) {
+        this.ctx.lineTo(this.polygon[i].x, this.polygon[i].y);
+      }
 
-    // First draw the filled area
-    this.ctx.beginPath();
-    this.ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
+      // Draw with default yellow style
+      this.ctx.fillStyle = this.POLYGON_FILL_COLOR;
+      this.ctx.fill();
+      this.ctx.strokeStyle = this.POLYGON_BORDER_COLOR;
+      this.ctx.lineWidth = this.POLYGON_BORDER_WIDTH;
+      this.ctx.lineJoin = 'round';
+      this.ctx.stroke();
 
-    for (let i = 1; i < this.polygon.length; i++) {
-      this.ctx.lineTo(this.polygon[i].x, this.polygon[i].y);
+      // Draw vertex points
+      this.polygon.forEach((point) => {
+        this.ctx!.beginPath();
+        this.ctx!.arc(point.x, point.y, this.VERTEX_RADIUS, 0, 2 * Math.PI);
+        this.ctx!.fillStyle = this.VERTEX_COLOR;
+        this.ctx!.fill();
+        this.ctx!.strokeStyle = 'black';
+        this.ctx!.lineWidth = 1;
+        this.ctx!.stroke();
+      });
     }
-
-    // Close the polygon path
-    this.ctx.closePath();
-
-    // Fill with semi-transparent color
-    this.ctx.fillStyle = this.POLYGON_FILL_COLOR;
-    this.ctx.fill();
-
-    // Then draw the border with thicker line
-    this.ctx.strokeStyle = this.POLYGON_BORDER_COLOR;
-    this.ctx.lineWidth = this.POLYGON_BORDER_WIDTH;
-    this.ctx.lineJoin = 'round';
-    this.ctx.stroke();
-
-    // Draw points at each vertex
-    this.polygon.forEach((point) => {
-      this.ctx!.beginPath();
-      this.ctx!.arc(point.x, point.y, this.VERTEX_RADIUS, 0, 2 * Math.PI);
-      this.ctx!.fillStyle = this.VERTEX_COLOR;
-      this.ctx!.fill();
-      this.ctx!.strokeStyle = 'black';
-      this.ctx!.lineWidth = 1;
-      this.ctx!.stroke();
-    });
   }
 
   finishDrawing() {
@@ -551,16 +907,5 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   onMouseUpContainer(event: MouseEvent) {
     this.finishDrawing();
-  }
-
-  // Apply both translate + scale
-  private applyTransform() {
-    if (this.imageElementRef) {
-      this.renderer.setStyle(
-        this.imageElementRef.nativeElement,
-        'transform',
-        `translate(${this.translateX}px, ${this.translateY}px) scale(${this.zoomLevel})`
-      );
-    }
   }
 }
