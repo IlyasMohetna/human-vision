@@ -1,1 +1,8 @@
-<p>control-bar-item works!</p>
+<button
+  [attr.aria-label]="label"
+  [class.bg-blue-600]="isActive"
+  class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"
+  (click)="clicked.emit()"
+>
+  <fa-icon [icon]="icon"></fa-icon>
+</button>
