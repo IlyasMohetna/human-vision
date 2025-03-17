@@ -14,6 +14,7 @@ import POLYGONS, { PolygonData } from './data';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { LeftSideBarComponent } from './components/left-side-bar/left-side-bar.component';
+import { RightSideBarComponent } from './components/right-side-bar/right-side-bar.component';
 import {
   CdkDragDrop,
   DragDropModule,
@@ -30,6 +31,7 @@ import {
     FontAwesomeModule,
     ControlBarComponent,
     LeftSideBarComponent,
+    RightSideBarComponent,
     DragDropModule,
   ],
   templateUrl: './studio.component.html',
