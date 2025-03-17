@@ -1,0 +1,246 @@
+<div class="flex h-screen">
+  <!-- Left Sidebar with SideNavigationBar structure -->
+  <app-left-side-bar></app-left-side-bar>
+  <main
+    class="flex-1 relative bg-[#4C4C4C] flex flex-col items-center justify-center"
+  >
+    <div class="w-full bg-[#262C2F] text-white py-2 px-4 shadow-md">
+      <app-control-bar
+        [zoomLevel]="zoomLevel"
+        [isPanning]="spacePressed"
+        (zoomIn)="zoomIn()"
+        (zoomOut)="zoomOut()"
+        (resetZoom)="resetZoom()"
+        (toggleCrosshair)="toggleCrosshair()"
+        [isCrosshair]="showCrosshair"
+        (togglePanning)="togglePanning()"
+        (maxZoom)="maxZoom()"
+        [zoomLevel]="zoomLevel"
+      >
+      </app-control-bar>
+    </div>
+
+    <div class="flex-1 w-full relative flex items-center justify-center">
+      <div
+        class="relative w-full h-[90vh]"
+        (mousedown)="onMouseDownContainer($event)"
+        (mousemove)="onMouseMoveContainer($event)"
+        (mouseup)="onMouseUpContainer($event)"
+        (mouseenter)="handleMouseEnterContainer()"
+        (mouseleave)="handleMouseLeaveContainer()"
+        (mousemove)="updateCrosshairPosition($event)"
+      >
+        <div
+          #imageContainer
+          class="image-container"
+          tabindex="0"
+          (keydown)="handleKeyboardShortcuts($event)"
+        >
+          <div class="image-wrapper">
+            <img
+              #imageElement
+              *ngIf="imageUrl"
+              [src]="imageUrl"
+              alt="Zoomable Image"
+              class="zoomable-image"
+              draggable="false"
+              (load)="onImageLoad()"
+            />
+          </div>
+        </div>
+
+        <div
+          class="crosshair-container"
+          [style.display]="
+            showCrosshair && isMouseInContainer ? 'block' : 'none'
+          "
+        >
+          <div class="crosshair-h" [style.top.px]="crosshairY"></div>
+          <div class="crosshair-v" [style.left.px]="crosshairX"></div>
+        </div>
+
+        <div
+          class="coordinate-label"
+          [style.display]="isMouseInContainer ? 'block' : 'none'"
+          [style.left.px]="crosshairX + 10"
+          [style.top.px]="crosshairY + 10"
+        >
+          {{
+            showCoordinates
+              ? displayedCoordinateX + ", " + displayedCoordinateY
+              : "No Coordinates"
+          }}
+        </div>
+      </div>
+
+      <canvas
+        #annotationCanvas
+        class="absolute top-0 left-0 w-full h-full"
+        [class.pointer-events-none]="!drawMode"
+        style="z-index: 500"
+        (mousedown)="startDrawing($event)"
+        (mousemove)="drawPolygon($event)"
+        (mouseup)="finishDrawing()"
+      ></canvas>
+
+      <div
+        class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"
+        style="z-index: 2000"
+      >
+        {{
+          showCoordinates
+            ? "X: " + displayedCoordinateX + ", Y: " + displayedCoordinateY
+            : "No Coordinates"
+        }}
+
+        | Zoom:
+        {{ zoomLevel.toFixed(1) }}x
+      </div>
+    </div>
+  </main>
+
+  <!-- Right Sidebar with Priority Containers -->
+  <aside class="w-1/6 bg-[#282828] text-white p-4 overflow-y-auto">
+    <h2 class="text-lg font-bold mb-4">Annotations</h2>
+
+    <!-- High Priority Container -->
+    <div class="mb-4">
+      <div class="text-sm text-white font-bold bg-red-600 p-2 rounded-t">
+        High Priority
+      </div>
+      <div
+        cdkDropList
+        id="high-priority"
+        [cdkDropListData]="highPriorityAnnotations"
+        [cdkDropListConnectedTo]="[
+          'medium-priority',
+          'low-priority',
+          'unassigned'
+        ]"
+        class="bg-red-500 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b"
+        (cdkDropListDropped)="onAnnotationDrop($event)"
+      >
+        <div
+          *ngFor="let item of highPriorityAnnotations"
+          class="bg-red-500 text-white p-2 mb-1 rounded cursor-move flex items-center"
+          cdkDrag
+          (mouseenter)="setHoveredPolygon(item.id)"
+          (mouseleave)="clearHoveredPolygon()"
+        >
+          <input
+            type="checkbox"
+            [checked]="activePolygons[item.id]"
+            (change)="togglePolygon(item.id)"
+            class="mr-2"
+          />
+          <span>{{ item.label || "Unnamed" }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medium Priority Container -->
+    <div class="mb-4">
+      <div class="text-sm text-black font-bold bg-yellow-400 p-2 rounded-t">
+        Medium Priority
+      </div>
+      <div
+        cdkDropList
+        id="medium-priority"
+        [cdkDropListData]="mediumPriorityAnnotations"
+        [cdkDropListConnectedTo]="[
+          'high-priority',
+          'low-priority',
+          'unassigned'
+        ]"
+        class="bg-yellow-400 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b"
+        (cdkDropListDropped)="onAnnotationDrop($event)"
+      >
+        <div
+          *ngFor="let item of mediumPriorityAnnotations"
+          class="bg-yellow-400 text-black p-2 mb-1 rounded cursor-move flex items-center"
+          cdkDrag
+          (mouseenter)="setHoveredPolygon(item.id)"
+          (mouseleave)="clearHoveredPolygon()"
+        >
+          <input
+            type="checkbox"
+            [checked]="activePolygons[item.id]"
+            (change)="togglePolygon(item.id)"
+            class="mr-2"
+          />
+          <span>{{ item.label || "Unnamed" }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Low Priority Container -->
+    <div class="mb-4">
+      <div class="text-sm text-white font-bold bg-green-600 p-2 rounded-t">
+        Low Priority
+      </div>
+      <div
+        cdkDropList
+        id="low-priority"
+        [cdkDropListData]="lowPriorityAnnotations"
+        [cdkDropListConnectedTo]="[
+          'high-priority',
+          'medium-priority',
+          'unassigned'
+        ]"
+        class="bg-green-500 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b"
+        (cdkDropListDropped)="onAnnotationDrop($event)"
+      >
+        <div
+          *ngFor="let item of lowPriorityAnnotations"
+          class="bg-green-500 text-white p-2 mb-1 rounded cursor-move flex items-center"
+          cdkDrag
+          (mouseenter)="setHoveredPolygon(item.id)"
+          (mouseleave)="clearHoveredPolygon()"
+        >
+          <input
+            type="checkbox"
+            [checked]="activePolygons[item.id]"
+            (change)="togglePolygon(item.id)"
+            class="mr-2"
+          />
+          <span>{{ item.label || "Unnamed" }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unassigned Annotations Container -->
+    <div>
+      <div class="text-sm text-white font-bold bg-blue-600 p-2 rounded-t">
+        Unassigned
+      </div>
+      <div
+        cdkDropList
+        id="unassigned"
+        [cdkDropListData]="unassignedAnnotations"
+        [cdkDropListConnectedTo]="[
+          'high-priority',
+          'medium-priority',
+          'low-priority'
+        ]"
+        class="bg-blue-500 bg-opacity-20 p-2 min-h-[100px] max-h-[150px] overflow-y-auto rounded-b"
+        (cdkDropListDropped)="onAnnotationDrop($event)"
+      >
+        <div
+          *ngFor="let item of unassignedAnnotations"
+          class="bg-blue-500 text-white p-2 mb-1 rounded cursor-move flex items-center"
+          cdkDrag
+          (mouseenter)="setHoveredPolygon(item.id)"
+          (mouseleave)="clearHoveredPolygon()"
+        >
+          <input
+            type="checkbox"
+            [checked]="activePolygons[item.id]"
+            (change)="togglePolygon(item.id)"
+            class="mr-2"
+          />
+          <span>{{ item.label || "Unnamed" }}</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>

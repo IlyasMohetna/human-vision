@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 
 # Install Angular CLI globally before switching to non-root user
 RUN npm install -g @angular/cli
+RUN npm install -g @compodoc/compodoc
 
 # Copy package files
 COPY package*.json ./

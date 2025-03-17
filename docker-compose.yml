@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   humanvision_app:
     build:
@@ -28,6 +26,7 @@ services:
     working_dir: /usr/src/app
     ports:
       - "4200:4200"
+      - "8080:8080"
     volumes:
       - ./app:/usr/src/app
     command: npm start

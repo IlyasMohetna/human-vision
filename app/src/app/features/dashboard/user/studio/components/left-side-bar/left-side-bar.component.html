@@ -1,0 +1,45 @@
+<aside class="SideNavigationBar left">
+  <div class="CompanionBar">
+    <div
+      *ngFor="let item of sidebarNavItems; let i = index"
+      class="VerticalEditorButton"
+      [class.active]="selectedSidebarItem === i"
+      (click)="selectSidebarItem(i)"
+      [attr.title]="item.label"
+    >
+      <span class="nav-text">{{ item.label }}</span>
+    </div>
+  </div>
+
+  <div class="NavigationBarContentWrapper">
+    <ng-container [ngSwitch]="selectedSidebarItem">
+      <div *ngSwitchCase="0" class="ContentPanel">
+        <h2 class="PanelTitle">Project</h2>
+        <nav class="MenuItems">
+          <a href="#" class="MenuItem">Dashboard</a>
+          <a href="#" class="MenuItem">Settings</a>
+          <a href="#" class="MenuItem">Export</a>
+        </nav>
+      </div>
+
+      <div *ngSwitchCase="1" class="ContentPanel">
+        <h2 class="PanelTitle">Tools</h2>
+        <p>Blabla</p>
+      </div>
+
+      <div *ngSwitchCase="2" class="ContentPanel">
+        <h2 class="PanelTitle">Zoom Controls</h2>
+        <p>Ok</p>
+      </div>
+
+      <div *ngSwitchCase="3" class="ContentPanel">
+        <h2 class="PanelTitle">Annotations</h2>
+        <p>oKKK</p>
+      </div>
+
+      <div *ngSwitchCase="4" class="ContentPanel">
+        <h2 class="PanelTitle">Images</h2>
+      </div>
+    </ng-container>
+  </div>
+</aside>

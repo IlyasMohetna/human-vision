@@ -1,0 +1,47 @@
+<div class="flex items-center space-x-1 max-w-6xl w-full">
+  <div class="flex items-center space-x-1 mr-4 border-r pr-4 border-gray-600">
+    <app-control-bar-item
+      icon="magnifying-glass-plus"
+      label="Zoom In"
+      (clicked)="zoomIn.emit()"
+    ></app-control-bar-item>
+
+    <app-control-bar-item
+      icon="magnifying-glass-minus"
+      label="Zoom Out"
+      (clicked)="zoomOut.emit()"
+    ></app-control-bar-item>
+
+    <app-control-bar-item
+      icon="minimize"
+      label="Fit Image"
+      (clicked)="resetZoom.emit()"
+    ></app-control-bar-item>
+
+    <app-control-bar-item
+      icon="maximize"
+      label="Max Zoom"
+      (clicked)="maxZoom.emit()"
+    ></app-control-bar-item>
+  </div>
+
+  <div class="flex items-center space-x-1">
+    <app-control-bar-item
+      icon="hand-paper"
+      label="Panning Mode"
+      [isActive]="isPanning"
+      (clicked)="togglePanning.emit()"
+    ></app-control-bar-item>
+
+    <app-control-bar-item
+      icon="crosshairs"
+      label="Toggle Crosshair"
+      [isActive]="isCrosshair"
+      (clicked)="toggleCrosshair.emit()"
+    ></app-control-bar-item>
+  </div>
+
+  <div class="ml-4 py-1 px-2 bg-gray-700 rounded text-sm flex items-center">
+    <span class="text-gray-300 mr-1">Zoom: {{ zoomLevel.toFixed(1) }}x</span>
+  </div>
+</div>

@@ -1,0 +1,778 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  PolygonData</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/features/dashboard/user/studio/data.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#id" 
+>
+                                            id
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#label" 
+>
+                                            label
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#points" 
+>
+                                            points
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#priority" 
+>
+                                            priority
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#type" 
+>
+                                            type
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="label"></a>
+                                        <span class="name "><b>label</b>
+                                            <a href="#label">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>label:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="points"></a>
+                                        <span class="name "><b>points</b>
+                                            <a href="#points">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>points:     <code>[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="priority"></a>
+                                        <span class="name "><b>priority</b>
+                                            <a href="#priority">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>priority:     <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="type"></a>
+                                        <span class="name "><b>type</b>
+                                            <a href="#type">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>type:     <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface PolygonData {
+  id: string;
+  type: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27;;
+  points: [number, number][];
+  label?: string;
+  priority?: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27;; // Add priority property
+}
+
+const POLYGONS: PolygonData[] &#x3D; [
+  {
+    id: &#x27;poly1&#x27;,
+    type: &#x27;high&#x27;,
+    label: &#x27;Critical Area&#x27;,
+    points: [
+      [1738, 428],
+      [1750, 428],
+      [1759, 428],
+      [1765, 426],
+      [1768, 426],
+      [1768, 429],
+      [1767, 434],
+      [1770, 437],
+      [1772, 438],
+      [1772, 440],
+      [1769, 448],
+      [1768, 452],
+      [1777, 454],
+      [1794, 460],
+      [1848, 468],
+      [1855, 468],
+      [1857, 464],
+      [1860, 459],
+      [1862, 454],
+      [1864, 449],
+      [1865, 443],
+      [1864, 440],
+      [1858, 440],
+      [1854, 435],
+      [1858, 430],
+      [1868, 431],
+      [1874, 432],
+      [1880, 434],
+      [1889, 434],
+      [1894, 436],
+      [1900, 439],
+      [1899, 442],
+      [1889, 446],
+      [1878, 447],
+      [1873, 452],
+      [1873, 460],
+      [1877, 467],
+      [1884, 472],
+      [1892, 474],
+      [1924, 476],
+      [1948, 481],
+      [1954, 486],
+      [1946, 488],
+      [1935, 488],
+      [1914, 484],
+      [1887, 481],
+      [1878, 480],
+      [1881, 487],
+      [1885, 492],
+      [1889, 495],
+      [1912, 490],
+      [1933, 495],
+      [1955, 512],
+      [1963, 526],
+      [1966, 546],
+      [1962, 564],
+      [1958, 572],
+      [1941, 590],
+      [1921, 600],
+      [1895, 600],
+      [1876, 595],
+      [1861, 580],
+      [1853, 568],
+      [1851, 562],
+      [1844, 566],
+      [1815, 540],
+      [1815, 540],
+      [1785, 509],
+      [1770, 499],
+      [1760, 499],
+      [1757, 511],
+      [1769, 524],
+      [1770, 550],
+      [1753, 582],
+      [1733, 595],
+      [1717, 597],
+      [1702, 596],
+      [1692, 589],
+      [1685, 582],
+      [1673, 564],
+      [1674, 548],
+      [1679, 537],
+      [1687, 519],
+      [1703, 507],
+      [1718, 485],
+      [1720, 447],
+    ],
+  },
+  {
+    id: &#x27;poly2&#x27;,
+    type: &#x27;medium&#x27;,
+    label: &#x27;Defect Region&#x27;,
+    points: [
+      [1828, 455],
+      [1901, 446],
+      [1910, 438],
+      [1924, 432],
+      [1940, 429],
+      [1946, 423],
+      [1951, 420],
+      [1955, 420],
+      [1958, 424],
+      [1959, 429],
+      [1964, 435],
+      [1966, 438],
+      [1966, 439],
+      [1958, 449],
+      [1960, 460],
+      [1961, 467],
+      [1960, 476],
+      [1958, 481],
+      [1959, 484],
+      [1975, 485],
+      [1991, 486],
+      [2012, 495],
+      [2029, 515],
+      [2039, 545],
+      [2027, 577],
+      [2007, 593],
+      [1978, 597],
+      [1950, 586],
+      [1925, 568],
+      [1913, 532],
+      [1909, 517],
+      [1875, 553],
+      [1849, 562],
+      [1841, 572],
+      [1843, 585],
+      [1838, 587],
+      [1834, 582],
+      [1815, 590],
+      [1790, 593],
+      [1772, 586],
+      [1755, 574],
+      [1738, 553],
+      [1731, 529],
+      [1733, 511],
+      [1732, 490],
+      [1746, 479],
+      [1771, 476],
+      [1797, 473],
+    ],
+  },
+  {
+    id: &#x27;poly22&#x27;,
+    type: &#x27;medium&#x27;,
+    label: &#x27;Defect Region&#x27;,
+    points: [
+      [1052, 410],
+      [1036, 410],
+      [1024, 410],
+      [1021, 410],
+      [1017, 411],
+      [1014, 415],
+      [1012, 419],
+      [1010, 425],
+      [1008, 425],
+      [1004, 425],
+      [1003, 426],
+      [1002, 428],
+      [1004, 430],
+      [1005, 431],
+      [1007, 432],
+      [1005, 435],
+      [1004, 440],
+      [1003, 444],
+      [1004, 449],
+      [1004, 455],
+      [1005, 456],
+      [1007, 458],
+      [1010, 459],
+      [1014, 459],
+      [1017, 458],
+      [1020, 455],
+      [1021, 452],
+      [1043, 451],
+      [1051, 426],
+    ],
+  },
+  {
+    id: &#x27;poly5&#x27;,
+    type: &#x27;medium&#x27;,
+    label: &#x27;Defect Region&#x27;,
+    points: [
+      [843, 310],
+      [850, 319],
+      [851, 329],
+      [849, 334],
+      [840, 340],
+      [832, 340],
+      [826, 338],
+      [819, 330],
+      [819, 320],
+      [824, 313],
+      [830, 308],
+    ],
+  },
+  {
+    id: &#x27;poly3&#x27;,
+    type: &#x27;low&#x27;,
+    label: &#x27;Inspection Zone&#x27;,
+    points: [
+      [1672, 373],
+      [1679, 357],
+      [1685, 348],
+      [1687, 343],
+      [1686, 338],
+      [1681, 332],
+      [1673, 330],
+      [1670, 326],
+      [1669, 318],
+      [1669, 315],
+      [1663, 312],
+      [1666, 304],
+      [1669, 300],
+      [1670, 289],
+      [1669, 280],
+      [1677, 273],
+      [1683, 271],
+      [1692, 270],
+      [1707, 266],
+      [1716, 269],
+      [1724, 276],
+      [1729, 284],
+      [1732, 290],
+      [1735, 296],
+      [1733, 301],
+      [1719, 312],
+      [1717, 316],
+      [1715, 320],
+      [1715, 326],
+      [1718, 333],
+      [1727, 343],
+      [1732, 361],
+      [1736, 400],
+      [1740, 422],
+      [1750, 462],
+      [1752, 479],
+      [1763, 514],
+      [1766, 525],
+      [1765, 535],
+      [1745, 540],
+      [1744, 547],
+      [1753, 566],
+      [1767, 580],
+      [1775, 595],
+      [1790, 629],
+      [1789, 631],
+      [1799, 644],
+      [1805, 651],
+      [1806, 659],
+      [1806, 668],
+      [1805, 673],
+      [1803, 675],
+      [1796, 678],
+      [1793, 676],
+      [1787, 674],
+      [1785, 674],
+      [1775, 683],
+      [1765, 684],
+      [1747, 683],
+      [1743, 681],
+      [1748, 675],
+      [1755, 673],
+      [1764, 658],
+      [1765, 655],
+      [1766, 645],
+      [1764, 636],
+      [1752, 618],
+      [1728, 586],
+      [1710, 570],
+      [1705, 554],
+      [1696, 536],
+      [1693, 526],
+      [1684, 536],
+      [1662, 561],
+      [1658, 574],
+      [1655, 604],
+      [1649, 621],
+      [1646, 629],
+      [1644, 636],
+      [1641, 639],
+      [1638, 643],
+      [1635, 661],
+      [1633, 673],
+      [1628, 680],
+      [1621, 682],
+      [1618, 679],
+      [1616, 673],
+      [1594, 676],
+      [1583, 673],
+      [1576, 667],
+      [1580, 663],
+      [1586, 661],
+      [1595, 657],
+      [1602, 654],
+      [1608, 649],
+      [1616, 635],
+      [1623, 620],
+      [1628, 589],
+      [1629, 570],
+      [1626, 557],
+      [1628, 547],
+      [1634, 536],
+      [1656, 496],
+      [1663, 477],
+      [1668, 470],
+      [1670, 454],
+      [1668, 431],
+      [1666, 420],
+      [1663, 404],
+      [1666, 387],
+    ],
+  },
+];
+
+export default POLYGONS;
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'PolygonData.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
