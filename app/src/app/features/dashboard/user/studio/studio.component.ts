@@ -510,7 +510,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   }
 
   // Add these methods to handle hover events
-  setHoveredPolygon(id: string) {
+  setHoveredPolygon(id: string | null) {
     this.hoveredPolygonId = id;
     this.redrawAllPolygons();
   }
