@@ -1,28 +1,27 @@
-/* All left sidebar styles moved from studio component */
 .SideNavigationBar {
   display: flex;
-  width: 400px; /* Increased fixed width */
-  min-width: 300px; /* Ensure it never shrinks below this width */
+  width: 400px;
+  min-width: 300px;
   background-color: #282828;
   border-right: 1px solid #3a3a3a;
   height: 100%;
-  overflow: hidden; /* Prevent any overflow */
-  flex-shrink: 0; /* Prevent sidebar from shrinking */
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .CompanionBar {
-  width: 50px; /* Slightly wider for better readability */
+  width: 50px;
   min-width: 50px;
-  flex-shrink: 0; /* Prevent from shrinking */
+  flex-shrink: 0;
   background-color: #1e1e1e;
   border-right: 1px solid #333;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Prevent scroll */
+  overflow: hidden;
 }
 
 .VerticalEditorButton {
-  height: 90px; /* Taller buttons */
+  height: 90px;
   padding: 8px 0;
   color: #b3b3b3;
   cursor: pointer;
@@ -32,13 +31,12 @@
   position: relative;
 }
 
-/* Create vertical text */
 .nav-text {
   writing-mode: vertical-lr;
   transform: rotate(180deg);
   text-orientation: mixed;
   white-space: nowrap;
-  font-size: 14px; /* Larger font */
+  font-size: 14px;
   position: absolute;
   left: 50%;
   top: 0;
@@ -54,7 +52,7 @@
   background-color: #383838;
   color: white;
   border-left: 3px solid #0078d7;
-  padding-left: 3px; /* Adjusted for the border */
+  padding-left: 3px;
 }
 
 .VerticalEditorButton:hover {
@@ -62,20 +60,20 @@
 }
 
 .NavigationBarContentWrapper {
-  width: 250px; /* Fixed width: 300px total - 50px CompanionBar */
+  width: 250px;
   min-width: 250px;
-  flex-shrink: 0; /* Prevent shrinking */
+  flex-shrink: 0;
   overflow-y: auto;
-  overflow-x: hidden; /* Hide horizontal overflow */
+  overflow-x: hidden;
   background-color: #282828;
-  border-left: none; /* Remove any internal border */
+  border-left: none;
 }
 
 .ContentPanel {
   width: 100%;
   padding: 16px;
-  box-sizing: border-box; /* Include padding in width calculation */
-  background-color: #282828; /* Same as wrapper background */
+  box-sizing: border-box;
+  background-color: #282828;
 }
 
 .ContentPanel * {
@@ -216,7 +214,6 @@
   background-color: #43a047;
 }
 
-/* Image list styling */
 .ImagesList {
   width: 100%;
   display: grid;

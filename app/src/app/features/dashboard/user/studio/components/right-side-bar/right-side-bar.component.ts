@@ -2,14 +2,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 
-// Import the actual PolygonData type to ensure type compatibility
 import { PolygonData } from '../../data';
+import { AnnotationCategoryComponent } from './annotation-category/annotation-category.component';
 
 @Component({
   selector: 'app-right-side-bar',
   templateUrl: './right-side-bar.component.html',
   standalone: true,
-  imports: [CommonModule, DragDropModule],
+  imports: [CommonModule, DragDropModule, AnnotationCategoryComponent],
 })
 export class RightSideBarComponent {
   @Input() highPriorityAnnotations: PolygonData[] = [];

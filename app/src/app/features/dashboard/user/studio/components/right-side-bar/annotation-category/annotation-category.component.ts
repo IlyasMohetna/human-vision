@@ -33,32 +33,25 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
   @Output() itemToggle = new EventEmitter<string>();
   @Output() toggleExpand = new EventEmitter<boolean>();
 
-  // Flag to track if dragging is in progress
   isDragging = false;
 
-  // Global drag state tracker using document events
   private globalDragListener: any;
   isAnyDragging = false;
 
-  // Track if a drag is currently hovering over the container
   containerHasDrag = false;
 
-  // Always allow dragging into this drop list
   enterPredicate = () => true;
 
   ngOnInit() {
-    // Listen for global drag events
     this.globalDragListener = this.setupDragListeners();
   }
 
   ngOnDestroy() {
-    // Clean up event listeners
     if (this.globalDragListener) {
       this.globalDragListener.forEach((cleanup: Function) => cleanup());
     }
   }
 
-  // Setup listeners for global drag events
   private setupDragListeners() {
     const startListener = (event: Event) => {
       this.isAnyDragging = true;
@@ -67,7 +60,7 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
     const endListener = (event: Event) => {
       setTimeout(() => {
         this.isAnyDragging = false;
-      }, 50); // Small delay to ensure drop is processed first
+      }, 50);
     };
 
     document.addEventListener('cdkDragStarted', startListener);
@@ -79,7 +72,6 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
     ];
   }
 
-  // Modify the categoryColorClasses getter to include height adjustments
   get categoryColorClasses() {
     const baseClasses = {
       high: {
@@ -98,9 +90,9 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
         marker: 'bg-green-500',
       },
       none: {
-        border: 'border-l-blue-500',
-        badge: 'bg-blue-500 text-white',
-        marker: 'bg-blue-500',
+        border: 'border-l-gray-500',
+        badge: 'bg-gray-600 text-white',
+        marker: 'bg-gray-500',
       },
     };
 
@@ -113,8 +105,6 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
   }
 
   onItemDrop(event: CdkDragDrop<PolygonData[]>) {
-    // Ensure this item is only moved after dropping.
-    // By default, we also reset the flags so "No annotations" won't show mid-drag.
     this.isDragging = false;
     this.isAnyDragging = false;
     this.itemDrop.emit(event);

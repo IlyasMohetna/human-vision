@@ -12,8 +12,8 @@ import { MapModalComponent } from '../map-modal/map-modal.component';
 export class LeftSideBarComponent {
   selectedSidebarItem = 1;
   showMapModal = false;
-  mapCoordinates = '50.11277826699915,8.681049182681981';
-  mapHeading = 180;
+  mapCoordinates = '50.108713798330555,8.68032783609474';
+  mapHeading = 240;
 
   sidebarNavItems = [
     { label: 'Images' },

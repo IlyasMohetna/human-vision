@@ -13,13 +13,11 @@
   width: 6px;
 }
 
-/* For anti-aliasing and smooth fonts */
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Drag and drop styling */
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
@@ -36,30 +34,28 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-/* Custom scrolling containers with explicit CSS properties - improved fixed heights */
 .scroll-container-sm {
-  height: 100px !important; /* Exact fixed height */
+  height: 100px !important;
   min-height: 100px !important;
   max-height: 100px !important;
-  overflow-y: scroll !important; /* Force scrollbar always visible */
+  overflow-y: scroll !important;
   overflow-x: hidden !important;
   display: block !important;
   position: relative;
-  flex: none !important; /* No flexbox growth/shrinking */
+  flex: none !important;
   margin-bottom: 10px;
 }
 
 .scroll-container-lg {
-  height: calc(100% - 40px) !important; /* Full height minus header */
+  height: calc(100% - 40px) !important;
   min-height: 200px !important;
-  overflow-y: scroll !important; /* Force scrollbar always visible */
+  overflow-y: scroll !important;
   overflow-x: hidden !important;
   display: block !important;
   position: relative;
-  flex: none !important; /* No flexbox growth/shrinking */
+  flex: none !important;
 }
 
-/* Styling for WebKit browsers (Chrome, Safari, etc.) */
 .scroll-container-sm::-webkit-scrollbar,
 .scroll-container-lg::-webkit-scrollbar {
   width: 6px;
@@ -76,7 +72,6 @@
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* Ensure drag items don't interfere with scrolling */
 .cdk-drop-list {
   height: 100%;
 }
