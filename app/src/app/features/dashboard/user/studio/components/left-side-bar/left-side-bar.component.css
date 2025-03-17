@@ -1,7 +1,7 @@
 /* All left sidebar styles moved from studio component */
 .SideNavigationBar {
   display: flex;
-  width: 300px; /* Increased fixed width */
+  width: 400px; /* Increased fixed width */
   min-width: 300px; /* Ensure it never shrinks below this width */
   background-color: #282828;
   border-right: 1px solid #3a3a3a;

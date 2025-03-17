@@ -36,7 +36,7 @@ import {
   styleUrls: ['./studio.component.css'],
 })
 export class StudioComponent implements AfterViewInit, OnDestroy {
-  imageUrl = 'assets/test4.png'; // Replace with dynamic backend data when ready
+  imageUrl = 'assets/test.png'; // Replace with dynamic backend data when ready
   drawMode = false; // To toggle drawing mode
   mouseX = 0;
   mouseY = 0;
