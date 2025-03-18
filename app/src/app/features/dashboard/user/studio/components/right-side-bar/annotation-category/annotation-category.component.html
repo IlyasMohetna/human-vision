@@ -53,21 +53,20 @@
       (cdkDragStarted)="onDragStart()"
       (cdkDragEnded)="onDragEnd()"
     >
+      <!-- Left side with label -->
+      <span>{{ item.label || "Unnamed" }}</span>
+
+      <!-- Right side with badge and eye icon -->
       <div class="flex items-center">
-        <input
-          type="checkbox"
-          [checked]="isItemActive(item.id)"
-          (change)="onItemToggle(item.id)"
-          class="mr-2"
-        />
-        <span>{{ item.label || "Unnamed" }}</span>
+        <fa-icon
+          [icon]="isItemActive(item.id) ? 'eye' : 'eye-slash'"
+          class="text-white transition-all cursor-pointer ml-2"
+          [class.text-opacity-40]="!isItemActive(item.id)"
+          [class.text-opacity-90]="isItemActive(item.id)"
+          [class.hover:text-opacity-100]="true"
+          (click)="onItemToggle(item.id); $event.stopPropagation()"
+        ></fa-icon>
       </div>
-      <span
-        class="text-xs px-2 py-0.5 rounded-full"
-        [ngClass]="categoryColorClasses.badge"
-      >
-        {{ badgeText }}
-      </span>
     </div>
 
     <div

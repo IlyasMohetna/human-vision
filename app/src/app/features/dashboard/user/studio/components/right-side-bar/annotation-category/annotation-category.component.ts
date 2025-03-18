@@ -14,7 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @Component({
   selector: 'app-annotation-category',
   standalone: true,
-  imports: [CommonModule, DragDropModule],
+  imports: [CommonModule, DragDropModule, FontAwesomeModule],
   templateUrl: './annotation-category.component.html',
 })
 export class AnnotationCategoryComponent implements OnInit, OnDestroy {
