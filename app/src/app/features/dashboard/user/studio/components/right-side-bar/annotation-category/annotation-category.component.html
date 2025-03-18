@@ -10,13 +10,7 @@
       class="absolute left-0 top-0 h-full w-1 transition-all duration-200 hover:w-1.5"
       [ngClass]="categoryColorClasses.marker"
     ></div>
-    <div class="flex items-center">
-      <img
-        [src]="iconPath"
-        [alt]="title.toLowerCase()"
-        class="w-5 h-5 mr-2"
-        draggable="false"
-      />
+    <div class="flex items-center font-bold">
       <span>{{ title }}</span>
     </div>
     <div class="flex items-center">
@@ -27,12 +21,11 @@
         {{ badgeText }}
       </span>
       <img
-        src="assets/icons/down.svg"
+        src="assets/icons/down.png"
         alt="toggle"
         class="w-4 h-4 ml-2 transition-transform duration-200"
-        [class.transform]="isExpanded"
-        [class.rotate-180]="isExpanded"
         draggable="false"
+        style="filter: brightness(0) invert(1)"
       />
     </div>
   </div>
