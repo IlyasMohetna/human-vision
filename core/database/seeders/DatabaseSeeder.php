@@ -26,5 +26,11 @@ class DatabaseSeeder extends Seeder
             'lastname' => 'Mqueen',
             'email' => 'admin@admin.com'
         ]);
+
+        User::factory()->create([
+            'firstname' => 'Kevin',
+            'lastname' => 'Lelievre',
+            'email' => 'kevin.lelievre@utbm.fr',
+        ]);
     }
 }
