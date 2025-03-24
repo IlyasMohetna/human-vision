@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 export const ADMIN_MENU = [
-  { name: 'Admin Dashboard', route: '/admin', icon: 'dashboard' },
-  { name: 'User Management', route: '/admin/users', icon: 'users' },
-  { name: 'Reports', route: '/admin/reports', icon: 'chart' },
+  { name: 'Dashboard', route: 'admin/dashboard', icon: 'dashboard' },
 ];
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'dashboard',
+    component: HomeComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -1,20 +1,35 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
-import { HomeComponent } from './user/home/home.component';
-import { SettingsComponent } from './user/settings/settings.component';
-import { UserRoutingModule } from './user/user-routing.module';
+import { UserResolver } from '../../core/resolvers/user.resolver';
+import { RoleGuard } from '../../core/guards/role.guard';
+import { Role } from '../auth/enums/role';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardLayoutComponent,
+    resolve: { user: UserResolver },
     children: [
       {
-        path: '',
+        path: 'admin',
         loadChildren: () =>
-          import('./user/user-routing.module').then((m) => m.UserRoutingModule),
+          import('./admin/admin.module').then((m) => m.AdminModule),
+        canLoad: [RoleGuard],
+        data: { role: Role.Admin },
       },
+      {
+        path: 'user',
+        loadChildren: () =>
+          import('./user/user.module').then((m) => m.UserModule),
+        canLoad: [RoleGuard],
+        data: { role: Role.User },
+      },
+      // {
+      //   path: '',
+      //   redirectTo: 'user',
+      //   pathMatch: 'full',
+      // },
     ],
   },
 ];

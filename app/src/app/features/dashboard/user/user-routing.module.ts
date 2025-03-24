@@ -5,14 +5,14 @@ import { SettingsComponent } from './settings/settings.component';
 import { StudioComponent } from './studio/studio.component';
 
 export const USER_MENU = [
-  { name: 'Analytics', route: '/user', icon: 'home' },
-  { name: 'Studio', route: '/dashboard/studio', icon: 'shopping-cart' },
+  { name: 'Analytics', route: 'user/home', icon: 'home' },
+  { name: 'Studio', route: 'user/studio', icon: 'shopping-cart' },
   { name: 'Reviews', route: '/user/profile', icon: 'user' },
-  { name: 'Settings', route: '/user/settings', icon: 'user-cog' },
+  { name: 'Settings', route: 'settings', icon: 'user-cog' },
 ];
 
 const routes: Routes = [
-  { path: 'analytics', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'studio', component: StudioComponent, data: { showLayout: false } },
   {
     path: 'settings',
