@@ -20,8 +20,17 @@ class GithubService
 
     protected function githubRequest($endpoint)
     {
-        return Http::withToken($this->token)
-            ->get("{$this->apiBase}/{$this->owner}/{$this->repo}/contents/{$endpoint}");
+        $url = "{$this->apiBase}/{$this->owner}/{$this->repo}/contents/{$endpoint}";
+
+        $response = Http::withToken($this->token)->get($url);
+
+        $remaining = $response->header('X-RateLimit-Remaining');
+        $limit = $response->header('X-RateLimit-Limit');
+        $used = $limit - $remaining;
+    
+        logger()->info("[GitHub API] {$used}/{$limit} used – {$remaining} remaining for endpoint: {$endpoint}");
+    
+        return $response;
     }
 
     public function listContents($path = '')
@@ -65,6 +74,34 @@ class GithubService
         }
 
         return $allFiles;
+    }
+
+    public function getDatasetStructure()
+    {
+        $structure = [];
+
+        // Step 1: Get all top-level city folders
+        $cities = $this->getCities();
+    
+        foreach ($cities as $city) {
+            $cityName = $city['name'];
+            $cityPath = $city['path'];
+    
+            // Step 2: List folders (datasets) inside each city
+            $citySubfolders = $this->listContents($cityPath);
+    
+            // Step 3: Filter only folders
+            $datasetFolders = array_filter($citySubfolders, function ($item) {
+                return $item['type'] === 'dir';
+            });
+    
+            // Step 4: Add each subfolder path under the city key
+            $structure[$cityName] = array_map(function ($folder) {
+                return $folder['path'];
+            }, $datasetFolders);
+        }
+    
+        return $structure;
     }
 
     public function getCities($path = '')

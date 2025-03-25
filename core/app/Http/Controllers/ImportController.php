@@ -2,81 +2,157 @@
 
 namespace App\Http\Controllers;
 
+use Throwable;
+use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
+use App\Jobs\ImportDatasetJob;
 use App\Services\GithubService;
-use Illuminate\Http\StreamedEvent;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Response;
 
 class ImportController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(GithubService $githubService)
     {
-        $importId = (string) Str::uuid();
+        if ($this->importAlreadyRunning()) {
+            return response()->json(['message' => 'Import already running.'], 409);
+        }
 
-        // Store a "running" flag (or "stop" == false). We'll use this to check cancellation.
-        Cache::put("import-status:{$importId}", 'running', 300);
+        $jobs = $this->buildImportJobs($githubService);
 
-        // Example array of data to import. In your case, you might fetch from GitHubService, etc.
-        // E.g.: $cities = (new GithubService)->getCities();
-        $cities = ['CityA', 'CityB', 'CityC', 'CityD'];
+        $batch = Bus::batch($jobs)
+            ->name('Dataset Import')
+            ->then(fn() => $this->onBatchSuccess())
+            ->catch(fn(Batch $batch, Throwable $e) => $this->onBatchFailure($e))
+            ->dispatch();
 
-        // Return an eventStream response (Laravel 10+).
-        return response()->eventStream(function () use ($cities, $importId) {
-            $total = count($cities);
-            $processed = 0;
+        $this->lockBatch($batch->id);
 
-            // Iterate the dataset
-            foreach ($cities as $city) {
-                // Check if a stop was requested
-                $status = Cache::get("import-status:{$importId}");
-                if ($status === 'stopped') {
-                    // Emit a final event to let the client know we're stopping
-                    yield new StreamedEvent(
-                        event: 'update',
-                        data: json_encode([
-                            'status' => 'stopped',
-                            'processed' => $processed,
-                            'total' => $total,
-                        ])
-                    );
-                    // End the function => close the stream
-                    return;
-                }
-
-                // ... DO IMPORT LOGIC HERE ...
-                // E.g. call some service, store data, etc.
-
-                $processed++;
-
-                // yield an SSE chunk with progress
-                yield new StreamedEvent(
-                    event: 'update',
-                    data: json_encode([
-                        'status' => 'running',
-                        'processed' => $processed,
-                        'total' => $total,
-                        'city' => $city,
-                    ])
-                );
-
-                // Simulate a delay for demonstration
-                sleep(2);
-            }
-        }, endStreamWith: new StreamedEvent(
-            event: 'update',
-            data: json_encode(['status' => 'done'])
-        ));
+        return response()->json([
+            'message' => 'Import started.',
+            'batch_id' => $batch->id,
+        ]);
     }
 
-    // Endpoint to stop the import
-    public function stop(Request $request)
+    public function progress(string $id)
     {
-        $importId = $request->input('importId');
+        return Response::stream(function () use ($id) {
+            $batch = Bus::findBatch($id);
 
-        // Mark it as stopped
-        Cache::put("import-status:{$importId}", 'stopped', 300);
+            // 🔁 Simulate if batch is finished or missing
+            if (!$batch || $batch->finished()) {
+                $this->simulateProgress();
+                return;
+            }
 
-        return response()->json(['message' => 'Stop request acknowledged.']);
+            // 📡 Live tracking
+            while (true) {
+                $batch = Bus::findBatch($id);
+
+                if (!$batch) {
+                    $this->sendSseEvent('error', ['error' => 'Batch not found']);
+                    break;
+                }
+
+                $this->sendSseEvent('update', $this->formatBatchData($batch));
+
+                if ($batch->finished()) {
+                    $this->sendSseEvent('complete', ['done' => true]);
+                    break;
+                }
+
+                sleep(1);
+            }
+        }, 200, [
+            'Content-Type' => 'text/event-stream',
+            'Cache-Control' => 'no-cache',
+            'Connection' => 'keep-alive',
+        ]);
+    }
+
+    // ────────────────────────────────────────────────────────────────────────────────
+    // 🔧 Utility Methods
+    // ────────────────────────────────────────────────────────────────────────────────
+
+    private function buildImportJobs(GithubService $githubService): array
+    {
+        $cities = $githubService->getDatasetStructure();
+        $jobs = [];
+
+        foreach ($cities as $city => $datasets) {
+            foreach ($datasets as $datasetPath) {
+                $jobs[] = (new ImportDatasetJob($city, $datasetPath))->delay(now()->addSeconds(10));
+            }
+        }
+
+        return $jobs;
+    }
+
+    private function lockBatch(string $batchId): void
+    {
+        Cache::put('import_in_progress', $batchId, now()->addHour());
+    }
+
+    private function importAlreadyRunning(): bool
+    {
+        return Cache::has('import_in_progress');
+    }
+
+    private function onBatchSuccess(): void
+    {
+        Log::info("✅ Import batch complete!");
+        Cache::forget('import_in_progress');
+    }
+
+    private function onBatchFailure(Throwable $e): void
+    {
+        Log::error("❌ Import batch failed: " . $e->getMessage());
+        Cache::forget('import_in_progress');
+    }
+
+    private function formatBatchData(Batch $batch): array
+    {
+        return [
+            'status' => $batch->status,
+            'progress' => $batch->progress(),
+            'processedJobs' => $batch->processedJobs(),
+            'totalJobs' => $batch->totalJobs,
+            'failedJobs' => $batch->failedJobs,
+        ];
+    }
+
+    private function sendSseEvent(string $event, array $data): void
+    {
+        echo "event: {$event}\n";
+        echo 'data: ' . json_encode($data) . "\n\n";
+        ob_flush();
+        flush();
+    }
+
+    private function simulateProgress(): void
+    {
+        $progress = 0;
+        $total = 500;
+
+        while ($progress <= 100) {
+            $this->sendSseEvent('update', [
+                'status' => 'mocking',
+                'progress' => $progress,
+                'processedJobs' => intval($progress * ($total / 100)),
+                'totalJobs' => $total,
+                'failedJobs' => 0,
+                'mock' => true,
+            ]);
+
+            if ($progress === 100) {
+                $this->sendSseEvent('complete', ['done' => true, 'mock' => true]);
+                break;
+            }
+
+            $progress += 5;
+            sleep(1);
+        }
     }
 }
