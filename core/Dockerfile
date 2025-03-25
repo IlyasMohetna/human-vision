@@ -7,7 +7,8 @@ ARG WWWGROUP=1000
 # Install necessary packages
 RUN apt-get update && apt-get install -y \
     libpq-dev zip unzip curl net-tools iproute2 procps lsof vim \
-    && docker-php-ext-install pdo pdo_mysql
+    supervisor \
+    && docker-php-ext-install pdo pdo_mysql pcntl
 
 RUN groupadd --force -g $WWWGROUP core \
     && useradd -u $WWWUSER -g core -m core
@@ -29,6 +30,8 @@ WORKDIR /var/www
 # Copy project files
 COPY --chown=core:core . .
 
+RUN mkdir -p /var/log/supervisor && chown -R core:core /var/log/supervisor
+
 # Fix permissions on storage & cache
 RUN chown -R core:core /var/www/storage /var/www/bootstrap/cache \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
@@ -37,10 +40,11 @@ RUN chown -R core:core /var/www/storage /var/www/bootstrap/cache \
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-# Set non-root user for running the container
 USER core
+
+COPY ./supervisord.conf /etc/supervisor/conf.d
+
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Start PHP-FPM
 CMD ["php-fpm"]

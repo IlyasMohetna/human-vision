@@ -10,4 +10,6 @@ if [ ! -d vendor ]; then
   php artisan db:seed
 fi
 
+supervisord -c /etc/supervisor/conf.d/supervisord.conf
+
 exec "$@"
