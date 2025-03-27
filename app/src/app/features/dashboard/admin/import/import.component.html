@@ -11,7 +11,15 @@
         📦 Import Progress
       </h2>
 
-      <div class="relative w-32 h-32">
+      <button
+        (click)="startImport()"
+        [disabled]="isRunning"
+        class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition disabled:opacity-50"
+      >
+        {{ isRunning ? "Import In Progress" : "Start Import" }}
+      </button>
+
+      <div class="relative w-32 h-32 mt-4">
         <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
           <circle
             cx="50"
@@ -55,7 +63,6 @@
         </span>
       </div>
 
-      <!-- Job Stats -->
       <div class="grid grid-cols-3 gap-4 w-full text-center mt-4 text-sm">
         <div>
           <p class="text-gray-500">Total</p>

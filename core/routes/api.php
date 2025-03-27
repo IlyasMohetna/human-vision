@@ -21,7 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('me', [AuthController::class, 'me']);
 });
 
-Route::get('import', ImportController::class);
-Route::get('import/progress/{id}', [ImportController::class, 'progress']);
+Route::post('import/start', [\App\Http\Controllers\ImportController::class, 'start']);
+Route::get('import/status', [\App\Http\Controllers\ImportController::class, 'status']);
+Route::get('import/progress/{id}', [\App\Http\Controllers\ImportController::class, 'progress']);
+
 
 Route::get('test', [ImportController::class, 'test']);

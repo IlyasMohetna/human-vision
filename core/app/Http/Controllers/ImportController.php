@@ -15,13 +15,17 @@ use Illuminate\Support\Facades\Response;
 
 class ImportController extends Controller
 {
-    public function __invoke(GithubService $githubService)
+    /**
+     * Start a new import batch.
+     */
+    public function start(GithubService $githubService)
     {
         $lockKey = 'import_in_progress';
 
+        // If an import is already running, return its batch ID.
         if (Cache::has($lockKey)) {
             return response()->json([
-                'message' => 'Import already running.',
+                'message'  => 'Import already running.',
                 'batch_id' => Cache::get($lockKey),
             ], 200);
         }
@@ -41,39 +45,63 @@ class ImportController extends Controller
             })
             ->dispatch();
 
+        // Lock to prevent multiple concurrent imports.
         Cache::put($lockKey, $batch->id, now()->addHour());
 
         return response()->json([
-            'message' => 'Download started.',
+            'message'  => 'Download started.',
             'batch_id' => $batch->id,
         ]);
     }
 
-    public function test()
+    /**
+     * Check the status of the current import.
+     * Returns the running batch id if an import is in progress.
+     */
+    public function status()
     {
-        (new SyncDatasetToDatabaseJob())->handle();
+        $lockKey = 'import_in_progress';
+
+        if (Cache::has($lockKey)) {
+            return response()->json([
+                'message'  => 'Import running.',
+                'batch_id' => Cache::get($lockKey),
+            ], 200);
+        }
+
+        return response()->json([
+            'message'  => 'No import running.',
+            'batch_id' => null,
+        ], 200);
     }
 
+    /**
+     * Get progress of a given import batch.
+     */
     public function progress(string $id)
     {
         $batch = Bus::findBatch($id);
 
+        // If the batch isn’t found, return some mocked progress.
         if (!$batch) {
             $progress = now()->second % 101;
 
             return response()->json([
-                'status' => 'mocking',
-                'progress' => $progress,
-                'processedJobs' => intval($progress * 5),
-                'totalJobs' => 500,
-                'failedJobs' => 0,
-                'mock' => true,
+                'status'         => 'mocking',
+                'progress'       => $progress,
+                'processedJobs'  => intval($progress * 5),
+                'totalJobs'      => 500,
+                'failedJobs'     => 0,
+                'mock'           => true,
             ]);
         }
 
         return response()->json($this->formatBatchData($batch));
     }
 
+    /**
+     * Build jobs based on dataset structure from the GithubService.
+     */
     private function buildImportJobs(GithubService $githubService): array
     {
         $cities = $githubService->getDatasetStructure();
@@ -88,14 +116,17 @@ class ImportController extends Controller
         return $jobs;
     }
 
+    /**
+     * Format batch data for the response.
+     */
     private function formatBatchData(Batch $batch): array
     {
         return [
-            'status' => $batch->status,
-            'progress' => $batch->progress(),
+            'status'        => $batch->status,
+            'progress'      => $batch->progress(),
             'processedJobs' => $batch->processedJobs(),
-            'totalJobs' => $batch->totalJobs,
-            'failedJobs' => $batch->failedJobs,
+            'totalJobs'     => $batch->totalJobs,
+            'failedJobs'    => $batch->failedJobs,
         ];
     }
 }

@@ -35,15 +35,22 @@ class ImportDatasetJob implements ShouldQueue
     public function handle(GithubService $githubService): void
     {
         $files = $githubService->listContents($this->datasetPath);
-        foreach($files as $file){
+
+        foreach ($files as $file) {
             if ($file['type'] !== 'file') continue;
+
             $filePath = $file['path'];
             $fileName = basename($filePath);
-            $content = $githubService->getFileContent($filePath);
+            $content = $githubService->downloadFile($file);
+
+            if (!$content) {
+                Log::warning("Skipping file due to download failure: $filePath");
+                continue;
+            }
 
             $datasetId = basename($this->datasetPath);
             $storagePath = "{$this->city}/{$datasetId}/{$fileName}";
-                
+
             Storage::put($storagePath, $content);
         }
     }
