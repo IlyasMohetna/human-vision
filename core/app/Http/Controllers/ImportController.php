@@ -6,6 +6,7 @@ use Throwable;
 use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use App\Jobs\ImportDatasetJob;
+use App\Jobs\SyncDatasetToDatabaseJob;
 use App\Services\GithubService;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
@@ -16,65 +17,62 @@ class ImportController extends Controller
 {
     public function __invoke(GithubService $githubService)
     {
-        if ($this->importAlreadyRunning()) {
-            return response()->json(['message' => 'Import already running.'], 409);
+        $lockKey = 'import_in_progress';
+
+        if (Cache::has($lockKey)) {
+            return response()->json([
+                'message' => 'Import already running.',
+                'batch_id' => Cache::get($lockKey),
+            ], 200);
         }
 
         $jobs = $this->buildImportJobs($githubService);
 
         $batch = Bus::batch($jobs)
-            ->name('Dataset Import')
-            ->then(fn() => $this->onBatchSuccess())
-            ->catch(fn(Batch $batch, Throwable $e) => $this->onBatchFailure($e))
+            ->name('Dataset Download')
+            ->then(function (Batch $batch) {
+                Log::info("✅ Download batch complete! Dispatching sync job...");
+                dispatch(new SyncDatasetToDatabaseJob());
+                Cache::forget('import_in_progress');
+            })
+            ->catch(function (Batch $batch, Throwable $e) {
+                Log::error("❌ Download batch failed: " . $e->getMessage());
+                Cache::forget('import_in_progress');
+            })
             ->dispatch();
 
-        $this->lockBatch($batch->id);
+        Cache::put($lockKey, $batch->id, now()->addHour());
 
         return response()->json([
-            'message' => 'Import started.',
+            'message' => 'Download started.',
             'batch_id' => $batch->id,
         ]);
     }
 
-    public function progress(string $id)
+    public function test()
     {
-        return Response::stream(function () use ($id) {
-            $batch = Bus::findBatch($id);
-
-            // 🔁 Simulate if batch is finished or missing
-            if (!$batch || $batch->finished()) {
-                $this->simulateProgress();
-                return;
-            }
-
-            // 📡 Live tracking
-            while (true) {
-                $batch = Bus::findBatch($id);
-
-                if (!$batch) {
-                    $this->sendSseEvent('error', ['error' => 'Batch not found']);
-                    break;
-                }
-
-                $this->sendSseEvent('update', $this->formatBatchData($batch));
-
-                if ($batch->finished()) {
-                    $this->sendSseEvent('complete', ['done' => true]);
-                    break;
-                }
-
-                sleep(1);
-            }
-        }, 200, [
-            'Content-Type' => 'text/event-stream',
-            'Cache-Control' => 'no-cache',
-            'Connection' => 'keep-alive',
-        ]);
+        (new SyncDatasetToDatabaseJob())->handle();
     }
 
-    // ────────────────────────────────────────────────────────────────────────────────
-    // 🔧 Utility Methods
-    // ────────────────────────────────────────────────────────────────────────────────
+    public function progress(string $id)
+    {
+        $batch = Bus::findBatch($id);
+
+        if (!$batch) {
+            $progress = now()->second % 101;
+
+            return response()->json([
+                'status' => 'mocking',
+                'progress' => $progress,
+                'processedJobs' => intval($progress * 5),
+                'totalJobs' => 500,
+                'failedJobs' => 0,
+                'mock' => true,
+            ]);
+        }
+
+        return response()->json($this->formatBatchData($batch));
+    }
 
     private function buildImportJobs(GithubService $githubService): array
     {
@@ -83,33 +81,11 @@ class ImportController extends Controller
 
         foreach ($cities as $city => $datasets) {
             foreach ($datasets as $datasetPath) {
-                $jobs[] = (new ImportDatasetJob($city, $datasetPath))->delay(now()->addSeconds(10));
+                $jobs[] = new ImportDatasetJob($city, $datasetPath);
             }
         }
 
         return $jobs;
-    }
-
-    private function lockBatch(string $batchId): void
-    {
-        Cache::put('import_in_progress', $batchId, now()->addHour());
-    }
-
-    private function importAlreadyRunning(): bool
-    {
-        return Cache::has('import_in_progress');
-    }
-
-    private function onBatchSuccess(): void
-    {
-        Log::info("✅ Import batch complete!");
-        Cache::forget('import_in_progress');
-    }
-
-    private function onBatchFailure(Throwable $e): void
-    {
-        Log::error("❌ Import batch failed: " . $e->getMessage());
-        Cache::forget('import_in_progress');
     }
 
     private function formatBatchData(Batch $batch): array
@@ -121,38 +97,5 @@ class ImportController extends Controller
             'totalJobs' => $batch->totalJobs,
             'failedJobs' => $batch->failedJobs,
         ];
-    }
-
-    private function sendSseEvent(string $event, array $data): void
-    {
-        echo "event: {$event}\n";
-        echo 'data: ' . json_encode($data) . "\n\n";
-        ob_flush();
-        flush();
-    }
-
-    private function simulateProgress(): void
-    {
-        $progress = 0;
-        $total = 500;
-
-        while ($progress <= 100) {
-            $this->sendSseEvent('update', [
-                'status' => 'mocking',
-                'progress' => $progress,
-                'processedJobs' => intval($progress * ($total / 100)),
-                'totalJobs' => $total,
-                'failedJobs' => 0,
-                'mock' => true,
-            ]);
-
-            if ($progress === 100) {
-                $this->sendSseEvent('complete', ['done' => true, 'mock' => true]);
-                break;
-            }
-
-            $progress += 5;
-            sleep(1);
-        }
     }
 }
