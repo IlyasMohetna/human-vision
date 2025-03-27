@@ -1,0 +1,796 @@
+
+   INFO  Horizon started successfully.  
+
+  2025-03-27 05:16:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:37 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:37 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:37 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:37 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:37 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:37 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:40 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:40 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:40 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:16:40 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:40 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:40 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:43 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:43 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:43 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:43 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:43 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:43 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:46 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:46 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:16:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:46 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:16:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:49 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:49 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:49 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:52 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:52 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:52 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:16:52 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:50 App\Jobs\ImportDatasetJob ................ 867.00ms DONE
+  2025-03-27 05:16:50 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:53 App\Jobs\ImportDatasetJob ................ 919.38ms DONE
+  2025-03-27 05:16:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:53 App\Jobs\ImportDatasetJob ................ 824.66ms DONE
+  2025-03-27 05:16:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:53 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:16:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:56 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:16:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:56 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:16:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:56 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:16:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:59 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:59 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:16:59 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:16:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:02 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:02 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:02 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:02 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:02 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:02 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:04 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:04 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:05 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:05 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:04 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:04 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:07 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:07 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:08 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:08 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:08 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:08 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:10 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:10 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:10 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:10 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:10 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:10 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:14 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:14 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:14 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:14 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:13 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:13 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:16 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:16 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:17 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:17 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+
+   INFO  Horizon started successfully.  
+
+  2025-03-27 05:17:23 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:23 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:23 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:24 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:24 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:23 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:27 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:31 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:17:31 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:30 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:33 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:33 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:33 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:33 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:33 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:33 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:33 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:34 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:34 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:34 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:34 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:36 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:36 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:36 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:36 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:36 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:36 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:36 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:37 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:37 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:37 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:37 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:37 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:37 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:38 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:38 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:38 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:38 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:40 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:40 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:40 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:40 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:40 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:40 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:40 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:40 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:42 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:17:42 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:42 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:42 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:41 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:41 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:42 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:17:42 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:41 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:17:41 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:44 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:17:44 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:45 App\Jobs\ImportDatasetJob ...................... 5s DONE
+  2025-03-27 05:17:45 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:44 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:17:44 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:45 App\Jobs\ImportDatasetJob ...................... 5s DONE
+  2025-03-27 05:17:45 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:46 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:17:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:46 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:17:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:46 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:45 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:17:45 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:47 App\Jobs\ImportDatasetJob ...................... 5s DONE
+  2025-03-27 05:17:47 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:47 App\Jobs\ImportDatasetJob ..................... 17s DONE
+  2025-03-27 05:17:47 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:48 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:48 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:48 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:48 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:47 App\Jobs\ImportDatasetJob ...................... 1s DONE
+  2025-03-27 05:17:47 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:47 App\Jobs\ImportDatasetJob ...................... 1s DONE
+  2025-03-27 05:17:47 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:48 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:17:48 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:48 App\Jobs\ImportDatasetJob ................ 897.67ms DONE
+  2025-03-27 05:17:48 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:48 App\Jobs\ImportDatasetJob ................ 805.34ms DONE
+  2025-03-27 05:17:48 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... 1s DONE
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:50 App\Jobs\ImportDatasetJob ................ 865.34ms DONE
+  2025-03-27 05:17:50 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ................ 646.73ms DONE
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ................ 510.43ms DONE
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:50 App\Jobs\ImportDatasetJob ...................... 1s DONE
+  2025-03-27 05:17:50 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... 1s DONE
+  2025-03-27 05:17:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:50 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:50 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:51 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:51 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:50 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:50 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:51 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:51 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:52 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:52 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:52 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:52 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:54 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:54 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:54 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:54 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:55 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:56 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:56 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:56 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:55 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:56 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:57 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:57 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:56 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:57 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:57 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:57 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:57 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:17:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:00 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:00 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:01 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:01 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:01 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:01 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:02 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:02 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:03 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:04 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:04 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:04 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:04 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:04 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:04 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:05 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:05 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:06 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:06 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:06 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:06 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:06 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:06 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:05 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:05 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:06 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:06 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:07 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:07 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:07 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:07 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:06 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:06 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:07 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:07 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:08 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:08 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:09 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:10 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:10 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:10 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:10 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:09 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:09 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:10 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:10 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:09 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:09 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:09 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:09 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:09 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:10 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:10 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:09 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:09 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:12 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:12 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:13 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:13 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:13 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:13 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:12 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:12 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:13 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:13 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:13 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:13 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:12 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:12 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:13 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:13 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:14 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:14 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:14 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:14 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:16 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:16 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:16 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:16 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:16 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:16 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:45 App\Jobs\ImportDatasetJob ..................... 31s DONE
+  2025-03-27 05:18:45 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:16 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:16 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:16 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:16 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:17 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:17 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:17 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:17 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:20 App\Jobs\ImportDatasetJob ............ -25,740.69ms DONE
+  2025-03-27 05:18:20 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:20 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:20 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:19 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:20 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:20 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:20 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:20 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:22 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:22 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:23 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:23 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:22 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:22 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:22 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:23 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:23 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:23 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:23 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:23 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:23 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:23 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:23 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:26 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:26 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:26 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:26 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:28 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:29 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:29 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:29 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:29 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:29 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:29 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:29 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:29 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:31 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:31 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:31 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:31 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:31 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:31 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:31 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:31 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:31 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:31 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:32 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:32 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:32 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:32 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:32 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:32 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:32 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:32 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:32 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:32 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:34 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:34 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:34 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:34 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:35 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:35 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:34 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:34 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:35 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:35 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:35 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:35 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:35 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:35 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:39 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:39 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:38 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:41 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:41 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:41 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:41 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:41 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:41 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:41 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:41 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:41 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:41 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:42 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:42 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:42 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:42 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:42 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:42 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:42 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:42 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:43 App\Jobs\ImportDatasetJob ..................... 11s FAIL
+  2025-03-27 05:18:43 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:45 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:45 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:44 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:44 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:44 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:44 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:45 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:45 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:46 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:46 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:45 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:45 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:45 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:45 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:46 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:46 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:46 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:46 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:47 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:47 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:47 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:47 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:49 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:48 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:48 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:48 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:48 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:49 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:48 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:48 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:49 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:49 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:49 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:51 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:51 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:52 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:52 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:51 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:51 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:51 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:51 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:53 App\Jobs\ImportDatasetJob ...................... 5s DONE
+  2025-03-27 05:18:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:54 App\Jobs\ImportDatasetJob ...................... 5s DONE
+  2025-03-27 05:18:54 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:53 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:53 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:53 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:53 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:54 App\Jobs\ImportDatasetJob ...................... 5s DONE
+  2025-03-27 05:18:54 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:55 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:55 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:56 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:18:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:57 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:57 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:56 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:56 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:57 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:57 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:56 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:56 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:58 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:58 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:58 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:58 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:58 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:58 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob ................. 21.95ms FAIL
+  2025-03-27 05:18:59 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:18:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:59 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:18:59 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:18:59 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob .................. 9.22ms FAIL
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob ................. 10.25ms FAIL
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob ................. 13.29ms FAIL
+  2025-03-27 05:19:00 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:19:01 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:19:01 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:19:02 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:19:02 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:19:03 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:19:02 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:19:09 App\Jobs\ImportDatasetJob ..................... 17s DONE
+  2025-03-27 05:19:35 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:39 App\Jobs\ImportDatasetJob ...................... 4s DONE
+  2025-03-27 05:19:54 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob .................. 2.50ms DONE
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob .................. 0.88ms DONE
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob .................. 0.79ms DONE
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob .................. 0.83ms DONE
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ................. 16.57ms FAIL
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ................. 12.93ms FAIL
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ................. 11.21ms FAIL
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:19:55 App\Jobs\ImportDatasetJob ................. 10.88ms FAIL
+  2025-03-27 05:19:57 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob .................. 2.13ms DONE
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob .................. 0.51ms DONE
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob .................. 0.62ms DONE
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob .................. 0.65ms DONE
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ................. 12.57ms FAIL
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob .................. 9.12ms FAIL
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ................. 13.56ms FAIL
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ................. 10.87ms FAIL
+  2025-03-27 05:21:17 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:21:20 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:22:15 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:22:15 App\Jobs\ImportDatasetJob .................. 4.05ms DONE
+  2025-03-27 05:22:15 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:22:15 App\Jobs\ImportDatasetJob ................. 22.69ms FAIL
+
+   INFO  Horizon started successfully.  
+
+  2025-03-27 05:25:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... 3s DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.57ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.49ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.39ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.54ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.53ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.85ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.80ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.60ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.58ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.59ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.52ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.45ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.64ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.58ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.73ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 0.84ms DONE
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ................. 13.31ms FAIL
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob .................. 9.85ms FAIL
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ................. 10.39ms FAIL
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:25:25 App\Jobs\ImportDatasetJob ................. 10.45ms FAIL
+  2025-03-27 05:26:19 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... 2s DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.56ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.54ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.60ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 1.64ms DONE
+  2025-03-27 05:26:22 App\Jobs\SyncDatasetToDatabaseJob .............. RUNNING
+"munster/000043/munster_000043_000019_gtFine_color.png" // app/Jobs/SyncDatasetToDatabaseJob.php:42
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 1.98ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.49ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.45ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.45ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.45ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.60ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.55ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.82ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 1.85ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.98ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 1.00ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob .................. 0.68ms DONE
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ................. 25.11ms FAIL
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ................. 10.00ms FAIL
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ................. 11.47ms FAIL
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ...................... RUNNING
+  2025-03-27 05:26:22 App\Jobs\ImportDatasetJob ................. 12.26ms FAIL
