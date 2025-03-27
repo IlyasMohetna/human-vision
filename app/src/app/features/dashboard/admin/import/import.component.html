@@ -1,25 +1,39 @@
-<div class="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+<div
+  class="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center p-6"
+>
   <div
     class="bg-white shadow-2xl rounded-2xl p-8 max-w-md w-full relative overflow-hidden"
   >
+    <!-- Background animated shape -->
     <div
-      class="absolute -top-4 -left-4 w-32 h-32 bg-indigo-100 rounded-full blur-3xl opacity-30 animate-pulse"
+      class="absolute -top-8 -left-8 w-40 h-40 bg-indigo-200 rounded-full blur-3xl opacity-40 animate-pulse"
     ></div>
 
     <div class="flex flex-col items-center space-y-6">
-      <h2 class="text-2xl font-bold text-indigo-700 tracking-wide">
-        📦 Import Progress
+      <h2 class="text-3xl font-extrabold text-indigo-800 tracking-tight">
+        🚀 Import Progress
       </h2>
 
-      <button
-        (click)="startImport()"
-        [disabled]="isRunning"
-        class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition disabled:opacity-50"
-      >
-        {{ isRunning ? "Import In Progress" : "Start Import" }}
-      </button>
+      <!-- Buttons: Start when not running, Stop when running -->
+      <div class="flex space-x-4">
+        <button
+          (click)="startImport()"
+          [disabled]="isRunning"
+          class="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition disabled:opacity-50"
+        >
+          Start Import
+        </button>
+        <button
+          *ngIf="isRunning"
+          (click)="stopImport()"
+          class="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition"
+        >
+          Stop Import
+        </button>
+      </div>
 
-      <div class="relative w-32 h-32 mt-4">
+      <!-- Progress Circle -->
+      <div class="relative w-40 h-40 mt-4">
         <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
           <circle
             cx="50"
@@ -35,38 +49,44 @@
             r="45"
             [attr.stroke-dasharray]="282.6"
             [attr.stroke-dashoffset]="282.6 - (progress / 100) * 282.6"
-            stroke="#6366f1"
+            stroke="#4F46E5"
             stroke-width="10"
             stroke-linecap="round"
             fill="none"
             class="transition-all duration-500"
-          />
+            [ngClass]="{
+              'animate-spin-slow': isRunning && status !== 'cancelled'
+            }"
+          ></circle>
         </svg>
         <div class="absolute inset-0 flex items-center justify-center">
-          <span class="text-2xl font-semibold text-indigo-600"
+          <span class="text-3xl font-bold text-indigo-700"
             >{{ progress }}%</span
           >
         </div>
       </div>
 
+      <!-- Status Label -->
       <div class="w-full text-center">
         <span
-          class="px-3 py-1 text-sm font-medium rounded-full"
+          class="px-4 py-1 text-sm font-medium rounded-full"
           [ngClass]="{
             'bg-blue-100 text-blue-700': status === 'pending',
             'bg-green-100 text-green-700': status === 'finished',
             'bg-yellow-100 text-yellow-700': status === 'mocking',
-            'bg-red-100 text-red-700': failedJobs > 0
+            'bg-red-100 text-red-700':
+              status === 'failed' || status === 'cancelled'
           }"
         >
           {{ status | titlecase }}
         </span>
       </div>
 
+      <!-- Job Stats -->
       <div class="grid grid-cols-3 gap-4 w-full text-center mt-4 text-sm">
         <div>
           <p class="text-gray-500">Total</p>
-          <p class="font-semibold text-gray-700">{{ totalJobs }}</p>
+          <p class="font-semibold text-gray-800">{{ totalJobs }}</p>
         </div>
         <div>
           <p class="text-gray-500">Processed</p>
@@ -78,6 +98,7 @@
         </div>
       </div>
 
+      <!-- Optional message when using mock data -->
       <div *ngIf="isMock" class="mt-4 text-xs text-gray-400 italic">
         Mock data active — waiting for real batch...
       </div>

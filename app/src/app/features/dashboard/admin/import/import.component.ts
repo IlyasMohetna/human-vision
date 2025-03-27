@@ -9,8 +9,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './import.component.html',
 })
 export class ImportComponent implements OnInit, OnDestroy {
-  // Update the endpoints to match the new backend routes.
   private startImportUrl = 'http://localhost:9400/api/import/start';
+  private stopImportUrl = 'http://localhost:9400/api/import/stop';
   private statusUrl = 'http://localhost:9400/api/import/status';
   private progressUrl = 'http://localhost:9400/api/import/progress';
   intervalId: any;
@@ -27,7 +27,6 @@ export class ImportComponent implements OnInit, OnDestroy {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    // Only check if an import is already running without starting a new one.
     this.checkExistingImport();
   }
 
@@ -36,21 +35,49 @@ export class ImportComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Starts a new import job by calling the dedicated endpoint.
+   * Starts a new import job.
+   * Immediately disables the start button to prevent double-clicks.
    */
   startImport() {
     if (this.isRunning) return;
+    // Immediately disable further clicks.
+    this.isRunning = true;
 
-    this.http.post<any>(this.startImportUrl, {}).subscribe((res) => {
-      this.batchId = res.batch_id;
-      this.status = 'started';
-      this.isRunning = true;
-      this.startPolling();
-    });
+    this.http.post<any>(this.startImportUrl, {}).subscribe(
+      (res) => {
+        this.batchId = res.batch_id;
+        this.status = 'started';
+        this.startPolling();
+      },
+      (error) => {
+        console.error('Error starting import', error);
+        // Re-enable if an error occurs.
+        this.isRunning = false;
+      }
+    );
   }
 
   /**
-   * Checks for an existing import job without starting a new one.
+   * Stops/cancels the ongoing import job.
+   */
+  stopImport() {
+    if (!this.isRunning) return;
+
+    this.http.post<any>(this.stopImportUrl, {}).subscribe(
+      (res) => {
+        // Update UI to reflect the cancellation.
+        this.status = 'cancelled';
+        this.isRunning = false;
+        clearInterval(this.intervalId);
+      },
+      (error) => {
+        console.error('Error stopping import', error);
+      }
+    );
+  }
+
+  /**
+   * Checks if an import is already running.
    */
   checkExistingImport() {
     this.http.get<any>(this.statusUrl).subscribe(
@@ -62,22 +89,21 @@ export class ImportComponent implements OnInit, OnDestroy {
         }
       },
       (error) => {
-        // Handle error if needed (for example, no job running)
         console.error('Error checking import status', error);
       }
     );
   }
 
   /**
-   * Start polling the progress endpoint.
+   * Starts polling for progress updates.
    */
   startPolling() {
-    this.fetchProgress(); // initial call
+    this.fetchProgress();
     this.intervalId = setInterval(() => this.fetchProgress(), 2000);
   }
 
   /**
-   * Fetches the progress of the current import batch.
+   * Fetches progress details from the backend.
    */
   fetchProgress() {
     if (!this.batchId) return;
@@ -92,7 +118,11 @@ export class ImportComponent implements OnInit, OnDestroy {
         this.failedJobs = data.failedJobs;
         this.isMock = !!data.mock;
 
-        if (data.status === 'finished' || data.status === 'failed') {
+        if (
+          data.status === 'finished' ||
+          data.status === 'failed' ||
+          data.status === 'cancelled'
+        ) {
           this.isRunning = false;
           clearInterval(this.intervalId);
         }
