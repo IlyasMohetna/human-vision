@@ -33,7 +33,6 @@ class ImportDatasetJob implements ShouldQueue
      */
     public function handle(GithubService $githubService): void
     {
-        // Check for cancellation before processing.
         if ($this->batch() && $this->batch()->cancelled()) {
             Log::info("Batch cancelled for {$this->city} - {$this->datasetPath} before processing.");
             return;
@@ -42,7 +41,6 @@ class ImportDatasetJob implements ShouldQueue
         $files = $githubService->listContents($this->datasetPath);
 
         foreach ($files as $file) {
-            // Periodically check if the batch has been cancelled.
             if ($this->batch() && $this->batch()->cancelled()) {
                 Log::info("Batch cancelled during processing for {$this->city} - {$this->datasetPath}.");
                 return;
@@ -68,7 +66,6 @@ class ImportDatasetJob implements ShouldQueue
     public function middleware(): array
     {
         return [
-            // Prevent same dataset from running multiple times concurrently
             new WithoutOverlapping($this->city . '_' . basename($this->datasetPath)),
         ];
     }

@@ -40,7 +40,6 @@ export class ImportComponent implements OnInit, OnDestroy {
    */
   startImport() {
     if (this.isRunning) return;
-    // Immediately disable further clicks.
     this.isRunning = true;
 
     this.http.post<any>(this.startImportUrl, {}).subscribe(
@@ -65,7 +64,6 @@ export class ImportComponent implements OnInit, OnDestroy {
 
     this.http.post<any>(this.stopImportUrl, {}).subscribe(
       (res) => {
-        // Update UI to reflect the cancellation.
         this.status = 'cancelled';
         this.isRunning = false;
         clearInterval(this.intervalId);
