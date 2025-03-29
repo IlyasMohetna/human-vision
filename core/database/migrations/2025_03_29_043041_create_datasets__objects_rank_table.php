@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('datasets__variants', function (Blueprint $table) {
+        Schema::create('datasets__objects_rank', function (Blueprint $table) {
             $table->id();
-            $table->string('path');
-            $table->foreignId('type_id')->constrained('datasets__variant_types');
+            $table->string('mongo_object_id');
+            $table->integer('rank');
             $table->foreignId('dataset_id')->constrained('datasets');
+            $table->decimal('percentage', 5, 2)->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('datasets__variants');
+        Schema::dropIfExists('datasets__objects_rank');
     }
 };
