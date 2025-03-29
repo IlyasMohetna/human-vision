@@ -10,7 +10,8 @@ import {
   NgZone,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import POLYGONS, { PolygonData } from './data';
+import { HttpClientModule } from '@angular/common/http';
+import POLYGONS from './data';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { LeftSideBarComponent } from './components/left-side-bar/left-side-bar.component';
@@ -21,6 +22,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { PolygonDataService } from '../../../../services/polygon-data.service';
 
 @Component({
   selector: 'app-studio',
@@ -33,12 +35,13 @@ import {
     LeftSideBarComponent,
     RightSideBarComponent,
     DragDropModule,
+    HttpClientModule,
   ],
   templateUrl: './studio.component.html',
   styleUrls: ['./studio.component.css'],
 })
 export class StudioComponent implements AfterViewInit, OnDestroy {
-  imageUrl = 'assets/test.png'; // Replace with dynamic backend data when ready
+  imageUrl = 'assets/test.png'; // Will be replaced with API data
   drawMode = false; // To toggle drawing mode
   mouseX = 0;
   mouseY = 0;
@@ -77,8 +80,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private polygon: { x: number; y: number }[] = [];
   private resizeObserver?: ResizeObserver;
 
-  // New: Type colors map
-  private readonly TYPE_COLORS = {
+  // New: Type colors map - fix the type definition
+  private readonly TYPE_COLORS: Record<
+    string,
+    { border: string; fill: string }
+  > = {
     high: {
       border: 'rgba(255, 0, 0, 1)', // Solid red
       fill: 'rgba(255, 0, 0, 0.2)', // Semi-transparent red
@@ -95,10 +101,15 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       border: 'rgba(0, 120, 255, 1)', // Solid blue
       fill: 'rgba(0, 120, 255, 0.2)', // Semi-transparent blue
     },
+    default: {
+      // Add a default color for fallback
+      border: 'rgba(128, 128, 128, 1)', // Gray
+      fill: 'rgba(128, 128, 128, 0.2)',
+    },
   };
 
-  // Replace polygonData with this
-  public polygonDataList: PolygonData[] = POLYGONS;
+  // Replace polygon data type with new structure
+  public polygonDataList: any[] = [];
 
   // The currently active/displayed polygons
   activePolygons: { [id: string]: boolean } = {};
@@ -143,8 +154,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private lastZoomTime = 0;
   private readonly ZOOM_THROTTLE_MS = 10; // Throttle to improve performance
 
-  // Add these properties to your StudioComponent class:
-
   // Navigation items for the sidebar
   sidebarNavItems = [
     { icon: '📁', label: 'Project' },
@@ -156,35 +165,17 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   // Currently selected sidebar item (default to Tools)
   selectedSidebarItem = 1; // Start with Tools selected
 
-  // Method to handle sidebar navigation selection
-  selectSidebarItem(index: number) {
-    this.selectedSidebarItem = index;
-  }
-
   // Lists for different priority annotations
-  highPriorityAnnotations: PolygonData[] = [];
-  mediumPriorityAnnotations: PolygonData[] = [];
-  lowPriorityAnnotations: PolygonData[] = [];
-  unassignedAnnotations: PolygonData[] = [];
+  highPriorityAnnotations: any[] = [];
+  mediumPriorityAnnotations: any[] = [];
+  lowPriorityAnnotations: any[] = [];
+  unassignedAnnotations: any[] = [];
 
-  constructor(private renderer: Renderer2, private ngZone: NgZone) {
-    // Initialize all polygons as active
-    this.polygonDataList.forEach((poly) => {
-      this.activePolygons[poly.id] = true;
-
-      // Distribute polygons to priority lists based on their priority
-      if (poly.priority === 'high') {
-        this.highPriorityAnnotations.push(poly);
-      } else if (poly.priority === 'medium') {
-        this.mediumPriorityAnnotations.push(poly);
-      } else if (poly.priority === 'low') {
-        this.lowPriorityAnnotations.push(poly);
-      } else {
-        // No priority assigned - put in unassigned
-        this.unassignedAnnotations.push(poly);
-      }
-    });
-  }
+  constructor(
+    private renderer: Renderer2,
+    private ngZone: NgZone,
+    private polygonDataService: PolygonDataService
+  ) {}
 
   // Keyboard shortcuts - global scope
   @HostListener('window:keydown', ['$event'])
@@ -278,6 +269,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
     // Initial update of minimum zoom level
     setTimeout(() => this.updateMinZoomLevel(), 500);
+
+    // Fetch data from the service
+    this.loadPolygonData();
   }
 
   ngOnDestroy() {
@@ -297,6 +291,60 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     // Cancel any pending animations
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
+    }
+  }
+
+  private loadPolygonData() {
+    this.polygonDataService.fetchPolygonData().subscribe({
+      next: (response) => {
+        console.log('API Response:', response);
+
+        // Set the polygon data list from objects array
+        this.polygonDataList = response.objects || [];
+
+        // Initialize all polygons as active
+        this.polygonDataList.forEach((poly) => {
+          this.activePolygons[poly.objectId] = true;
+
+          // Distribute to categories based on label type
+          this.categorizePolygon(poly);
+        });
+
+        // Find the Original Image variant and set it as the default
+        if (response.variants && response.variants.length > 0) {
+          const originalImage = response.variants.find(
+            (variant: any) => variant.type === 'Original Image'
+          );
+
+          if (originalImage && originalImage.path) {
+            this.imageUrl = originalImage.path;
+            console.log('Setting image URL to:', this.imageUrl);
+          }
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching polygon data:', error);
+      },
+    });
+  }
+
+  private categorizePolygon(polygon: any) {
+    switch (polygon.label?.toLowerCase()) {
+      case 'person':
+        this.highPriorityAnnotations.push(polygon);
+        break;
+      case 'car':
+      case 'bicycle':
+      case 'motorcycle':
+        this.mediumPriorityAnnotations.push(polygon);
+        break;
+      case 'traffic sign':
+      case 'traffic light':
+        this.lowPriorityAnnotations.push(polygon);
+        break;
+      default:
+        this.unassignedAnnotations.push(polygon);
+        break;
     }
   }
 
@@ -354,20 +402,25 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       this.polygons = {};
 
       this.polygonDataList.forEach((polyData) => {
-        // Map coordinates from data to canvas space
-        const points = polyData.points.map(([x, y]) => ({
+        // Map coordinates from data to canvas space - now using polygon instead of points
+        if (!polyData.polygon || !Array.isArray(polyData.polygon)) {
+          console.warn('Invalid polygon data for:', polyData);
+          return;
+        }
+
+        const points = polyData.polygon.map(([x, y]: [number, number]) => ({
           x: offsetX + x * scaleX,
           y: offsetY + y * scaleY,
         }));
 
         // Store both original and transformed coordinates
-        this.originalPolygons[polyData.id] = {
+        this.originalPolygons[polyData.objectId] = {
           points: [...points], // Clone the points
           type: polyData.type,
           label: polyData.label,
         };
 
-        this.polygons[polyData.id] = {
+        this.polygons[polyData.objectId] = {
           points: [...points], // Clone the points
           type: polyData.type,
           label: polyData.label,
@@ -380,13 +433,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     }, 500);
   }
 
-  // Toggle a specific polygon's visibility
-  togglePolygon(id: string) {
-    this.activePolygons[id] = !this.activePolygons[id];
-    this.redrawAllPolygons();
-  }
-
-  // New method to draw all polygons
   private redrawAllPolygons() {
     if (!this.ctx || !this.imageElementRef) return;
 
@@ -417,11 +463,17 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         id !== this.hoveredPolygonId &&
         poly.points.length >= 2
       ) {
-        // Get the corresponding polygon data with priority info
-        const polygonData = this.polygonDataList.find((p) => p.id === id);
-        // Use priority for color if it exists, otherwise use blue
-        const colorType = polygonData?.priority || 'blue';
-        const colors = this.TYPE_COLORS[colorType];
+        // Get the corresponding polygon data
+        const polygonData = this.polygonDataList.find((p) => p.objectId === id);
+
+        // Use priority for color if available, otherwise default to label-based color
+        const colorType =
+          polygonData?.priority ||
+          this.getColorTypeFromLabel(polygonData?.label);
+
+        // Now we know colorType is always a valid key
+        const colors =
+          this.TYPE_COLORS[colorType] || this.TYPE_COLORS['default'];
 
         this.ctx!.beginPath();
         this.ctx!.moveTo(poly.points[0].x, poly.points[0].y);
@@ -438,8 +490,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         this.ctx!.lineWidth = this.POLYGON_BORDER_WIDTH;
         this.ctx!.lineJoin = 'round';
         this.ctx!.stroke();
-
-        // We removed the code that draws vertex points here
       }
     });
 
@@ -448,9 +498,14 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       const poly = this.polygons[this.hoveredPolygonId];
       if (poly && poly.points.length >= 2) {
         const polygonData = this.polygonDataList.find(
-          (p) => p.id === this.hoveredPolygonId
+          (p) => p.objectId === this.hoveredPolygonId
         );
-        const colorType = polygonData?.priority || 'blue';
+
+        // Use priority for color if available, otherwise default to label-based color
+        const colorType =
+          polygonData?.priority ||
+          this.getColorTypeFromLabel(polygonData?.label);
+
         this.drawSinglePolygon(poly.points, colorType, true);
       }
     }
@@ -458,15 +513,16 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     this.ctx.restore();
   }
 
-  // New method to draw a single polygon with the correct color
+  // Updated method signature to accept string instead of specific union type
   private drawSinglePolygon(
     points: { x: number; y: number }[],
-    type: 'high' | 'medium' | 'low' | 'blue',
+    type: string,
     isHovered: boolean = false
   ) {
     if (!this.ctx || points.length < 2) return;
 
-    const colors = this.TYPE_COLORS[type];
+    // Use default if type is not found
+    const colors = this.TYPE_COLORS[type] || this.TYPE_COLORS['default'];
 
     // Draw filled area
     this.ctx.beginPath();
@@ -504,12 +560,25 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
     // Reset shadow
     this.ctx.shadowBlur = 0;
-
-    // Don't draw vertex points for any polygons - remove this section entirely
-    // We're removing the code that draws points at each vertex
   }
 
-  // Add these methods to handle hover events
+  // Helper method to get a valid color type from a label
+  private getColorTypeFromLabel(label: string | undefined): string {
+    if (!label) return 'default';
+
+    const labelLower = label.toLowerCase();
+
+    if (['person', 'pedestrian'].includes(labelLower)) {
+      return 'high';
+    } else if (['car', 'bicycle', 'motorcycle'].includes(labelLower)) {
+      return 'medium';
+    } else if (['traffic sign', 'traffic light'].includes(labelLower)) {
+      return 'low';
+    }
+
+    return 'default';
+  }
+
   setHoveredPolygon(id: string | null) {
     this.hoveredPolygonId = id;
     this.redrawAllPolygons();
@@ -549,26 +618,20 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  // Handle mouse wheel zoom
   handleWheel(event: WheelEvent) {
-    // Prevent default scrolling behavior
     event.preventDefault();
 
-    // Only zoom if the target is within the image container
     const target = event.target as HTMLElement;
     if (!this.imageContainerRef.nativeElement.contains(target)) {
       return;
     }
 
-    // Ctrl + wheel for zoom with improved throttling
     if (event.ctrlKey) {
       event.preventDefault();
 
-      // Calculate zoom amount based on wheel delta for smoother zooming
-      const zoomDelta = event.deltaY * -0.001; // Smaller increments for smoother zoom
+      const zoomDelta = event.deltaY * -0.001;
 
       if (zoomDelta > 0) {
-        // Don't create a new zoom operation if we have one pending
         if (!this.zoomUpdatePending) {
           this.zoomIn();
         }
@@ -579,15 +642,10 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
           this.flashZoomLimitReached();
         }
       }
-    } else {
-      // Regular wheel for scrolling if needed
-      // You can add panning functionality here in the future
     }
   }
 
-  // Zoom control methods
   zoomIn() {
-    // Throttle the zoom operations
     const now = Date.now();
     if (now - this.lastZoomTime < this.ZOOM_THROTTLE_MS) {
       if (!this.zoomUpdatePending) {
@@ -608,7 +666,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   }
 
   zoomOut() {
-    // Throttle the zoom operations
     const now = Date.now();
     if (now - this.lastZoomTime < this.ZOOM_THROTTLE_MS) {
       if (!this.zoomUpdatePending) {
@@ -630,7 +687,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    // Don't allow zooming out smaller than the initial zoom level
     if (this.zoomLevel > this.initialZoomLevel + this.zoomFactor / 2) {
       this.zoomLevel = Math.max(
         this.initialZoomLevel,
@@ -644,22 +700,18 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   }
 
   resetZoom() {
-    // Reset to initial zoom level
     this.zoomLevel = this.initialZoomLevel;
-    this.translateX = 0; // Also reset translation
+    this.translateX = 0;
     this.translateY = 0;
     this.applyTransform();
   }
 
-  // Add a visual feedback when trying to zoom beyond limits
   flashZoomLimitReached() {
     const image = this.imageElementRef.nativeElement;
     if (!image) return;
 
-    // Add a short CSS animation to show we've reached the limit
     this.renderer.addClass(image, 'zoom-limit');
 
-    // Remove the class after the animation completes
     setTimeout(() => {
       this.renderer.removeClass(image, 'zoom-limit');
     }, 300);
@@ -678,7 +730,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   applyTransform() {
     if (!this.imageElementRef) return;
 
-    // Cancel any pending animation frame to prevent multiple redraws
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = null;
@@ -686,7 +737,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
     const transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.zoomLevel})`;
 
-    // Apply transforms to image element immediately for responsiveness
     if (this.panning) {
       this.renderer.setStyle(
         this.imageElementRef.nativeElement,
@@ -708,23 +758,19 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     );
     this.lastTransformApplied = transform;
 
-    // Always ensure polygons are properly updated
     this.animationFrameId = requestAnimationFrame(() => {
-      // Make sure originalPolygons exists before trying to update
       if (
         this.originalPolygons &&
         Object.keys(this.originalPolygons).length > 0
       ) {
         this.updatePolygonsForTransform();
       } else {
-        // If we don't have polygon data, try to reload
         this.loadImportedPolygons();
       }
       this.animationFrameId = null;
     });
   }
 
-  // New method to update polygon positions based on current transform
   private updatePolygonsForTransform() {
     if (
       !this.originalPolygons ||
@@ -733,32 +779,25 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     )
       return;
 
-    // Get the current image position and dimensions
     const imageRect =
       this.imageElementRef.nativeElement.getBoundingClientRect();
     const canvasRect = this.canvasRef.nativeElement.getBoundingClientRect();
 
-    // Calculate image to canvas offset - IMPORTANT for proper positioning
     const offsetX = imageRect.left - canvasRect.left;
     const offsetY = imageRect.top - canvasRect.top;
 
-    // For each polygon, apply the current transform to its original coordinates
     Object.keys(this.originalPolygons).forEach((id) => {
       const original = this.originalPolygons[id];
 
-      // Apply the transform to each point more accurately
       this.polygons[id] = {
         ...original,
         points: original.points.map((point) => {
-          // Calculate position relative to image center for scaling
           const relativeX = point.x - this.imageCenter.x;
           const relativeY = point.y - this.imageCenter.y;
 
-          // Apply scaling to relative coordinates
           const scaledX = relativeX * this.zoomLevel;
           const scaledY = relativeY * this.zoomLevel;
 
-          // Translate back to absolute coordinates (from center)
           return {
             x: this.imageCenter.x + scaledX + this.translateX,
             y: this.imageCenter.y + scaledY + this.translateY,
@@ -767,10 +806,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       };
     });
 
-    // Store transform applied for debugging
     this.lastTransformApplied = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.zoomLevel})`;
 
-    // Redraw with the updated positions
     this.redrawAllPolygons();
   }
 
@@ -783,14 +820,12 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   displayedCoordinateY = 0;
 
   updateCrosshairPosition(event: MouseEvent) {
-    // Calculate position relative to the parent div
     const parentRect = (
       event.currentTarget as HTMLElement
     ).getBoundingClientRect();
     this.crosshairX = event.clientX - parentRect.left;
     this.crosshairY = event.clientY - parentRect.top;
 
-    // Check if the cursor is inside the scaled image
     if (!this.imageElementRef) return;
     const imageRect =
       this.imageElementRef.nativeElement.getBoundingClientRect();
@@ -812,7 +847,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  // Check if the event occurred inside the image container
   isEventInImageArea(event: MouseEvent | WheelEvent): boolean {
     if (!this.imageContainerRef) return false;
     const rect = this.imageContainerRef.nativeElement.getBoundingClientRect();
@@ -824,9 +858,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  handleKeyboardShortcuts(event: KeyboardEvent) {
-    // Additional component-specific keyboard shortcuts can be added here
-  }
+  handleKeyboardShortcuts(event: KeyboardEvent) {}
 
   private resizeCanvasToContainer() {
     const canvas = this.canvasRef.nativeElement;
@@ -836,7 +868,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       canvas.height = container.clientHeight;
     }
 
-    // If we have polygons, reload them to adjust to new canvas size
     if (this.polygonDataList.length > 0 && this.imageElementRef) {
       this.loadImportedPolygons();
     }
@@ -854,7 +885,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     const y = event.clientY - rect.top;
     this.polygon.push({ x, y });
 
-    // Draw the first point
     if (this.ctx) {
       this.ctx.beginPath();
       this.ctx.arc(x, y, this.VERTEX_RADIUS, 0, 2 * Math.PI);
@@ -875,10 +905,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
     if (!this.drawMode || !this.isDrawing || !this.ctx) return;
 
-    // Redraw the canvas with the polygon
     this.redrawPolygons();
 
-    // Draw current line to mouse position
     if (this.polygon.length > 0) {
       const lastPoint = this.polygon[this.polygon.length - 1];
       this.ctx.beginPath();
@@ -891,12 +919,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   }
 
   private redrawPolygons() {
-    // First redraw all the saved polygons
     this.redrawAllPolygons();
 
-    // Then draw the current active polygon being created
     if (this.polygon.length >= 2 && this.ctx) {
-      // For active drawing, use yellow (or any preferred color)
       this.ctx.beginPath();
       this.ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
 
@@ -904,7 +929,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
         this.ctx.lineTo(this.polygon[i].x, this.polygon[i].y);
       }
 
-      // Draw with default yellow style
       this.ctx.fillStyle = this.POLYGON_FILL_COLOR;
       this.ctx.fill();
       this.ctx.strokeStyle = this.POLYGON_BORDER_COLOR;
@@ -912,7 +936,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       this.ctx.lineJoin = 'round';
       this.ctx.stroke();
 
-      // Draw vertex points
       this.polygon.forEach((point) => {
         this.ctx!.beginPath();
         this.ctx!.arc(point.x, point.y, this.VERTEX_RADIUS, 0, 2 * Math.PI);
@@ -951,10 +974,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   handleMouseLeaveContainer() {
     this.isMouseInContainer = false;
-    this.showCoordinates = false; // Hide coordinates once we leave
+    this.showCoordinates = false;
   }
 
-  // Add panning state & offsets
   panning = false;
   private panningStartX = 0;
   private panningStartY = 0;
@@ -962,10 +984,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private translateY = 0;
   public spacePressed = false;
 
-  // Handle mousedown on our parent container
   onMouseDownContainer(event: MouseEvent) {
     if (this.spacePressed) {
-      this.panning = true; // Only start panning if space is pressed & mouse is down
+      this.panning = true;
       this.panningStartX = event.clientX - this.translateX;
       this.panningStartY = event.clientY - this.translateY;
     } else {
@@ -983,38 +1004,27 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     this.finishDrawing();
   }
 
-  // Add this new method to refresh polygons after saving
   refreshPolygons() {
-    // First check if there's anything to refresh
     if (Object.keys(this.originalPolygons).length === 0) {
-      // If original data is empty, reload from data source
       this.loadImportedPolygons();
       return;
     }
 
-    // If we have polygon data, recalculate positions and redraw
     this.updatePolygonsForTransform();
 
-    // Force a redraw of the canvas
     if (this.ctx) {
-      // Request animation frame for smooth rendering
       requestAnimationFrame(() => {
         this.redrawAllPolygons();
       });
     }
   }
 
-  // Use this when saving (call this at the end of your save method)
   saveChanges() {
-    // Your existing save logic here...
-
-    // After saving, refresh the polygons to ensure they remain visible
     setTimeout(() => {
       this.refreshPolygons();
-    }, 100); // Small delay to ensure any state changes have settled
+    }, 100);
   }
 
-  // Add a method to check polygon visibility for debugging
   checkPolygonsVisibility() {
     console.log(
       'Original polygons:',
@@ -1033,19 +1043,16 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     this.panning = !this.panning;
   }
 
-  // Add property to store the currently dragged polygon
   private draggedPolygonId: string | null = null;
 
-  // Add these new methods for drag-and-drop functionality
-  onDragStart(event: DragEvent, polygon: PolygonData) {
+  onDragStart(event: DragEvent, polygon: any) {
     if (!event.dataTransfer) return;
-    this.draggedPolygonId = polygon.id;
-    event.dataTransfer.setData('text/plain', polygon.id);
+    this.draggedPolygonId = polygon.objectId;
+    event.dataTransfer.setData('text/plain', polygon.objectId);
     event.dataTransfer.effectAllowed = 'move';
   }
 
   onDragOver(event: DragEvent) {
-    // This is needed to allow dropping
     event.preventDefault();
     if (event.dataTransfer) {
       event.dataTransfer.dropEffect = 'move';
@@ -1057,15 +1064,14 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     const polygonId = event.dataTransfer?.getData('text/plain');
 
     if (polygonId && this.draggedPolygonId) {
-      // Find the polygon and update its priority
-      const polygon = this.polygonDataList.find((p) => p.id === polygonId);
+      const polygon = this.polygonDataList.find(
+        (p) => p.objectId === polygonId
+      );
       if (polygon) {
         polygon.priority = priority;
         console.log(`Changed polygon ${polygonId} priority to ${priority}`);
 
-        // Also update the polygon in the rendering map
         if (this.polygons[polygonId]) {
-          // Update original polygon data
           this.redrawAllPolygons();
         }
       }
@@ -1073,49 +1079,69 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  // Modify the clearPriority method to handle undefined values
   clearPriority(polygonId: string | undefined | null) {
-    if (!polygonId) return; // Skip if polygonId is undefined or null
+    if (!polygonId) return;
 
-    const polygon = this.polygonDataList.find((p) => p.id === polygonId);
+    const polygon = this.polygonDataList.find((p) => p.objectId === polygonId);
     if (polygon) {
       polygon.priority = undefined;
       this.redrawAllPolygons();
     }
   }
 
-  // Handle drop between containers
-  onAnnotationDrop(event: CdkDragDrop<PolygonData[]>) {
+  onAnnotationDrop(event: CdkDragDrop<any[]>) {
+    // Get item being moved
+    const item = event.previousContainer.data[event.previousIndex];
+
+    // Determine new priority based on the container ID
+    let newPriority: string | undefined = undefined;
+    if (event.container.id === 'high-priority') {
+      newPriority = 'high';
+    } else if (event.container.id === 'medium-priority') {
+      newPriority = 'medium';
+    } else if (event.container.id === 'low-priority') {
+      newPriority = 'low';
+    }
+
+    // Update the item's priority
+    if (item && newPriority) {
+      console.log(`Updating ${item.objectId} priority to ${newPriority}`);
+      item.priority = newPriority;
+    }
+
+    // Move the item between arrays
     if (event.previousContainer === event.container) {
-      // If dropped in the same container, just reorder
       moveItemInArray(
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
     } else {
-      // If moved to a different container, transfer the item
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
-
-      // Update the priority based on the container
-      const droppedItem = event.container.data[event.currentIndex];
-      if (event.container.id === 'high-priority') {
-        droppedItem.priority = 'high';
-      } else if (event.container.id === 'medium-priority') {
-        droppedItem.priority = 'medium';
-      } else if (event.container.id === 'low-priority') {
-        droppedItem.priority = 'low';
-      } else {
-        droppedItem.priority = undefined; // Unassigned
-      }
-
-      // Redraw to reflect color changes
-      this.redrawAllPolygons();
     }
+
+    // Make sure to redraw all polygons to show the updated colors
+    this.redrawAllPolygons();
+  }
+
+  // Toggle a specific polygon's visibility - this was missing
+  togglePolygon(id: string) {
+    this.activePolygons[id] = !this.activePolygons[id];
+    this.redrawAllPolygons();
+  }
+
+  // Method to handle sidebar navigation selection
+  selectSidebarItem(index: number) {
+    this.selectedSidebarItem = index;
+  }
+
+  // Add method to check if the annotation list contains an ID
+  hasAnnotationWithId(list: any[], id: string): boolean {
+    return list.some((item) => item.objectId === id);
   }
 }

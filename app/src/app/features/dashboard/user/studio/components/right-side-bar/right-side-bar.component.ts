@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 
-import { PolygonData } from '../../data';
 import { AnnotationCategoryComponent } from './annotation-category/annotation-category.component';
 
 @Component({
@@ -12,13 +11,13 @@ import { AnnotationCategoryComponent } from './annotation-category/annotation-ca
   imports: [CommonModule, DragDropModule, AnnotationCategoryComponent],
 })
 export class RightSideBarComponent {
-  @Input() highPriorityAnnotations: PolygonData[] = [];
-  @Input() mediumPriorityAnnotations: PolygonData[] = [];
-  @Input() lowPriorityAnnotations: PolygonData[] = [];
-  @Input() unassignedAnnotations: PolygonData[] = [];
+  @Input() highPriorityAnnotations: any[] = [];
+  @Input() mediumPriorityAnnotations: any[] = [];
+  @Input() lowPriorityAnnotations: any[] = [];
+  @Input() unassignedAnnotations: any[] = [];
   @Input() activePolygons: { [key: string]: boolean } = {};
 
-  @Output() annotationDrop = new EventEmitter<CdkDragDrop<PolygonData[]>>();
+  @Output() annotationDrop = new EventEmitter<CdkDragDrop<any[]>>();
   @Output() hoveredPolygonChange = new EventEmitter<string | null>();
   @Output() togglePolygonChange = new EventEmitter<string>();
 
@@ -34,7 +33,7 @@ export class RightSideBarComponent {
     this.togglePolygonChange.emit(id);
   }
 
-  onAnnotationDrop(event: CdkDragDrop<PolygonData[]>): void {
+  onAnnotationDrop(event: CdkDragDrop<any[]>): void {
     this.annotationDrop.emit(event);
   }
 }

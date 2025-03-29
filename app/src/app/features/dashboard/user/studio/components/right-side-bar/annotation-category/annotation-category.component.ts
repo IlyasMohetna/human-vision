@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
-import { PolygonData } from '../../../data';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -24,11 +23,11 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
   @Input() iconPath = 'assets/icons/rectangle.svg';
   @Input() dropListId = '';
   @Input() connectedDropLists: string[] = [];
-  @Input() annotations: PolygonData[] = [];
+  @Input() annotations: any[] = [];
   @Input() isExpanded = true;
   @Input() activeItems: { [key: string]: boolean } = {};
 
-  @Output() itemDrop = new EventEmitter<CdkDragDrop<PolygonData[]>>();
+  @Output() itemDrop = new EventEmitter<CdkDragDrop<any[]>>();
   @Output() itemHover = new EventEmitter<string>();
   @Output() itemHoverEnd = new EventEmitter<void>();
   @Output() itemToggle = new EventEmitter<string>();
@@ -105,7 +104,7 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
     this.toggleExpand.emit(this.isExpanded);
   }
 
-  onItemDrop(event: CdkDragDrop<PolygonData[]>) {
+  onItemDrop(event: CdkDragDrop<any[]>) {
     this.isDragging = false;
     this.isAnyDragging = false;
     this.itemDrop.emit(event);
@@ -132,7 +131,7 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
   }
 
   isItemActive(id: string): boolean {
-    return !!this.activeItems[id];
+    return this.activeItems[id] === true;
   }
 
   onContainerEnter() {

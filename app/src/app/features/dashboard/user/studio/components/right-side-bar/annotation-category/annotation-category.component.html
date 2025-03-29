@@ -48,7 +48,7 @@
       class="flex justify-between items-center p-2 mb-1 border-l hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-colors duration-150"
       [ngClass]="categoryColorClasses.border"
       cdkDrag
-      (mouseenter)="onItemHover(item.id)"
+      (mouseenter)="onItemHover(item.objectId)"
       (mouseleave)="onItemHoverEnd()"
       (cdkDragStarted)="onDragStart()"
       (cdkDragEnded)="onDragEnd()"
@@ -59,12 +59,12 @@
       <!-- Right side with badge and eye icon -->
       <div class="flex items-center">
         <fa-icon
-          [icon]="isItemActive(item.id) ? 'eye' : 'eye-slash'"
+          [icon]="isItemActive(item.objectId) ? 'eye' : 'eye-slash'"
           class="text-white transition-all cursor-pointer ml-2"
-          [class.text-opacity-40]="!isItemActive(item.id)"
-          [class.text-opacity-90]="isItemActive(item.id)"
+          [class.text-opacity-40]="!isItemActive(item.objectId)"
+          [class.text-opacity-90]="isItemActive(item.objectId)"
           [class.hover:text-opacity-100]="true"
-          (click)="onItemToggle(item.id); $event.stopPropagation()"
+          (click)="onItemToggle(item.objectId); $event.stopPropagation()"
         ></fa-icon>
       </div>
     </div>

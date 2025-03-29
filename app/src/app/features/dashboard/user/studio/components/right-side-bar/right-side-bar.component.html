@@ -76,14 +76,14 @@
         *ngFor="let item of unassignedAnnotations"
         class="flex justify-between items-center p-2 mb-1 border-l border-l-gray-500 hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-colors duration-150"
         cdkDrag
-        (mouseenter)="setHoveredPolygon(item.id)"
+        (mouseenter)="setHoveredPolygon(item.objectId)"
         (mouseleave)="clearHoveredPolygon()"
       >
         <div class="flex items-center">
           <input
             type="checkbox"
-            [checked]="activePolygons[item.id]"
-            (change)="togglePolygon(item.id)"
+            [checked]="activePolygons[item.objectId]"
+            (change)="togglePolygon(item.objectId)"
             class="mr-2"
           />
           <span>{{ item.label || "Unnamed" }}</span>
