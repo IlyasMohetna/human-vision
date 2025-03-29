@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\DatasetController;
+use App\Http\Controllers\TestController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -14,7 +15,7 @@ Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::post('logout', [AuthController::class, 'logout']);
+        Route::post('logout', [AuthController::class, 'logout']); 
     });
 });
 
@@ -35,3 +36,6 @@ Route::get('import/progress/{id}', [\App\Http\Controllers\ImportController::clas
 
 
 Route::get('test', [ImportController::class, 'test']);
+
+Route::get('meteo', [TestController::class, 'test']);
+
