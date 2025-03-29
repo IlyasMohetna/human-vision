@@ -8,6 +8,7 @@ import {
   HostListener,
   Renderer2,
   NgZone,
+  CUSTOM_ELEMENTS_SCHEMA,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -37,6 +38,7 @@ import { PolygonDataService } from '../../../../services/polygon-data.service';
     DragDropModule,
     HttpClientModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './studio.component.html',
   styleUrls: ['./studio.component.css'],
 })
@@ -179,6 +181,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   // Add the missing isDragging property
   private isDragging = false;
 
+  public vehicle: any = {};
+
   constructor(
     private renderer: Renderer2,
     private ngZone: NgZone,
@@ -305,6 +309,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private loadPolygonData() {
     this.polygonDataService.fetchPolygonData().subscribe({
       next: (response) => {
+        this.vehicle = response.vehicle;
         console.log('API Response:', response);
 
         // Set the polygon data list from objects array

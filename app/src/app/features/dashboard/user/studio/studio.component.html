@@ -1,6 +1,9 @@
 <div class="flex h-screen">
   <!-- Left Sidebar with SideNavigationBar structure -->
-  <app-left-side-bar></app-left-side-bar>
+  <app-left-side-bar
+    [mapCoordinates]="vehicle?.gpsLatitude + ',' + vehicle?.gpsLongitude"
+    [mapHeading]="vehicle?.gpsHeading"
+  ></app-left-side-bar>
 
   <main
     class="flex-1 relative bg-[#4C4C4C] flex flex-col items-center justify-center"

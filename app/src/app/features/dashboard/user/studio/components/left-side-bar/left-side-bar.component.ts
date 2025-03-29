@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapModalComponent } from '../map-modal/map-modal.component';
 
@@ -10,17 +10,17 @@ import { MapModalComponent } from '../map-modal/map-modal.component';
   styleUrls: ['./left-side-bar.component.css'],
 })
 export class LeftSideBarComponent {
+  @Input() mapCoordinates = '';
+  @Input() mapHeading = 0;
+
   selectedSidebarItem = 1;
   showMapModal = false;
-  mapCoordinates = '50.108713798330555,8.68032783609474';
-  mapHeading = 240;
 
+  // Adjust default nav items if desired
   sidebarNavItems = [
     { label: 'Images' },
     { label: 'Traffic sign' },
-    {
-      label: 'Maps',
-    },
+    { label: 'Maps' },
     { label: 'IA' },
   ];
 
