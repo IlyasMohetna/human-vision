@@ -8,4 +8,9 @@ class Annotation extends Model
 {
     protected $connection = 'mongodb';
     protected $collection = 'annotations';
+
+    public function dataset()
+    {
+        return $this->belongsTo(Dataset::class, 'dataset_id', '_id');
+    }
 }

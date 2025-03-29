@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\DatasetController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -17,8 +18,14 @@ Route::prefix('auth')->group(function () {
     });
 });
 
+Route::prefix('dataset')->group(function () {
+    Route::get('random', [DatasetController::class, 'random']);
+});
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('me', [AuthController::class, 'me']);
+
+ 
 });
 
 Route::get('import/start', [\App\Http\Controllers\ImportController::class, 'start']);

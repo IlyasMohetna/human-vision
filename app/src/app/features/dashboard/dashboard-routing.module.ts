@@ -25,11 +25,6 @@ const routes: Routes = [
         canLoad: [RoleGuard],
         data: { role: Role.User },
       },
-      // {
-      //   path: '',
-      //   redirectTo: 'user',
-      //   pathMatch: 'full',
-      // },
     ],
   },
 ];

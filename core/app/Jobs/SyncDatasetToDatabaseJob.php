@@ -29,7 +29,6 @@ class SyncDatasetToDatabaseJob implements ShouldQueue
         try {
             Log::info('Starting SyncDatasetToDatabaseJob');
 
-            // Reset related tables
             Schema::disableForeignKeyConstraints();
             Dataset::truncate();
             Variant::truncate();
@@ -37,7 +36,7 @@ class SyncDatasetToDatabaseJob implements ShouldQueue
             Schema::enableForeignKeyConstraints();
             Log::info('Truncated dataset, variant, and annotation tables');
 
-            $storage = Storage::disk('local');
+            $storage = Storage::disk('public');
             $cities = $storage->directories();
 
             foreach ($cities as $cityname) {
@@ -63,7 +62,7 @@ class SyncDatasetToDatabaseJob implements ShouldQueue
                 'trace' => $e->getTraceAsString(),
             ]);
 
-            throw $e; // still fail the job so Laravel/Horizon registers it
+            throw $e;
         }
     }
 
@@ -72,11 +71,14 @@ class SyncDatasetToDatabaseJob implements ShouldQueue
         try {
             Log::debug("Processing dataset: {$dataset} for city: {$city->name}");
 
-            $files = Storage::disk('local')->files($dataset);
+            $datasetModel = Dataset::create(['city_id' => $city->id]);
+
+            $files = Storage::disk('public')->files($dataset);
 
             // Main image
-            $mainImage = reset(preg_grep('/leftImg8bit/i', $files));
-            $mainImagePath = Storage::disk('local')->path($mainImage);
+            $mainImageMatches = preg_grep('/leftImg8bit/i', $files);
+            $mainImage = reset($mainImageMatches);
+            $mainImagePath = Storage::disk('public')->path($mainImage);
             $metaData = $this->getMetaData($mainImagePath);
 
             if (!$metaData) {
@@ -84,17 +86,20 @@ class SyncDatasetToDatabaseJob implements ShouldQueue
             }
 
             // Vehicle JSON
-            $vehicleJsonPath = reset(preg_grep('/vehicle.json/i', $files));
-            $vehicleJsonData = $vehicleJsonPath ? Storage::json($vehicleJsonPath) : [];
+            $vehicleMatches = preg_grep('/vehicle.json/i', $files);
+            $vehicleJsonPath = reset($vehicleMatches);
+            $vehicleJsonData = $vehicleJsonPath ? Storage::disk('public')->json($vehicleJsonPath) : [];
 
             // Polygon JSON
-            $polygonJsonPath = reset(preg_grep('/polygons.json/i', $files));
-            $polygonJsonData = $polygonJsonPath ? Storage::json($polygonJsonPath) : [];
+            $polygonMatches = preg_grep('/polygons.json/i', $files);
+            $polygonJsonPath = reset($polygonMatches);
+            $polygonJsonData = Storage::disk('public')->json($polygonJsonPath);
 
             if (!$polygonJsonData || !is_array($polygonJsonData)) {
                 throw new \Exception("Invalid polygon data for: {$polygonJsonPath}");
             }
 
+            $polygonJsonData['dataset_id'] = $datasetModel->id;
             $polygonJsonData['meta'] = reset($metaData);
             $polygonJsonData['vehicle'] = $vehicleJsonData;
 
@@ -105,7 +110,6 @@ class SyncDatasetToDatabaseJob implements ShouldQueue
             }
 
             Annotation::create($polygonJsonData);
-            $datasetModel = Dataset::create(['city_id' => $city->id]);
 
             foreach ($files as $file) {
                 if (Str::contains($file, ['polygons.json', 'vehicle.json'])) {

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class VariantType extends Model
 {
-    protected $table = 'variant__types';
+    protected $table = 'datasets__variant_types';
 }
