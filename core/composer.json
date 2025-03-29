@@ -10,6 +10,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "frameright/image-metadata-parser": "^1.1",
+        "intervention/image": "^3.11",
+        "joserick/png-metadata": "^0.2.7",
         "laravel/framework": "^12",
         "laravel/horizon": "^5.31",
         "laravel/sanctum": "^4.0",

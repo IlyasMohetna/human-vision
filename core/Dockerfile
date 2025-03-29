@@ -6,9 +6,9 @@ ARG WWWGROUP=1000
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y \
-    libpq-dev zip unzip curl net-tools iproute2 procps lsof vim \
+    libpq-dev zip unzip curl net-tools iproute2 procps lsof vim libimage-exiftool-perl \
     supervisor \
-    && docker-php-ext-install pdo pdo_mysql pcntl
+    && docker-php-ext-install pdo pdo_mysql pcntl exif
 
 RUN groupadd --force -g $WWWGROUP core \
     && useradd -u $WWWUSER -g core -m core

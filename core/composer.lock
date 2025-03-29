@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1284028a1badbc2cec71843beeab3118",
+    "content-hash": "7980c2216cdf89651732dc5abfdeecdd",
     "packages": [
         {
             "name": "brick/math",
@@ -509,6 +509,77 @@
                 }
             ],
             "time": "2025-03-06T22:45:56+00:00"
+        },
+        {
+            "name": "frameright/image-metadata-parser",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Frameright/php-image-metadata-parser.git",
+                "reference": "2c9b9c0691d9e4fb9862e8fcd4a6a75efdb4b9cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Frameright/php-image-metadata-parser/zipball/2c9b9c0691d9e4fb9862e8fcd4a6a75efdb4b9cd",
+                "reference": "2c9b9c0691d9e4fb9862e8fcd4a6a75efdb4b9cd",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.6",
+                "phpcompatibility/php-compatibility": "^9.3.5",
+                "phpunit/phpunit": "^9.5.25"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CSD\\Image\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frameright (Coberg Ltd)",
+                    "email": "hello@frameright.io",
+                    "homepage": "https://frameright.io/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Aurelien Lourot",
+                    "email": "software@lourot.dev",
+                    "homepage": "https://lourot.dev/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Daniel Chesterton",
+                    "email": "daniel@chestertondevelopment.com",
+                    "homepage": "http://www.chestertondevelopment.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Image metadata parsing library",
+            "keywords": [
+                "Frameright",
+                "IDC",
+                "IPTC",
+                "Image Display Control",
+                "exif",
+                "image",
+                "metadata",
+                "photo",
+                "xmp"
+            ],
+            "support": {
+                "issues": "https://github.com/Frameright/php-image-metadata-parser/issues",
+                "source": "https://github.com/Frameright/php-image-metadata-parser/tree/1.1.3"
+            },
+            "time": "2024-11-15T14:44:06+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -1053,6 +1124,209 @@
                 }
             ],
             "time": "2025-02-03T10:55:03+00:00"
+        },
+        {
+            "name": "intervention/gif",
+            "version": "4.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/gif.git",
+                "reference": "6addac2c68b4bc0e37d0d3ccedda57eb84729c49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/gif/zipball/6addac2c68b4bc0e37d0d3ccedda57eb84729c49",
+                "reference": "6addac2c68b4bc0e37d0d3ccedda57eb84729c49",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^10.0 || ^11.0",
+                "slevomat/coding-standard": "~8.0",
+                "squizlabs/php_codesniffer": "^3.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Gif\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@intervention.io",
+                    "homepage": "https://intervention.io/"
+                }
+            ],
+            "description": "Native PHP GIF Encoder/Decoder",
+            "homepage": "https://github.com/intervention/gif",
+            "keywords": [
+                "animation",
+                "gd",
+                "gif",
+                "image"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/gif/issues",
+                "source": "https://github.com/Intervention/gif/tree/4.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/interventionio",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Intervention",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/interventionphp",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2025-01-05T10:52:39+00:00"
+        },
+        {
+            "name": "intervention/image",
+            "version": "3.11.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "ebbb711871fb261c064cf4c422f5f3c124fe1842"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/ebbb711871fb261c064cf4c422f5f3c124fe1842",
+                "reference": "ebbb711871fb261c064cf4c422f5f3c124fe1842",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "intervention/gif": "^4.2",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0",
+                "slevomat/coding-standard": "~8.0",
+                "squizlabs/php_codesniffer": "^3.8"
+            },
+            "suggest": {
+                "ext-exif": "Recommended to be able to read EXIF data properly."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@intervention.io",
+                    "homepage": "https://intervention.io/"
+                }
+            ],
+            "description": "PHP image manipulation",
+            "homepage": "https://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "resize",
+                "thumbnail",
+                "watermark"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/image/issues",
+                "source": "https://github.com/Intervention/image/tree/3.11.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/interventionio",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Intervention",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/interventionphp",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2025-02-27T13:08:55+00:00"
+        },
+        {
+            "name": "joserick/png-metadata",
+            "version": "0.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joserick/PNGMetadata.git",
+                "reference": "c46f0c604818b678981e01a6d3261045145928a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joserick/PNGMetadata/zipball/c46f0c604818b678981e01a6d3261045145928a3",
+                "reference": "c46f0c604818b678981e01a6d3261045145928a3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-exif": "*",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.18",
+                "phpstan/phpstan-nette": "^0.12.6",
+                "symplify/easy-coding-standard": "^7.2",
+                "tracy/tracy": "^2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PNGMetadata\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jóse Erick Carreón",
+                    "email": "joserick.92@gmail.com",
+                    "homepage": "https://github.com/joserick"
+                },
+                {
+                    "name": "Jan Barášek",
+                    "homepage": "https://baraja.cz"
+                }
+            ],
+            "description": "A PHP library for extract the metadata (XMP, EXIF) within a PNG format image.",
+            "keywords": [
+                "exif",
+                "exiftool",
+                "metadata",
+                "png",
+                "xmp"
+            ],
+            "support": {
+                "issues": "https://github.com/joserick/PNGMetadata/issues",
+                "source": "https://github.com/joserick/PNGMetadata/tree/0.2.7"
+            },
+            "time": "2020-11-02T22:47:54+00:00"
         },
         {
             "name": "laravel/framework",

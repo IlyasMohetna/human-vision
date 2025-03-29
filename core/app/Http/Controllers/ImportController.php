@@ -109,6 +109,11 @@ class ImportController extends Controller
         return response()->json($this->formatBatchData($batch));
     }
 
+    public function test()
+    {
+        (new SyncDatasetToDatabaseJob())->handle();
+    }
+
     private function buildImportJobs(GithubService $githubService): array
     {
         $cities = $githubService->getDatasetStructure();
