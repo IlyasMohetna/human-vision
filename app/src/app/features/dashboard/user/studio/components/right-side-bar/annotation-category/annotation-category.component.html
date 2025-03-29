@@ -45,7 +45,7 @@
     (cdkDropListExited)="onContainerExit()"
   >
     <div
-      *ngFor="let item of annotations"
+      *ngFor="let item of annotations; let i = index"
       class="flex justify-between items-center p-2 mb-1 border-l hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-all duration-200"
       [ngClass]="[categoryColorClasses.border]"
       [class.bg-blue-700]="hoveredPolygonId === item.objectId"
@@ -57,17 +57,26 @@
       (cdkDragStarted)="onDragStart()"
       (cdkDragEnded)="onDragEnd()"
     >
-      <!-- Left side with label -->
       <span>{{ item.label || "Unnamed" }}</span>
-
-      <!-- Right side with badge and eye icon -->
       <div class="flex items-center">
+        <!-- Up arrow -->
+        <fa-icon
+          [icon]="['fas', 'arrow-up']"
+          class="mx-2 cursor-pointer"
+          (click)="moveItemUp(i); $event.stopPropagation()"
+        ></fa-icon>
+        <!-- Down arrow -->
+        <fa-icon
+          [icon]="['fas', 'arrow-down']"
+          class="mr-2 cursor-pointer"
+          (click)="moveItemDown(i); $event.stopPropagation()"
+        ></fa-icon>
+        <!-- Existing eye icon -->
         <fa-icon
           [icon]="isItemActive(item.objectId) ? 'eye' : 'eye-slash'"
-          class="text-white transition-all cursor-pointer ml-2"
+          class="text-white transition-all cursor-pointer"
           [class.text-opacity-40]="!isItemActive(item.objectId)"
           [class.text-opacity-90]="isItemActive(item.objectId)"
-          [class.hover:text-opacity-100]="true"
           (click)="onItemToggle(item.objectId); $event.stopPropagation()"
         ></fa-icon>
       </div>

@@ -189,4 +189,21 @@ export class AnnotationCategoryComponent
       }
     }
   }
+
+  // Methods to reorder an item up or down in the list
+  moveItemUp(index: number) {
+    if (index > 0) {
+      const item = this.annotations[index];
+      this.annotations.splice(index, 1);
+      this.annotations.splice(index - 1, 0, item);
+    }
+  }
+
+  moveItemDown(index: number) {
+    if (index < this.annotations.length - 1) {
+      const item = this.annotations[index];
+      this.annotations.splice(index, 1);
+      this.annotations.splice(index + 1, 0, item);
+    }
+  }
 }
