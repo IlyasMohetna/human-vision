@@ -9,6 +9,7 @@
         badgeText="High"
         iconPath="assets/icons/flag-high.svg"
         dropListId="high-priority"
+        [hoveredPolygonId]="hoveredPolygonId"
         [connectedDropLists]="['medium-priority', 'low-priority', 'unassigned']"
         [annotations]="highPriorityAnnotations"
         [activeItems]="activePolygons"
@@ -25,6 +26,7 @@
         badgeText="Medium"
         iconPath="assets/icons/flag-medium.svg"
         dropListId="medium-priority"
+        [hoveredPolygonId]="hoveredPolygonId"
         [connectedDropLists]="['high-priority', 'low-priority', 'unassigned']"
         [annotations]="mediumPriorityAnnotations"
         [activeItems]="activePolygons"
@@ -41,6 +43,7 @@
         badgeText="Low"
         iconPath="assets/icons/flag-low.svg"
         dropListId="low-priority"
+        [hoveredPolygonId]="hoveredPolygonId"
         [connectedDropLists]="[
           'high-priority',
           'medium-priority',
@@ -74,7 +77,9 @@
     >
       <div
         *ngFor="let item of unassignedAnnotations"
-        class="flex justify-between items-center p-2 mb-1 border-l border-l-gray-500 hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-colors duration-150"
+        class="flex justify-between items-center p-2 mb-1 border-l border-l-blue-500 hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-all duration-200"
+        [class.bg-blue-700]="hoveredPolygonId === item.objectId"
+        [class.bg-opacity-40]="hoveredPolygonId === item.objectId"
         cdkDrag
         (mouseenter)="setHoveredPolygon(item.objectId)"
         (mouseleave)="clearHoveredPolygon()"

@@ -585,8 +585,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   }
 
   setHoveredPolygon(id: string | null) {
-    this.hoveredPolygonId = id;
-    this.redrawAllPolygons();
+    if (this.hoveredPolygonId !== id) {
+      console.log('Setting hovered polygon:', id);
+      this.hoveredPolygonId = id;
+      this.redrawAllPolygons();
+    }
   }
 
   clearHoveredPolygon() {
@@ -1002,7 +1005,59 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   onMouseMoveContainer(event: MouseEvent) {
     if (!this.panning) {
       this.drawPolygon(event);
+
+      // Add polygon hover detection on mouse move
+      this.checkPolygonHover(event);
     }
+  }
+
+  // Add new method to check if mouse is hovering over a polygon
+  checkPolygonHover(event: MouseEvent) {
+    const rect = this.canvasRef.nativeElement.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    let hoveredId: string | null = null;
+
+    // Check if the mouse is inside any polygon
+    Object.entries(this.polygons).forEach(([id, poly]) => {
+      if (
+        this.activePolygons[id] &&
+        this.isPointInPolygon(mouseX, mouseY, poly.points)
+      ) {
+        hoveredId = id;
+      }
+    });
+
+    // Only update if we're hovering over a different polygon
+    if (hoveredId !== this.hoveredPolygonId) {
+      console.log('Canvas hover polygon:', hoveredId);
+      this.setHoveredPolygon(hoveredId);
+    }
+  }
+
+  // Add helper method to check if a point is inside a polygon
+  isPointInPolygon(
+    x: number,
+    y: number,
+    points: { x: number; y: number }[]
+  ): boolean {
+    if (points.length < 3) return false;
+
+    let inside = false;
+    for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
+      const xi = points[i].x;
+      const yi = points[i].y;
+      const xj = points[j].x;
+      const yj = points[j].y;
+
+      const intersect =
+        yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
+
+      if (intersect) inside = !inside;
+    }
+
+    return inside;
   }
 
   onMouseUpContainer(event: MouseEvent) {

@@ -45,8 +45,10 @@
   >
     <div
       *ngFor="let item of annotations"
-      class="flex justify-between items-center p-2 mb-1 border-l hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-colors duration-150"
-      [ngClass]="categoryColorClasses.border"
+      class="flex justify-between items-center p-2 mb-1 border-l hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-all duration-200"
+      [ngClass]="[categoryColorClasses.border]"
+      [class.bg-blue-700]="hoveredPolygonId === item.objectId"
+      [class.bg-opacity-40]="hoveredPolygonId === item.objectId"
       cdkDrag
       (mouseenter)="onItemHover(item.objectId)"
       (mouseleave)="onItemHoverEnd()"

@@ -5,6 +5,8 @@ import {
   EventEmitter,
   OnInit,
   OnDestroy,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
@@ -16,7 +18,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [CommonModule, DragDropModule, FontAwesomeModule],
   templateUrl: './annotation-category.component.html',
 })
-export class AnnotationCategoryComponent implements OnInit, OnDestroy {
+export class AnnotationCategoryComponent
+  implements OnInit, OnDestroy, OnChanges
+{
   @Input() title = '';
   @Input() priority: 'high' | 'medium' | 'low' | 'none' = 'none';
   @Input() badgeText = '';
@@ -26,6 +30,7 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
   @Input() annotations: any[] = [];
   @Input() isExpanded = true;
   @Input() activeItems: { [key: string]: boolean } = {};
+  @Input() hoveredPolygonId: string | null = null;
 
   @Output() itemDrop = new EventEmitter<CdkDragDrop<any[]>>();
   @Output() itemHover = new EventEmitter<string>();
@@ -49,6 +54,33 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.globalDragListener) {
       this.globalDragListener.forEach((cleanup: Function) => cleanup());
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (
+      changes['hoveredPolygonId'] &&
+      !changes['hoveredPolygonId'].firstChange
+    ) {
+      console.log(
+        'CategoryComponent received hoveredPolygonId:',
+        this.hoveredPolygonId
+      );
+
+      // Check if we have any matching annotations with this ID
+      if (this.hoveredPolygonId) {
+        const matchingItem = this.annotations.find(
+          (item) => item.objectId === this.hoveredPolygonId
+        );
+        if (matchingItem) {
+          console.log(
+            'Found matching item in',
+            this.title,
+            'category:',
+            matchingItem.objectId
+          );
+        }
+      }
     }
   }
 
@@ -132,6 +164,10 @@ export class AnnotationCategoryComponent implements OnInit, OnDestroy {
 
   isItemActive(id: string): boolean {
     return this.activeItems[id] === true;
+  }
+
+  isItemHoveredFromCanvas(id: string): boolean {
+    return this.hoveredPolygonId === id;
   }
 
   onContainerEnter() {
