@@ -38,5 +38,8 @@ class DatabaseSeeder extends Seeder
             'lastname' => 'Lelievre',
             'email' => 'kevin.lelievre@utbm.fr',
         ]);
+        $this->call(CitiesTableSeeder::class);
+        $this->call(DatasetsStatusTableSeeder::class);
+        $this->call(DatasetsVariantTypesTableSeeder::class);
     }
 }

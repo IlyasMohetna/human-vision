@@ -4,6 +4,8 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 
+use function PHPUnit\Framework\isNumeric;
+
 class GithubService
 {
     protected $token;
@@ -20,15 +22,19 @@ class GithubService
 
     protected function githubRequest($endpoint)
     {
-        $url = "{$this->apiBase}/{$this->owner}/{$this->repo}/contents/{$endpoint}";
+        $url = "{$this->apiBase}/{$this->owner}/{$this->repo}/{$endpoint}";
 
         $response = Http::withToken($this->token)->get($url);
 
         $remaining = $response->header('X-RateLimit-Remaining');
         $limit = $response->header('X-RateLimit-Limit');
-        $used = $limit - $remaining;
-    
-        logger()->info("[GitHub API] {$used}/{$limit} used – {$remaining} remaining for endpoint: {$endpoint}");
+
+        if(isNumeric($remaining) && isNumeric($limit)) {
+            $remaining = (int)$remaining;
+            $used = (int)$limit - (int)$remaining;
+            $limit = (int)$limit;
+            logger()->info("[GitHub API] {$used}/{$limit} used – {$remaining} remaining for endpoint: {$endpoint}");
+        }
     
         return $response;
     }
@@ -42,6 +48,38 @@ class GithubService
         }
 
         return [];
+    }
+
+    public function downloadRepoArchive(string $ref = 'main'): ?string
+    {
+        $filename = storage_path("app/{$this->repo}-{$ref}.zip");
+
+        // GitHub API endpoint to download a repository archive (ZIP)
+        $url = "https://api.github.com/repos/{$this->owner}/{$this->repo}/zipball/{$ref}";
+
+        try {
+            $response = Http::withOptions([
+                    'allow_redirects' => true,   // Follow the 302 redirect automatically
+                    'sink'            => $filename, // Stream directly to file
+                    'timeout'         => 300,     // Increase timeout as needed
+                ])
+                ->withHeaders([
+                    'Accept'                 => 'application/vnd.github+json',
+                    'Authorization'          => "Bearer {$this->token}",
+                    'X-GitHub-Api-Version'   => '2022-11-28',
+                ])
+                ->get($url);
+
+            if ($response->successful()) {
+                return $filename;
+            }
+
+            logger()->error("Failed to download repository archive. HTTP Status: {$response->status()}");
+            return null;
+        } catch (\Exception $e) {
+            logger()->error("Exception while downloading repository archive: " . $e->getMessage());
+            return null;
+        }
     }
 
     public function getFileContent($path)

@@ -13,12 +13,8 @@ return new class extends Migration
     {
         Schema::create('datasets', function (Blueprint $table) {
             $table->id();
-            $table->string('path');
-            $table->string('mongo_annotation_id');
-            $table->foreignId('status_id')->constrained('datasets__status');
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('status_id')->default(1)->constrained('datasets__status');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('admin_id')->nullable()->constrained('users');
             $table->foreignId('city_id')->constrained('cities');
             $table->timestamps();

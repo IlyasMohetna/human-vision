@@ -2,61 +2,175 @@
 
 namespace App\Jobs;
 
+use App\Models\Annotation;
+use App\Models\City;
+use App\Models\Dataset;
+use App\Models\Variant;
+use App\Models\VariantType;
+use Illuminate\Bus\Queueable;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use PNGMetadata\PNGMetadata;
-use CSD\Image\Format\PNG;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class SyncDatasetToDatabaseJob implements ShouldQueue
 {
-    use Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+    public $tries = 1;
+    public $timeout = 0;
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
-        $storage = Storage::disk('local');
-        $cities = $storage->directories();
+        try {
+            Log::info('Starting SyncDatasetToDatabaseJob');
 
-        foreach($cities as $city){
-            $datasets = $storage->directories($city);
-            foreach($datasets as $dataset){
-                $this->processDataSet($dataset);
-                dd('stop');
+            // Reset related tables
+            Schema::disableForeignKeyConstraints();
+            Dataset::truncate();
+            Variant::truncate();
+            Annotation::truncate();
+            Schema::enableForeignKeyConstraints();
+            Log::info('Truncated dataset, variant, and annotation tables');
+
+            $storage = Storage::disk('local');
+            $cities = $storage->directories();
+
+            foreach ($cities as $cityname) {
+                Log::debug("Processing city: {$cityname}");
+
+                $city = City::where('name', $cityname)->first();
+                if (!$city) {
+                    throw new \Exception("City not found: {$cityname}");
+                }
+
+                $datasets = $storage->directories($cityname);
+                foreach ($datasets as $dataset) {
+                    $this->processDataSet($dataset, $city);
+                }
             }
+
+            Log::info('SyncDatasetToDatabaseJob completed successfully');
+        } catch (\Throwable $e) {
+            Log::error('SyncDatasetToDatabaseJob failed', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            throw $e; // still fail the job so Laravel/Horizon registers it
         }
     }
 
-    public function processDataSet($dataset)
-    {        
-        $files = Storage::disk('local')->files($dataset);
-        foreach($files as $path){
-            if(preg_match('/munster_000043_000019_leftImg8bit/i', $path) === 0){
-                continue;
+    public function processDataSet($dataset, City $city)
+    {
+        try {
+            Log::debug("Processing dataset: {$dataset} for city: {$city->name}");
+
+            $files = Storage::disk('local')->files($dataset);
+
+            // Main image
+            $mainImage = reset(preg_grep('/leftImg8bit/i', $files));
+            $mainImagePath = Storage::disk('local')->path($mainImage);
+            $metaData = $this->getMetaData($mainImagePath);
+
+            if (!$metaData) {
+                throw new \Exception("Meta data not found for file: {$mainImage}");
             }
 
-            $file = Storage::disk('local')->path($path);
-            $escapedPath = escapeshellarg($path);
+            // Vehicle JSON
+            $vehicleJsonPath = reset(preg_grep('/vehicle.json/i', $files));
+            $vehicleJsonData = $vehicleJsonPath ? Storage::json($vehicleJsonPath) : [];
+
+            // Polygon JSON
+            $polygonJsonPath = reset(preg_grep('/polygons.json/i', $files));
+            $polygonJsonData = $polygonJsonPath ? Storage::json($polygonJsonPath) : [];
+
+            if (!$polygonJsonData || !is_array($polygonJsonData)) {
+                throw new \Exception("Invalid polygon data for: {$polygonJsonPath}");
+            }
+
+            $polygonJsonData['meta'] = reset($metaData);
+            $polygonJsonData['vehicle'] = $vehicleJsonData;
+
+            foreach ($polygonJsonData['objects'] as &$object) {
+                if (!isset($object['objectId'])) {
+                    $object = ['objectId' => uniqid('obj_', true)] + $object;
+                }
+            }
+
+            Annotation::create($polygonJsonData);
+            $datasetModel = Dataset::create(['city_id' => $city->id]);
+
+            foreach ($files as $file) {
+                if (Str::contains($file, ['polygons.json', 'vehicle.json'])) {
+                    continue;
+                }
+
+                $variantTypeId = $this->getVariantTypeIdFromImgName($file);
+
+                Variant::create([
+                    'path' => $file,
+                    'type_id' => $variantTypeId,
+                    'dataset_id' => $datasetModel->id,
+                ]);
+            }
+
+            Log::debug("Finished dataset: {$dataset}");
+        } catch (\Throwable $e) {
+            Log::error("Error processing dataset: {$dataset}", [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            throw $e;
+        }
+    }
+
+    public function getMetaData($file)
+    {
+        try {
+            $escapedPath = escapeshellarg($file);
             $output = [];
 
-            exec("exiftool -j -n {$file}", $output);
+            exec("exiftool -j -n {$escapedPath}", $output);
             $json = implode("\n", $output);
-            dd($json);
-            // Check if file extension is jpg
-            $png_metadata = new PNGMetadata($file);
+            $data = json_decode($json, true);
 
-            // dd($png_metadata->toArray());
-            dd($file);
+            return $data;
+        } catch (\Throwable $e) {
+            Log::error("Error reading metadata from: {$file}", [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return null;
         }
+    }
+
+    public function getVariantTypeIdFromImgName($imgName)
+    {
+        $mapping = [
+            'leftImg8bit'        => 1,
+            'gtFine_color'       => 2,
+            'gtFine_instanceIds' => 3,
+            'gtFine_labelIds'    => 4,
+        ];
+
+        foreach ($mapping as $key => $value) {
+            if (Str::contains($imgName, $key)) {
+                return $value;
+            }
+        }
+
+        Log::error("Variant type not found for file: {$imgName}");
+        throw new \Exception("Variant type not found: {$imgName}");
     }
 }

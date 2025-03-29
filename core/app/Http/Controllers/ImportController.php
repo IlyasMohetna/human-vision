@@ -19,7 +19,6 @@ class ImportController extends Controller
     {
         $lockKey = 'import_in_progress';
 
-        // If an import is already running, return its batch ID.
         if (Cache::has($lockKey)) {
             return response()->json([
                 'message'  => 'Import already running.',
@@ -111,12 +110,16 @@ class ImportController extends Controller
 
     public function test()
     {
-        (new SyncDatasetToDatabaseJob())->handle();
+        dispatch(new SyncDatasetToDatabaseJob());
+        // (new SyncDatasetToDatabaseJob())->handle();
     }
 
     private function buildImportJobs(GithubService $githubService): array
     {
+        $githubService->downloadRepoArchive('main');
+        dd('downloaded ?');
         $cities = $githubService->getDatasetStructure();
+        dd($cities);
         $jobs = [];
 
         foreach ($cities as $city => $datasets) {
