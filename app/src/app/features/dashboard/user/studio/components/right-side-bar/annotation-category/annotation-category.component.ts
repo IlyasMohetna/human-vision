@@ -7,6 +7,11 @@ import {
   OnDestroy,
   OnChanges,
   SimpleChanges,
+  ViewChild,
+  ElementRef,
+  QueryList,
+  ViewChildren,
+  AfterViewInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
@@ -19,7 +24,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   templateUrl: './annotation-category.component.html',
 })
 export class AnnotationCategoryComponent
-  implements OnInit, OnDestroy, OnChanges
+  implements OnInit, OnDestroy, OnChanges, AfterViewInit
 {
   @Input() title = '';
   @Input() priority: 'high' | 'medium' | 'low' | 'none' = 'none';
@@ -37,6 +42,9 @@ export class AnnotationCategoryComponent
   @Output() itemHoverEnd = new EventEmitter<void>();
   @Output() itemToggle = new EventEmitter<string>();
   @Output() toggleExpand = new EventEmitter<boolean>();
+
+  @ViewChild('scrollableContainer') scrollableContainer!: ElementRef;
+  @ViewChildren('annotationItem') annotationItems!: QueryList<ElementRef>;
 
   isDragging = false;
 
@@ -58,30 +66,29 @@ export class AnnotationCategoryComponent
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (
-      changes['hoveredPolygonId'] &&
-      !changes['hoveredPolygonId'].firstChange
-    ) {
-      console.log(
-        'CategoryComponent received hoveredPolygonId:',
-        this.hoveredPolygonId
-      );
-
+    if (changes['hoveredPolygonId']) {
       // Check if we have any matching annotations with this ID
       if (this.hoveredPolygonId) {
         const matchingItem = this.annotations.find(
           (item) => item.objectId === this.hoveredPolygonId
         );
-        if (matchingItem) {
+
+        if (matchingItem && !this.isDragging && !this.isAnyDragging) {
           console.log(
             'Found matching item in',
             this.title,
             'category:',
             matchingItem.objectId
           );
+          // Use a small timeout to ensure DOM is updated
+          setTimeout(() => this.scrollToHighlightedItem(), 50);
         }
       }
     }
+  }
+
+  ngAfterViewInit() {
+    // Initialize after view has been created
   }
 
   private setupDragListeners() {
@@ -176,5 +183,38 @@ export class AnnotationCategoryComponent
 
   onContainerExit() {
     this.containerHasDrag = false;
+  }
+
+  // Simplify the scroll method
+  scrollToHighlightedItem() {
+    if (!this.scrollableContainer || !this.isDragging || !this.isAnyDragging) {
+      const container = this.scrollableContainer.nativeElement;
+
+      // Find the item directly through DOM query rather than ViewChildren
+      const highlightedItem = container.querySelector(
+        `[data-object-id="${this.hoveredPolygonId}"]`
+      );
+
+      if (highlightedItem) {
+        console.log('Found DOM element to scroll to:', this.hoveredPolygonId);
+
+        // Calculate if visible in viewport
+        const containerRect = container.getBoundingClientRect();
+        const itemRect = highlightedItem.getBoundingClientRect();
+
+        const isFullyVisible =
+          itemRect.top >= containerRect.top &&
+          itemRect.bottom <= containerRect.bottom;
+
+        // Only scroll if not fully visible
+        if (!isFullyVisible) {
+          console.log('Scrolling to item:', this.hoveredPolygonId);
+          highlightedItem.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+          });
+        }
+      }
+    }
   }
 }

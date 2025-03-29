@@ -39,6 +39,7 @@
     cdkDropListSortingDisabled="true"
     [cdkDropListEnterPredicate]="enterPredicate"
     class="p-2 flex-1 min-h-0 overflow-y-auto"
+    #scrollableContainer
     (cdkDropListDropped)="onItemDrop($event)"
     (cdkDropListEntered)="onContainerEnter()"
     (cdkDropListExited)="onContainerExit()"
@@ -49,6 +50,7 @@
       [ngClass]="[categoryColorClasses.border]"
       [class.bg-blue-700]="hoveredPolygonId === item.objectId"
       [class.bg-opacity-40]="hoveredPolygonId === item.objectId"
+      [attr.data-object-id]="item.objectId"
       cdkDrag
       (mouseenter)="onItemHover(item.objectId)"
       (mouseleave)="onItemHoverEnd()"

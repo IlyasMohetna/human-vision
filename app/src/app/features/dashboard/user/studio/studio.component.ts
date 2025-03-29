@@ -176,6 +176,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   lowPriorityAnnotations: any[] = [];
   unassignedAnnotations: any[] = [];
 
+  // Add the missing isDragging property
+  private isDragging = false;
+
   constructor(
     private renderer: Renderer2,
     private ngZone: NgZone,
@@ -1013,6 +1016,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   // Add new method to check if mouse is hovering over a polygon
   checkPolygonHover(event: MouseEvent) {
+    if (this.isDragging || this.panning) return; // Don't check during drag or pan
+
     const rect = this.canvasRef.nativeElement.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
@@ -1212,5 +1217,14 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   // Add method to check if the annotation list contains an ID
   hasAnnotationWithId(list: any[], id: string): boolean {
     return list.some((item) => item.objectId === id);
+  }
+
+  // Add methods to set the isDragging state
+  onPolygonDragStart() {
+    this.isDragging = true;
+  }
+
+  onPolygonDragEnd() {
+    this.isDragging = false;
   }
 }
