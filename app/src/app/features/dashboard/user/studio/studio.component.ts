@@ -102,9 +102,14 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       fill: 'rgba(0, 120, 255, 0.2)', // Semi-transparent blue
     },
     default: {
-      // Add a default color for fallback
-      border: 'rgba(128, 128, 128, 1)', // Gray
-      fill: 'rgba(128, 128, 128, 0.2)',
+      // Change default to blue "info" color instead of gray
+      border: 'rgba(0, 120, 255, 1)', // Blue
+      fill: 'rgba(0, 120, 255, 0.2)',
+    },
+    unassigned: {
+      // Add explicit unassigned for clarity
+      border: 'rgba(0, 120, 255, 1)', // Blue
+      fill: 'rgba(0, 120, 255, 0.2)',
     },
   };
 
@@ -564,7 +569,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   // Helper method to get a valid color type from a label
   private getColorTypeFromLabel(label: string | undefined): string {
-    if (!label) return 'default';
+    if (!label) return 'unassigned'; // Changed from 'default' to 'unassigned'
 
     const labelLower = label.toLowerCase();
 
@@ -576,7 +581,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       return 'low';
     }
 
-    return 'default';
+    return 'unassigned'; // Changed from 'default' to 'unassigned'
   }
 
   setHoveredPolygon(id: string | null) {
@@ -1101,12 +1106,21 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
       newPriority = 'medium';
     } else if (event.container.id === 'low-priority') {
       newPriority = 'low';
+    } else if (event.container.id === 'unassigned') {
+      // Explicitly clear priority when moved to unassigned
+      newPriority = undefined;
     }
 
     // Update the item's priority
-    if (item && newPriority) {
-      console.log(`Updating ${item.objectId} priority to ${newPriority}`);
-      item.priority = newPriority;
+    if (item) {
+      if (newPriority) {
+        console.log(`Updating ${item.objectId} priority to ${newPriority}`);
+        item.priority = newPriority;
+      } else {
+        // Clear priority explicitly when moved to unassigned
+        console.log(`Clearing priority for ${item.objectId}`);
+        delete item.priority; // Remove the property completely
+      }
     }
 
     // Move the item between arrays
