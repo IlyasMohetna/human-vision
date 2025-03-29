@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapModalComponent } from '../map-modal/map-modal.component';
 
@@ -10,13 +10,15 @@ import { MapModalComponent } from '../map-modal/map-modal.component';
   styleUrls: ['./left-side-bar.component.css'],
 })
 export class LeftSideBarComponent {
-  @Input() mapCoordinates = '';
-  @Input() mapHeading = 0;
+  @Input() mapCoordinates: string = '';
+  @Input() mapHeading: number | null = null;
+  @Input() variants: any[] = [];
 
-  selectedSidebarItem = 1;
+  @Output() variantSelected = new EventEmitter<any>();
+
+  selectedSidebarItem = 0;
   showMapModal = false;
 
-  // Adjust default nav items if desired
   sidebarNavItems = [
     { label: 'Images' },
     { label: 'Traffic sign' },
@@ -34,5 +36,10 @@ export class LeftSideBarComponent {
 
   closeMapModal() {
     this.showMapModal = false;
+  }
+
+  selectVariant(variant: any) {
+    console.log('ok');
+    this.variantSelected.emit(variant);
   }
 }

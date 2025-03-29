@@ -7,12 +7,10 @@ import {
   OnDestroy,
   HostListener,
   Renderer2,
-  NgZone,
   CUSTOM_ELEMENTS_SCHEMA,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import POLYGONS from './data';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { LeftSideBarComponent } from './components/left-side-bar/left-side-bar.component';
@@ -24,6 +22,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { PolygonDataService } from '../../../../services/polygon-data.service';
+import { PolygonDataMap } from './polygon.types';
 
 @Component({
   selector: 'app-studio',
@@ -67,6 +66,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private imageNaturalHeight = 0;
   private containerWidth = 0;
   private containerHeight = 0;
+
+  // Dataset variants
+  variants: any[] = [];
 
   @ViewChild('annotationCanvas', { static: false })
   canvasRef!: ElementRef<HTMLCanvasElement>;
@@ -122,13 +124,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   activePolygons: { [id: string]: boolean } = {};
 
   // Modified polygon storage to include type information
-  private polygons: {
-    [id: string]: {
-      points: { x: number; y: number }[];
-      type: 'high' | 'medium' | 'low';
-      label?: string;
-    };
-  } = {};
+  private polygons: PolygonDataMap = {};
 
   // Add these constants near the top of the class
   private readonly POLYGON_BORDER_COLOR = 'yellow';
@@ -141,13 +137,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   hoveredPolygonId: string | null = null;
 
   // Add these properties to store original polygon coordinates
-  private originalPolygons: {
-    [id: string]: {
-      points: { x: number; y: number }[];
-      type: 'high' | 'medium' | 'low';
-      label?: string;
-    };
-  } = {};
+  private originalPolygons: PolygonDataMap = {};
 
   // Add this property to store image center
   private imageCenter = { x: 0, y: 0 };
@@ -185,7 +175,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private renderer: Renderer2,
-    private ngZone: NgZone,
     private polygonDataService: PolygonDataService
   ) {}
 
@@ -310,7 +299,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     this.polygonDataService.fetchPolygonData().subscribe({
       next: (response) => {
         this.vehicle = response.vehicle;
-        console.log('API Response:', response);
 
         // Set the polygon data list from objects array
         this.polygonDataList = response.objects || [];
@@ -328,6 +316,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
           const originalImage = response.variants.find(
             (variant: any) => variant.type === 'Original Image'
           );
+
+          this.variants = response.variants;
 
           if (originalImage && originalImage.path) {
             this.imageUrl = originalImage.path;
@@ -1231,5 +1221,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   onPolygonDragEnd() {
     this.isDragging = false;
+  }
+
+  onVariantSelected(variant: any) {
+    this.imageUrl = variant.path;
   }
 }

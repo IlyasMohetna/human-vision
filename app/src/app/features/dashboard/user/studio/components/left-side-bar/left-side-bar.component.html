@@ -13,13 +13,25 @@
 
   <div class="NavigationBarContentWrapper">
     <ng-container [ngSwitch]="selectedSidebarItem">
-      <div *ngSwitchCase="0" class="ContentPanel">
-        <h2 class="PanelTitle">Project</h2>
-        <nav class="MenuItems">
-          <a href="#" class="MenuItem">Dashboard</a>
-          <a href="#" class="MenuItem">Settings</a>
-          <a href="#" class="MenuItem">Export</a>
-        </nav>
+      <div *ngSwitchCase="0">
+        <div class="grid grid-cols-2 gap-4 p-2">
+          <div
+            class="border border-gray-300 p-2 flex items-center justify-center relative"
+            *ngFor="let variant of variants"
+            (click)="selectVariant(variant)"
+          >
+            <img
+              [src]="variant.path"
+              alt="Variant"
+              class="max-w-full object-contain"
+            />
+            <span
+              class="absolute top-1 left-1 bg-black text-white text-xs px-1 py-0.5 rounded"
+            >
+              {{ variant.type }}
+            </span>
+          </div>
+        </div>
       </div>
 
       <div *ngSwitchCase="1" class="ContentPanel">
@@ -46,7 +58,7 @@
   <app-map-modal
     [isOpen]="showMapModal"
     [coordinates]="mapCoordinates"
-    [heading]="mapHeading"
+    [heading]="mapHeading ?? 0"
     (closeModalEvent)="closeMapModal()"
   >
   </app-map-modal>
