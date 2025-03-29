@@ -13,6 +13,7 @@ export class LeftSideBarComponent {
   @Input() mapCoordinates: string = '';
   @Input() mapHeading: number | null = null;
   @Input() variants: any[] = [];
+  @Input() currentImageUrl: string = ''; // To track which variant is currently displayed
 
   @Output() variantSelected = new EventEmitter<any>();
 
@@ -25,6 +26,16 @@ export class LeftSideBarComponent {
     { label: 'Maps' },
     { label: 'IA' },
   ];
+
+  ngOnInit() {
+    // Set the default selected variant to the original image
+    const originalImage = this.variants.find(
+      (variant) => variant.type === 'Original Image'
+    );
+    if (originalImage) {
+      this.selectVariant(originalImage);
+    }
+  }
 
   selectSidebarItem(item: any): void {
     if (item === 2) {
@@ -39,7 +50,7 @@ export class LeftSideBarComponent {
   }
 
   selectVariant(variant: any) {
-    console.log('ok');
+    this.currentImageUrl = variant.path;
     this.variantSelected.emit(variant);
   }
 }
