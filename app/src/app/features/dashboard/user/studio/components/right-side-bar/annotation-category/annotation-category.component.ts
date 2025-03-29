@@ -14,7 +14,11 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  DragDropModule,
+  CDK_DRAG_CONFIG,
+} from '@angular/cdk/drag-drop';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -22,6 +26,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   standalone: true,
   imports: [CommonModule, DragDropModule, FontAwesomeModule],
   templateUrl: './annotation-category.component.html',
+  providers: [
+    {
+      provide: CDK_DRAG_CONFIG,
+      useValue: {
+        dragStartThreshold: 0, // Lower threshold
+        pointerDirectionChangeThreshold: 1, // Makes movement more responsive
+      },
+    },
+  ],
 })
 export class AnnotationCategoryComponent
   implements OnInit, OnDestroy, OnChanges, AfterViewInit
@@ -48,39 +61,26 @@ export class AnnotationCategoryComponent
 
   isDragging = false;
 
-  private globalDragListener: any;
-  isAnyDragging = false;
-
   containerHasDrag = false;
 
   enterPredicate = () => true;
 
   ngOnInit() {
-    this.globalDragListener = this.setupDragListeners();
+    // Initialization logic
   }
 
   ngOnDestroy() {
-    if (this.globalDragListener) {
-      this.globalDragListener.forEach((cleanup: Function) => cleanup());
-    }
+    // Cleanup logic
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['hoveredPolygonId']) {
-      // Check if we have any matching annotations with this ID
-      if (this.hoveredPolygonId) {
+      if (this.hoveredPolygonId && !this.isDragging) {
         const matchingItem = this.annotations.find(
           (item) => item.objectId === this.hoveredPolygonId
         );
 
-        if (matchingItem && !this.isDragging && !this.isAnyDragging) {
-          console.log(
-            'Found matching item in',
-            this.title,
-            'category:',
-            matchingItem.objectId
-          );
-          // Use a small timeout to ensure DOM is updated
+        if (matchingItem) {
           setTimeout(() => this.scrollToHighlightedItem(), 50);
         }
       }
@@ -89,26 +89,6 @@ export class AnnotationCategoryComponent
 
   ngAfterViewInit() {
     // Initialize after view has been created
-  }
-
-  private setupDragListeners() {
-    const startListener = (event: Event) => {
-      this.isAnyDragging = true;
-    };
-
-    const endListener = (event: Event) => {
-      setTimeout(() => {
-        this.isAnyDragging = false;
-      }, 50);
-    };
-
-    document.addEventListener('cdkDragStarted', startListener);
-    document.addEventListener('cdkDragEnded', endListener);
-
-    return [
-      () => document.removeEventListener('cdkDragStarted', startListener),
-      () => document.removeEventListener('cdkDragEnded', endListener),
-    ];
   }
 
   get categoryColorClasses() {
@@ -145,7 +125,6 @@ export class AnnotationCategoryComponent
 
   onItemDrop(event: CdkDragDrop<any[]>) {
     this.isDragging = false;
-    this.isAnyDragging = false;
     this.itemDrop.emit(event);
   }
 
@@ -185,20 +164,15 @@ export class AnnotationCategoryComponent
     this.containerHasDrag = false;
   }
 
-  // Simplify the scroll method
   scrollToHighlightedItem() {
-    if (!this.scrollableContainer || !this.isDragging || !this.isAnyDragging) {
+    if (!this.scrollableContainer || !this.isDragging) {
       const container = this.scrollableContainer.nativeElement;
 
-      // Find the item directly through DOM query rather than ViewChildren
       const highlightedItem = container.querySelector(
         `[data-object-id="${this.hoveredPolygonId}"]`
       );
 
       if (highlightedItem) {
-        console.log('Found DOM element to scroll to:', this.hoveredPolygonId);
-
-        // Calculate if visible in viewport
         const containerRect = container.getBoundingClientRect();
         const itemRect = highlightedItem.getBoundingClientRect();
 
@@ -206,9 +180,7 @@ export class AnnotationCategoryComponent
           itemRect.top >= containerRect.top &&
           itemRect.bottom <= containerRect.bottom;
 
-        // Only scroll if not fully visible
         if (!isFullyVisible) {
-          console.log('Scrolling to item:', this.hoveredPolygonId);
           highlightedItem.scrollIntoView({
             behavior: 'smooth',
             block: 'nearest',

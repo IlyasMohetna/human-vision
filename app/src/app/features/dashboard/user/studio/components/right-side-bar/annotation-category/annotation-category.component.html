@@ -74,12 +74,7 @@
     </div>
 
     <div
-      *ngIf="
-        annotations.length === 0 &&
-        !isDragging &&
-        !isAnyDragging &&
-        !containerHasDrag
-      "
+      *ngIf="annotations.length === 0 && !isDragging && !containerHasDrag"
       class="text-center py-4 text-gray-500 italic text-sm"
     >
       No annotations in this category
