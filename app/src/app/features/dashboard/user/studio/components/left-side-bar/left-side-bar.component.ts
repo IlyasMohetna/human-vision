@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { MapModalComponent } from '../map-modal/map-modal.component';
 import { MetadataComponent } from './components/metadata/metadata.component';
 import { VariantsComponent } from './components/variants/variants.component';
+import { VehicleInfoComponent } from './components/vehicle-info/vehicle-info.component';
 
 @Component({
   selector: 'app-left-side-bar',
@@ -20,6 +21,7 @@ import { VariantsComponent } from './components/variants/variants.component';
     MapModalComponent,
     MetadataComponent,
     VariantsComponent,
+    VehicleInfoComponent,
   ],
   templateUrl: './left-side-bar.component.html',
   styleUrls: ['./left-side-bar.component.css'],
@@ -40,6 +42,9 @@ export class LeftSideBarComponent implements OnInit, OnChanges {
 
   sidebarNavItems = [
     { label: 'Images' },
+    { label: 'Vehicle' },
+    { label: 'Méteo' },
+    { label: 'Vehicles' },
     { label: 'Traffic sign' },
     { label: 'Maps' },
     { label: 'Meta data' },

@@ -21,23 +21,35 @@
         ></app-variants>
       </div>
 
-      <div *ngSwitchCase="1" class="ContentPanel">
-        <h2 class="PanelTitle">Tools</h2>
-        <p>Blabla</p>
+      <!-- New Vehicle Info Panel -->
+      <div *ngSwitchCase="1" class="ContentPanel !p-0">
+        <h2 class="PanelTitle p-3">Vehicle Information</h2>
+        <app-vehicle-info [vehicle]="vehicle"></app-vehicle-info>
       </div>
 
       <div *ngSwitchCase="2" class="ContentPanel">
-        <h2 class="PanelTitle">Zoom Controls</h2>
-        <p>Ok</p>
+        <h2 class="PanelTitle">Météo</h2>
+        <p>Weather information</p>
       </div>
 
-      <div *ngSwitchCase="3" class="ContentPanel !p-0">
+      <div *ngSwitchCase="3" class="ContentPanel">
+        <h2 class="PanelTitle">Traffic sign</h2>
+        <p>Traffic sign information</p>
+      </div>
+
+      <div *ngSwitchCase="4" class="ContentPanel">
+        <h2 class="PanelTitle">Maps</h2>
+        <p>Maps information</p>
+      </div>
+
+      <div *ngSwitchCase="5" class="ContentPanel !p-0">
         <h2 class="PanelTitle p-3">Meta data</h2>
         <app-metadata [metadata]="metadata"></app-metadata>
       </div>
 
-      <div *ngSwitchCase="4" class="ContentPanel">
-        <h2 class="PanelTitle">Images</h2>
+      <div *ngSwitchCase="6" class="ContentPanel">
+        <h2 class="PanelTitle">IA</h2>
+        <p>AI information</p>
       </div>
     </ng-container>
   </div>

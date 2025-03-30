@@ -1,0 +1,209 @@
+<div class="text-white p-4">
+  <div
+    *ngIf="
+      vehicle && (vehicle.speed !== undefined || vehicle.yawRate !== undefined)
+    "
+    class="space-y-6"
+  >
+    <div class="bg-[#333333] rounded-lg shadow-lg p-5">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold text-blue-400">Vehicle Speed</h3>
+        <div
+          class="text-lg font-bold bg-gray-900 text-white px-4 py-1.5 rounded-lg border border-gray-700 shadow-inner"
+        >
+          <span
+            class="text-3xl"
+            style="text-shadow: 0 0 10px rgba(59, 130, 246, 0.5)"
+            >{{ speedKmh }}</span
+          >
+          <span class="text-xs align-top ml-1">km/h</span>
+        </div>
+      </div>
+
+      <div class="relative flex justify-center mb-4">
+        <svg width="280" height="160" viewBox="0 0 280 160" class="mx-auto">
+          <path
+            d="M 10,150 A 130,130 0 0,1 270,150"
+            stroke="#374151"
+            stroke-width="16"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            d="M 10,150 A 130,130 0 0,1 35,74"
+            stroke="#EF4444"
+            stroke-width="16"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            d="M 35,74 A 130,130 0 0,1 100,26"
+            stroke="#F59E0B"
+            stroke-width="16"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            d="M 100,26 A 130,130 0 0,1 180,26"
+            stroke="#FACC15"
+            stroke-width="16"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            d="M 180,26 A 130,130 0 0,1 245,74"
+            stroke="#BEF264"
+            stroke-width="16"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            d="M 245,74 A 130,130 0 0,1 270,150"
+            stroke="#22C55E"
+            stroke-width="16"
+            fill="none"
+            stroke-linecap="round"
+          />
+
+          <g stroke="white" stroke-width="2">
+            <line x1="10" y1="150" x2="20" y2="150" />
+            <text x="2" y="145" fill="white" font-size="12">0</text>
+
+            <line x1="35" y1="74" x2="43" y2="79" />
+            <text x="30" y="70" fill="white" font-size="12">20</text>
+
+            <line x1="100" y1="26" x2="103" y2="36" />
+            <text x="90" y="22" fill="white" font-size="12">40</text>
+
+            <line x1="180" y1="26" x2="177" y2="36" />
+            <text x="170" y="22" fill="white" font-size="12">60</text>
+
+            <line x1="245" y1="74" x2="237" y2="79" />
+            <text x="240" y="70" fill="white" font-size="12">80</text>
+
+            <line x1="270" y1="150" x2="260" y2="150" />
+            <text x="265" y="145" fill="white" font-size="12">100</text>
+          </g>
+
+          <line
+            [attr.transform]="
+              'rotate(' + (speedometerPercentage * 1.8 - 90) + ', 140, 150)'
+            "
+            x1="140"
+            y1="150"
+            x2="140"
+            y2="50"
+            stroke="#FF3B30"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+
+          <circle
+            cx="140"
+            cy="150"
+            r="8"
+            fill="#2A2A2A"
+            stroke="#FF3B30"
+            stroke-width="2"
+          />
+        </svg>
+      </div>
+
+      <div class="flex flex-wrap justify-between gap-2 px-4 mt-2 mb-4">
+        <div class="flex items-center gap-2">
+          <div class="w-5 h-2 rounded-full bg-red-500"></div>
+          <p class="text-xs text-gray-300">0-20</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-5 h-2 rounded-full bg-amber-500"></div>
+          <p class="text-xs text-gray-300">20-40</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-5 h-2 rounded-full bg-yellow-400"></div>
+          <p class="text-xs text-gray-300">40-60</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-5 h-2 rounded-full bg-lime-300"></div>
+          <p class="text-xs text-gray-300">60-80</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-5 h-2 rounded-full bg-green-500"></div>
+          <p class="text-xs text-gray-300">80-100</p>
+        </div>
+      </div>
+
+      <div class="mt-1 text-sm text-gray-400 flex justify-between">
+        <span>Original Reading: {{ vehicle.speed?.toFixed(2) || 0 }} m/s</span>
+        <span
+          class="px-2 py-1 rounded-full text-xs"
+          [ngClass]="{
+            'bg-red-900 text-red-100': speedKmh < 30,
+            'bg-yellow-900 text-yellow-100': speedKmh >= 30 && speedKmh < 60,
+            'bg-green-900 text-green-100': speedKmh >= 60
+          }"
+        >
+          {{ speedKmh < 30 ? "Slow" : speedKmh < 60 ? "Moderate" : "Fast" }}
+        </span>
+      </div>
+    </div>
+
+    <div class="bg-[#333333] rounded-lg shadow-lg p-5">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold text-purple-400">Vehicle Direction</h3>
+        <span
+          class="text-2xl font-bold"
+          [ngClass]="{
+            'text-blue-300': yawRateDegrees > -1 && yawRateDegrees < 1,
+            'text-green-300': yawRateDegrees <= -1,
+            'text-orange-300': yawRateDegrees >= 1
+          }"
+        >
+          {{ directionText }}
+        </span>
+      </div>
+
+      <div class="flex items-center justify-center mb-4" style="height: 180px">
+        <div class="relative" style="width: 150px; height: 150px">
+          <img
+            [style.transform]="'rotate(' + yawRateDegrees * 4 + 'deg)'"
+            style="
+              transition: transform 0.3s ease;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            "
+            src="https://png.pngtree.com/png-vector/20230110/ourmid/pngtree-car-top-view-image-png-image_6557068.png"
+            alt="Car"
+          />
+        </div>
+      </div>
+
+      <div class="mt-4 text-sm text-gray-400 flex justify-between">
+        <span>Yaw Rate: {{ yawRateDegrees }}°/s</span>
+        <span>Original: {{ vehicle.yawRate?.toFixed(4) || 0 }} rad/s</span>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="
+      !vehicle || (vehicle.speed === undefined && vehicle.yawRate === undefined)
+    "
+    class="flex flex-col items-center justify-center p-12 text-gray-400"
+  >
+    <svg
+      class="w-16 h-16 mb-4 text-gray-600"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 8v4m0 4h.01M12 3a9 9 0 110 18 9 9 0 010-18z"
+      />
+    </svg>
+    <div class="text-lg">No vehicle data available</div>
+  </div>
+</div>
