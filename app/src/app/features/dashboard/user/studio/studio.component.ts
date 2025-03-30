@@ -16,6 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { LeftSideBarComponent } from './components/left-side-bar/left-side-bar.component';
 import { RightSideBarComponent } from './components/right-side-bar/right-side-bar.component';
+import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import {
   CdkDragDrop,
   DragDropModule,
@@ -24,6 +25,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { PolygonDataService } from '../../../../services/polygon-data.service';
 import { PolygonDataMap } from './polygon.types';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-studio',
@@ -37,38 +39,34 @@ import { PolygonDataMap } from './polygon.types';
     RightSideBarComponent,
     DragDropModule,
     HttpClientModule,
+    LoadingOverlayComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './studio.component.html',
   styleUrls: ['./studio.component.css'],
 })
 export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
-  imageUrl = 'assets/test.png'; // Will be replaced with API data
-  drawMode = false; // To toggle drawing mode
+  imageUrl = '';
+  drawMode = false;
   mouseX = 0;
   mouseY = 0;
 
-  // Zoom control properties
   zoomLevel = 1.0;
-  zoomFactor = 0.1; // Amount to zoom in/out by
-  minZoomLevel = 1; // Minimum zoom level - don't let image get smaller than original fit
+  zoomFactor = 0.1;
+  minZoomLevel = 1;
 
-  // Flag to track initial zoom
   private initialZoomSet = false;
   private initialZoomLevel = 1.0;
 
-  // Crosshair properties
-  showCrosshair = true; // Set to true by default
+  showCrosshair = true;
   crosshairX = 0;
   crosshairY = 0;
 
-  // Original image dimensions for calculating min zoom
   private imageNaturalWidth = 0;
   private imageNaturalHeight = 0;
   private containerWidth = 0;
   private containerHeight = 0;
 
-  // Dataset data
   variants: any[] = [];
   metadata: any = {};
   vehicle: any = {};
@@ -175,11 +173,29 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   // Add the missing isDragging property
   private isDragging = false;
 
+  // Add loading state variables
+  isLoading = true;
+  studioHash = '';
+  currentImageUrl = '';
+
   constructor(
     private renderer: Renderer2,
     private polygonDataService: PolygonDataService,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    private route: ActivatedRoute
+  ) {
+    // Generate a random hash when component is initialized
+    this.studioHash = this.generateRandomHash();
+  }
+
+  // Method to generate a random hash
+  private generateRandomHash(): string {
+    return (
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15)
+    );
+  }
 
   // Keyboard shortcuts - global scope
   @HostListener('window:keydown', ['$event'])
@@ -250,6 +266,16 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
   ngOnInit() {
     this.loadDatasetId();
+
+    this.route.data.subscribe((data) => {
+      if (data['randomHash']) {
+        if (typeof data['randomHash'] === 'function') {
+          this.studioHash = data['randomHash']();
+        } else {
+          this.studioHash = data['randomHash'];
+        }
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -311,6 +337,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private loadPolygonData() {
+    this.isLoading = true; // Ensure loading is shown
+
     this.polygonDataService.fetchPolygonData().subscribe({
       next: (response) => {
         // Set the polygon data list from objects array
@@ -337,11 +365,21 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
           if (originalImage && originalImage.path) {
             this.imageUrl = originalImage.path;
+            this.currentImageUrl = originalImage.path;
           }
         }
+
+        // Add a delay before hiding the loading overlay
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 2000); // Wait 2 more seconds after data is loaded
       },
       error: (error) => {
         console.error('Error fetching polygon data:', error);
+        // Hide loading even on error, after a delay
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 2000);
       },
     });
   }
@@ -1240,5 +1278,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
   onVariantSelected(variant: any) {
     this.imageUrl = variant.path;
+    this.currentImageUrl = variant.path;
   }
 }

@@ -1,11 +1,15 @@
+<app-loading-overlay
+  *ngIf="isLoading"
+  [studioHash]="studioHash"
+></app-loading-overlay>
+
 <div class="flex h-screen">
-  <!-- Left Sidebar with SideNavigationBar structure -->
   <app-left-side-bar
     [variants]="variants"
     [metadata]="metadata"
     [vehicle]="vehicle"
     [currentImageUrl]="currentImageUrl"
-    [datasetId]="datasetId"
+    [datasetId]="datasetId ?? 0"
     (variantSelected)="onVariantSelected($event)"
   ></app-left-side-bar>
 
