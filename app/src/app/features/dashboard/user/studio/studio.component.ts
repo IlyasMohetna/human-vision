@@ -67,8 +67,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private containerWidth = 0;
   private containerHeight = 0;
 
-  // Dataset variants
+  // Dataset data
   variants: any[] = [];
+  metadata: any = {};
 
   @ViewChild('annotationCanvas', { static: false })
   canvasRef!: ElementRef<HTMLCanvasElement>;
@@ -310,6 +311,10 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
           // Distribute to categories based on label type
           this.categorizePolygon(poly);
         });
+
+        this.metadata = [response.meta || {}]; // Wrap the metadata object in an array
+
+        console.log('The data is', JSON.stringify(this.metadata, null, 2));
 
         // Find the Original Image variant and set it as the default
         if (response.variants && response.variants.length > 0) {

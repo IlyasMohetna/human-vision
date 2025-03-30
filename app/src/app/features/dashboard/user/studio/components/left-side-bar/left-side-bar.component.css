@@ -74,10 +74,17 @@
   padding: 16px;
   box-sizing: border-box;
   background-color: #282828;
+  /* height: calc(100vh - 90px); Keep this to ensure proper scrolling area */
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex; /* Add flex display */
+  flex-direction: column; /* Arrange children vertically */
 }
 
-.ContentPanel * {
+.ContentPanel > * {
   max-width: 100%;
+  flex-grow: 1; /* Allow children to grow and take available space */
 }
 
 .PanelTitle {

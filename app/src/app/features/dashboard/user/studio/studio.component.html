@@ -4,6 +4,7 @@
     [mapCoordinates]="vehicle?.gpsLatitude + ',' + vehicle?.gpsLongitude"
     [mapHeading]="vehicle?.gpsHeading"
     [variants]="variants"
+    [metadata]="metadata"
     [currentImageUrl]="imageUrl"
     (variantSelected)="onVariantSelected($event)"
   ></app-left-side-bar>

@@ -34,6 +34,7 @@
     "ngx-image-zoom": "^3.0.0",
     "primeng": "^19.0.9",
     "rxjs": "~7.8.0",
+    "snapsvg-cjs": "^0.0.6",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
