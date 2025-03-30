@@ -1,0 +1,280 @@
+.SideNavigationBar {
+  display: flex;
+  width: 400px;
+  min-width: 300px;
+  background-color: #282828;
+  border-right: 1px solid #3a3a3a;
+  height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.CompanionBar {
+  width: 50px;
+  min-width: 50px;
+  flex-shrink: 0;
+  background-color: #1e1e1e;
+  border-right: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.VerticalEditorButton {
+  height: 90px;
+  padding: 8px 0;
+  color: #b3b3b3;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+  transition: background-color 0.2s;
+  user-select: none;
+  position: relative;
+}
+
+.nav-text {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  text-orientation: mixed;
+  white-space: nowrap;
+  font-size: 14px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 100%;
+  transform-origin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -7px;
+}
+
+.VerticalEditorButton.active {
+  background-color: #383838;
+  color: white;
+  border-left: 3px solid #0078d7;
+  padding-left: 3px;
+}
+
+.VerticalEditorButton:hover {
+  background-color: #333;
+}
+
+.NavigationBarContentWrapper {
+  width: 250px;
+  min-width: 250px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #282828;
+  border-left: none;
+}
+
+.ContentPanel {
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: #282828;
+  /* height: calc(100vh - 90px); Keep this to ensure proper scrolling area */
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex; /* Add flex display */
+  flex-direction: column; /* Arrange children vertically */
+}
+
+.ContentPanel > * {
+  max-width: 100%;
+  flex-grow: 1; /* Allow children to grow and take available space */
+}
+
+.PanelTitle {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: white;
+  border-bottom: 1px solid #3a3a3a;
+  padding-bottom: 8px;
+}
+
+.MenuItems {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.MenuItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  color: #e0e0e0;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  border: 1px solid transparent;
+}
+
+.MenuItem:hover {
+  background-color: #3a3a3a;
+  border: 1px solid #4a4a4a;
+}
+
+.MenuItem.with-status {
+  display: flex;
+  align-items: center;
+}
+
+.StatusIndicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #666;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.StatusIndicator.active {
+  background-color: #0078d7;
+  border-color: #0078d7;
+}
+
+.MenuItemIcon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.ZoomStatus {
+  margin-top: 12px;
+  padding: 8px;
+  background-color: #333;
+  border-radius: 4px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.ZoomLabel {
+  color: #999;
+  margin-right: 8px;
+}
+
+.ZoomValue {
+  color: white;
+  font-weight: bold;
+}
+
+.AnnotationsList {
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+}
+
+.AnnotationItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #3a3a3a;
+  transition: background-color 0.2s;
+}
+
+.AnnotationItem:hover,
+.AnnotationItem.selected {
+  background-color: #3a3a3a;
+}
+
+.AnnotationCheckbox {
+  margin-right: 10px;
+}
+
+.AnnotationDetails {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AnnotationName {
+  font-weight: medium;
+  color: white;
+}
+
+.AnnotationBadge {
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.AnnotationBadge.high {
+  background-color: #e53935;
+}
+
+.AnnotationBadge.medium {
+  background-color: #ffb300;
+}
+
+.AnnotationBadge.low {
+  background-color: #43a047;
+}
+
+.ImagesList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.ImagePreview {
+  aspect-ratio: 1;
+  border: 2px solid transparent;
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ImagePreview.selected {
+  border-color: #0078d7;
+}
+
+.Foreground,
+.Background {
+  position: absolute;
+}
+
+.CheckBox {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.ImageContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+}
+
+.PreviewImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.placeholder-content {
+  color: #aaa;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 4px;
+  text-align: center;
+}

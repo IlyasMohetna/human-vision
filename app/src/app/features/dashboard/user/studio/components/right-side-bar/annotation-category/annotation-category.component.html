@@ -1,0 +1,92 @@
+<div class="h-full flex flex-col overflow-hidden">
+  <div
+    (click)="toggleExpandState()"
+    class="relative flex justify-between items-center h-10 px-4 cursor-pointer hover:bg-opacity-20 hover:bg-black transition-all duration-200"
+    [class.bg-opacity-10]="!isExpanded"
+    [class.bg-opacity-20]="isExpanded"
+    [class.bg-black]="true"
+  >
+    <div
+      class="absolute left-0 top-0 h-full w-1 transition-all duration-200 hover:w-1.5"
+      [ngClass]="categoryColorClasses.marker"
+    ></div>
+    <div class="flex items-center font-bold">
+      <span>{{ title }}</span>
+    </div>
+    <div class="flex items-center">
+      <span
+        class="text-xs px-2 py-0.5 rounded-full"
+        [ngClass]="categoryColorClasses.badge"
+      >
+        {{ badgeText }}
+      </span>
+      <img
+        src="assets/icons/down.png"
+        alt="toggle"
+        class="w-4 h-4 ml-2 transition-transform duration-200"
+        draggable="false"
+        style="filter: brightness(0) invert(1)"
+      />
+    </div>
+  </div>
+
+  <div
+    *ngIf="isExpanded"
+    cdkDropList
+    [id]="dropListId"
+    [cdkDropListData]="annotations"
+    [cdkDropListConnectedTo]="connectedDropLists"
+    cdkDropListSortingDisabled="true"
+    [cdkDropListEnterPredicate]="enterPredicate"
+    class="p-2 flex-1 min-h-0 overflow-y-auto"
+    #scrollableContainer
+    (cdkDropListDropped)="onItemDrop($event)"
+    (cdkDropListEntered)="onContainerEnter()"
+    (cdkDropListExited)="onContainerExit()"
+  >
+    <div
+      *ngFor="let item of annotations; let i = index"
+      class="flex justify-between items-center p-2 mb-1 border-l hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-all duration-200"
+      [ngClass]="[categoryColorClasses.border]"
+      [class.bg-blue-700]="hoveredPolygonId === item.objectId"
+      [class.bg-opacity-40]="hoveredPolygonId === item.objectId"
+      [attr.data-object-id]="item.objectId"
+      cdkDrag
+      (mouseenter)="onItemHover(item.objectId)"
+      (mouseleave)="onItemHoverEnd()"
+      (cdkDragStarted)="onDragStart()"
+      (cdkDragEnded)="onDragEnd()"
+    >
+      <span>{{ item.label || "Unnamed" }}</span>
+      <div class="flex items-center">
+        <!-- Up arrow -->
+        <fa-icon
+          [icon]="['fas', 'arrow-up']"
+          class="mx-2 cursor-pointer"
+          (click)="moveItemUp(i); $event.stopPropagation()"
+        ></fa-icon>
+        <!-- Down arrow -->
+        <fa-icon
+          [icon]="['fas', 'arrow-down']"
+          class="mr-2 cursor-pointer"
+          (click)="moveItemDown(i); $event.stopPropagation()"
+        ></fa-icon>
+        <!-- Existing eye icon -->
+        <fa-icon
+          [icon]="isItemActive(item.objectId) ? 'eye' : 'eye-slash'"
+          class="text-white transition-all cursor-pointer"
+          [class.text-opacity-40]="!isItemActive(item.objectId)"
+          [class.text-opacity-90]="isItemActive(item.objectId)"
+          (click)="onItemToggle(item.objectId); $event.stopPropagation()"
+        ></fa-icon>
+      </div>
+    </div>
+
+    <div
+      *ngIf="annotations.length === 0 && !isDragging && !containerHasDrag"
+      class="text-center py-4 text-gray-500 italic text-sm"
+    >
+      No annotations in this category
+    </div>
+  </div>
+</div>

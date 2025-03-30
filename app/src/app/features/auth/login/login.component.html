@@ -1,0 +1,69 @@
+<div class="flex h-screen">
+  <section
+    class="w-1/2 flex items-center justify-center p-10 bg-white dark:bg-gray-900 shadow-lg dark:shadow-gray-700 rounded-lg"
+  >
+    <div class="max-w-md w-full">
+      <div>
+        <h3 class="text-3xl font-bold">Welcome Back!</h3>
+      </div>
+
+      <div *ngIf="errorMessage">
+        <div class="w-full" variant="destructive">
+          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          <p>
+            {{ errorMessage }}
+          </p>
+        </div>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div>
+          <label for="email" class="block text-gray-700 font-semibold"
+            >Email</label
+          >
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            class="w-full p-2 border rounded-lg mb-4"
+            formControlName="email"
+          />
+
+          <label for="password" class="block text-gray-700 font-semibold"
+            >Password</label
+          >
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            class="w-full p-2 border rounded-lg mb-4"
+            formControlName="password"
+          />
+        </div>
+
+        <div class="mt-4">
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer"
+          >
+            Sign In
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-4 text-center">
+        <a href="#" class="text-blue-500 hover:underline">Forgot password?</a>
+        <span class="mx-2">|</span>
+        <a href="#" class="text-blue-500 hover:underline">Sign up</a>
+      </div>
+    </div>
+  </section>
+
+  <div
+    class="w-1/2 bg-black flex items-center justify-center text-white text-center p-10"
+  >
+    <div>
+      <img src="assets/img/logo.svg" alt="Spartan Logo" class="mt-8" />
+    </div>
+  </div>
+</div>

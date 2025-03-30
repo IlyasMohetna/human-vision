@@ -1,0 +1,210 @@
+<div class="w-full text-white">
+  <div *ngIf="metadata && metadata.length > 0">
+    <div *ngFor="let meta of metadata">
+      <div
+        class="mb-6 rounded-md overflow-hidden shadow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+      >
+        <div class="flex items-center p-3 bg-[#505050]">
+          <span class="text-xl mr-3">📁</span>
+          <h3 class="text-xl font-medium m-0 text-white">File Information</h3>
+        </div>
+
+        <div class="w-full">
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Source File
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.SourceFile }}
+            </div>
+          </div>
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              File Name
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.FileName }}
+            </div>
+          </div>
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Directory
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.Directory }}
+            </div>
+          </div>
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              File Size
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.FileSize | number }} bytes
+            </div>
+          </div>
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              File Type
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.FileType }}
+            </div>
+          </div>
+          <div class="flex border-b-0 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              MIME Type
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.MIMEType }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="mb-6 rounded-md overflow-hidden shadow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+      >
+        <div class="flex items-center p-3 bg-[#505050]">
+          <span class="text-xl mr-3">🖼️</span>
+          <h3 class="text-xl font-medium m-0 text-white">Image Properties</h3>
+        </div>
+
+        <div class="w-full">
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Dimensions
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.ImageWidth }} × {{ meta.ImageHeight }} px
+            </div>
+          </div>
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Bit Depth
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.BitDepth }}
+            </div>
+          </div>
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Color Type
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.ColorType }}
+            </div>
+          </div>
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Gamma
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.Gamma }}
+            </div>
+          </div>
+          <div class="flex border-b-0 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Megapixels
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.Megapixels }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="mb-6 rounded-md overflow-hidden shadow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+      >
+        <div class="flex items-center p-3 bg-[#505050]">
+          <span class="text-xl mr-3">📅</span>
+          <h3 class="text-xl font-medium m-0 text-white">Date Information</h3>
+        </div>
+
+        <div class="w-full">
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              File Modify Date
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.FileModifyDate }}
+            </div>
+          </div>
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              File Access Date
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.FileAccessDate }}
+            </div>
+          </div>
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Date Created
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.Datecreate }}
+            </div>
+          </div>
+          <div class="flex border-b-0 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Date Modified
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.Datemodify }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="mb-6 rounded-md overflow-hidden shadow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+      >
+        <div class="flex items-center p-3 bg-[#505050]">
+          <span class="text-xl mr-3">ℹ️</span>
+          <h3 class="text-xl font-medium m-0 text-white">
+            Additional Information
+          </h3>
+        </div>
+
+        <div class="w-full">
+          <div
+            *ngIf="meta.Warning"
+            class="flex border-b border-white/5 hover:bg-white/5 transition"
+          >
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Warning
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.Warning }}
+            </div>
+          </div>
+          <div class="flex border-b border-white/5 hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Background Color
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              {{ meta.BackgroundColor }}
+            </div>
+          </div>
+          <div class="flex hover:bg-white/5 transition">
+            <div class="p-3 font-semibold text-indigo-200 flex-none w-2/5">
+              Pixels Per Unit
+            </div>
+            <div class="p-3 flex-1 font-mono text-sm break-all">
+              X: {{ meta.PixelsPerUnitX }}, Y: {{ meta.PixelsPerUnitY }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="!metadata || metadata.length === 0"
+    class="flex flex-col items-center justify-center p-12 text-gray-400"
+  >
+    <div class="text-6xl mb-4">❓</div>
+    <div class="text-lg">No metadata available</div>
+  </div>
+</div>

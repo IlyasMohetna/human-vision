@@ -16,8 +16,30 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'firstname' => 'Ilyas',
+            'lastname' => 'Mohetna',
+            'email' => 'ilyas.mohetna@hotmail.com',
         ]);
+
+        User::factory()->create([
+            'firstname' => 'Léo',
+            'lastname' => 'Ferraiuolo-Pulli',
+            'email' => 'leo.ferraiuolopulli@gmail.com',
+        ]);
+
+        User::factory()->asAdmin()->create([
+            'firstname' => 'James',
+            'lastname' => 'Mqueen',
+            'email' => 'admin@admin.com'
+        ]);
+
+        User::factory()->create([
+            'firstname' => 'Kevin',
+            'lastname' => 'Lelievre',
+            'email' => 'kevin.lelievre@utbm.fr',
+        ]);
+        $this->call(CitiesTableSeeder::class);
+        $this->call(DatasetsStatusTableSeeder::class);
+        $this->call(DatasetsVariantTypesTableSeeder::class);
     }
 }

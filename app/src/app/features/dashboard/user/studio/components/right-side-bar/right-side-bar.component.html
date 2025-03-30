@@ -1,0 +1,106 @@
+<div class="w-full h-full bg-[#282828] text-white flex flex-col max-h-[100vh]">
+  <h2 class="text-lg text-white font-bold p-2">Annotations</h2>
+
+  <div class="h-[60%] grid grid-rows-3 gap-4">
+    <div>
+      <app-annotation-category
+        title="High Priority"
+        priority="high"
+        badgeText="High"
+        iconPath="assets/icons/flag-high.svg"
+        dropListId="high-priority"
+        [hoveredPolygonId]="hoveredPolygonId"
+        [connectedDropLists]="['medium-priority', 'low-priority', 'unassigned']"
+        [annotations]="highPriorityAnnotations"
+        [activeItems]="activePolygons"
+        (itemDrop)="onAnnotationDrop($event)"
+        (itemHover)="setHoveredPolygon($event)"
+        (itemHoverEnd)="clearHoveredPolygon()"
+        (itemToggle)="togglePolygon($event)"
+      ></app-annotation-category>
+    </div>
+    <div>
+      <app-annotation-category
+        title="Medium Priority"
+        priority="medium"
+        badgeText="Medium"
+        iconPath="assets/icons/flag-medium.svg"
+        dropListId="medium-priority"
+        [hoveredPolygonId]="hoveredPolygonId"
+        [connectedDropLists]="['high-priority', 'low-priority', 'unassigned']"
+        [annotations]="mediumPriorityAnnotations"
+        [activeItems]="activePolygons"
+        (itemDrop)="onAnnotationDrop($event)"
+        (itemHover)="setHoveredPolygon($event)"
+        (itemHoverEnd)="clearHoveredPolygon()"
+        (itemToggle)="togglePolygon($event)"
+      ></app-annotation-category>
+    </div>
+    <div>
+      <app-annotation-category
+        title="Low Priority"
+        priority="low"
+        badgeText="Low"
+        iconPath="assets/icons/flag-low.svg"
+        dropListId="low-priority"
+        [hoveredPolygonId]="hoveredPolygonId"
+        [connectedDropLists]="[
+          'high-priority',
+          'medium-priority',
+          'unassigned'
+        ]"
+        [annotations]="lowPriorityAnnotations"
+        [activeItems]="activePolygons"
+        (itemDrop)="onAnnotationDrop($event)"
+        (itemHover)="setHoveredPolygon($event)"
+        (itemHoverEnd)="clearHoveredPolygon()"
+        (itemToggle)="togglePolygon($event)"
+      ></app-annotation-category>
+    </div>
+  </div>
+
+  <div class="h-[40%] flex flex-col overflow-hidden">
+    <div class="text-sm text-white font-bold bg-blue-600 p-2 rounded-t">
+      Unassigned
+    </div>
+    <div
+      cdkDropList
+      id="unassigned"
+      [cdkDropListData]="unassignedAnnotations"
+      [cdkDropListConnectedTo]="[
+        'high-priority',
+        'medium-priority',
+        'low-priority'
+      ]"
+      class="bg-blue-500 bg-opacity-20 p-2 flex-1 overflow-y-auto rounded-b"
+      #unassignedContainer
+      (cdkDropListDropped)="onAnnotationDrop($event)"
+    >
+      <div
+        *ngFor="let item of unassignedAnnotations"
+        class="flex justify-between items-center p-2 mb-1 border-l border-l-blue-500 hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-all duration-200"
+        [class.bg-blue-700]="hoveredPolygonId === item.objectId"
+        [class.bg-opacity-40]="hoveredPolygonId === item.objectId"
+        [attr.data-object-id]="item.objectId"
+        cdkDrag
+        (cdkDragStarted)="onDragStart()"
+        (cdkDragEnded)="onDragEnd()"
+        (mouseenter)="setHoveredPolygon(item.objectId)"
+        (mouseleave)="clearHoveredPolygon()"
+      >
+        <div class="flex items-center">
+          <input
+            type="checkbox"
+            [checked]="activePolygons[item.objectId]"
+            (change)="togglePolygon(item.objectId)"
+            class="mr-2"
+          />
+          <span>{{ item.label || "Unnamed" }}</span>
+        </div>
+        <span class="text-xs px-2 py-0.5 rounded-full bg-gray-600 text-white">
+          Unassigned
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

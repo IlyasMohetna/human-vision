@@ -1,0 +1,66 @@
+<aside class="SideNavigationBar left">
+  <div class="CompanionBar">
+    <div
+      *ngFor="let item of sidebarNavItems; let i = index"
+      class="VerticalEditorButton"
+      [class.active]="selectedSidebarItem === i"
+      (click)="selectSidebarItem(i)"
+      [attr.title]="item.label"
+    >
+      <span class="nav-text">{{ item.label }}</span>
+    </div>
+  </div>
+
+  <div>
+    <ng-container [ngSwitch]="selectedSidebarItem">
+      <div *ngSwitchCase="0">
+        <app-variants
+          [variants]="variants"
+          [currentImageUrl]="currentImageUrl"
+          (variantSelected)="selectVariant($event)"
+        ></app-variants>
+      </div>
+
+      <div *ngSwitchCase="1" class="ContentPanel !p-0">
+        <h2 class="PanelTitle p-3">Vehicle Information</h2>
+        <app-vehicle [vehicle]="vehicle"></app-vehicle>
+      </div>
+
+      <div *ngSwitchCase="2" class="ContentPanel">
+        <h2 class="PanelTitle">Météo</h2>
+        <app-weather
+          [datasetId]="datasetId"
+          [outsideTemperature]="vehicle?.outsideTemperature"
+        ></app-weather>
+      </div>
+
+      <div *ngSwitchCase="3" class="ContentPanel">
+        <h2 class="PanelTitle">Maps</h2>
+        <p>Maps information</p>
+      </div>
+
+      <div *ngSwitchCase="4" class="ContentPanel">
+        <h2 class="PanelTitle">Traffic sign</h2>
+        <p>Traffic sign information</p>
+      </div>
+
+      <div *ngSwitchCase="5" class="ContentPanel !p-0">
+        <h2 class="PanelTitle p-3">Meta data</h2>
+        <app-metadata [metadata]="metadata"></app-metadata>
+      </div>
+
+      <div *ngSwitchCase="6" class="ContentPanel">
+        <h2 class="PanelTitle">IA</h2>
+        <p>AI information</p>
+      </div>
+    </ng-container>
+  </div>
+
+  <app-map-modal
+    [isOpen]="showMapModal"
+    [coordinates]="mapCoordinates"
+    [heading]="mapHeading ?? 0"
+    (closeModalEvent)="closeMapModal()"
+  >
+  </app-map-modal>
+</aside>

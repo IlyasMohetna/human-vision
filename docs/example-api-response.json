@@ -1,0 +1,30 @@
+{
+  "data": {
+    "title": "Example Dataset",
+    "description": "Sample polygons from the backend"
+  },
+  "polygons": [
+    {
+      "id": "polygon_101",
+      "points": [
+        [10, 20],
+        [40, 80],
+        [60, 20]
+      ],
+      "label": "Polygon 101",
+      "type": "low",
+      "priority": "medium"
+    },
+    {
+      "id": "polygon_102",
+      "points": [
+        [100, 200],
+        [150, 250],
+        [120, 210]
+      ],
+      "label": "Polygon 102",
+      "type": "medium",
+      "priority": "high"
+    }
+  ]
+}

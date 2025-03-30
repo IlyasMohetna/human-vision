@@ -1,0 +1,18 @@
+<div
+  *ngIf="weatherData; else loading"
+  class="bg-gray-900 text-white p-10 rounded-lg shadow-xl max-w-lg mx-auto flex flex-col items-center gap-4"
+>
+  <img
+    [src]="getWeatherIcon(weatherData.weather_code).img"
+    alt="Weather Icon"
+    class="w-48 h-48 object-contain"
+  />
+  <h2 class="text-3xl font-bold">
+    {{ getWeatherIcon(weatherData.weather_code).label }}
+  </h2>
+  <div class="text-sm text-gray-300">Time: {{ weatherData.time }}</div>
+</div>
+
+<ng-template #loading>
+  <div class="text-center text-gray-400">Loading weather data...</div>
+</ng-template>

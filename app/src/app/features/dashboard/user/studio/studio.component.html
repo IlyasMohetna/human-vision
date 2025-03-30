@@ -1,0 +1,124 @@
+<div class="flex h-screen">
+  <!-- Left Sidebar with SideNavigationBar structure -->
+  <app-left-side-bar
+    [variants]="variants"
+    [metadata]="metadata"
+    [vehicle]="vehicle"
+    [currentImageUrl]="currentImageUrl"
+    [datasetId]="datasetId"
+    (variantSelected)="onVariantSelected($event)"
+  ></app-left-side-bar>
+
+  <main
+    class="flex-1 relative bg-[#4C4C4C] flex flex-col items-center justify-center"
+  >
+    <div class="w-full bg-[#262C2F] text-white py-2 px-4 shadow-md">
+      <app-control-bar
+        [zoomLevel]="zoomLevel"
+        [isPanning]="spacePressed"
+        (zoomIn)="zoomIn()"
+        (zoomOut)="zoomOut()"
+        (resetZoom)="resetZoom()"
+        (toggleCrosshair)="toggleCrosshair()"
+        [isCrosshair]="showCrosshair"
+        (togglePanning)="togglePanning()"
+        (maxZoom)="maxZoom()"
+        [zoomLevel]="zoomLevel"
+      >
+      </app-control-bar>
+    </div>
+
+    <div class="flex-1 w-full relative flex items-center justify-center">
+      <div
+        class="relative w-full h-[90vh]"
+        (mousedown)="onMouseDownContainer($event)"
+        (mousemove)="onMouseMoveContainer($event)"
+        (mouseup)="onMouseUpContainer($event)"
+        (mouseenter)="handleMouseEnterContainer()"
+        (mouseleave)="handleMouseLeaveContainer()"
+        (mousemove)="updateCrosshairPosition($event)"
+      >
+        <div
+          #imageContainer
+          class="image-container"
+          tabindex="0"
+          (keydown)="handleKeyboardShortcuts($event)"
+        >
+          <div class="image-wrapper">
+            <img
+              #imageElement
+              *ngIf="imageUrl"
+              [src]="imageUrl"
+              alt="Zoomable Image"
+              class="zoomable-image"
+              draggable="false"
+              (load)="onImageLoad()"
+            />
+          </div>
+        </div>
+
+        <div
+          class="crosshair-container"
+          [style.display]="
+            showCrosshair && isMouseInContainer ? 'block' : 'none'
+          "
+        >
+          <div class="crosshair-h" [style.top.px]="crosshairY"></div>
+          <div class="crosshair-v" [style.left.px]="crosshairX"></div>
+        </div>
+
+        <div
+          class="coordinate-label"
+          [style.display]="isMouseInContainer ? 'block' : 'none'"
+          [style.left.px]="crosshairX + 10"
+          [style.top.px]="crosshairY + 10"
+        >
+          {{
+            showCoordinates
+              ? displayedCoordinateX + ", " + displayedCoordinateY
+              : "No Coordinates"
+          }}
+        </div>
+      </div>
+
+      <canvas
+        #annotationCanvas
+        class="absolute top-0 left-0 w-full h-full"
+        [class.pointer-events-none]="!drawMode"
+        style="z-index: 500"
+        (mousedown)="startDrawing($event)"
+        (mousemove)="drawPolygon($event)"
+        (mouseup)="finishDrawing()"
+      ></canvas>
+
+      <div
+        class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"
+        style="z-index: 2000"
+      >
+        {{
+          showCoordinates
+            ? "X: " + displayedCoordinateX + ", Y: " + displayedCoordinateY
+            : "No Coordinates"
+        }}
+
+        | Zoom:
+        {{ zoomLevel.toFixed(1) }}x
+      </div>
+    </div>
+  </main>
+
+  <!-- Right Sidebar - Now using the component -->
+  <div class="w-1/6">
+    <app-right-side-bar
+      [highPriorityAnnotations]="highPriorityAnnotations"
+      [mediumPriorityAnnotations]="mediumPriorityAnnotations"
+      [lowPriorityAnnotations]="lowPriorityAnnotations"
+      [unassignedAnnotations]="unassignedAnnotations"
+      [activePolygons]="activePolygons"
+      [hoveredPolygonId]="hoveredPolygonId"
+      (annotationDrop)="onAnnotationDrop($event)"
+      (hoveredPolygonChange)="setHoveredPolygon($event)"
+      (togglePolygonChange)="togglePolygon($event)"
+    ></app-right-side-bar>
+  </div>
+</div>

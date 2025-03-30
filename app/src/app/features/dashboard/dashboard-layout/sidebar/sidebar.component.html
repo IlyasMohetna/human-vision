@@ -1,0 +1,205 @@
+<div class="h-full">
+  <div
+    class="md:hidden p-4 flex justify-between items-center bg-white/70 dark:bg-black/50 backdrop-blur-md shadow z-40"
+  >
+    <div class="flex items-center gap-2">
+      <svg
+        class="w-6 h-6 text-violet-500"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M12 2a9.715 9.715 0 00-7 3l7 7 7-7a9.715 9.715 0 00-7-3z" />
+        <path d="M2 12l7 7 7-7" />
+      </svg>
+      <span class="font-semibold text-gray-900 dark:text-gray-100"
+        >My App
+      </span>
+    </div>
+
+    <button
+      (click)="toggleSidebar()"
+      class="text-gray-600 dark:text-gray-300 focus:outline-none"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div
+    *ngIf="isOpen"
+    class="fixed inset-0 bg-black/40 z-30 md:hidden"
+    (click)="toggleSidebar()"
+  ></div>
+
+  <aside
+    class="fixed md:relative top-0 left-0 w-72 md:w-64 h-full z-40 backdrop-blur-md border-r border-white/20 dark:border-black/20 text-gray-800 dark:text-gray-100 shadow-2xl md:shadow-none flex flex-col justify-between transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0"
+    [class.translate-x-0]="isOpen"
+    [class.dark:bg-stone-900]="darkMode$ | async"
+  >
+    <ng-container *ngIf="user$ | async as user; else loading">
+      <div class="p-4 border-b border-white/20 dark:border-black/20">
+        <button
+          class="flex items-center gap-2 w-full hover:bg-white/10 p-2 rounded group transition"
+        >
+          <img
+            src="https://api.dicebear.com/9.x/notionists/svg"
+            alt="User Avatar"
+            class="w-10 h-10 rounded-full shadow bg-violet-500 flex-shrink-0"
+          />
+          <div class="text-left flex-1">
+            <p class="text-sm font-bold">
+              {{ user.firstname }} {{ user.lastname }}
+            </p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              {{ user.email }}
+            </p>
+          </div>
+        </button>
+      </div>
+    </ng-container>
+
+    <div></div>
+
+    <ng-template #loading>
+      <div
+        class="p-4 border-b border-white/20 dark:border-black/20 animate-pulse"
+      >
+        <div class="flex items-center gap-2">
+          <div
+            class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-700"
+          ></div>
+          <div class="flex-1 space-y-2">
+            <div class="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4"></div>
+            <div class="h-3 bg-gray-300 dark:bg-gray-700 rounded w-1/2"></div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="flex-1 overflow-y-auto p-4 space-y-4">
+      <div
+        class="relative flex items-center px-3 py-2 bg-white/40 dark:bg-black/40 rounded"
+      >
+        <svg
+          class="w-4 h-4 text-gray-500 mr-2"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 21l-6-6m2-5a7 7 0 10-14 0 7 7 0 0014 0z"
+          />
+        </svg>
+        <input
+          type="text"
+          placeholder="Search"
+          class="bg-transparent w-full focus:outline-none text-sm placeholder-gray-500"
+        />
+        <span
+          class="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-600 dark:text-gray-300 bg-white/20 dark:bg-black/20 p-1 rounded flex items-center gap-1"
+        >
+          ⌘ K
+        </span>
+      </div>
+
+      <nav class="space-y-2">
+        <ng-container *ngIf="menuItems$ | async as menuItems">
+          <ng-container *ngFor="let item of menuItems">
+            <a
+              [routerLink]="item.route"
+              class="flex items-center justify-start gap-2 w-full rounded px-2 py-1.5 text-sm transition-[box-shadow,_background-color,_color]"
+              [class.bg-white]="isActive(item.route)"
+              [class.text-stone-950]="isActive(item.route)"
+              [class.shadow]="isActive(item.route)"
+              [class.hover:bg-stone-200]="!isActive(item.route)"
+              [class.bg-transparent]="!isActive(item.route)"
+              [class.text-stone-500]="!isActive(item.route)"
+              [class.shadow-none]="!isActive(item.route)"
+              [class.dark:bg-stone-800]="
+                isActive(item.route) && (darkMode$ | async)
+              "
+              [class.dark:text-white]="
+                isActive(item.route) && (darkMode$ | async)
+              "
+            >
+              <fa-icon [icon]="item.icon"></fa-icon>
+              <span> {{ item.name }}</span>
+            </a>
+          </ng-container>
+        </ng-container>
+      </nav>
+
+      <div class="flex items-center justify-between mt-6 px-3 py-2">
+        <span class="text-sm">Dark Mode</span>
+        <button
+          (click)="toggleDarkMode()"
+          class="relative inline-flex items-center h-6 rounded-full w-12 transition-colors focus:outline-none"
+          [class.bg-stone-300]="!(darkMode$ | async)"
+          [class.bg-violet-600]="darkMode$ | async"
+        >
+          <span class="sr-only">Toggle Dark Mode</span>
+          <span
+            class="inline-block w-5 h-5 transform rounded-full transition-transform"
+            [class.translate-x-6]="darkMode$ | async"
+            [class.translate-x-1]="!(darkMode$ | async)"
+            [class.bg-white]="true"
+          >
+            <svg
+              *ngIf="!(darkMode$ | async)"
+              class="w-4 h-4 m-0.5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+
+            <svg
+              *ngIf="darkMode$ | async"
+              class="w-4 h-4 m-0.5 text-indigo-200"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+              ></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="p-2 mb-4 text-center">
+      <button
+        class="w-11/12 bg-red-600 hover:bg-red-700 text-white font-semibold py-1.5 rounded-lg shadow-md transition duration-300 ease-in-out"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+    </div>
+  </aside>
+</div>
