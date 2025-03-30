@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\DatasetResource;
-use App\Models\Annotation;
 use App\Models\Dataset;
 use App\Models\Variant;
-use App\Services\WeatherService;
+use App\Models\Annotation;
 use Illuminate\Http\Request;
+use App\Services\WeatherService;
+use Illuminate\Support\Facades\Cache;
+use App\Http\Resources\DatasetResource;
 
 class DatasetController extends Controller
 {
@@ -45,16 +46,29 @@ class DatasetController extends Controller
 
     public function weather($id)
     {
-        $dataset = Dataset::findOrFail($id);
-        $annotation = $dataset->annotation;
-        $metadata = $annotation->meta;
-        $latitude = $annotation->vehicle['gpsLatitude'];
-        $longitude = $annotation->vehicle['gpsLongitude'];
-        $date = $metadata['Datecreate'];
+        $cacheKey = "weather_dataset_$id";
 
-        $weatherService = new WeatherService($latitude, $longitude, $date);
-        $weather = $weatherService->getWeather();
-
-        return response()->json($weather, 200);
+        if (Cache::has($cacheKey)) {
+            $weather = Cache::get($cacheKey);
+            $fromCache = true;
+        } else {
+            $dataset = Dataset::findOrFail($id);
+            $annotation = $dataset->annotation;
+            $metadata = $annotation->meta;
+            $latitude = $annotation->vehicle['gpsLatitude'];
+            $longitude = $annotation->vehicle['gpsLongitude'];
+            $date = $metadata['Datecreate'];
+    
+            $weatherService = new WeatherService($latitude, $longitude, $date);
+            $weather = $weatherService->getWeather();
+    
+            Cache::put($cacheKey, $weather, now()->addMinutes(60));
+            $fromCache = false;
+        }
+    
+        return response()->json([
+            'from_cache' => $fromCache,
+            'data' => $weather
+        ], 200);
     }
 }

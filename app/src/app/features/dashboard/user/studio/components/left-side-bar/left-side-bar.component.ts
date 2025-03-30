@@ -11,7 +11,8 @@ import { CommonModule } from '@angular/common';
 import { MapModalComponent } from '../map-modal/map-modal.component';
 import { MetadataComponent } from './components/metadata/metadata.component';
 import { VariantsComponent } from './components/variants/variants.component';
-import { VehicleInfoComponent } from './components/vehicle/vehicle.component';
+import { VehicleComponent } from './components/vehicle/vehicle.component';
+import { WeatherComponent } from './components/weather/weather.component';
 
 @Component({
   selector: 'app-left-side-bar',
@@ -21,7 +22,8 @@ import { VehicleInfoComponent } from './components/vehicle/vehicle.component';
     MapModalComponent,
     MetadataComponent,
     VariantsComponent,
-    VehicleInfoComponent,
+    VehicleComponent,
+    WeatherComponent,
   ],
   templateUrl: './left-side-bar.component.html',
   styleUrls: ['./left-side-bar.component.css'],
@@ -41,12 +43,11 @@ export class LeftSideBarComponent implements OnInit, OnChanges {
   showMapModal = false;
 
   sidebarNavItems = [
-    { label: 'Images' },
+    { label: 'Variants' },
     { label: 'Vehicle' },
-    { label: 'Méteo' },
-    { label: 'Vehicles' },
-    { label: 'Traffic sign' },
+    { label: 'Weather' },
     { label: 'Maps' },
+    { label: 'Traffic sign' },
     { label: 'Meta data' },
     { label: 'IA' },
   ];
@@ -83,7 +84,7 @@ export class LeftSideBarComponent implements OnInit, OnChanges {
   }
 
   selectSidebarItem(item: any): void {
-    if (item === 2) {
+    if (item === 3) {
       this.showMapModal = true;
     } else {
       this.selectedSidebarItem = item;

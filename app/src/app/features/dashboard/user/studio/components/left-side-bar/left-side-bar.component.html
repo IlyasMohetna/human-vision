@@ -28,17 +28,19 @@
 
       <div *ngSwitchCase="2" class="ContentPanel">
         <h2 class="PanelTitle">Météo</h2>
-        <p>Weather information</p>
+        <app-weather
+          [outsideTemperature]="vehicle?.outsideTemperature"
+        ></app-weather>
       </div>
 
       <div *ngSwitchCase="3" class="ContentPanel">
-        <h2 class="PanelTitle">Traffic sign</h2>
-        <p>Traffic sign information</p>
+        <h2 class="PanelTitle">Maps</h2>
+        <p>Maps information</p>
       </div>
 
       <div *ngSwitchCase="4" class="ContentPanel">
-        <h2 class="PanelTitle">Maps</h2>
-        <p>Maps information</p>
+        <h2 class="PanelTitle">Traffic sign</h2>
+        <p>Traffic sign information</p>
       </div>
 
       <div *ngSwitchCase="5" class="ContentPanel !p-0">

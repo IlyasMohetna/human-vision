@@ -2,12 +2,12 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-vehicle-info',
+  selector: 'app-vehicle',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './vehicle-info.component.html',
+  templateUrl: './vehicle.component.html',
 })
-export class VehicleInfoComponent implements OnChanges {
+export class VehicleComponent implements OnChanges {
   @Input() vehicle: any = {};
 
   speedKmh: number = 0;
