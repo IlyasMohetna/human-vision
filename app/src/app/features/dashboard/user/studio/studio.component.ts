@@ -70,6 +70,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   // Dataset data
   variants: any[] = [];
   metadata: any = {};
+  vehicle: any = {};
 
   @ViewChild('annotationCanvas', { static: false })
   canvasRef!: ElementRef<HTMLCanvasElement>;
@@ -171,8 +172,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   // Add the missing isDragging property
   private isDragging = false;
-
-  public vehicle: any = {};
 
   constructor(
     private renderer: Renderer2,
@@ -299,8 +298,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   private loadPolygonData() {
     this.polygonDataService.fetchPolygonData().subscribe({
       next: (response) => {
-        this.vehicle = response.vehicle;
-
         // Set the polygon data list from objects array
         this.polygonDataList = response.objects || [];
 
@@ -312,11 +309,10 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
           this.categorizePolygon(poly);
         });
 
-        this.metadata = [response.meta || {}]; // Wrap the metadata object in an array
+        this.metadata = [response.meta || {}];
 
-        console.log('The data is', JSON.stringify(this.metadata, null, 2));
+        this.vehicle = response.vehicle || {};
 
-        // Find the Original Image variant and set it as the default
         if (response.variants && response.variants.length > 0) {
           const originalImage = response.variants.find(
             (variant: any) => variant.type === 'Original Image'
@@ -326,7 +322,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
           if (originalImage && originalImage.path) {
             this.imageUrl = originalImage.path;
-            console.log('Setting image URL to:', this.imageUrl);
           }
         }
       },

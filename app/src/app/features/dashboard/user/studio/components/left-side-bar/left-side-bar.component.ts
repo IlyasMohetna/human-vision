@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapModalComponent } from '../map-modal/map-modal.component';
 import { MetadataComponent } from './components/metadata/metadata.component';
@@ -16,14 +24,16 @@ import { VariantsComponent } from './components/variants/variants.component';
   templateUrl: './left-side-bar.component.html',
   styleUrls: ['./left-side-bar.component.css'],
 })
-export class LeftSideBarComponent {
-  @Input() mapCoordinates: string = '';
-  @Input() mapHeading: number | null = null;
+export class LeftSideBarComponent implements OnInit, OnChanges {
   @Input() variants: any[] = [];
   @Input() metadata: any = {};
-  @Input() currentImageUrl: string = ''; // To track which variant is currently displayed
+  @Input() vehicle: any = {};
+  @Input() currentImageUrl: string = '';
 
   @Output() variantSelected = new EventEmitter<any>();
+
+  public mapCoordinates: string = '';
+  public mapHeading: number | null = null;
 
   selectedSidebarItem = 0;
   showMapModal = false;
@@ -37,7 +47,6 @@ export class LeftSideBarComponent {
   ];
 
   ngOnInit() {
-    // Set the default selected variant to the original image
     const originalImage = this.variants.find(
       (variant) => variant.type === 'Original Image'
     );
@@ -45,7 +54,27 @@ export class LeftSideBarComponent {
       this.selectVariant(originalImage);
     }
 
-    console.log('Metadata:', JSON.stringify(this.metadata, null, 2));
+    this.updateMapData();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['vehicle']) {
+      this.updateMapData();
+    }
+  }
+
+  private updateMapData() {
+    if (this.vehicle && typeof this.vehicle === 'object') {
+      if (this.vehicle.gpsLatitude && this.vehicle.gpsLongitude) {
+        this.mapCoordinates = `${this.vehicle.gpsLatitude},${this.vehicle.gpsLongitude}`;
+        this.mapHeading = this.vehicle.gpsHeading || 0;
+      } else {
+        console.warn(
+          'Vehicle object exists but is missing GPS coordinates:',
+          this.vehicle
+        );
+      }
+    }
   }
 
   selectSidebarItem(item: any): void {

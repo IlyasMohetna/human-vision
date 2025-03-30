@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\DatasetResource;
+use App\Models\Annotation;
 use App\Models\Dataset;
+use App\Models\Variant;
 use Illuminate\Http\Request;
 
 class DatasetController extends Controller
@@ -25,6 +27,7 @@ class DatasetController extends Controller
         'traffic sign',
         'traffic light',
     ];
+
     public function random()
     {
         $dataset = Dataset::where('status_id', 1)->with('city','variants.type')->inRandomOrder()->first();

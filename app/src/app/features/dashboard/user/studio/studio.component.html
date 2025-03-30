@@ -1,8 +1,7 @@
 <div class="flex h-screen">
   <!-- Left Sidebar with SideNavigationBar structure -->
   <app-left-side-bar
-    [mapCoordinates]="vehicle?.gpsLatitude + ',' + vehicle?.gpsLongitude"
-    [mapHeading]="vehicle?.gpsHeading"
+    [vehicle]="vehicle"
     [variants]="variants"
     [metadata]="metadata"
     [currentImageUrl]="imageUrl"
