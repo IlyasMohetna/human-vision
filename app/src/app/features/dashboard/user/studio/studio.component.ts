@@ -369,14 +369,12 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
           }
         }
 
-        // Add a delay before hiding the loading overlay
         setTimeout(() => {
           this.isLoading = false;
-        }, 2000); // Wait 2 more seconds after data is loaded
+        }, 3000);
       },
       error: (error) => {
         console.error('Error fetching polygon data:', error);
-        // Hide loading even on error, after a delay
         setTimeout(() => {
           this.isLoading = false;
         }, 2000);
