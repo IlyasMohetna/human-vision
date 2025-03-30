@@ -6,6 +6,7 @@ use App\Http\Resources\DatasetResource;
 use App\Models\Annotation;
 use App\Models\Dataset;
 use App\Models\Variant;
+use App\Services\WeatherService;
 use Illuminate\Http\Request;
 
 class DatasetController extends Controller
@@ -40,5 +41,20 @@ class DatasetController extends Controller
         $dataset->annotation = $annotation;
 
         return response()->json(new DatasetResource($dataset), 200);
+    }
+
+    public function weather($id)
+    {
+        $dataset = Dataset::findOrFail($id);
+        $annotation = $dataset->annotation;
+        $metadata = $annotation->meta;
+        $latitude = $annotation->vehicle['gpsLatitude'];
+        $longitude = $annotation->vehicle['gpsLongitude'];
+        $date = $metadata['Datecreate'];
+
+        $weatherService = new WeatherService($latitude, $longitude, $date);
+        $weather = $weatherService->getWeather();
+
+        return response()->json($weather, 200);
     }
 }

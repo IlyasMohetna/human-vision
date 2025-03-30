@@ -7,12 +7,29 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class WeatherService {
-    public function getMeteo($latitude, $longitude, $date){
-        $date = Carbon::parse($date);
+    
+    private $latitude;
+    private $longitude;
+    private $date;
+
+    /**
+     * Create a new service instance.
+     *
+     * @return void
+     */
+    public function __construct($latitude = null, $longitude = null, $date = null)
+    {
+        $this->latitude = $latitude;
+        $this->longitude = $longitude;
+        $this->date = $date;
+    }
+
+    public function getWeather(){
+        $date = Carbon::parse($this->date);
 
         $url = Uri::of('https://archive-api.open-meteo.com/v1/archive')->withQuery([
-            'latitude' => $latitude,
-            'longitude' => $longitude,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
             'start_date' => $date->format('Y-m-d'),
             'end_date' => $date->format('Y-m-d'),
             'hourly' => 'temperature_2m,weather_code'
