@@ -29,6 +29,7 @@
       <div *ngSwitchCase="2" class="ContentPanel">
         <h2 class="PanelTitle">Météo</h2>
         <app-weather
+          [datasetId]="datasetId"
           [outsideTemperature]="vehicle?.outsideTemperature"
         ></app-weather>
       </div>

@@ -1,10 +1,11 @@
 <div class="flex h-screen">
   <!-- Left Sidebar with SideNavigationBar structure -->
   <app-left-side-bar
-    [vehicle]="vehicle"
     [variants]="variants"
     [metadata]="metadata"
-    [currentImageUrl]="imageUrl"
+    [vehicle]="vehicle"
+    [currentImageUrl]="currentImageUrl"
+    [datasetId]="datasetId"
     (variantSelected)="onVariantSelected($event)"
   ></app-left-side-bar>
 

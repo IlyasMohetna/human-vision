@@ -8,9 +8,10 @@ import {
   HostListener,
   Renderer2,
   CUSTOM_ELEMENTS_SCHEMA,
+  OnInit,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ControlBarComponent } from './components/control-bar/control-bar.component';
 import { LeftSideBarComponent } from './components/left-side-bar/left-side-bar.component';
@@ -41,7 +42,7 @@ import { PolygonDataMap } from './polygon.types';
   templateUrl: './studio.component.html',
   styleUrls: ['./studio.component.css'],
 })
-export class StudioComponent implements AfterViewInit, OnDestroy {
+export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   imageUrl = 'assets/test.png'; // Will be replaced with API data
   drawMode = false; // To toggle drawing mode
   mouseX = 0;
@@ -71,6 +72,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
   variants: any[] = [];
   metadata: any = {};
   vehicle: any = {};
+  public datasetId: number | null = null;
 
   @ViewChild('annotationCanvas', { static: false })
   canvasRef!: ElementRef<HTMLCanvasElement>;
@@ -175,7 +177,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private renderer: Renderer2,
-    private polygonDataService: PolygonDataService
+    private polygonDataService: PolygonDataService,
+    private http: HttpClient
   ) {}
 
   // Keyboard shortcuts - global scope
@@ -245,6 +248,10 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     this.panning = false;
   }
 
+  ngOnInit() {
+    this.loadDatasetId();
+  }
+
   ngAfterViewInit() {
     const canvas = this.canvasRef.nativeElement;
     this.ctx = canvas.getContext('2d');
@@ -293,6 +300,14 @@ export class StudioComponent implements AfterViewInit, OnDestroy {
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
     }
+  }
+
+  private loadDatasetId() {
+    this.http
+      .get('http://localhost:9400/api/dataset/random')
+      .subscribe((res: any) => {
+        this.datasetId = res.id;
+      });
   }
 
   private loadPolygonData() {

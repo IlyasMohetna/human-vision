@@ -1,16 +1,18 @@
-<div class="p-4 text-white bg-gray-800 rounded-md shadow-lg">
-  <div class="mb-4">
-    <h2 class="text-xl font-bold mb-2">Outside Temperature</h2>
-    <div>{{ outsideTemperature || "N/A" }} °C</div>
-  </div>
-
-  <div *ngIf="weatherData" class="mb-4">
-    <h2 class="text-xl font-bold mb-2">Weather Forecast</h2>
-    <div class="flex items-center gap-3 text-2xl">
-      <span>{{ getWeatherIcon(weatherData.weather_code) }}</span>
-      <span>{{ weatherData.temperature }} °C</span>
-    </div>
-    <div class="text-sm text-gray-300 mt-1">Time: {{ weatherData.time }}</div>
-  </div>
-  <div *ngIf="!weatherData" class="text-gray-400">Loading weather data...</div>
+<div
+  *ngIf="weatherData; else loading"
+  class="bg-gray-900 text-white p-10 rounded-lg shadow-xl max-w-lg mx-auto flex flex-col items-center gap-4"
+>
+  <img
+    [src]="getWeatherIcon(weatherData.weather_code).img"
+    alt="Weather Icon"
+    class="w-48 h-48 object-contain"
+  />
+  <h2 class="text-3xl font-bold">
+    {{ getWeatherIcon(weatherData.weather_code).label }}
+  </h2>
+  <div class="text-sm text-gray-300">Time: {{ weatherData.time }}</div>
 </div>
+
+<ng-template #loading>
+  <div class="text-center text-gray-400">Loading weather data...</div>
+</ng-template>

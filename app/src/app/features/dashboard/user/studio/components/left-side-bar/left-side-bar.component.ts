@@ -33,6 +33,7 @@ export class LeftSideBarComponent implements OnInit, OnChanges {
   @Input() metadata: any = {};
   @Input() vehicle: any = {};
   @Input() currentImageUrl: string = '';
+  @Input() datasetId: number = 1;
 
   @Output() variantSelected = new EventEmitter<any>();
 
