@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { MapModalComponent } from '../map-modal/map-modal.component';
 import { MetadataComponent } from './components/metadata/metadata.component';
 import { VariantsComponent } from './components/variants/variants.component';
-import { VehicleInfoComponent } from './components/vehicle-info/vehicle-info.component';
+import { VehicleInfoComponent } from './components/vehicle/vehicle.component';
 
 @Component({
   selector: 'app-left-side-bar',

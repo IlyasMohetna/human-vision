@@ -21,10 +21,9 @@
         ></app-variants>
       </div>
 
-      <!-- New Vehicle Info Panel -->
       <div *ngSwitchCase="1" class="ContentPanel !p-0">
         <h2 class="PanelTitle p-3">Vehicle Information</h2>
-        <app-vehicle-info [vehicle]="vehicle"></app-vehicle-info>
+        <app-vehicle [vehicle]="vehicle"></app-vehicle>
       </div>
 
       <div *ngSwitchCase="2" class="ContentPanel">
