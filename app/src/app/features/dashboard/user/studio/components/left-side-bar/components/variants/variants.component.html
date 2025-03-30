@@ -1,0 +1,24 @@
+<div class="grid grid-cols-2">
+  <div
+    class="border border-[#333] p-4 flex items-center justify-center relative cursor-pointer"
+    *ngFor="let variant of variants"
+    (click)="selectVariant(variant)"
+  >
+    <img
+      [src]="variant.path"
+      alt="Variant"
+      class="w-[90%] object-contain mt-6"
+    />
+    <span
+      class="absolute top-1 left-1 bg-black text-white text-xs px-1 py-0.5 rounded"
+    >
+      {{ variant.type }}
+    </span>
+    <div
+      *ngIf="currentImageUrl === variant.path"
+      class="absolute top-1 right-1 bg-green-600 rounded-full w-6 h-6 flex items-center justify-center"
+    >
+      <span class="text-white text-sm">✓</span>
+    </div>
+  </div>
+</div>

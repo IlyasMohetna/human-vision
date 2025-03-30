@@ -2,11 +2,17 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapModalComponent } from '../map-modal/map-modal.component';
 import { MetadataComponent } from './components/metadata/metadata.component';
+import { VariantsComponent } from './components/variants/variants.component';
 
 @Component({
   selector: 'app-left-side-bar',
   standalone: true,
-  imports: [CommonModule, MapModalComponent, MetadataComponent],
+  imports: [
+    CommonModule,
+    MapModalComponent,
+    MetadataComponent,
+    VariantsComponent,
+  ],
   templateUrl: './left-side-bar.component.html',
   styleUrls: ['./left-side-bar.component.css'],
 })
