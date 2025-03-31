@@ -298,10 +298,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
     this.polygonDataService.fetchPolygonData().subscribe({
       next: (response) => {
-        console.log('Polygon data received:', response);
-
         this.polygonDataList = response.objects || [];
-        console.log('Polygon data list length:', this.polygonDataList.length);
 
         this.polygonDataList.forEach((poly) => {
           this.activePolygons[poly.objectId] = true;
@@ -319,7 +316,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
           this.variants = response.variants;
 
           if (originalImage && originalImage.path) {
-            console.log('Setting image URL:', originalImage.path);
             this.imageUrl = originalImage.path;
             this.currentImageUrl = originalImage.path;
           }
@@ -366,8 +362,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   onImageLoad() {
-    console.log('Image loaded, initialZoomSet:', this.initialZoomSet);
-
     if (this.imageElementRef && this.imageElementRef.nativeElement) {
       const img = this.imageElementRef.nativeElement;
       this.imageNaturalWidth = img.naturalWidth;
@@ -377,10 +371,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
         this.updateMinZoomLevel();
         this.initialZoomLevel = this.zoomLevel;
         this.initialZoomSet = true;
-        console.log('Initial zoom set to: ', this.initialZoomLevel);
 
         setTimeout(() => {
-          console.log('Loading imported polygons...');
           this.loadImportedPolygons();
         }, 200);
       }
@@ -393,17 +385,12 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       return;
     }
 
-    console.log('Loading polygons...', this.polygonDataList.length);
-
     setTimeout(() => {
       const imageElement = this.imageElementRef.nativeElement;
       const canvas = this.canvasRef.nativeElement;
 
       const imageRect = imageElement.getBoundingClientRect();
       const canvasRect = canvas.getBoundingClientRect();
-
-      console.log('Image rect:', imageRect);
-      console.log('Canvas rect:', canvasRect);
 
       this.imageCenter = {
         x: (imageRect.left + imageRect.right) / 2 - canvasRect.left,
@@ -415,8 +402,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
       const scaleX = imageElement.clientWidth / this.imageNaturalWidth;
       const scaleY = imageElement.clientHeight / this.imageNaturalHeight;
-
-      console.log('Scale factors:', scaleX, scaleY);
 
       this.originalPolygons = {};
       this.polygons = {};
@@ -444,9 +429,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
           label: polyData.label,
         };
       });
-
-      console.log('Image center:', this.imageCenter);
-      console.log('Loaded polygons count:', Object.keys(this.polygons).length);
 
       setTimeout(() => {
         this.redrawAllPolygons();
@@ -584,7 +566,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
   setHoveredPolygon(id: string | null) {
     if (this.hoveredPolygonId !== id) {
-      console.log('Setting hovered polygon:', id);
       this.hoveredPolygonId = id;
       this.redrawAllPolygons();
     }
@@ -1023,7 +1004,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     });
 
     if (hoveredId !== this.hoveredPolygonId) {
-      console.log('Canvas hover polygon:', hoveredId);
       this.setHoveredPolygon(hoveredId);
     }
   }
@@ -1076,15 +1056,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     }, 100);
   }
 
-  checkPolygonsVisibility() {
-    console.log(
-      'Original polygons:',
-      Object.keys(this.originalPolygons).length
-    );
-    console.log('Transformed polygons:', Object.keys(this.polygons).length);
-    console.log('Active flags:', this.activePolygons);
-  }
-
   maxZoom() {
     this.zoomLevel = 5.0;
     this.applyTransform();
@@ -1120,8 +1091,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       );
       if (polygon) {
         polygon.priority = priority;
-        console.log(`Changed polygon ${polygonId} priority to ${priority}`);
-
         if (this.polygons[polygonId]) {
           this.redrawAllPolygons();
         }
@@ -1156,10 +1125,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
     if (item) {
       if (newPriority) {
-        console.log(`Updating ${item.objectId} priority to ${newPriority}`);
         item.priority = newPriority;
       } else {
-        console.log(`Clearing priority for ${item.objectId}`);
         delete item.priority;
       }
     }
@@ -1209,7 +1176,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   reloadAllData() {
-    console.log('Reloading all data...');
+    this.logPolygonDataWithPriorities();
 
     this.studioHash = this.generateRandomHash();
 
@@ -1242,6 +1209,80 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     setTimeout(() => {
       this.loadPolygonData();
     }, 500);
+  }
+
+  /**
+   * Formats and logs polygon data with their priorities
+   * This can be used to send data to the backend later
+   */
+  private logPolygonDataWithPriorities() {
+    // Create a formatted representation of polygons with their priorities
+    const polygonsWithPriorities = this.polygonDataList.map((polygon) => {
+      // Determine priority - use explicit priority if set, otherwise infer from label
+      let priority = polygon.priority;
+
+      if (!priority) {
+        // Get priority from label if not explicitly set
+        const label = polygon.label?.toLowerCase();
+        if (label) {
+          if (['person', 'pedestrian'].includes(label)) {
+            priority = 'high';
+          } else if (['car', 'bicycle', 'motorcycle'].includes(label)) {
+            priority = 'medium';
+          } else if (['traffic sign', 'traffic light'].includes(label)) {
+            priority = 'low';
+          } else {
+            priority = 'unassigned';
+          }
+        } else {
+          priority = 'unassigned';
+        }
+      }
+
+      // Return formatted object with relevant properties
+      return {
+        objectId: polygon.objectId,
+        label: polygon.label || 'Unlabeled',
+        priority: priority,
+        visible: this.activePolygons[polygon.objectId] === true,
+        // Include other relevant properties you might need for the backend
+        // coordinates: polygon.polygon // Uncomment if you need coordinates
+      };
+    });
+
+    // Create a summary object with counts by priority
+    const summary = {
+      total: polygonsWithPriorities.length,
+      highPriority: polygonsWithPriorities.filter((p) => p.priority === 'high')
+        .length,
+      mediumPriority: polygonsWithPriorities.filter(
+        (p) => p.priority === 'medium'
+      ).length,
+      lowPriority: polygonsWithPriorities.filter((p) => p.priority === 'low')
+        .length,
+      unassigned: polygonsWithPriorities.filter(
+        (p) => p.priority === 'unassigned'
+      ).length,
+      visible: polygonsWithPriorities.filter((p) => p.visible).length,
+      hidden: polygonsWithPriorities.filter((p) => !p.visible).length,
+    };
+
+    // Log both the detailed polygon data and the summary
+    console.log('=== Polygon Data with Priorities ===');
+    console.log('Summary:', summary);
+    console.log('Detailed polygon data:', polygonsWithPriorities);
+    console.log('Raw polygon data for backend:', {
+      datasetId: this.datasetId,
+      polygons: polygonsWithPriorities,
+    });
+    console.log('===============================');
+
+    // Return the formatted data (useful for when you want to send to backend)
+    return {
+      datasetId: this.datasetId,
+      polygons: polygonsWithPriorities,
+      summary,
+    };
   }
 
   private showReloadIndicator() {
