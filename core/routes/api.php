@@ -34,7 +34,7 @@ Route::get('import/start', [\App\Http\Controllers\ImportController::class, 'star
 Route::post('import/stop', [\App\Http\Controllers\ImportController::class, 'stop']);
 Route::get('import/status', [\App\Http\Controllers\ImportController::class, 'status']);
 Route::get('import/progress/{id}', [\App\Http\Controllers\ImportController::class, 'progress']);
-
+Route::get('import/start-with-progress', [\App\Http\Controllers\ImportController::class, 'startWithProgress']);
 
 Route::get('test', [ImportController::class, 'test']);
 

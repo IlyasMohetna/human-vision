@@ -49,6 +49,42 @@ class ImportController extends Controller
         ]);
     }
 
+    public function startWithProgress(GithubService $githubService)
+    {
+        $lockKey = 'import_in_progress';
+
+        if (Cache::has($lockKey)) {
+            return response()->json([
+                'message'  => 'Import already running.',
+                'batch_id' => Cache::get($lockKey),
+            ], 200);
+        }
+
+        $batchId = uniqid('batch_', true);
+        Cache::put($lockKey, $batchId, now()->addHour());
+        Cache::put("progress_{$batchId}", 0);
+
+        dispatch(function () use ($githubService, $batchId) {
+            try {
+                Cache::put("progress_{$batchId}", 10);
+                $githubService->downloadRepoArchive('main');
+                Cache::put("progress_{$batchId}", 70);
+                dispatch(new SyncDatasetToDatabaseJob());
+                Cache::put("progress_{$batchId}", 100);
+            } catch (Throwable $e) {
+                Log::error("❌ Import failed: " . $e->getMessage());
+                Cache::put("progress_{$batchId}", -1);
+            } finally {
+                Cache::forget('import_in_progress');
+            }
+        });
+
+        return response()->json([
+            'message'  => 'Import started with progress tracking.',
+            'batch_id' => $batchId,
+        ]);
+    }
+
     public function stop(Request $request)
     {
         $lockKey = 'import_in_progress';
@@ -90,22 +126,16 @@ class ImportController extends Controller
 
     public function progress(string $id)
     {
-        $batch = Bus::findBatch($id);
+        $progress = Cache::get("progress_{$id}", null);
 
-        if (!$batch) {
-            $progress = now()->second % 101;
-
-            return response()->json([
-                'status'         => 'mocking',
-                'progress'       => $progress,
-                'processedJobs'  => intval($progress * 5),
-                'totalJobs'      => 500,
-                'failedJobs'     => 0,
-                'mock'           => true,
-            ]);
+        if ($progress === null) {
+            return response()->json(['message' => 'Batch not found.', 'progress' => null], 404);
         }
 
-        return response()->json($this->formatBatchData($batch));
+        return response()->json([
+            'status'   => $progress === 100 ? 'finished' : ($progress === -1 ? 'failed' : 'running'),
+            'progress' => $progress,
+        ]);
     }
 
     public function test()
