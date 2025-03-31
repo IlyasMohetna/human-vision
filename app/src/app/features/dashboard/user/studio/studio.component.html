@@ -109,6 +109,14 @@
         {{ zoomLevel.toFixed(1) }}x
       </div>
     </div>
+    <div class="p-3 bg-slate-500 w-full">
+      <button
+        (click)="reloadAllData()"
+        class="bg-orange-500 p-2 rounded-xl text-white hover:bg-orange-600 transition-colors"
+      >
+        Reload Dataset
+      </button>
+    </div>
   </main>
 
   <!-- Right Sidebar - Now using the component -->

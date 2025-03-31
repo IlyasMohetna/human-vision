@@ -86,94 +86,65 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   private polygon: { x: number; y: number }[] = [];
   private resizeObserver?: ResizeObserver;
 
-  // New: Type colors map - fix the type definition
   private readonly TYPE_COLORS: Record<
     string,
     { border: string; fill: string }
   > = {
     high: {
-      border: 'rgba(255, 0, 0, 1)', // Solid red
-      fill: 'rgba(255, 0, 0, 0.2)', // Semi-transparent red
+      border: 'rgba(255, 0, 0, 1)',
+      fill: 'rgba(255, 0, 0, 0.2)',
     },
     medium: {
-      border: 'rgba(255, 255, 0, 1)', // Solid yellow
-      fill: 'rgba(255, 255, 0, 0.2)', // Semi-transparent yellow
+      border: 'rgba(255, 255, 0, 1)',
+      fill: 'rgba(255, 255, 0, 0.2)',
     },
     low: {
-      border: 'rgba(0, 255, 0, 1)', // Solid green
-      fill: 'rgba(0, 255, 0, 0.2)', // Semi-transparent green
+      border: 'rgba(0, 255, 0, 1)',
+      fill: 'rgba(0, 255, 0, 0.2)',
     },
     blue: {
-      border: 'rgba(0, 120, 255, 1)', // Solid blue
-      fill: 'rgba(0, 120, 255, 0.2)', // Semi-transparent blue
+      border: 'rgba(0, 120, 255, 1)',
+      fill: 'rgba(0, 120, 255, 0.2)',
     },
     default: {
-      // Change default to blue "info" color instead of gray
-      border: 'rgba(0, 120, 255, 1)', // Blue
+      border: 'rgba(0, 120, 255, 1)',
       fill: 'rgba(0, 120, 255, 0.2)',
     },
     unassigned: {
-      // Add explicit unassigned for clarity
-      border: 'rgba(0, 120, 255, 1)', // Blue
+      border: 'rgba(0, 120, 255, 1)',
       fill: 'rgba(0, 120, 255, 0.2)',
     },
   };
 
-  // Replace polygon data type with new structure
   public polygonDataList: any[] = [];
-
-  // The currently active/displayed polygons
   activePolygons: { [id: string]: boolean } = {};
-
-  // Modified polygon storage to include type information
   private polygons: PolygonDataMap = {};
-
-  // Add these constants near the top of the class
   private readonly POLYGON_BORDER_COLOR = 'yellow';
   private readonly POLYGON_BORDER_WIDTH = 3;
-  private readonly POLYGON_FILL_COLOR = 'rgba(255, 255, 0, 0.2)'; // semi-transparent yellow
+  private readonly POLYGON_FILL_COLOR = 'rgba(255, 255, 0, 0.2)';
   private readonly VERTEX_COLOR = 'yellow';
   private readonly VERTEX_RADIUS = 4;
-
-  // Add this property to track which polygon is being hovered
   hoveredPolygonId: string | null = null;
-
-  // Add these properties to store original polygon coordinates
   private originalPolygons: PolygonDataMap = {};
-
-  // Add this property to store image center
   private imageCenter = { x: 0, y: 0 };
-
-  // Add this property to better track and debug the transforms
   private lastTransformApplied = '';
-
-  // Add these properties for smoother animations
   private animationFrameId: number | null = null;
   private zoomUpdatePending = false;
   private lastZoomTime = 0;
-  private readonly ZOOM_THROTTLE_MS = 10; // Throttle to improve performance
-
-  // Navigation items for the sidebar
+  private readonly ZOOM_THROTTLE_MS = 10;
   sidebarNavItems = [
     { icon: '📁', label: 'Project' },
     { icon: '🔧', label: 'Tools' },
     { icon: '🔍', label: 'Zoom' },
     { icon: '📋', label: 'Annotations' },
   ];
-
-  // Currently selected sidebar item (default to Tools)
-  selectedSidebarItem = 1; // Start with Tools selected
-
-  // Lists for different priority annotations
+  selectedSidebarItem = 1;
   highPriorityAnnotations: any[] = [];
   mediumPriorityAnnotations: any[] = [];
   lowPriorityAnnotations: any[] = [];
   unassignedAnnotations: any[] = [];
-
-  // Add the missing isDragging property
   private isDragging = false;
-
-  // Add loading state variables
+  private initialLoadCompleted = false;
   isLoading = true;
   studioHash = '';
   currentImageUrl = '';
@@ -184,11 +155,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     private http: HttpClient,
     private route: ActivatedRoute
   ) {
-    // Generate a random hash when component is initialized
     this.studioHash = this.generateRandomHash();
   }
 
-  // Method to generate a random hash
   private generateRandomHash(): string {
     return (
       Math.random().toString(36).substring(2, 15) +
@@ -197,11 +166,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     );
   }
 
-  // Keyboard shortcuts - global scope
   @HostListener('window:keydown', ['$event'])
   handleGlobalKeyboardShortcuts(event: KeyboardEvent) {
     if (event.ctrlKey) {
-      // Support multiple key values for '+' or '-'
       if (event.key === '+' || event.key === '=' || event.key === 'Add') {
         event.preventDefault();
         this.zoomIn();
@@ -217,7 +184,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
         this.resetZoom();
       }
     } else {
-      // Remove direct panning = true
       if (event.key === ' ') {
         event.preventDefault();
         this.spacePressed = true;
@@ -232,7 +198,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
-  // Listen for space release
   @HostListener('window:keyup', ['$event'])
   handleGlobalKeyboardShortcutsUp(event: KeyboardEvent) {
     if (event.key === ' ') {
@@ -241,7 +206,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
-  // Prevent default browser zoom behavior when using Ctrl+wheel
   @HostListener('window:wheel', ['$event'])
   onWindowWheel(event: WheelEvent) {
     if (event.ctrlKey) {
@@ -282,39 +246,31 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     const canvas = this.canvasRef.nativeElement;
     this.ctx = canvas.getContext('2d');
 
-    // Set initial size
     this.resizeCanvasToContainer();
 
-    // Create ResizeObserver to handle container size changes
     this.resizeObserver = new ResizeObserver(() => {
       this.resizeCanvasToContainer();
       this.redrawPolygons();
     });
 
-    // Observe the canvas's parent element
     this.resizeObserver.observe(canvas.parentElement as Element);
 
-    // Add wheel event listener to the image container
     this.imageContainerRef.nativeElement.addEventListener(
       'wheel',
       this.handleWheel.bind(this),
       { passive: false }
     );
 
-    // Initial update of minimum zoom level
     setTimeout(() => this.updateMinZoomLevel(), 500);
 
-    // Fetch data from the service
     this.loadPolygonData();
   }
 
   ngOnDestroy() {
-    // Clean up the observer when component is destroyed
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
     }
 
-    // Remove event listeners
     if (this.imageContainerRef) {
       this.imageContainerRef.nativeElement.removeEventListener(
         'wheel',
@@ -322,7 +278,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       );
     }
 
-    // Cancel any pending animations
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
     }
@@ -337,23 +292,23 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   private loadPolygonData() {
-    this.isLoading = true; // Ensure loading is shown
+    if (!this.initialLoadCompleted) {
+      this.isLoading = true;
+    }
 
     this.polygonDataService.fetchPolygonData().subscribe({
       next: (response) => {
-        // Set the polygon data list from objects array
-        this.polygonDataList = response.objects || [];
+        console.log('Polygon data received:', response);
 
-        // Initialize all polygons as active
+        this.polygonDataList = response.objects || [];
+        console.log('Polygon data list length:', this.polygonDataList.length);
+
         this.polygonDataList.forEach((poly) => {
           this.activePolygons[poly.objectId] = true;
-
-          // Distribute to categories based on label type
           this.categorizePolygon(poly);
         });
 
         this.metadata = [response.meta || {}];
-
         this.vehicle = response.vehicle || {};
 
         if (response.variants && response.variants.length > 0) {
@@ -364,20 +319,28 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
           this.variants = response.variants;
 
           if (originalImage && originalImage.path) {
+            console.log('Setting image URL:', originalImage.path);
             this.imageUrl = originalImage.path;
             this.currentImageUrl = originalImage.path;
           }
         }
 
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 3000);
+        if (!this.initialLoadCompleted) {
+          setTimeout(() => {
+            this.isLoading = false;
+            this.initialLoadCompleted = true;
+          }, 3000);
+        }
       },
       error: (error) => {
         console.error('Error fetching polygon data:', error);
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 2000);
+
+        if (!this.initialLoadCompleted) {
+          setTimeout(() => {
+            this.isLoading = false;
+            this.initialLoadCompleted = true;
+          }, 2000);
+        }
       },
     });
   }
@@ -403,18 +366,23 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   onImageLoad() {
+    console.log('Image loaded, initialZoomSet:', this.initialZoomSet);
+
     if (this.imageElementRef && this.imageElementRef.nativeElement) {
       const img = this.imageElementRef.nativeElement;
       this.imageNaturalWidth = img.naturalWidth;
       this.imageNaturalHeight = img.naturalHeight;
 
-      // Only set the initial zoom level once when the image first loads
       if (!this.initialZoomSet) {
         this.updateMinZoomLevel();
-        this.initialZoomLevel = this.zoomLevel; // Store the initial zoom level
+        this.initialZoomLevel = this.zoomLevel;
         this.initialZoomSet = true;
         console.log('Initial zoom set to: ', this.initialZoomLevel);
-        this.loadImportedPolygons();
+
+        setTimeout(() => {
+          console.log('Loading imported polygons...');
+          this.loadImportedPolygons();
+        }, 200);
       }
     }
   }
@@ -425,38 +393,35 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       return;
     }
 
-    console.log('Loading polygons...');
+    console.log('Loading polygons...', this.polygonDataList.length);
 
-    // Wait a bit to ensure everything is rendered
     setTimeout(() => {
-      // Get image and canvas dimensions
       const imageElement = this.imageElementRef.nativeElement;
       const canvas = this.canvasRef.nativeElement;
 
-      // Get image position within viewport
       const imageRect = imageElement.getBoundingClientRect();
       const canvasRect = canvas.getBoundingClientRect();
 
-      // Store image center coordinates - relative to canvas
+      console.log('Image rect:', imageRect);
+      console.log('Canvas rect:', canvasRect);
+
       this.imageCenter = {
         x: (imageRect.left + imageRect.right) / 2 - canvasRect.left,
         y: (imageRect.top + imageRect.bottom) / 2 - canvasRect.top,
       };
 
-      // Now that we have the image center, calculate offsets from center
       const offsetX = imageRect.left - canvasRect.left;
       const offsetY = imageRect.top - canvasRect.top;
 
-      // Calculate scale factor between natural image size and displayed image
       const scaleX = imageElement.clientWidth / this.imageNaturalWidth;
       const scaleY = imageElement.clientHeight / this.imageNaturalHeight;
 
-      // Process all polygons
-      this.originalPolygons = {}; // Store the original coordinates
+      console.log('Scale factors:', scaleX, scaleY);
+
+      this.originalPolygons = {};
       this.polygons = {};
 
       this.polygonDataList.forEach((polyData) => {
-        // Map coordinates from data to canvas space - now using polygon instead of points
         if (!polyData.polygon || !Array.isArray(polyData.polygon)) {
           console.warn('Invalid polygon data for:', polyData);
           return;
@@ -467,23 +432,25 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
           y: offsetY + y * scaleY,
         }));
 
-        // Store both original and transformed coordinates
         this.originalPolygons[polyData.objectId] = {
-          points: [...points], // Clone the points
-          type: polyData.type,
+          points: [...points],
+          type: polyData.type || this.getColorTypeFromLabel(polyData.label),
           label: polyData.label,
         };
 
         this.polygons[polyData.objectId] = {
-          points: [...points], // Clone the points
-          type: polyData.type,
+          points: [...points],
+          type: polyData.type || this.getColorTypeFromLabel(polyData.label),
           label: polyData.label,
         };
       });
 
       console.log('Image center:', this.imageCenter);
-      console.log('Loaded polygons:', this.polygons);
-      this.redrawAllPolygons();
+      console.log('Loaded polygons count:', Object.keys(this.polygons).length);
+
+      setTimeout(() => {
+        this.redrawAllPolygons();
+      }, 100);
     }, 500);
   }
 
@@ -492,10 +459,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
     const canvas = this.canvasRef.nativeElement;
 
-    // Clear with a single operation for better performance
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Setup clipping once outside the loop
     const imageRect =
       this.imageElementRef.nativeElement.getBoundingClientRect();
     const canvasRect = canvas.getBoundingClientRect();
@@ -510,22 +475,18 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     );
     this.ctx.clip();
 
-    // Batch all non-hovered polygons first to minimize state changes
     Object.entries(this.polygons).forEach(([id, poly]) => {
       if (
         this.activePolygons[id] &&
         id !== this.hoveredPolygonId &&
         poly.points.length >= 2
       ) {
-        // Get the corresponding polygon data
         const polygonData = this.polygonDataList.find((p) => p.objectId === id);
 
-        // Use priority for color if available, otherwise default to label-based color
         const colorType =
           polygonData?.priority ||
           this.getColorTypeFromLabel(polygonData?.label);
 
-        // Now we know colorType is always a valid key
         const colors =
           this.TYPE_COLORS[colorType] || this.TYPE_COLORS['default'];
 
@@ -547,7 +508,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       }
     });
 
-    // Draw the hovered polygon with special effects
     if (this.hoveredPolygonId && this.activePolygons[this.hoveredPolygonId]) {
       const poly = this.polygons[this.hoveredPolygonId];
       if (poly && poly.points.length >= 2) {
@@ -555,7 +515,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
           (p) => p.objectId === this.hoveredPolygonId
         );
 
-        // Use priority for color if available, otherwise default to label-based color
         const colorType =
           polygonData?.priority ||
           this.getColorTypeFromLabel(polygonData?.label);
@@ -567,7 +526,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     this.ctx.restore();
   }
 
-  // Updated method signature to accept string instead of specific union type
   private drawSinglePolygon(
     points: { x: number; y: number }[],
     type: string,
@@ -575,10 +533,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   ) {
     if (!this.ctx || points.length < 2) return;
 
-    // Use default if type is not found
     const colors = this.TYPE_COLORS[type] || this.TYPE_COLORS['default'];
 
-    // Draw filled area
     this.ctx.beginPath();
     this.ctx.moveTo(points[0].x, points[0].y);
 
@@ -586,17 +542,13 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       this.ctx.lineTo(points[i].x, points[i].y);
     }
 
-    // Close the polygon path
     this.ctx.closePath();
 
-    // For hovered polygons, use more opaque fill and add shadow
     if (isHovered) {
-      // Add shadow for highlight effect
       this.ctx.shadowColor = colors.border;
       this.ctx.shadowBlur = 15;
 
-      // Use more opaque fill for hover
-      this.ctx.fillStyle = colors.fill.replace('0.2', '0.4'); // Make fill more opaque
+      this.ctx.fillStyle = colors.fill.replace('0.2', '0.4');
     } else {
       this.ctx.shadowBlur = 0;
       this.ctx.fillStyle = colors.fill;
@@ -604,7 +556,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
     this.ctx.fill();
 
-    // Draw the border with thicker line for hovered polygons
     this.ctx.strokeStyle = colors.border;
     this.ctx.lineWidth = isHovered
       ? this.POLYGON_BORDER_WIDTH + 2
@@ -612,13 +563,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     this.ctx.lineJoin = 'round';
     this.ctx.stroke();
 
-    // Reset shadow
     this.ctx.shadowBlur = 0;
   }
 
-  // Helper method to get a valid color type from a label
   private getColorTypeFromLabel(label: string | undefined): string {
-    if (!label) return 'unassigned'; // Changed from 'default' to 'unassigned'
+    if (!label) return 'unassigned';
 
     const labelLower = label.toLowerCase();
 
@@ -630,7 +579,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       return 'low';
     }
 
-    return 'unassigned'; // Changed from 'default' to 'unassigned'
+    return 'unassigned';
   }
 
   setHoveredPolygon(id: string | null) {
@@ -658,17 +607,13 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     this.containerWidth = container.clientWidth;
     this.containerHeight = container.clientHeight;
 
-    // Calculate the ratio to fit the image in the container (ensuring it's at least 95%)
     const widthRatio = this.containerWidth / this.imageNaturalWidth;
     const heightRatio = this.containerHeight / this.imageNaturalHeight;
 
-    // Use the smaller ratio to ensure image fits within container
     const fitRatio = Math.min(widthRatio, heightRatio);
 
-    // Ensure we never zoom out smaller than 95% of the fit ratio
     this.minZoomLevel = fitRatio * 0.95;
 
-    // If current zoom is less than the new minimum, adjust it
     if (this.zoomLevel < this.minZoomLevel) {
       this.zoomLevel = this.minZoomLevel;
       this.applyZoom();
@@ -1055,14 +1000,12 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     if (!this.panning) {
       this.drawPolygon(event);
 
-      // Add polygon hover detection on mouse move
       this.checkPolygonHover(event);
     }
   }
 
-  // Add new method to check if mouse is hovering over a polygon
   checkPolygonHover(event: MouseEvent) {
-    if (this.isDragging || this.panning) return; // Don't check during drag or pan
+    if (this.isDragging || this.panning) return;
 
     const rect = this.canvasRef.nativeElement.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
@@ -1070,7 +1013,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
     let hoveredId: string | null = null;
 
-    // Check if the mouse is inside any polygon
     Object.entries(this.polygons).forEach(([id, poly]) => {
       if (
         this.activePolygons[id] &&
@@ -1080,14 +1022,12 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       }
     });
 
-    // Only update if we're hovering over a different polygon
     if (hoveredId !== this.hoveredPolygonId) {
       console.log('Canvas hover polygon:', hoveredId);
       this.setHoveredPolygon(hoveredId);
     }
   }
 
-  // Add helper method to check if a point is inside a polygon
   isPointInPolygon(
     x: number,
     y: number,
@@ -1201,10 +1141,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   onAnnotationDrop(event: CdkDragDrop<any[]>) {
-    // Get item being moved
     const item = event.previousContainer.data[event.previousIndex];
 
-    // Determine new priority based on the container ID
     let newPriority: string | undefined = undefined;
     if (event.container.id === 'high-priority') {
       newPriority = 'high';
@@ -1213,23 +1151,19 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     } else if (event.container.id === 'low-priority') {
       newPriority = 'low';
     } else if (event.container.id === 'unassigned') {
-      // Explicitly clear priority when moved to unassigned
       newPriority = undefined;
     }
 
-    // Update the item's priority
     if (item) {
       if (newPriority) {
         console.log(`Updating ${item.objectId} priority to ${newPriority}`);
         item.priority = newPriority;
       } else {
-        // Clear priority explicitly when moved to unassigned
         console.log(`Clearing priority for ${item.objectId}`);
-        delete item.priority; // Remove the property completely
+        delete item.priority;
       }
     }
 
-    // Move the item between arrays
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -1245,27 +1179,22 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       );
     }
 
-    // Make sure to redraw all polygons to show the updated colors
     this.redrawAllPolygons();
   }
 
-  // Toggle a specific polygon's visibility - this was missing
   togglePolygon(id: string) {
     this.activePolygons[id] = !this.activePolygons[id];
     this.redrawAllPolygons();
   }
 
-  // Method to handle sidebar navigation selection
   selectSidebarItem(index: number) {
     this.selectedSidebarItem = index;
   }
 
-  // Add method to check if the annotation list contains an ID
   hasAnnotationWithId(list: any[], id: string): boolean {
     return list.some((item) => item.objectId === id);
   }
 
-  // Add methods to set the isDragging state
   onPolygonDragStart() {
     this.isDragging = true;
   }
@@ -1277,5 +1206,61 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   onVariantSelected(variant: any) {
     this.imageUrl = variant.path;
     this.currentImageUrl = variant.path;
+  }
+
+  reloadAllData() {
+    console.log('Reloading all data...');
+
+    this.studioHash = this.generateRandomHash();
+
+    this.showReloadIndicator();
+
+    this.polygonDataList = [];
+    this.highPriorityAnnotations = [];
+    this.mediumPriorityAnnotations = [];
+    this.lowPriorityAnnotations = [];
+    this.unassignedAnnotations = [];
+    this.activePolygons = {};
+    this.polygons = {};
+    this.originalPolygons = {};
+
+    this.initialZoomSet = false;
+
+    if (this.ctx) {
+      this.ctx.clearRect(
+        0,
+        0,
+        this.canvasRef.nativeElement.width,
+        this.canvasRef.nativeElement.height
+      );
+    }
+
+    this.resetZoom();
+
+    this.loadDatasetId();
+
+    setTimeout(() => {
+      this.loadPolygonData();
+    }, 500);
+  }
+
+  private showReloadIndicator() {
+    const indicator = this.renderer.createElement('div');
+    this.renderer.setStyle(indicator, 'position', 'absolute');
+    this.renderer.setStyle(indicator, 'top', '10px');
+    this.renderer.setStyle(indicator, 'right', '10px');
+    this.renderer.setStyle(indicator, 'background', 'rgba(0, 0, 0, 0.7)');
+    this.renderer.setStyle(indicator, 'color', 'white');
+    this.renderer.setStyle(indicator, 'padding', '8px 16px');
+    this.renderer.setStyle(indicator, 'border-radius', '4px');
+    this.renderer.setStyle(indicator, 'z-index', '9999');
+    this.renderer.setProperty(indicator, 'textContent', 'Reloading data...');
+
+    const body = document.body;
+    this.renderer.appendChild(body, indicator);
+
+    setTimeout(() => {
+      this.renderer.removeChild(body, indicator);
+    }, 3000);
   }
 }
