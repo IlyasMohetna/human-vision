@@ -26,6 +26,7 @@ import {
 import { PolygonDataService } from '../../../../services/polygon-data.service';
 import { PolygonDataMap } from './polygon.types';
 import { ActivatedRoute } from '@angular/router';
+import { KeyboardService } from './services/keyboard.service';
 
 @Component({
   selector: 'app-studio',
@@ -153,7 +154,8 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     private renderer: Renderer2,
     private polygonDataService: PolygonDataService,
     private http: HttpClient,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private keyboardService: KeyboardService
   ) {
     this.studioHash = this.generateRandomHash();
   }
@@ -168,6 +170,12 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @HostListener('window:keydown', ['$event'])
   handleGlobalKeyboardShortcuts(event: KeyboardEvent) {
+    if (event.key === ' ' && this.keyboardService.isSpaceKeyEnabled()) {
+      event.preventDefault();
+      this.spacePressed = true;
+      return;
+    }
+
     if (event.ctrlKey) {
       if (event.key === '+' || event.key === '=' || event.key === 'Add') {
         event.preventDefault();
@@ -184,10 +192,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
         this.resetZoom();
       }
     } else {
-      if (event.key === ' ') {
-        event.preventDefault();
-        this.spacePressed = true;
-      }
       if (event.key.toLowerCase() === 'g') {
         this.toggleCrosshair();
       } else if (event.key.toLowerCase() === 'd') {
@@ -200,7 +204,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @HostListener('window:keyup', ['$event'])
   handleGlobalKeyboardShortcutsUp(event: KeyboardEvent) {
-    if (event.key === ' ') {
+    if (event.key === ' ' && this.keyboardService.isSpaceKeyEnabled()) {
       event.preventDefault();
       this.spacePressed = false;
     }
@@ -1245,6 +1249,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
         label: polygon.label || 'Unlabeled',
         priority: priority,
         visible: this.activePolygons[polygon.objectId] === true,
+        comment: polygon.comment || '', // Include comment in the output
         // Include other relevant properties you might need for the backend
         // coordinates: polygon.polygon // Uncomment if you need coordinates
       };
@@ -1265,10 +1270,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       ).length,
       visible: polygonsWithPriorities.filter((p) => p.visible).length,
       hidden: polygonsWithPriorities.filter((p) => !p.visible).length,
+      withComments: polygonsWithPriorities.filter((p) => p.comment).length, // Add comment count
     };
 
     // Log both the detailed polygon data and the summary
-    console.log('=== Polygon Data with Priorities ===');
+    console.log('=== Polygon Data with Priorities and Comments ===');
     console.log('Summary:', summary);
     console.log('Detailed polygon data:', polygonsWithPriorities);
     console.log('Raw polygon data for backend:', {
@@ -1283,6 +1289,19 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       polygons: polygonsWithPriorities,
       summary,
     };
+  }
+
+  // Method to handle comment additions
+  onCommentAdded(commentData: { id: string; comment: string }): void {
+    const polygon = this.polygonDataList.find(
+      (p) => p.objectId === commentData.id
+    );
+    if (polygon) {
+      polygon.comment = commentData.comment;
+      console.log(
+        `Added comment to polygon ${commentData.id}: ${commentData.comment}`
+      );
+    }
   }
 
   private showReloadIndicator() {

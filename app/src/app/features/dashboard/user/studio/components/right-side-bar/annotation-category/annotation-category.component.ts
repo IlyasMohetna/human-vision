@@ -20,6 +20,9 @@ import {
   CDK_DRAG_CONFIG,
 } from '@angular/cdk/drag-drop';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { KeyboardService } from '../../../services/keyboard.service';
 
 @Component({
   selector: 'app-annotation-category',
@@ -55,6 +58,7 @@ export class AnnotationCategoryComponent
   @Output() itemHoverEnd = new EventEmitter<void>();
   @Output() itemToggle = new EventEmitter<string>();
   @Output() toggleExpand = new EventEmitter<boolean>();
+  @Output() commentAdded = new EventEmitter<{ id: string; comment: string }>();
 
   @ViewChild('scrollableContainer') scrollableContainer!: ElementRef;
   @ViewChildren('annotationItem') annotationItems!: QueryList<ElementRef>;
@@ -64,6 +68,13 @@ export class AnnotationCategoryComponent
   containerHasDrag = false;
 
   enterPredicate = () => true;
+
+  constructor(
+    library: FaIconLibrary,
+    private keyboardService: KeyboardService
+  ) {
+    library.addIconPacks(fas);
+  }
 
   ngOnInit() {
     // Initialization logic
@@ -205,5 +216,97 @@ export class AnnotationCategoryComponent
       this.annotations.splice(index, 1);
       this.annotations.splice(index + 1, 0, item);
     }
+  }
+
+  openCommentModal(item: any): void {
+    // Disable space key detection when modal opens
+    this.keyboardService.disableSpaceKey();
+
+    // Create a modal element with a backdrop
+    const modalContainer = document.createElement('div');
+    modalContainer.className =
+      'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]';
+
+    // Create the modal content
+    const modal = document.createElement('div');
+    modal.className = 'bg-gray-800 rounded-lg p-6 w-96 max-w-[90%] shadow-xl';
+
+    // Add title
+    const title = document.createElement('h3');
+    title.className = 'text-xl font-bold mb-4 text-white';
+    title.textContent = `Comment on ${item.label || 'Unnamed'}`;
+
+    // Add textarea
+    const textarea = document.createElement('textarea');
+    textarea.className = 'w-full h-32 p-2 mb-4 bg-gray-700 text-white rounded';
+    textarea.placeholder = 'Add your comment here...';
+    textarea.value = item.comment || '';
+
+    // Stop propagation of keyboard events from the textarea
+    textarea.addEventListener('keydown', (e) => {
+      e.stopPropagation();
+    });
+
+    // Add actions div
+    const actions = document.createElement('div');
+    actions.className = 'flex justify-end space-x-2';
+
+    // Add cancel button
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className =
+      'px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.onclick = () => {
+      document.body.removeChild(modalContainer);
+      this.keyboardService.enableSpaceKey(); // Re-enable space key detection
+    };
+
+    // Add save button
+    const saveBtn = document.createElement('button');
+    saveBtn.className =
+      'px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500';
+    saveBtn.textContent = 'Save';
+    saveBtn.onclick = () => {
+      const comment = textarea.value.trim();
+      item.comment = comment; // Update the item directly
+      this.commentAdded.emit({ id: item.objectId, comment });
+      document.body.removeChild(modalContainer);
+      this.keyboardService.enableSpaceKey(); // Re-enable space key detection
+    };
+
+    // Assemble modal
+    actions.appendChild(cancelBtn);
+    actions.appendChild(saveBtn);
+    modal.appendChild(title);
+    modal.appendChild(textarea);
+    modal.appendChild(actions);
+    modalContainer.appendChild(modal);
+
+    // Add modal to body
+    document.body.appendChild(modalContainer);
+
+    // Focus the textarea
+    setTimeout(() => {
+      textarea.focus();
+    }, 0);
+
+    // Close on backdrop click
+    modalContainer.addEventListener('click', (e) => {
+      if (e.target === modalContainer) {
+        document.body.removeChild(modalContainer);
+        this.keyboardService.enableSpaceKey(); // Re-enable space key detection
+      }
+    });
+
+    // Also ensure we re-enable if modal is dismissed via escape key
+    const handleEscapeKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        document.body.removeChild(modalContainer);
+        this.keyboardService.enableSpaceKey();
+        document.removeEventListener('keydown', handleEscapeKey);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscapeKey);
   }
 }
