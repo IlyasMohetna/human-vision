@@ -71,13 +71,16 @@
           class="cursor-pointer"
           (click)="moveItemDown(i); $event.stopPropagation()"
         ></fa-icon>
-        <!-- Comment button -->
+        <!-- Comment button with improved styling -->
         <fa-icon
           [icon]="['fas', 'comment']"
-          class="cursor-pointer text-white"
-          [class.text-blue-300]="item.comment"
-          [class.text-white]="!item.comment"
-          [title]="item.comment ? item.comment : 'Add comment'"
+          class="cursor-pointer"
+          [class.text-gray-300]="item.comment"
+          [class.text-opacity-90]="item.comment"
+          [class.text-gray-600]="!item.comment"
+          [title]="
+            item.comment ? 'Edit comment: ' + item.comment : 'Add comment'
+          "
           (click)="openCommentModal(item); $event.stopPropagation()"
         ></fa-icon>
         <!-- Existing eye icon -->
@@ -98,4 +101,11 @@
       No annotations in this category
     </div>
   </div>
+
+  <app-comment-modal
+    [item]="selectedItem"
+    [isVisible]="modalVisible"
+    (close)="onModalClose()"
+    (save)="onModalSave($event)"
+  ></app-comment-modal>
 </div>
