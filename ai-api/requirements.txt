@@ -4,3 +4,7 @@ numpy
 opencv-python
 keras
 tensorflow
+mysql-connector-python
+python-dotenv
+pymongo
+gradio==2.0.8
