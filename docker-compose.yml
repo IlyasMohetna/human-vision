@@ -86,9 +86,11 @@ services:
     ports:
       - "3423:8000"
     volumes:
-      - .:/app
+      - ./ai-api:/app
+      - ./core/storage/app/public:/laravel-storage:ro
     environment:
       - ENV=development
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
     networks:
       - humanvision_network
 
