@@ -1,0 +1,19 @@
+<div class="grid grid-cols-2">
+  <div
+    class="border border-[#333] p-4 flex items-center justify-center relative cursor-pointer"
+    *ngFor="let sign of trafficSigns"
+    (mouseenter)="onMouseEnterSign(sign)"
+    (mouseleave)="onMouseLeaveSign()"
+  >
+    <img
+      [src]="formatTrafficSignUrl(sign.predicted_label)"
+      alt="Traffic Sign"
+      class="w-[90%] object-contain mt-6"
+    />
+    <span
+      class="absolute top-1 left-1 bg-black text-white text-xs px-1 py-0.5 rounded"
+    >
+      {{ sign.predicted_label }} ({{ sign.accuracy }})
+    </span>
+  </div>
+</div>

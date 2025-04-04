@@ -41,6 +41,11 @@
     ></app-control-bar-item>
   </div>
 
+  <button (click)="toggleAllPolygonsVisibility()">
+    <span *ngIf="allPolygonsVisible">Hide Polygons</span>
+    <span *ngIf="!allPolygonsVisible">Show Polygons</span>
+  </button>
+
   <div class="ml-4 py-1 px-2 bg-gray-700 rounded text-sm flex items-center">
     <span class="text-gray-300 mr-1">Zoom: {{ zoomLevel.toFixed(1) }}x</span>
   </div>

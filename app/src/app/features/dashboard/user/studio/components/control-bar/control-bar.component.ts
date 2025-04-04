@@ -20,4 +20,11 @@ export class ControlBarComponent {
   @Input() isCrosshair = false;
   @Output() maxZoom = new EventEmitter<void>();
   @Output() togglePanning = new EventEmitter<void>();
+  @Output() allPolygonsVisibilityToggled = new EventEmitter<boolean>();
+  public allPolygonsVisible: boolean = true;
+
+  toggleAllPolygonsVisibility() {
+    this.allPolygonsVisible = !this.allPolygonsVisible;
+    this.allPolygonsVisibilityToggled.emit(this.allPolygonsVisible);
+  }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AiApiGatewayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -22,12 +23,11 @@ Route::prefix('auth')->group(function () {
 Route::prefix('dataset')->group(function () {
     Route::get('random', [DatasetController::class, 'random']);
     Route::get('{id}/weather', [DatasetController::class, 'weather']);
+    Route::get('{id}/traffic-signs', [AiApiGatewayController::class, '__invoke']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('me', [AuthController::class, 'me']);
-
- 
+    Route::get('me', [AuthController::class, 'me']); 
 });
 
 Route::get('import/start', [\App\Http\Controllers\ImportController::class, 'start']);

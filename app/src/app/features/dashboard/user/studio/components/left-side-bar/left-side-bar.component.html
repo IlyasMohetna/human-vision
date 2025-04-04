@@ -41,7 +41,10 @@
 
       <div *ngSwitchCase="4" class="ContentPanel">
         <h2 class="PanelTitle">Traffic sign</h2>
-        <p>Traffic sign information</p>
+        <app-traffic-signs
+          [datasetId]="datasetId"
+          (hoverSign)="signHovered.emit($event)"
+        ></app-traffic-signs>
       </div>
 
       <div *ngSwitchCase="5" class="ContentPanel !p-0">

@@ -83,8 +83,6 @@ services:
       context: ./ai-api
       dockerfile: Dockerfile
     container_name: humanvision_ai_api
-    ports:
-      - "3423:8000"
     volumes:
       - ./ai-api:/app
       - ./core/storage/app/public:/laravel-storage:ro

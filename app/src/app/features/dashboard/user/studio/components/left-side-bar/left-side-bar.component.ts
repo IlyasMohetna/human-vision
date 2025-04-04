@@ -8,22 +8,26 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { MapModalComponent } from '../map-modal/map-modal.component';
 import { MetadataComponent } from './components/metadata/metadata.component';
 import { VariantsComponent } from './components/variants/variants.component';
 import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { WeatherComponent } from './components/weather/weather.component';
+import { TrafficSignsComponent } from './components/traffic-signs/traffic-signs.component';
 
 @Component({
   selector: 'app-left-side-bar',
   standalone: true,
   imports: [
     CommonModule,
+    HttpClientModule,
     MapModalComponent,
     MetadataComponent,
     VariantsComponent,
     VehicleComponent,
     WeatherComponent,
+    TrafficSignsComponent,
   ],
   templateUrl: './left-side-bar.component.html',
   styleUrls: ['./left-side-bar.component.css'],
@@ -36,6 +40,7 @@ export class LeftSideBarComponent implements OnInit, OnChanges {
   @Input() datasetId: number = 1;
 
   @Output() variantSelected = new EventEmitter<any>();
+  @Output() signHovered = new EventEmitter<string | null>();
 
   public mapCoordinates: string = '';
   public mapHeading: number | null = null;

@@ -233,8 +233,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    this.loadDatasetId();
-
     this.route.data.subscribe((data) => {
       if (data['randomHash']) {
         if (typeof data['randomHash'] === 'function') {
@@ -302,6 +300,7 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
     this.polygonDataService.fetchPolygonData().subscribe({
       next: (response) => {
+        this.datasetId = response.id;
         this.polygonDataList = response.objects || [];
 
         this.polygonDataList.forEach((poly) => {
@@ -1155,6 +1154,13 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
   togglePolygon(id: string) {
     this.activePolygons[id] = !this.activePolygons[id];
+    this.redrawAllPolygons();
+  }
+
+  toggleAllPolygons(visible: boolean) {
+    Object.keys(this.activePolygons).forEach((id) => {
+      this.activePolygons[id] = visible;
+    });
     this.redrawAllPolygons();
   }
 

@@ -11,6 +11,7 @@
     [currentImageUrl]="currentImageUrl"
     [datasetId]="datasetId ?? 0"
     (variantSelected)="onVariantSelected($event)"
+    (signHovered)="setHoveredPolygon($event)"
   ></app-left-side-bar>
 
   <main
@@ -28,6 +29,7 @@
         (togglePanning)="togglePanning()"
         (maxZoom)="maxZoom()"
         [zoomLevel]="zoomLevel"
+        (allPolygonsVisibilityToggled)="toggleAllPolygons($event)"
       >
       </app-control-bar>
     </div>
