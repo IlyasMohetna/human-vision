@@ -40,7 +40,7 @@
       </div>
 
       <div *ngSwitchCase="4" class="ContentPanel">
-        <h2 class="PanelTitle">Traffic sign</h2>
+        <h2 class="PanelTitle p-3">Traffic sign</h2>
         <app-traffic-signs
           [datasetId]="datasetId"
           (hoverSign)="signHovered.emit($event)"

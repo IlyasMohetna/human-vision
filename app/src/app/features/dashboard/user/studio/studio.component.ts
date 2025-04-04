@@ -1214,8 +1214,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
     this.resetZoom();
 
-    this.loadDatasetId();
-
     setTimeout(() => {
       this.loadPolygonData();
     }, 500);
