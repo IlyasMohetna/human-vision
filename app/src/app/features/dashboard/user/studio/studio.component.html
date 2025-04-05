@@ -30,88 +30,115 @@
         (maxZoom)="maxZoom()"
         [zoomLevel]="zoomLevel"
         (allPolygonsVisibilityToggled)="toggleAllPolygons($event)"
+        (compareModeToggled)="onCompareModeToggled()"
+        [compareMode]="compareMode"
+        [variants]="variants"
+        [selectedVariantA]="selectedVariantA"
+        [selectedVariantB]="selectedVariantB"
+        (selectedVariantAChange)="selectedVariantA = $event"
+        (selectedVariantBChange)="selectedVariantB = $event"
       >
       </app-control-bar>
     </div>
 
     <div class="flex-1 w-full relative flex items-center justify-center">
-      <div
-        class="relative w-full h-[90vh]"
-        (mousedown)="onMouseDownContainer($event)"
-        (mousemove)="onMouseMoveContainer($event)"
-        (mouseup)="onMouseUpContainer($event)"
-        (mouseenter)="handleMouseEnterContainer()"
-        (mouseleave)="handleMouseLeaveContainer()"
-        (mousemove)="updateCrosshairPosition($event)"
-      >
-        <div
-          #imageContainer
-          class="image-container"
-          tabindex="0"
-          (keydown)="handleKeyboardShortcuts($event)"
-        >
-          <div class="image-wrapper">
-            <img
-              #imageElement
-              *ngIf="imageUrl"
-              [src]="imageUrl"
-              alt="Zoomable Image"
-              class="zoomable-image"
-              draggable="false"
-              (load)="onImageLoad()"
-            />
+      <div class="relative w-full h-[90vh]">
+        <!-- Regular view - use [hidden] instead of *ngIf -->
+        <div [hidden]="compareMode">
+          <div
+            class="relative w-full h-[90vh]"
+            (mousedown)="onMouseDownContainer($event)"
+            (mousemove)="onMouseMoveContainer($event)"
+            (mouseup)="onMouseUpContainer($event)"
+            (mouseenter)="handleMouseEnterContainer()"
+            (mouseleave)="handleMouseLeaveContainer()"
+            (mousemove)="updateCrosshairPosition($event)"
+          >
+            <div
+              #imageContainer
+              class="image-container"
+              tabindex="0"
+              (keydown)="handleKeyboardShortcuts($event)"
+            >
+              <div class="image-wrapper">
+                <img
+                  #imageElement
+                  *ngIf="imageUrl"
+                  [src]="imageUrl"
+                  alt="Zoomable Image"
+                  class="zoomable-image"
+                  draggable="false"
+                  (load)="onImageLoad()"
+                />
+              </div>
+            </div>
+
+            <div
+              class="crosshair-container"
+              [style.display]="
+                showCrosshair && isMouseInContainer ? 'block' : 'none'
+              "
+            >
+              <div class="crosshair-h" [style.top.px]="crosshairY"></div>
+              <div class="crosshair-v" [style.left.px]="crosshairX"></div>
+            </div>
+
+            <div
+              class="coordinate-label"
+              [style.display]="isMouseInContainer ? 'block' : 'none'"
+              [style.left.px]="crosshairX + 10"
+              [style.top.px]="crosshairY + 10"
+            >
+              {{
+                showCoordinates
+                  ? displayedCoordinateX + ", " + displayedCoordinateY
+                  : "No Coordinates"
+              }}
+            </div>
+          </div>
+
+          <canvas
+            #annotationCanvas
+            class="absolute top-0 left-0 w-full h-full"
+            [class.pointer-events-none]="!drawMode"
+            style="z-index: 500"
+            (mousedown)="startDrawing($event)"
+            (mousemove)="drawPolygon($event)"
+            (mouseup)="finishDrawing()"
+          ></canvas>
+
+          <div
+            class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"
+            style="z-index: 2000"
+          >
+            {{
+              showCoordinates
+                ? "X: " + displayedCoordinateX + ", Y: " + displayedCoordinateY
+                : "No Coordinates"
+            }}
+
+            | Zoom:
+            {{ zoomLevel.toFixed(1) }}x
           </div>
         </div>
 
+        <!-- Compare view - use [hidden] instead of *ngIf -->
         <div
-          class="crosshair-container"
-          [style.display]="
-            showCrosshair && isMouseInContainer ? 'block' : 'none'
-          "
+          [hidden]="!compareMode"
+          class="image-container relative w-full h-full"
+          style="z-index: 0"
         >
-          <div class="crosshair-h" [style.top.px]="crosshairY"></div>
-          <div class="crosshair-v" [style.left.px]="crosshairX"></div>
+          <div class="image-wrapper">
+            <img-comparison-slider>
+              <img slot="first" [src]="selectedVariantA" alt="Variant A" />
+              <img slot="second" [src]="selectedVariantB" alt="Variant B" />
+            </img-comparison-slider>
+          </div>
         </div>
-
-        <div
-          class="coordinate-label"
-          [style.display]="isMouseInContainer ? 'block' : 'none'"
-          [style.left.px]="crosshairX + 10"
-          [style.top.px]="crosshairY + 10"
-        >
-          {{
-            showCoordinates
-              ? displayedCoordinateX + ", " + displayedCoordinateY
-              : "No Coordinates"
-          }}
-        </div>
-      </div>
-
-      <canvas
-        #annotationCanvas
-        class="absolute top-0 left-0 w-full h-full"
-        [class.pointer-events-none]="!drawMode"
-        style="z-index: 500"
-        (mousedown)="startDrawing($event)"
-        (mousemove)="drawPolygon($event)"
-        (mouseup)="finishDrawing()"
-      ></canvas>
-
-      <div
-        class="absolute bottom-2 right-2 bg-gray-900 text-white px-2 py-1 text-sm rounded"
-        style="z-index: 2000"
-      >
-        {{
-          showCoordinates
-            ? "X: " + displayedCoordinateX + ", Y: " + displayedCoordinateY
-            : "No Coordinates"
-        }}
-
-        | Zoom:
-        {{ zoomLevel.toFixed(1) }}x
       </div>
     </div>
-    <div class="p-3 bg-slate-500 w-full">
+
+    <div class="p-3 bg-slate-500 w-full z-10">
       <button
         (click)="reloadAllData()"
         class="bg-orange-500 p-2 rounded-xl text-white hover:bg-orange-600 transition-colors"
@@ -121,7 +148,6 @@
     </div>
   </main>
 
-  <!-- Right Sidebar - Now using the component -->
   <div class="w-1/6">
     <app-right-side-bar
       [highPriorityAnnotations]="highPriorityAnnotations"

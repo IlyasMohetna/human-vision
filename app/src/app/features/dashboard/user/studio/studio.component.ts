@@ -149,6 +149,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   isLoading = true;
   studioHash = '';
   currentImageUrl = '';
+  compareMode = false;
+  selectedVariantA = '';
+  selectedVariantB = '';
 
   constructor(
     private renderer: Renderer2,
@@ -317,6 +320,21 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
           );
 
           this.variants = response.variants;
+
+          // Set default variant selections for comparison
+          const variant1 = this.variants.find((v) => v.type === 'Variant 1');
+          const variant4 = this.variants.find((v) => v.type === 'Variant 4');
+
+          if (variant1) this.selectedVariantA = variant1.path;
+          if (variant4) this.selectedVariantB = variant4.path;
+
+          // Default to the first two variants if specific ones aren't found
+          if (!this.selectedVariantA && this.variants.length > 0) {
+            this.selectedVariantA = this.variants[3].path;
+          }
+          if (!this.selectedVariantB && this.variants.length > 1) {
+            this.selectedVariantB = this.variants[0].path;
+          }
 
           if (originalImage && originalImage.path) {
             this.imageUrl = originalImage.path;
@@ -1326,5 +1344,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     setTimeout(() => {
       this.renderer.removeChild(body, indicator);
     }, 3000);
+  }
+
+  onCompareModeToggled() {
+    this.compareMode = !this.compareMode;
   }
 }

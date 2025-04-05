@@ -1,52 +1,95 @@
-<div class="flex items-center space-x-1 max-w-6xl w-full">
-  <div class="flex items-center space-x-1 mr-4 border-r pr-4 border-gray-600">
-    <app-control-bar-item
-      icon="magnifying-glass-plus"
-      label="Zoom In"
-      (clicked)="zoomIn.emit()"
-    ></app-control-bar-item>
+<div class="flex items-center justify-between w-full">
+  <div class="flex items-center space-x-2">
+    <div class="flex items-center space-x-1 mr-4 border-r pr-4 border-gray-600">
+      <app-control-bar-item
+        icon="magnifying-glass-plus"
+        label="Zoom In"
+        (clicked)="zoomIn.emit()"
+      ></app-control-bar-item>
 
-    <app-control-bar-item
-      icon="magnifying-glass-minus"
-      label="Zoom Out"
-      (clicked)="zoomOut.emit()"
-    ></app-control-bar-item>
+      <app-control-bar-item
+        icon="magnifying-glass-minus"
+        label="Zoom Out"
+        (clicked)="zoomOut.emit()"
+      ></app-control-bar-item>
 
-    <app-control-bar-item
-      icon="minimize"
-      label="Fit Image"
-      (clicked)="resetZoom.emit()"
-    ></app-control-bar-item>
+      <app-control-bar-item
+        icon="minimize"
+        label="Fit Image"
+        (clicked)="resetZoom.emit()"
+      ></app-control-bar-item>
 
-    <app-control-bar-item
-      icon="maximize"
-      label="Max Zoom"
-      (clicked)="maxZoom.emit()"
-    ></app-control-bar-item>
+      <app-control-bar-item
+        icon="maximize"
+        label="Max Zoom"
+        (clicked)="maxZoom.emit()"
+      ></app-control-bar-item>
+    </div>
+
+    <div class="flex items-center space-x-1 mr-4 border-r pr-4 border-gray-600">
+      <app-control-bar-item
+        icon="hand-paper"
+        label="Panning Mode"
+        [isActive]="isPanning"
+        (clicked)="togglePanning.emit()"
+      ></app-control-bar-item>
+
+      <app-control-bar-item
+        icon="crosshairs"
+        label="Toggle Crosshair"
+        [isActive]="isCrosshair"
+        (clicked)="toggleCrosshair.emit()"
+      ></app-control-bar-item>
+
+      <app-control-bar-item
+        [icon]="allPolygonsVisible ? 'eye' : 'eye-slash'"
+        [label]="allPolygonsVisible ? 'Hide Polygons' : 'Show Polygons'"
+        (clicked)="toggleAllPolygonsVisibility()"
+      ></app-control-bar-item>
+
+      <app-control-bar-item
+        icon="clone"
+        label="Compare Mode"
+        [isActive]="compareMode"
+        (clicked)="onCompareModeClick()"
+      ></app-control-bar-item>
+    </div>
+
+    <div *ngIf="compareMode" class="flex items-center space-x-3">
+      <select
+        class="bg-gray-700 text-white text-sm rounded py-1 px-2 border border-gray-600 min-w-[120px] appearance-none pl-2 pr-8 cursor-pointer"
+        style="
+          background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 fill=%22%23fff%22 viewBox=%220 0 16 16%22%3E%3Cpath d=%22M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z%22/%3E%3C/svg%3E');
+          background-position: right 8px center;
+          background-repeat: no-repeat;
+        "
+        [ngModel]="selectedVariantA"
+        (ngModelChange)="onVariantAChanged($event)"
+      >
+        <option *ngFor="let variant of variants" [value]="variant.path">
+          {{ variant.type }}
+        </option>
+      </select>
+
+      <select
+        class="bg-gray-700 text-white text-sm rounded py-1 px-2 border border-gray-600 min-w-[120px] appearance-none pl-2 pr-8 cursor-pointer"
+        style="
+          background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 fill=%22%23fff%22 viewBox=%220 0 16 16%22%3E%3Cpath d=%22M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z%22/%3E%3C/svg%3E');
+          background-position: right 8px center;
+          background-repeat: no-repeat;
+        "
+        [ngModel]="selectedVariantB"
+        (ngModelChange)="onVariantBChanged($event)"
+      >
+        <option *ngFor="let variant of variants" [value]="variant.path">
+          {{ variant.type }}
+        </option>
+      </select>
+    </div>
   </div>
 
-  <div class="flex items-center space-x-1">
-    <app-control-bar-item
-      icon="hand-paper"
-      label="Panning Mode"
-      [isActive]="isPanning"
-      (clicked)="togglePanning.emit()"
-    ></app-control-bar-item>
-
-    <app-control-bar-item
-      icon="crosshairs"
-      label="Toggle Crosshair"
-      [isActive]="isCrosshair"
-      (clicked)="toggleCrosshair.emit()"
-    ></app-control-bar-item>
-  </div>
-
-  <button (click)="toggleAllPolygonsVisibility()">
-    <span *ngIf="allPolygonsVisible">Hide Polygons</span>
-    <span *ngIf="!allPolygonsVisible">Show Polygons</span>
-  </button>
-
-  <div class="ml-4 py-1 px-2 bg-gray-700 rounded text-sm flex items-center">
-    <span class="text-gray-300 mr-1">Zoom: {{ zoomLevel.toFixed(1) }}x</span>
+  <!-- Move zoom indicator to the right -->
+  <div class="py-1 px-2 bg-gray-700 rounded text-sm flex items-center">
+    <span class="text-gray-300">Zoom: {{ zoomLevel.toFixed(1) }}x</span>
   </div>
 </div>
