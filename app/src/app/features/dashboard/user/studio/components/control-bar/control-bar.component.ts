@@ -37,6 +37,10 @@ export class ControlBarComponent {
   @Output() selectedVariantAChange = new EventEmitter<string>();
   @Output() selectedVariantBChange = new EventEmitter<string>();
 
+  // Variables for copy tooltip
+  showCopyTooltip = false;
+  copyTooltipText = '';
+
   toggleAllPolygonsVisibility() {
     this.allPolygonsVisible = !this.allPolygonsVisible;
     this.allPolygonsVisibilityToggled.emit(this.allPolygonsVisible);
@@ -54,5 +58,74 @@ export class ControlBarComponent {
   onVariantBChanged(variantPath: string) {
     this.selectedVariantB = variantPath;
     this.selectedVariantBChange.emit(variantPath);
+  }
+
+  copyOriginalImageUrl() {
+    const originalImage = this.variants.find(
+      (variant) => variant.type === 'Original Image'
+    );
+
+    if (originalImage) {
+      const canvas = document.createElement('canvas');
+      const img = new Image();
+
+      img.onload = () => {
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0);
+
+          canvas.toBlob((blob) => {
+            if (blob) {
+              try {
+                const clipboardItem = new ClipboardItem({ 'image/png': blob });
+                navigator.clipboard
+                  .write([clipboardItem])
+                  .then(() => {
+                    this.copyTooltipText = 'Image copied!';
+                    this.showCopyTooltip = true;
+                  })
+                  .catch((err) => {
+                    console.error('Image copy failed: ', err);
+                    this.fallbackImageCopy(canvas);
+                  });
+              } catch (e) {
+                this.fallbackImageCopy(canvas);
+              }
+            }
+
+            setTimeout(() => {
+              this.showCopyTooltip = false;
+            }, 2000);
+          });
+        }
+      };
+
+      img.src = originalImage.path;
+      img.crossOrigin = 'Anonymous';
+    }
+  }
+
+  private fallbackImageCopy(canvas: HTMLCanvasElement) {
+    try {
+      const dataUrl = canvas.toDataURL('image/png');
+      navigator.clipboard
+        .writeText(dataUrl)
+        .then(() => {
+          this.copyTooltipText = 'Image copied as data URL!';
+          this.showCopyTooltip = true;
+        })
+        .catch((err) => {
+          console.error('Data URL copy failed: ', err);
+          this.copyTooltipText = 'Copy failed - check console';
+          this.showCopyTooltip = true;
+        });
+    } catch (e) {
+      console.error('Fallback copy failed: ', e);
+      this.copyTooltipText = 'Copy failed - check console';
+      this.showCopyTooltip = true;
+    }
   }
 }

@@ -11,7 +11,18 @@
     </div>
   </div>
 
-  <div>
+  <div
+    class="persistent-iframe"
+    [style.display]="selectedSidebarItem === 6 ? 'block' : 'none'"
+  >
+    <iframe
+      #geminiIframe
+      src="https://gemini.google.com"
+      class="mobile-view-iframe"
+    ></iframe>
+  </div>
+
+  <div [style.display]="selectedSidebarItem === 6 ? 'none' : 'block'">
     <ng-container [ngSwitch]="selectedSidebarItem">
       <div *ngSwitchCase="0">
         <app-variants
@@ -52,13 +63,8 @@
         <app-metadata [metadata]="metadata"></app-metadata>
       </div>
 
-      <div *ngSwitchCase="6" class="ContentPanel">
-        <h2 class="PanelTitle">IA</h2>
-        <iframe
-          src="https://chat.groq.com/"
-          width="100%"
-          height="100%"
-        ></iframe>
+      <div *ngSwitchCase="6" class="ContentPanel !p-0 flex flex-col h-full">
+        <!-- Just a placeholder, actual content is in the persistent-iframe div -->
       </div>
     </ng-container>
   </div>

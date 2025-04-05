@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AiApiGatewayController;
+use App\Http\Controllers\AiChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -24,6 +25,7 @@ Route::prefix('dataset')->group(function () {
     Route::get('random', [DatasetController::class, 'random']);
     Route::get('{id}/weather', [DatasetController::class, 'weather']);
     Route::get('{id}/traffic-signs', [AiApiGatewayController::class, '__invoke']);
+    Route::get('{id}/chat', [AiChatController::class, 'chat']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {

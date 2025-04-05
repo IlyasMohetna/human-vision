@@ -6,6 +6,8 @@ import {
   OnInit,
   OnChanges,
   SimpleChanges,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -42,6 +44,8 @@ export class LeftSideBarComponent implements OnInit, OnChanges {
   @Output() variantSelected = new EventEmitter<any>();
   @Output() signHovered = new EventEmitter<string | null>();
 
+  @ViewChild('geminiIframe') geminiIframe!: ElementRef<HTMLIFrameElement>;
+
   public mapCoordinates: string = '';
   public mapHeading: number | null = null;
 
@@ -67,6 +71,22 @@ export class LeftSideBarComponent implements OnInit, OnChanges {
     }
 
     this.updateMapData();
+  }
+
+  onIframeLoad() {
+    // By the time we reach here, the iframe is fully loaded.
+    console.log('iframe load event triggered.');
+
+    // Double check that we have the reference
+    if (this.geminiIframe?.nativeElement?.contentWindow) {
+      // Example of sending a postMessage
+      this.geminiIframe.nativeElement.contentWindow.postMessage(
+        'Hello from parent after load event!',
+        '*'
+      );
+    } else {
+      console.warn('geminiIframe or contentWindow is not available.');
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

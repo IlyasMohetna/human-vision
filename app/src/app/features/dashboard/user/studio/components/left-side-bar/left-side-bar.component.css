@@ -9,6 +9,10 @@
   flex-shrink: 0;
 }
 
+.SideNavigationBar.left {
+  height: 100%;
+}
+
 .CompanionBar {
   width: 50px;
   min-width: 50px;
@@ -80,6 +84,11 @@
   overflow-x: hidden;
   display: flex; /* Add flex display */
   flex-direction: column; /* Arrange children vertically */
+}
+
+.ContentPanel.flex.flex-col.h-full {
+  flex: 1;
+  display: flex;
 }
 
 .ContentPanel > * {
@@ -277,4 +286,22 @@
   background-color: #333;
   border-radius: 4px;
   text-align: center;
+}
+
+.persistent-iframe {
+  flex: 1;
+  width: calc(100% - 50px);
+  height: 100%;
+  background-color: #282828;
+  overflow: hidden;
+}
+
+.mobile-view-iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  max-width: none !important;
+  transform: none !important;
 }

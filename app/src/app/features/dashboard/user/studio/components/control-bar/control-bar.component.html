@@ -53,6 +53,14 @@
         [isActive]="compareMode"
         (clicked)="onCompareModeClick()"
       ></app-control-bar-item>
+
+      <app-control-bar-item
+        icon="copy"
+        label="Copy Original Image"
+        (clicked)="copyOriginalImageUrl()"
+        [showTooltip]="showCopyTooltip"
+        [tooltipText]="copyTooltipText"
+      ></app-control-bar-item>
     </div>
 
     <div *ngIf="compareMode" class="flex items-center space-x-3">

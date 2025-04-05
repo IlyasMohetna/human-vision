@@ -14,4 +14,7 @@ export class ControlBarItemComponent {
   @Input() label = '';
   @Input() isActive = false;
   @Output() clicked = new EventEmitter<void>();
+
+  @Input() showTooltip: boolean = false;
+  @Input() tooltipText: string = '';
 }
