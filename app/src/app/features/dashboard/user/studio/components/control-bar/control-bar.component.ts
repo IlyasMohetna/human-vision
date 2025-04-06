@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
-import { ControlBarItemComponent } from '../control-bar-item/control-bar-item.component';
+import { ControlBarItemComponent } from './components/control-bar-item/control-bar-item.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({

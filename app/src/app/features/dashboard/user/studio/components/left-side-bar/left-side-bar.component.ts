@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { MapModalComponent } from '../map-modal/map-modal.component';
+import { MapComponent } from './components/map/map.component';
 import { MetadataComponent } from './components/metadata/metadata.component';
 import { VariantsComponent } from './components/variants/variants.component';
 import { VehicleComponent } from './components/vehicle/vehicle.component';
@@ -24,7 +24,7 @@ import { TrafficSignsComponent } from './components/traffic-signs/traffic-signs.
   imports: [
     CommonModule,
     HttpClientModule,
-    MapModalComponent,
+    MapComponent,
     MetadataComponent,
     VariantsComponent,
     VehicleComponent,

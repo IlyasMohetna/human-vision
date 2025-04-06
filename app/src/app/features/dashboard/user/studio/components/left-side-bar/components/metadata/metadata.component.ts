@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-metadata',
   imports: [CommonModule],
   templateUrl: './metadata.component.html',
-  styles: ``, // Remove custom styles - we'll use Tailwind directly
 })
 export class MetadataComponent {
   @Input() metadata: any = {};

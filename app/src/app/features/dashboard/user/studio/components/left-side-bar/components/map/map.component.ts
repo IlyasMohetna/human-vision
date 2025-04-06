@@ -14,13 +14,12 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-map-modal',
-  standalone: true,
+  selector: 'app-map',
   imports: [CommonModule, FormsModule],
-  templateUrl: './map-modal.component.html',
-  styleUrls: ['./map-modal.component.css'],
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.css'],
 })
-export class MapModalComponent implements OnInit, OnChanges {
+export class MapComponent implements OnInit, OnChanges {
   @Input() isOpen = false;
   @Input() coordinates = '';
   @Input() heading = 0;
