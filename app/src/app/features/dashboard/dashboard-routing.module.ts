@@ -25,6 +25,9 @@ const routes: Routes = [
         // canLoad: [RoleGuard],
         data: { role: Role.User },
       },
+      {
+        path: 'setting',
+      }
     ],
   },
 ];
