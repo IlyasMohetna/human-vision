@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Dataset } from './models/dataset.model';
 import { PaginationInfo } from './models/pagination.types';
+import { BadgeComponent } from '../../../../core/components/badge/badge.component';
 
 @Component({
   selector: 'app-dataset',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BadgeComponent],
   templateUrl: './dataset.component.html',
   styles: ``,
   standalone: true,
