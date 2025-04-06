@@ -21,6 +21,7 @@ Route::prefix('auth')->group(function () {
     });
 });
 
+Route::get('datasets', [DatasetController::class, 'index']);
 Route::prefix('dataset')->group(function () {
     Route::get('random', [DatasetController::class, 'random']);
     Route::get('{id}/weather', [DatasetController::class, 'weather']);

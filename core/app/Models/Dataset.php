@@ -22,4 +22,9 @@ class Dataset extends Model
     {
         return $this->belongsTo(City::class, 'city_id');
     }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
 }
