@@ -37,7 +37,6 @@ export class ControlBarComponent {
   @Output() selectedVariantAChange = new EventEmitter<string>();
   @Output() selectedVariantBChange = new EventEmitter<string>();
 
-  // Variables for copy tooltip
   showCopyTooltip = false;
   copyTooltipText = '';
 
