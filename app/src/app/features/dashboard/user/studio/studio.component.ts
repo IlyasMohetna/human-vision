@@ -135,12 +135,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   private zoomUpdatePending = false;
   private lastZoomTime = 0;
   private readonly ZOOM_THROTTLE_MS = 10;
-  sidebarNavItems = [
-    { icon: '📁', label: 'Project' },
-    { icon: '🔧', label: 'Tools' },
-    { icon: '🔍', label: 'Zoom' },
-    { icon: '📋', label: 'Annotations' },
-  ];
   selectedSidebarItem = 1;
   highPriorityAnnotations: any[] = [];
   mediumPriorityAnnotations: any[] = [];
@@ -1233,18 +1227,11 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     // }, 500);
   }
 
-  /**
-   * Formats and logs polygon data with their priorities
-   * This can be used to send data to the backend later
-   */
   private logPolygonDataWithPriorities() {
-    // Create a formatted representation of polygons with their priorities
     const polygonsWithPriorities = this.polygonDataList.map((polygon) => {
-      // Determine priority - use explicit priority if set, otherwise infer from label
       let priority = polygon.priority;
 
       if (!priority) {
-        // Get priority from label if not explicitly set
         const label = polygon.label?.toLowerCase();
         if (label) {
           if (['person', 'pedestrian'].includes(label)) {
@@ -1261,19 +1248,15 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
         }
       }
 
-      // Return formatted object with relevant properties
       return {
         objectId: polygon.objectId,
         label: polygon.label || 'Unlabeled',
         priority: priority,
         visible: this.activePolygons[polygon.objectId] === true,
-        comment: polygon.comment || '', // Include comment in the output
-        // Include other relevant properties you might need for the backend
-        // coordinates: polygon.polygon // Uncomment if you need coordinates
+        comment: polygon.comment || '',
       };
     });
 
-    // Create a summary object with counts by priority
     const summary = {
       total: polygonsWithPriorities.length,
       highPriority: polygonsWithPriorities.filter((p) => p.priority === 'high')
@@ -1288,10 +1271,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       ).length,
       visible: polygonsWithPriorities.filter((p) => p.visible).length,
       hidden: polygonsWithPriorities.filter((p) => !p.visible).length,
-      withComments: polygonsWithPriorities.filter((p) => p.comment).length, // Add comment count
+      withComments: polygonsWithPriorities.filter((p) => p.comment).length,
     };
 
-    // Log both the detailed polygon data and the summary
     console.log('=== Polygon Data with Priorities and Comments ===');
     console.log('Summary:', summary);
     console.log('Detailed polygon data:', polygonsWithPriorities);
@@ -1301,7 +1283,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     });
     console.log('===============================');
 
-    // Return the formatted data (useful for when you want to send to backend)
     return {
       datasetId: this.datasetId,
       polygons: polygonsWithPriorities,
@@ -1309,7 +1290,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     };
   }
 
-  // Method to handle comment additions
   onCommentAdded(commentData: { id: string; comment: string }): void {
     const polygon = this.polygonDataList.find(
       (p) => p.objectId === commentData.id
@@ -1347,7 +1327,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   validateData() {
-    // Prompt the user for their confidence percentage, default being 100%
     let input = prompt(
       'Enter your confidence percentage (default is 100):',
       '100'
@@ -1359,7 +1338,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     const data = this.logPolygonDataWithPriorities();
-    // data.percentage = percentage; // include confidence level in the data
 
     if (data.summary.unassigned > 0) {
       this.toastr.error(
