@@ -24,9 +24,11 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { PolygonDataService } from '../../../../services/polygon-data.service';
-import { PolygonDataMap } from './polygon.types';
+import { PolygonDataMap } from './models/polygon.types';
 import { ActivatedRoute } from '@angular/router';
 import { KeyboardService } from './services/keyboard.service';
+import { ToastrService } from 'ngx-toastr';
+import { AnnotationService } from './services/annotation.service';
 
 @Component({
   selector: 'app-studio',
@@ -158,7 +160,9 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     private polygonDataService: PolygonDataService,
     private http: HttpClient,
     private route: ActivatedRoute,
-    private keyboardService: KeyboardService
+    private keyboardService: KeyboardService,
+    private toastr: ToastrService,
+    private annotationService: AnnotationService
   ) {
     this.studioHash = this.generateRandomHash();
   }
@@ -286,14 +290,6 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
     }
-  }
-
-  private loadDatasetId() {
-    this.http
-      .get('http://localhost:9400/api/dataset/random')
-      .subscribe((res: any) => {
-        this.datasetId = res.id;
-      });
   }
 
   private loadPolygonData() {
@@ -1208,33 +1204,33 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
     this.studioHash = this.generateRandomHash();
 
-    this.showReloadIndicator();
+    // this.showReloadIndicator();
 
-    this.polygonDataList = [];
-    this.highPriorityAnnotations = [];
-    this.mediumPriorityAnnotations = [];
-    this.lowPriorityAnnotations = [];
-    this.unassignedAnnotations = [];
-    this.activePolygons = {};
-    this.polygons = {};
-    this.originalPolygons = {};
+    // this.polygonDataList = [];
+    // this.highPriorityAnnotations = [];
+    // this.mediumPriorityAnnotations = [];
+    // this.lowPriorityAnnotations = [];
+    // this.unassignedAnnotations = [];
+    // this.activePolygons = {};
+    // this.polygons = {};
+    // this.originalPolygons = {};
 
-    this.initialZoomSet = false;
+    // this.initialZoomSet = false;
 
-    if (this.ctx) {
-      this.ctx.clearRect(
-        0,
-        0,
-        this.canvasRef.nativeElement.width,
-        this.canvasRef.nativeElement.height
-      );
-    }
+    // if (this.ctx) {
+    //   this.ctx.clearRect(
+    //     0,
+    //     0,
+    //     this.canvasRef.nativeElement.width,
+    //     this.canvasRef.nativeElement.height
+    //   );
+    // }
 
-    this.resetZoom();
+    // this.resetZoom();
 
-    setTimeout(() => {
-      this.loadPolygonData();
-    }, 500);
+    // setTimeout(() => {
+    //   this.loadPolygonData();
+    // }, 500);
   }
 
   /**
@@ -1348,5 +1344,34 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
   onCompareModeToggled() {
     this.compareMode = !this.compareMode;
+  }
+
+  validateData() {
+    // Prompt the user for their confidence percentage, default being 100%
+    let input = prompt(
+      'Enter your confidence percentage (default is 100):',
+      '100'
+    );
+    let percentage = 100;
+    if (input !== null) {
+      const parsed = parseInt(input, 10);
+      percentage = isNaN(parsed) ? 100 : parsed;
+    }
+
+    const data = this.logPolygonDataWithPriorities();
+    // data.percentage = percentage; // include confidence level in the data
+
+    if (data.summary.unassigned > 0) {
+      this.toastr.error(
+        'All elements need to be annotated!',
+        'Validation Error'
+      );
+      return;
+    }
+
+    this.annotationService.postAnnotationData(data).subscribe({
+      next: () => this.toastr.success('Data validated successfully!'),
+      error: () => this.toastr.error('Error posting data'),
+    });
   }
 }

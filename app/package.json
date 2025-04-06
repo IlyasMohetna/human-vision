@@ -33,6 +33,7 @@
     "img-comparison-slider": "^8.0.6",
     "markerjs2": "^2.32.3",
     "ngx-image-zoom": "^3.0.0",
+    "ngx-toastr": "^19.0.0",
     "primeng": "^19.0.9",
     "rxjs": "~7.8.0",
     "snapsvg-cjs": "^0.0.6",
