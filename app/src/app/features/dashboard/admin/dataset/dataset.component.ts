@@ -89,7 +89,6 @@ export class DatasetComponent implements OnInit {
     this.loadDatasets(1);
   }
 
-  // Improve pagination methods with null safety
   shouldShowPageButton(page: number): boolean {
     if (
       !this.pagination ||
@@ -99,7 +98,6 @@ export class DatasetComponent implements OnInit {
       return false;
     }
 
-    // Show current page and a few pages around it
     const currentPage = this.pagination.current_page;
     return (
       page === 1 ||
@@ -118,11 +116,9 @@ export class DatasetComponent implements OnInit {
     }
 
     const currentPage = this.pagination.current_page;
-    // Show ellipsis after page 2 if current page > 4
     if (page === 2 && currentPage > 4) {
       return true;
     }
-    // Show ellipsis before last-1 page if there are more pages left
     if (
       page === this.pagination.last_page - 1 &&
       currentPage < this.pagination.last_page - 3
@@ -132,7 +128,6 @@ export class DatasetComponent implements OnInit {
     return false;
   }
 
-  // Helper method for safe page iteration in the template
   getPageArray(): number[] {
     if (
       !this.pagination ||
@@ -141,7 +136,7 @@ export class DatasetComponent implements OnInit {
     ) {
       return [];
     }
-    // Use a more direct approach instead of Array.from
+
     const result: number[] = [];
     for (let i = 0; i < this.pagination.last_page; i++) {
       result.push(i + 1);
