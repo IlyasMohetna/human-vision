@@ -98,7 +98,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  PolygonData</li>
+  PolygonResponse</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,7 +122,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/features/dashboard/user/studio/models/polygon.types.ts</code>
+            <code>src/app/services/polygon-data.service.ts</code>
         </p>
 
 
@@ -141,22 +141,39 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#label" 
+                                        <a href="#city" 
 >
-                                            label
+                                            city
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#points" 
+                                        <a href="#id" 
 >
-                                            points
+                                            id
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#type" 
+                                        <a href="#meta" 
 >
-                                            type
+                                            meta
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#objects" 
+>
+                                            objects
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#variants" 
+>
+                                            variants
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#vehicle" 
+>
+                                            vehicle
                                         </a>
                                 </li>
                             </ul>
@@ -174,9 +191,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="label"></a>
-                                        <span class="name "><b>label</b>
-                                            <a href="#label">
+                                        <a name="city"></a>
+                                        <span class="name "><b>city</b>
+                                            <a href="#city">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -184,7 +201,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>label:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>city:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -197,11 +214,6 @@
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
 
 
 
@@ -212,9 +224,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="points"></a>
-                                        <span class="name "><b>points</b>
-                                            <a href="#points">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -222,7 +234,73 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>points:     <code>literal type[]</code>
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="meta"></a>
+                                        <span class="name "><b>meta</b>
+                                            <a href="#meta">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>meta:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="objects"></a>
+                                        <span class="name "><b>objects</b>
+                                            <a href="#objects">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>objects:     <code>literal type[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -245,9 +323,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="type"></a>
-                                        <span class="name "><b>type</b>
-                                            <a href="#type">
+                                        <a name="variants"></a>
+                                        <span class="name "><b>variants</b>
+                                            <a href="#variants">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -255,7 +333,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>type:     <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+                                        <code>variants:     <code>literal type[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -263,7 +341,40 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+                                            <i>Type : </i>    <code>literal type[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="vehicle"></a>
+                                        <span class="name "><b>vehicle</b>
+                                            <a href="#vehicle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>vehicle:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                                         </td>
                                     </tr>
@@ -279,14 +390,47 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface PolygonData {
-  points: { x: number; y: number }[];
-  type: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27;;
-  label?: string;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Observable, catchError, of, tap } from &#x27;rxjs&#x27;;
+
+export interface PolygonResponse {
+  id: number;
+  city: string;
+  variants: {
+    type: string;
+    path: string;
+  }[];
+  meta: any;
+  objects: {
+    objectId: string;
+    label: string;
+    polygon: [number, number][];
+  }[];
+  vehicle: any;
 }
 
-export interface PolygonDataMap {
-  [id: string]: PolygonData;
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class PolygonDataService {
+  constructor(private http: HttpClient) {}
+
+  fetchPolygonData(): Observable&lt;PolygonResponse&gt; {
+    return this.http.get&lt;PolygonResponse&gt;(&#x27;/api/dataset/random&#x27;).pipe(
+      tap((response) &#x3D;&gt; console.log(&#x27;API data received:&#x27;, response)),
+      catchError((error) &#x3D;&gt; {
+        return of({
+          id: -1,
+          city: &#x27;&#x27;,
+          variants: [],
+          meta: {},
+          objects: [],
+          vehicle: {},
+        } as PolygonResponse);
+      })
+    );
+  }
 }
 </code></pre>
     </div>
@@ -325,7 +469,7 @@ export interface PolygonDataMap {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'PolygonData.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'PolygonResponse.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

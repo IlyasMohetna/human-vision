@@ -1,0 +1,1414 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ImportComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/dashboard/admin/import/import.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-import</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./import.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#batchId" >batchId</a>
+                            </li>
+                            <li>
+                                <a href="#failedJobs" >failedJobs</a>
+                            </li>
+                            <li>
+                                <a href="#intervalId" >intervalId</a>
+                            </li>
+                            <li>
+                                <a href="#isMock" >isMock</a>
+                            </li>
+                            <li>
+                                <a href="#isRunning" >isRunning</a>
+                            </li>
+                            <li>
+                                <a href="#processedJobs" >processedJobs</a>
+                            </li>
+                            <li>
+                                <a href="#progress" >progress</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#progressUrl" >progressUrl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#startImportUrl" >startImportUrl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#startWithProgressUrl" >startWithProgressUrl</a>
+                            </li>
+                            <li>
+                                <a href="#status" >status</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#statusUrl" >statusUrl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#stopImportUrl" >stopImportUrl</a>
+                            </li>
+                            <li>
+                                <a href="#totalJobs" >totalJobs</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#checkExistingImport" >checkExistingImport</a>
+                            </li>
+                            <li>
+                                <a href="#fetchProgress" >fetchProgress</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#startImport" >startImport</a>
+                            </li>
+                            <li>
+                                <a href="#startPolling" >startPolling</a>
+                            </li>
+                            <li>
+                                <a href="#stopImport" >stopImport</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(http: HttpClient)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                    <code>HttpClient</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkExistingImport"></a>
+                    <span class="name">
+                        <span ><b>checkExistingImport</b></span>
+                        <a href="#checkExistingImport"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>checkExistingImport()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Checks if an import is already running.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchProgress"></a>
+                    <span class="name">
+                        <span ><b>fetchProgress</b></span>
+                        <a href="#fetchProgress"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fetchProgress()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Fetches progress details from the backend.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startImport"></a>
+                    <span class="name">
+                        <span ><b>startImport</b></span>
+                        <a href="#startImport"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>startImport()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Starts a new import job.
+Immediately disables the start button to prevent double-clicks.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startPolling"></a>
+                    <span class="name">
+                        <span ><b>startPolling</b></span>
+                        <a href="#startPolling"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>startPolling()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Starts polling for progress updates.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stopImport"></a>
+                    <span class="name">
+                        <span ><b>stopImport</b></span>
+                        <a href="#stopImport"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>stopImport()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Stops/cancels the ongoing import job.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="batchId"></a>
+                    <span class="name">
+                        <span ><b>batchId</b></span>
+                        <a href="#batchId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="failedJobs"></a>
+                    <span class="name">
+                        <span ><b>failedJobs</b></span>
+                        <a href="#failedJobs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="intervalId"></a>
+                    <span class="name">
+                        <span ><b>intervalId</b></span>
+                        <a href="#intervalId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isMock"></a>
+                    <span class="name">
+                        <span ><b>isMock</b></span>
+                        <a href="#isMock"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isRunning"></a>
+                    <span class="name">
+                        <span ><b>isRunning</b></span>
+                        <a href="#isRunning"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processedJobs"></a>
+                    <span class="name">
+                        <span ><b>processedJobs</b></span>
+                        <a href="#processedJobs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="progress"></a>
+                    <span class="name">
+                        <span ><b>progress</b></span>
+                        <a href="#progress"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="progressUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>progressUrl</b></span>
+                        <a href="#progressUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;http://localhost:9400/api/import/progress&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startImportUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>startImportUrl</b></span>
+                        <a href="#startImportUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;http://localhost:9400/api/import/start&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:12</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startWithProgressUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>startWithProgressUrl</b></span>
+                        <a href="#startWithProgressUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;http://localhost:9400/api/import/start-with-progress&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="status"></a>
+                    <span class="name">
+                        <span ><b>status</b></span>
+                        <a href="#status"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Idle&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statusUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>statusUrl</b></span>
+                        <a href="#statusUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;http://localhost:9400/api/import/status&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stopImportUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>stopImportUrl</b></span>
+                        <a href="#stopImportUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;http://localhost:9400/api/import/stop&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalJobs"></a>
+                    <span class="name">
+                        <span ><b>totalJobs</b></span>
+                        <a href="#totalJobs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/dashboard/admin/import/import.component.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+
+@Component({
+  selector: &#x27;app-import&#x27;,
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: &#x27;./import.component.html&#x27;,
+})
+export class ImportComponent implements OnInit, OnDestroy {
+  private startImportUrl &#x3D; &#x27;http://localhost:9400/api/import/start&#x27;;
+  private stopImportUrl &#x3D; &#x27;http://localhost:9400/api/import/stop&#x27;;
+  private statusUrl &#x3D; &#x27;http://localhost:9400/api/import/status&#x27;;
+  private progressUrl &#x3D; &#x27;http://localhost:9400/api/import/progress&#x27;;
+  private startWithProgressUrl &#x3D; &#x27;http://localhost:9400/api/import/start-with-progress&#x27;;
+  intervalId: any;
+
+  progress &#x3D; 0;
+  status &#x3D; &#x27;Idle&#x27;;
+  totalJobs &#x3D; 0;
+  processedJobs &#x3D; 0;
+  failedJobs &#x3D; 0;
+  isMock &#x3D; false;
+  batchId: string | null &#x3D; null;
+  isRunning &#x3D; false;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.checkExistingImport();
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
+
+  /**
+   * Starts a new import job.
+   * Immediately disables the start button to prevent double-clicks.
+   */
+  startImport() {
+    if (this.isRunning) return;
+    this.isRunning &#x3D; true;
+
+    this.http.get&lt;any&gt;(this.startWithProgressUrl).subscribe(
+      (res) &#x3D;&gt; {
+        this.batchId &#x3D; res.batch_id;
+        this.status &#x3D; &#x27;running&#x27;;
+        this.startPolling();
+      },
+      (error) &#x3D;&gt; {
+        console.error(&#x27;Error starting import&#x27;, error);
+        this.isRunning &#x3D; false;
+      }
+    );
+  }
+
+  /**
+   * Stops/cancels the ongoing import job.
+   */
+  stopImport() {
+    if (!this.isRunning) return;
+
+    this.http.post&lt;any&gt;(this.stopImportUrl, {}).subscribe(
+      (res) &#x3D;&gt; {
+        this.status &#x3D; &#x27;cancelled&#x27;;
+        this.isRunning &#x3D; false;
+        clearInterval(this.intervalId);
+      },
+      (error) &#x3D;&gt; {
+        console.error(&#x27;Error stopping import&#x27;, error);
+      }
+    );
+  }
+
+  /**
+   * Checks if an import is already running.
+   */
+  checkExistingImport() {
+    this.http.get&lt;any&gt;(this.statusUrl).subscribe(
+      (res) &#x3D;&gt; {
+        if (res.batch_id) {
+          this.batchId &#x3D; res.batch_id;
+          this.isRunning &#x3D; true;
+          this.startPolling();
+        }
+      },
+      (error) &#x3D;&gt; {
+        console.error(&#x27;Error checking import status&#x27;, error);
+      }
+    );
+  }
+
+  /**
+   * Starts polling for progress updates.
+   */
+  startPolling() {
+    this.fetchProgress();
+    this.intervalId &#x3D; setInterval(() &#x3D;&gt; this.fetchProgress(), 2000);
+  }
+
+  /**
+   * Fetches progress details from the backend.
+   */
+  fetchProgress() {
+    if (!this.batchId) return;
+
+    this.http
+      .get&lt;any&gt;(&#x60;${this.progressUrl}/${this.batchId}&#x60;)
+      .subscribe((data) &#x3D;&gt; {
+        this.progress &#x3D; data.progress;
+        this.status &#x3D; data.status;
+        this.totalJobs &#x3D; data.totalJobs;
+        this.processedJobs &#x3D; data.processedJobs;
+        this.failedJobs &#x3D; data.failedJobs;
+        this.isMock &#x3D; !!data.mock;
+
+        if (
+          data.status &#x3D;&#x3D;&#x3D; &#x27;finished&#x27; ||
+          data.status &#x3D;&#x3D;&#x3D; &#x27;failed&#x27; ||
+          data.status &#x3D;&#x3D;&#x3D; &#x27;cancelled&#x27;
+        ) {
+          this.isRunning &#x3D; false;
+          clearInterval(this.intervalId);
+        }
+      });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div
+  class&#x3D;&quot;min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center p-6&quot;
+&gt;
+  &lt;div
+    class&#x3D;&quot;bg-white shadow-2xl rounded-2xl p-8 max-w-md w-full relative overflow-hidden&quot;
+  &gt;
+    &lt;!-- Background animated shape --&gt;
+    &lt;div
+      class&#x3D;&quot;absolute -top-8 -left-8 w-40 h-40 bg-indigo-200 rounded-full blur-3xl opacity-40 animate-pulse&quot;
+    &gt;&lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;flex flex-col items-center space-y-6&quot;&gt;
+      &lt;h2 class&#x3D;&quot;text-3xl font-extrabold text-indigo-800 tracking-tight&quot;&gt;
+        🚀 Import Progress
+      &lt;/h2&gt;
+
+      &lt;!-- Buttons: Start when not running, Stop when running --&gt;
+      &lt;div class&#x3D;&quot;flex space-x-4&quot;&gt;
+        &lt;button
+          (click)&#x3D;&quot;startImport()&quot;
+          [disabled]&#x3D;&quot;isRunning&quot;
+          class&#x3D;&quot;bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition disabled:opacity-50&quot;
+        &gt;
+          Start Import
+        &lt;/button&gt;
+        &lt;button
+          *ngIf&#x3D;&quot;isRunning&quot;
+          (click)&#x3D;&quot;stopImport()&quot;
+          class&#x3D;&quot;bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition&quot;
+        &gt;
+          Stop Import
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Progress Circle --&gt;
+      &lt;div class&#x3D;&quot;relative w-40 h-40 mt-4&quot;&gt;
+        &lt;svg class&#x3D;&quot;w-full h-full transform -rotate-90&quot; viewBox&#x3D;&quot;0 0 100 100&quot;&gt;
+          &lt;circle
+            cx&#x3D;&quot;50&quot;
+            cy&#x3D;&quot;50&quot;
+            r&#x3D;&quot;45&quot;
+            stroke&#x3D;&quot;#e5e7eb&quot;
+            stroke-width&#x3D;&quot;10&quot;
+            fill&#x3D;&quot;none&quot;
+          /&gt;
+          &lt;circle
+            cx&#x3D;&quot;50&quot;
+            cy&#x3D;&quot;50&quot;
+            r&#x3D;&quot;45&quot;
+            [attr.stroke-dasharray]&#x3D;&quot;282.6&quot;
+            [attr.stroke-dashoffset]&#x3D;&quot;282.6 - (progress / 100) * 282.6&quot;
+            stroke&#x3D;&quot;#4F46E5&quot;
+            stroke-width&#x3D;&quot;10&quot;
+            stroke-linecap&#x3D;&quot;round&quot;
+            fill&#x3D;&quot;none&quot;
+            class&#x3D;&quot;transition-all duration-500&quot;
+            [ngClass]&#x3D;&quot;{
+              &#x27;animate-spin-slow&#x27;: isRunning &amp;&amp; status !&#x3D;&#x3D; &#x27;cancelled&#x27;
+            }&quot;
+          &gt;&lt;/circle&gt;
+        &lt;/svg&gt;
+        &lt;div class&#x3D;&quot;absolute inset-0 flex items-center justify-center&quot;&gt;
+          &lt;span class&#x3D;&quot;text-3xl font-bold text-indigo-700&quot;
+            &gt;{{ progress }}%&lt;/span
+          &gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Status Label --&gt;
+      &lt;div class&#x3D;&quot;w-full text-center&quot;&gt;
+        &lt;span
+          class&#x3D;&quot;px-4 py-1 text-sm font-medium rounded-full&quot;
+          [ngClass]&#x3D;&quot;{
+            &#x27;bg-blue-100 text-blue-700&#x27;: status &#x3D;&#x3D;&#x3D; &#x27;pending&#x27;,
+            &#x27;bg-green-100 text-green-700&#x27;: status &#x3D;&#x3D;&#x3D; &#x27;finished&#x27;,
+            &#x27;bg-yellow-100 text-yellow-700&#x27;: status &#x3D;&#x3D;&#x3D; &#x27;mocking&#x27;,
+            &#x27;bg-red-100 text-red-700&#x27;:
+              status &#x3D;&#x3D;&#x3D; &#x27;failed&#x27; || status &#x3D;&#x3D;&#x3D; &#x27;cancelled&#x27;
+          }&quot;
+        &gt;
+          {{ status | titlecase }}
+        &lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Job Stats --&gt;
+      &lt;div class&#x3D;&quot;grid grid-cols-3 gap-4 w-full text-center mt-4 text-sm&quot;&gt;
+        &lt;div&gt;
+          &lt;p class&#x3D;&quot;text-gray-500&quot;&gt;Total&lt;/p&gt;
+          &lt;p class&#x3D;&quot;font-semibold text-gray-800&quot;&gt;{{ totalJobs }}&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;p class&#x3D;&quot;text-gray-500&quot;&gt;Processed&lt;/p&gt;
+          &lt;p class&#x3D;&quot;font-semibold text-green-600&quot;&gt;{{ processedJobs }}&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;p class&#x3D;&quot;text-gray-500&quot;&gt;Failed&lt;/p&gt;
+          &lt;p class&#x3D;&quot;font-semibold text-red-500&quot;&gt;{{ failedJobs }}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Optional message when using mock data --&gt;
+      &lt;div *ngIf&#x3D;&quot;isMock&quot; class&#x3D;&quot;mt-4 text-xs text-gray-400 italic&quot;&gt;
+        Mock data active — waiting for real batch...
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div  class="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center p-6">  <div    class="bg-white shadow-2xl rounded-2xl p-8 max-w-md w-full relative overflow-hidden"  >    <!-- Background animated shape -->    <div      class="absolute -top-8 -left-8 w-40 h-40 bg-indigo-200 rounded-full blur-3xl opacity-40 animate-pulse"    ></div>    <div class="flex flex-col items-center space-y-6">      <h2 class="text-3xl font-extrabold text-indigo-800 tracking-tight">        🚀 Import Progress      </h2>      <!-- Buttons: Start when not running, Stop when running -->      <div class="flex space-x-4">        <button          (click)="startImport()"          [disabled]="isRunning"          class="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition disabled:opacity-50"        >          Start Import        </button>        <button          *ngIf="isRunning"          (click)="stopImport()"          class="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition"        >          Stop Import        </button>      </div>      <!-- Progress Circle -->      <div class="relative w-40 h-40 mt-4">        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">          <circle            cx="50"            cy="50"            r="45"            stroke="#e5e7eb"            stroke-width="10"            fill="none"          />          <circle            cx="50"            cy="50"            r="45"            [attr.stroke-dasharray]="282.6"            [attr.stroke-dashoffset]="282.6 - (progress / 100) * 282.6"            stroke="#4F46E5"            stroke-width="10"            stroke-linecap="round"            fill="none"            class="transition-all duration-500"            [ngClass]="{              \'animate-spin-slow\': isRunning && status !== \'cancelled\'            }"          ></circle>        </svg>        <div class="absolute inset-0 flex items-center justify-center">          <span class="text-3xl font-bold text-indigo-700"            >{{ progress }}%</span          >        </div>      </div>      <!-- Status Label -->      <div class="w-full text-center">        <span          class="px-4 py-1 text-sm font-medium rounded-full"          [ngClass]="{            \'bg-blue-100 text-blue-700\': status === \'pending\',            \'bg-green-100 text-green-700\': status === \'finished\',            \'bg-yellow-100 text-yellow-700\': status === \'mocking\',            \'bg-red-100 text-red-700\':              status === \'failed\' || status === \'cancelled\'          }"        >          {{ status | titlecase }}        </span>      </div>      <!-- Job Stats -->      <div class="grid grid-cols-3 gap-4 w-full text-center mt-4 text-sm">        <div>          <p class="text-gray-500">Total</p>          <p class="font-semibold text-gray-800">{{ totalJobs }}</p>        </div>        <div>          <p class="text-gray-500">Processed</p>          <p class="font-semibold text-green-600">{{ processedJobs }}</p>        </div>        <div>          <p class="text-gray-500">Failed</p>          <p class="font-semibold text-red-500">{{ failedJobs }}</p>        </div>      </div>      <!-- Optional message when using mock data -->      <div *ngIf="isMock" class="mt-4 text-xs text-gray-400 italic">        Mock data active — waiting for real batch...      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AnnotationCategoryComponent', 'selector': 'app-annotation-category'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'CommentModalComponent', 'selector': 'app-comment-modal'},{'name': 'ControlBarComponent', 'selector': 'app-control-bar'},{'name': 'ControlBarItemComponent', 'selector': 'app-control-bar-item'},{'name': 'DashboardLayoutComponent', 'selector': 'app-dashboard-layout'},{'name': 'DatasetComponent', 'selector': 'app-dataset'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ImportComponent', 'selector': 'app-import'},{'name': 'LeftSideBarComponent', 'selector': 'app-left-side-bar'},{'name': 'LoadingOverlayComponent', 'selector': 'app-loading-overlay'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MetadataComponent', 'selector': 'app-metadata'},{'name': 'RightSideBarComponent', 'selector': 'app-right-side-bar'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StudioComponent', 'selector': 'app-studio'},{'name': 'TrafficSignsComponent', 'selector': 'app-traffic-signs'},{'name': 'VariantsComponent', 'selector': 'app-variants'},{'name': 'VehicleComponent', 'selector': 'app-vehicle'},{'name': 'WeatherComponent', 'selector': 'app-weather'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ImportComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ImportComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

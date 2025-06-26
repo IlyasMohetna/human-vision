@@ -136,15 +136,24 @@ import { SettingsComponent } from &#x27;./settings/settings.component&#x27;;
 import { StudioComponent } from &#x27;./studio/studio.component&#x27;;
 
 export const USER_MENU &#x3D; [
-  { name: &#x27;Analytics&#x27;, route: &#x27;/user&#x27;, icon: &#x27;home&#x27; },
-  { name: &#x27;Studio&#x27;, route: &#x27;/dashboard/studio&#x27;, icon: &#x27;shopping-cart&#x27; },
+  { name: &#x27;Analytics&#x27;, route: &#x27;user/home&#x27;, icon: &#x27;home&#x27; },
+  { name: &#x27;Studio&#x27;, route: &#x27;user/studio&#x27;, icon: &#x27;shopping-cart&#x27; },
   { name: &#x27;Reviews&#x27;, route: &#x27;/user/profile&#x27;, icon: &#x27;user&#x27; },
-  { name: &#x27;Settings&#x27;, route: &#x27;/user/settings&#x27;, icon: &#x27;user-cog&#x27; },
+  { name: &#x27;Settings&#x27;, route: &#x27;settings&#x27;, icon: &#x27;user-cog&#x27; },
 ];
 
 const routes: Routes &#x3D; [
-  { path: &#x27;analytics&#x27;, component: HomeComponent },
-  { path: &#x27;studio&#x27;, component: StudioComponent, data: { showLayout: false } },
+  { path: &#x27;home&#x27;, component: HomeComponent },
+  {
+    path: &#x27;studio&#x27;,
+    component: StudioComponent,
+    data: {
+      showLayout: false,
+      randomHash: () &#x3D;&gt;
+        &quot;Math.random().toString(36).substring(2, 15)&quot; +
+        &quot;Math.random().toString(36).substring(2, 15)&quot;,
+    },
+  },
   {
     path: &#x27;settings&#x27;,
     component: SettingsComponent,

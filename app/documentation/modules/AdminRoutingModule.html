@@ -131,14 +131,30 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { HomeComponent } from &#x27;./home/home.component&#x27;;
+import { ImportComponent } from &#x27;./import/import.component&#x27;;
+import { DatasetComponent } from &#x27;./dataset/dataset.component&#x27;;
 
 export const ADMIN_MENU &#x3D; [
-  { name: &#x27;Admin Dashboard&#x27;, route: &#x27;/admin&#x27;, icon: &#x27;dashboard&#x27; },
-  { name: &#x27;User Management&#x27;, route: &#x27;/admin/users&#x27;, icon: &#x27;users&#x27; },
-  { name: &#x27;Reports&#x27;, route: &#x27;/admin/reports&#x27;, icon: &#x27;chart&#x27; },
+  { name: &#x27;Dashboard&#x27;, route: &#x27;admin/dashboard&#x27;, icon: &#x27;dashboard&#x27; },
+  { name: &#x27;Dataset&#x27;, route: &#x27;admin/dataset&#x27;, icon: &#x27;database&#x27; },
+  { name: &#x27;Import Data&#x27;, route: &#x27;admin/import&#x27;, icon: &#x27;download&#x27; },
 ];
 
-const routes: Routes &#x3D; [];
+const routes: Routes &#x3D; [
+  {
+    path: &#x27;dashboard&#x27;,
+    component: HomeComponent,
+  },
+  {
+    path: &#x27;dataset&#x27;,
+    component: DatasetComponent,
+  },
+  {
+    path: &#x27;import&#x27;,
+    component: ImportComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

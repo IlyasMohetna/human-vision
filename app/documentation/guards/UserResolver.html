@@ -93,7 +93,7 @@
 
 <ol class="breadcrumb">
     <li class="breadcrumb-item">Guards</li>
-    <li class="breadcrumb-item" >GuestGuard</li>
+    <li class="breadcrumb-item" >UserResolver</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -117,7 +117,7 @@
             <h3>File</h3>
             </p>
             <p class="comment">
-                <code>src/app/guards/guest.guard.ts</code>
+                <code>src/app/core/resolvers/user.resolver.ts</code>
             </p>
 
 
@@ -139,7 +139,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#canActivate" >canActivate</a>
+                                <a href="#resolve" >resolve</a>
                             </li>
                         </ul>
                     </td>
@@ -159,12 +159,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, router: Router)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: Router)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/guards/guest.guard.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/core/resolvers/user.resolver.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -182,10 +182,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>authService</td>
+                                                        <td>userService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -223,24 +223,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="canActivate"></a>
+                    <a name="resolve"></a>
                     <span class="name">
-                        <span ><b>canActivate</b></span>
-                        <a href="#canActivate"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>resolve</b></span>
+                        <a href="#resolve"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>canActivate()</code>
+<code>resolve()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/app/guards/guest.guard.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="14"
+                                    class="link-to-prism">src/app/core/resolvers/user.resolver.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -249,7 +249,7 @@
                 <td class="col-md-4">
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User | null&gt;</a></code>
 
                         </div>
                 </td>
@@ -262,21 +262,38 @@
 
         <div class="tab-pane fade  tab-source-code" id="source">
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { CanActivate, Router } from &#x27;@angular/router&#x27;;
-import { AuthService } from &#x27;../features/auth/services/auth.service&#x27;;
+import { Resolve, Router } from &#x27;@angular/router&#x27;;
+import { Observable, of } from &#x27;rxjs&#x27;;
+import { catchError, filter, take, tap } from &#x27;rxjs/operators&#x27;;
+import { UserService } from &#x27;../../features/auth/services/user.service&#x27;;
+import { User } from &#x27;../../features/auth/models/user.model&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
-export class GuestGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+export class UserResolver implements Resolve&lt;User | null&gt; {
+  constructor(private userService: UserService, private router: Router) {}
 
-  canActivate(): boolean {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate([&#x27;/app&#x27;]);
-      return false;
+  resolve(): Observable&lt;User | null&gt; {
+    const currentUser &#x3D; this.userService.getUser();
+    if (currentUser) {
+      return of(currentUser);
     }
-    return true;
+
+    this.userService.fetchUser();
+
+    return this.userService.user$.pipe(
+      filter((user) &#x3D;&gt; !!user),
+      take(1),
+      tap((user) &#x3D;&gt; {
+        console.log(&#x27;UserResolver: User loaded:&#x27;, user);
+      }),
+      catchError((err) &#x3D;&gt; {
+        console.error(&#x27;UserResolver: Error fetching user:&#x27;, err);
+        this.router.navigate([&#x27;/login&#x27;]);
+        return of(null);
+      })
+    );
   }
 }
 </code></pre>
@@ -319,7 +336,7 @@ export class GuestGuard implements CanActivate {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'guard';
-            var COMPODOC_CURRENT_PAGE_URL = 'GuestGuard.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserResolver.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -176,4 +176,9 @@ class ImportController extends Controller
             'failedJobs'    => $batch->failedJobs,
         ];
     }
+
+    public function manualImport()
+    {
+        dispatch(new SyncDatasetToDatabaseJob());
+    }
 }
