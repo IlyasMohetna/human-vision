@@ -1,0 +1,127 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  background-color: #282828;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 900px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #262c2f;
+  padding: 10px 20px;
+  color: white;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-content {
+  padding: 0;
+  height: 450px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.action-button {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.action-button:hover {
+  background-color: #3367d6;
+}
+
+.coordinates-input {
+  display: flex;
+  margin-right: 10px;
+}
+
+.coordinates-input input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px 0 0 4px;
+  min-width: 200px;
+}
+
+.coordinates-input .action-button {
+  border-radius: 0 4px 4px 0;
+  margin-right: 0;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+  color: white;
+  font-size: 18px;
+}
+
+.heading-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 0;
+  width: 80px;
+}
+
+.map-info {
+  display: flex;
+  padding: 5px 15px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 12px;
+  justify-content: space-between;
+}
+
+.info-item {
+  display: flex;
+  margin-right: 20px;
+}
+
+.info-label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.info-value {
+  font-family: monospace;
+}
+
+.hidden {
+  display: none;
+}

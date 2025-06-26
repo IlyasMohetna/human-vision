@@ -24,13 +24,10 @@ export interface PolygonResponse {
 export class PolygonDataService {
   constructor(private http: HttpClient) {}
 
-  // Fetch polygons and related data from the API
   fetchPolygonData(): Observable<PolygonResponse> {
     return this.http.get<PolygonResponse>('/api/dataset/random').pipe(
       tap((response) => console.log('API data received:', response)),
       catchError((error) => {
-        console.error('Error fetching polygon data:', error);
-        // Return a fallback or empty response
         return of({
           id: -1,
           city: '',

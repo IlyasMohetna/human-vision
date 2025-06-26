@@ -71,4 +71,34 @@ class DatasetController extends Controller
             'data' => $weather
         ], 200);
     }
+
+    public function index(Request $request)
+    {
+        $perPage = $request->get('perPage', 10);
+        $datasets = Dataset::with([
+            'city:id,name',
+            'status:id,name',
+            'variants' => function($query) {
+                $query->where('type_id', 1)
+                      ->select('id', 'dataset_id', 'path')
+                      ->limit(1);
+            }
+        ])
+        ->select('id', 'city_id', 'status_id', 'created_at')
+        ->paginate($perPage);
+
+        $datasets->getCollection()->transform(function ($dataset) {
+            if ($dataset->variants->isNotEmpty()) {
+                $variant = $dataset->variants->first();
+                $variant->path = asset('storage/' . $variant->path);
+                $dataset->variant = $variant;
+            } else {
+                $dataset->variant = null;
+            }
+            unset($dataset->variants);
+            return $dataset;
+        });
+
+        return response()->json($datasets, 200);
+    }
 }

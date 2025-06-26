@@ -20,18 +20,27 @@ import {
   CDK_DRAG_CONFIG,
 } from '@angular/cdk/drag-drop';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { KeyboardService } from '../../../services/keyboard.service';
+import { CommentModalComponent } from '../comment-modal/comment-modal.component';
 
 @Component({
   selector: 'app-annotation-category',
   standalone: true,
-  imports: [CommonModule, DragDropModule, FontAwesomeModule],
+  imports: [
+    CommonModule,
+    DragDropModule,
+    FontAwesomeModule,
+    CommentModalComponent,
+  ],
   templateUrl: './annotation-category.component.html',
   providers: [
     {
       provide: CDK_DRAG_CONFIG,
       useValue: {
-        dragStartThreshold: 0, // Lower threshold
-        pointerDirectionChangeThreshold: 1, // Makes movement more responsive
+        dragStartThreshold: 0,
+        pointerDirectionChangeThreshold: 1,
       },
     },
   ],
@@ -55,6 +64,7 @@ export class AnnotationCategoryComponent
   @Output() itemHoverEnd = new EventEmitter<void>();
   @Output() itemToggle = new EventEmitter<string>();
   @Output() toggleExpand = new EventEmitter<boolean>();
+  @Output() commentAdded = new EventEmitter<{ id: string; comment: string }>();
 
   @ViewChild('scrollableContainer') scrollableContainer!: ElementRef;
   @ViewChildren('annotationItem') annotationItems!: QueryList<ElementRef>;
@@ -64,6 +74,16 @@ export class AnnotationCategoryComponent
   containerHasDrag = false;
 
   enterPredicate = () => true;
+
+  modalVisible = false;
+  selectedItem: any = null;
+
+  constructor(
+    library: FaIconLibrary,
+    private keyboardService: KeyboardService
+  ) {
+    library.addIconPacks(fas);
+  }
 
   ngOnInit() {
     // Initialization logic
@@ -205,5 +225,35 @@ export class AnnotationCategoryComponent
       this.annotations.splice(index, 1);
       this.annotations.splice(index + 1, 0, item);
     }
+  }
+
+  openCommentModal(item: any): void {
+    // Disable space key detection when modal opens
+    this.keyboardService.disableSpaceKey();
+
+    this.selectedItem = item;
+    this.modalVisible = true;
+  }
+
+  onModalClose(): void {
+    this.modalVisible = false;
+    this.selectedItem = null;
+
+    // Re-enable space key detection
+    this.keyboardService.enableSpaceKey();
+  }
+
+  onModalSave(commentData: { id: string; comment: string }): void {
+    // Find the item and update its comment
+    const item = this.annotations.find((a) => a.objectId === commentData.id);
+    if (item) {
+      item.comment = commentData.comment;
+    }
+
+    // Emit the comment added event
+    this.commentAdded.emit(commentData);
+
+    // Close the modal
+    this.onModalClose();
   }
 }

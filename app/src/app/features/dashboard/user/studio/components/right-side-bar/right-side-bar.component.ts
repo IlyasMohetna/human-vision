@@ -33,6 +33,7 @@ export class RightSideBarComponent implements OnChanges, AfterViewInit {
   @Output() annotationDrop = new EventEmitter<CdkDragDrop<any[]>>();
   @Output() hoveredPolygonChange = new EventEmitter<string | null>();
   @Output() togglePolygonChange = new EventEmitter<string>();
+  @Output() commentAdded = new EventEmitter<{ id: string; comment: string }>();
 
   @ViewChild('unassignedContainer') unassignedContainer!: ElementRef;
   @ViewChildren('unassignedItem') unassignedItems!: QueryList<ElementRef>;
@@ -76,6 +77,10 @@ export class RightSideBarComponent implements OnChanges, AfterViewInit {
 
   onAnnotationDrop(event: CdkDragDrop<any[]>): void {
     this.annotationDrop.emit(event);
+  }
+
+  onCommentAdded(commentData: { id: string; comment: string }): void {
+    this.commentAdded.emit(commentData);
   }
 
   // Track drag state

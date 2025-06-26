@@ -6,24 +6,30 @@ import {
   OnInit,
   OnChanges,
   SimpleChanges,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MapModalComponent } from '../map-modal/map-modal.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MapComponent } from './components/map/map.component';
 import { MetadataComponent } from './components/metadata/metadata.component';
 import { VariantsComponent } from './components/variants/variants.component';
 import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { WeatherComponent } from './components/weather/weather.component';
+import { TrafficSignsComponent } from './components/traffic-signs/traffic-signs.component';
 
 @Component({
   selector: 'app-left-side-bar',
   standalone: true,
   imports: [
     CommonModule,
-    MapModalComponent,
+    HttpClientModule,
+    MapComponent,
     MetadataComponent,
     VariantsComponent,
     VehicleComponent,
     WeatherComponent,
+    TrafficSignsComponent,
   ],
   templateUrl: './left-side-bar.component.html',
   styleUrls: ['./left-side-bar.component.css'],
@@ -36,6 +42,9 @@ export class LeftSideBarComponent implements OnInit, OnChanges {
   @Input() datasetId: number = 1;
 
   @Output() variantSelected = new EventEmitter<any>();
+  @Output() signHovered = new EventEmitter<string | null>();
+
+  @ViewChild('geminiIframe') geminiIframe!: ElementRef<HTMLIFrameElement>;
 
   public mapCoordinates: string = '';
   public mapHeading: number | null = null;
@@ -62,6 +71,22 @@ export class LeftSideBarComponent implements OnInit, OnChanges {
     }
 
     this.updateMapData();
+  }
+
+  onIframeLoad() {
+    // By the time we reach here, the iframe is fully loaded.
+    console.log('iframe load event triggered.');
+
+    // Double check that we have the reference
+    if (this.geminiIframe?.nativeElement?.contentWindow) {
+      // Example of sending a postMessage
+      this.geminiIframe.nativeElement.contentWindow.postMessage(
+        'Hello from parent after load event!',
+        '*'
+      );
+    } else {
+      console.warn('geminiIframe or contentWindow is not available.');
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

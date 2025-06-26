@@ -57,19 +57,31 @@
       (cdkDragStarted)="onDragStart()"
       (cdkDragEnded)="onDragEnd()"
     >
-      <span>{{ item.label || "Unnamed" }}</span>
-      <div class="flex items-center">
+      <span class="flex-1">{{ item.label || "Unnamed" }}</span>
+      <div class="flex items-center gap-2">
         <!-- Up arrow -->
         <fa-icon
           [icon]="['fas', 'arrow-up']"
-          class="mx-2 cursor-pointer"
+          class="cursor-pointer"
           (click)="moveItemUp(i); $event.stopPropagation()"
         ></fa-icon>
         <!-- Down arrow -->
         <fa-icon
           [icon]="['fas', 'arrow-down']"
-          class="mr-2 cursor-pointer"
+          class="cursor-pointer"
           (click)="moveItemDown(i); $event.stopPropagation()"
+        ></fa-icon>
+        <!-- Comment button with improved styling -->
+        <fa-icon
+          [icon]="['fas', 'comment']"
+          class="cursor-pointer"
+          [class.text-gray-300]="item.comment"
+          [class.text-opacity-90]="item.comment"
+          [class.text-gray-600]="!item.comment"
+          [title]="
+            item.comment ? 'Edit comment: ' + item.comment : 'Add comment'
+          "
+          (click)="openCommentModal(item); $event.stopPropagation()"
         ></fa-icon>
         <!-- Existing eye icon -->
         <fa-icon
@@ -89,4 +101,11 @@
       No annotations in this category
     </div>
   </div>
+
+  <app-comment-modal
+    [item]="selectedItem"
+    [isVisible]="modalVisible"
+    (close)="onModalClose()"
+    (save)="onModalSave($event)"
+  ></app-comment-modal>
 </div>

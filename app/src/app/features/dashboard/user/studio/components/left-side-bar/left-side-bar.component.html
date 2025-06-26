@@ -11,7 +11,18 @@
     </div>
   </div>
 
-  <div>
+  <div
+    class="persistent-iframe"
+    [style.display]="selectedSidebarItem === 6 ? 'block' : 'none'"
+  >
+    <iframe
+      #geminiIframe
+      src="https://gemini.google.com"
+      class="mobile-view-iframe"
+    ></iframe>
+  </div>
+
+  <div [style.display]="selectedSidebarItem === 6 ? 'none' : 'block'">
     <ng-container [ngSwitch]="selectedSidebarItem">
       <div *ngSwitchCase="0">
         <app-variants
@@ -40,8 +51,11 @@
       </div>
 
       <div *ngSwitchCase="4" class="ContentPanel">
-        <h2 class="PanelTitle">Traffic sign</h2>
-        <p>Traffic sign information</p>
+        <h2 class="PanelTitle p-3">Traffic sign</h2>
+        <app-traffic-signs
+          [datasetId]="datasetId"
+          (hoverSign)="signHovered.emit($event)"
+        ></app-traffic-signs>
       </div>
 
       <div *ngSwitchCase="5" class="ContentPanel !p-0">
@@ -49,18 +63,17 @@
         <app-metadata [metadata]="metadata"></app-metadata>
       </div>
 
-      <div *ngSwitchCase="6" class="ContentPanel">
-        <h2 class="PanelTitle">IA</h2>
-        <p>AI information</p>
+      <div *ngSwitchCase="6" class="ContentPanel !p-0 flex flex-col h-full">
+        <!-- Just a placeholder, actual content is in the persistent-iframe div -->
       </div>
     </ng-container>
   </div>
 
-  <app-map-modal
+  <app-map
     [isOpen]="showMapModal"
     [coordinates]="mapCoordinates"
     [heading]="mapHeading ?? 0"
     (closeModalEvent)="closeMapModal()"
   >
-  </app-map-modal>
+  </app-map>
 </aside>

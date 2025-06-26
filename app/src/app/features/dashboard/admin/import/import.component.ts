@@ -13,6 +13,7 @@ export class ImportComponent implements OnInit, OnDestroy {
   private stopImportUrl = 'http://localhost:9400/api/import/stop';
   private statusUrl = 'http://localhost:9400/api/import/status';
   private progressUrl = 'http://localhost:9400/api/import/progress';
+  private startWithProgressUrl = 'http://localhost:9400/api/import/start-with-progress';
   intervalId: any;
 
   progress = 0;
@@ -42,15 +43,14 @@ export class ImportComponent implements OnInit, OnDestroy {
     if (this.isRunning) return;
     this.isRunning = true;
 
-    this.http.post<any>(this.startImportUrl, {}).subscribe(
+    this.http.get<any>(this.startWithProgressUrl).subscribe(
       (res) => {
         this.batchId = res.batch_id;
-        this.status = 'started';
+        this.status = 'running';
         this.startPolling();
       },
       (error) => {
         console.error('Error starting import', error);
-        // Re-enable if an error occurs.
         this.isRunning = false;
       }
     );

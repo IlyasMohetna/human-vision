@@ -1,0 +1,80 @@
+<div
+  *ngIf="isVisible"
+  class="fixed inset-0 z-[9999] bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4"
+  (click)="onClose()"
+  (keydown)="onEscapeKey($event)"
+>
+  <!-- Modal container with refined styling -->
+  <div
+    class="bg-[#282828] border border-[#3a3a3a] rounded-lg shadow-2xl w-full max-w-md transform transition-all duration-300 ease-in-out animate-modalEntry"
+    (click)="stopPropagation($event)"
+  >
+    <!-- Header with dark theme colors -->
+    <div
+      class="border-b border-[#3a3a3a] p-5 flex items-center justify-between"
+    >
+      <h3 class="text-xl font-semibold text-white flex items-center gap-3">
+        <fa-icon [icon]="['fas', 'comment']" class="text-gray-400"></fa-icon>
+        <span>{{ item?.label || "Unnamed" }}</span>
+      </h3>
+      <button
+        class="text-gray-400 hover:text-white transition-colors rounded-full hover:bg-[#3a3a3a] p-1.5"
+        (click)="onClose()"
+        aria-label="Close"
+      >
+        <fa-icon [icon]="['fas', 'times']"></fa-icon>
+      </button>
+    </div>
+
+    <!-- Content with improved spacing -->
+    <div class="p-6">
+      <div class="mb-5">
+        <label
+          for="comment-textarea"
+          class="block text-gray-400 text-sm mb-2 font-medium"
+          >Add your comment</label
+        >
+        <textarea
+          id="comment-textarea"
+          [(ngModel)]="commentText"
+          class="w-full h-40 bg-[#222222] border border-[#3a3a3a] rounded-md p-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500 focus:ring-0 resize-none transition-all duration-200 shadow-inner"
+          placeholder="Type your comment here..."
+          (keydown)="stopPropagation($event)"
+          autofocus
+        ></textarea>
+      </div>
+
+      <!-- Hint text with improved styling -->
+      <div
+        class="mb-6 text-xs text-gray-500 bg-[#1E1E1E] p-3 rounded-md border border-[#333] flex items-start"
+      >
+        <fa-icon
+          [icon]="['fas', 'info-circle']"
+          class="mr-2 mt-0.5 flex-shrink-0"
+        ></fa-icon>
+        <span
+          >Comments are saved with the annotation and included when exporting
+          data. They help provide context and additional information about the
+          annotation.</span
+        >
+      </div>
+
+      <!-- Action buttons with improved styling -->
+      <div class="flex justify-end gap-3">
+        <button
+          class="px-4 py-2.5 bg-[#333] hover:bg-[#444] text-gray-300 rounded-md transition-colors shadow-sm"
+          (click)="onClose()"
+        >
+          Cancel
+        </button>
+        <button
+          class="px-4 py-2.5 bg-[#424242] hover:bg-[#505050] text-white rounded-md transition-colors shadow-sm flex items-center gap-2 font-medium"
+          (click)="onSave()"
+        >
+          <fa-icon [icon]="['fas', 'save']"></fa-icon>
+          Save Comment
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

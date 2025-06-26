@@ -13,7 +13,16 @@ export const USER_MENU = [
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'studio', component: StudioComponent, data: { showLayout: false } },
+  {
+    path: 'studio',
+    component: StudioComponent,
+    data: {
+      showLayout: false,
+      randomHash: () =>
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15),
+    },
+  },
   {
     path: 'settings',
     component: SettingsComponent,
