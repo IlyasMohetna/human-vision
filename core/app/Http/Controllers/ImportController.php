@@ -141,11 +141,11 @@ class ImportController extends Controller
 
     public function test()
     {
-        $response = Http::post('http://humanvision_ai_api:8000/predict', [
-            'dataset_id' => 1
-        ]);
-        dd($response->json());
-        // dispatch(new SyncDatasetToDatabaseJob());
+        // $response = Http::post('http://humanvision_ai_api:8000/predict', [
+        //     'dataset_id' => 1
+        // ]);
+        // dd($response->json());
+        dispatch(new SyncDatasetToDatabaseJob());
         // (new SyncDatasetToDatabaseJob())->handle();
     }
 

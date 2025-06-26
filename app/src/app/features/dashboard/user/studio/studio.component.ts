@@ -1198,33 +1198,33 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
 
     this.studioHash = this.generateRandomHash();
 
-    // this.showReloadIndicator();
+    this.showReloadIndicator();
 
-    // this.polygonDataList = [];
-    // this.highPriorityAnnotations = [];
-    // this.mediumPriorityAnnotations = [];
-    // this.lowPriorityAnnotations = [];
-    // this.unassignedAnnotations = [];
-    // this.activePolygons = {};
-    // this.polygons = {};
-    // this.originalPolygons = {};
+    this.polygonDataList = [];
+    this.highPriorityAnnotations = [];
+    this.mediumPriorityAnnotations = [];
+    this.lowPriorityAnnotations = [];
+    this.unassignedAnnotations = [];
+    this.activePolygons = {};
+    this.polygons = {};
+    this.originalPolygons = {};
 
-    // this.initialZoomSet = false;
+    this.initialZoomSet = false;
 
-    // if (this.ctx) {
-    //   this.ctx.clearRect(
-    //     0,
-    //     0,
-    //     this.canvasRef.nativeElement.width,
-    //     this.canvasRef.nativeElement.height
-    //   );
-    // }
+    if (this.ctx) {
+      this.ctx.clearRect(
+        0,
+        0,
+        this.canvasRef.nativeElement.width,
+        this.canvasRef.nativeElement.height
+      );
+    }
 
-    // this.resetZoom();
+    this.resetZoom();
 
-    // setTimeout(() => {
-    //   this.loadPolygonData();
-    // }, 500);
+    setTimeout(() => {
+      this.loadPolygonData();
+    }, 500);
   }
 
   private logPolygonDataWithPriorities() {
@@ -1347,9 +1347,23 @@ export class StudioComponent implements AfterViewInit, OnDestroy, OnInit {
       return;
     }
 
-    this.annotationService.postAnnotationData(data).subscribe({
-      next: () => this.toastr.success('Data validated successfully!'),
-      error: () => this.toastr.error('Error posting data'),
-    });
+    // Sending data to the backend
+    this.annotationService
+      .postAnnotationData(this.datasetId, {
+        datasetId: this.datasetId,
+        polygons: data.polygons,
+        summary: data.summary,
+        percentage: percentage,
+      })
+      .subscribe({
+        next: (response) => {
+          this.toastr.success('Data sent successfully!', 'Success');
+          this.reloadAllData();
+        },
+        error: (error) => {
+          this.toastr.error('Error sending data!', 'Error');
+        },
+      });
+
   }
 }

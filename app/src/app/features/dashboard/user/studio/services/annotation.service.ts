@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class AnnotationService {
   constructor(private http: HttpClient) {}
 
-  postAnnotationData(data: any): Observable<any> {
-    return this.http.post('/api/annotation', data);
+  postAnnotationData(datasetId: any, data: any): Observable<any> {
+    return this.http.post('/api/annotate/'+datasetId, data);
   }
 }

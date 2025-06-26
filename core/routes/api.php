@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AiApiGatewayController;
 use App\Http\Controllers\AiChatController;
+use App\Http\Controllers\AnnotationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -42,4 +43,6 @@ Route::get('import/start-with-progress', [\App\Http\Controllers\ImportController
 Route::get('test', [ImportController::class, 'test']);
 
 Route::get('meteo', [TestController::class, 'test']);
+
+Route::post('annotate/{datasetId}', [AnnotationController::class, 'annotate']);
 
