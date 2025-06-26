@@ -32,8 +32,8 @@ class DatasetController extends Controller
 
     public function random()
     {
-        // $dataset = Dataset::where('status_id', 1)->with('city','variants.type')->inRandomOrder()->first();
-        $dataset = Dataset::find(192);
+        $dataset = Dataset::where('status_id', 1)->with('city','variants.type')->inRandomOrder()->first();
+        // $dataset = Dataset::find(192);
         $annotation = $dataset->annotation;
         
         $annotation['objects'] = array_filter($annotation['objects'], function ($item) {
