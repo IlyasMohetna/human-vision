@@ -1,0 +1,2682 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  AnnotationCategoryComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+                <code>OnChanges</code>
+                <code>AfterViewInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>{
+    provide: CDK_DRAG_CONFIG, useValue: {
+        dragStartThreshold: , pointerDirectionChangeThreshold: ,
+    },
+}</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-annotation-category</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>DragDropModule</code>
+                            <code>FontAwesomeModule</code>
+                                <code><a href="../components/CommentModalComponent.html" target="_self" >CommentModalComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./annotation-category.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#annotationItems" >annotationItems</a>
+                            </li>
+                            <li>
+                                <a href="#containerHasDrag" >containerHasDrag</a>
+                            </li>
+                            <li>
+                                <a href="#enterPredicate" >enterPredicate</a>
+                            </li>
+                            <li>
+                                <a href="#isDragging" >isDragging</a>
+                            </li>
+                            <li>
+                                <a href="#modalVisible" >modalVisible</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#scrollableContainer" >scrollableContainer</a>
+                            </li>
+                            <li>
+                                <a href="#selectedItem" >selectedItem</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#isItemActive" >isItemActive</a>
+                            </li>
+                            <li>
+                                <a href="#isItemHoveredFromCanvas" >isItemHoveredFromCanvas</a>
+                            </li>
+                            <li>
+                                <a href="#moveItemDown" >moveItemDown</a>
+                            </li>
+                            <li>
+                                <a href="#moveItemUp" >moveItemUp</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onContainerEnter" >onContainerEnter</a>
+                            </li>
+                            <li>
+                                <a href="#onContainerExit" >onContainerExit</a>
+                            </li>
+                            <li>
+                                <a href="#onDragEnd" >onDragEnd</a>
+                            </li>
+                            <li>
+                                <a href="#onDragStart" >onDragStart</a>
+                            </li>
+                            <li>
+                                <a href="#onItemDrop" >onItemDrop</a>
+                            </li>
+                            <li>
+                                <a href="#onItemHover" >onItemHover</a>
+                            </li>
+                            <li>
+                                <a href="#onItemHoverEnd" >onItemHoverEnd</a>
+                            </li>
+                            <li>
+                                <a href="#onItemToggle" >onItemToggle</a>
+                            </li>
+                            <li>
+                                <a href="#onModalClose" >onModalClose</a>
+                            </li>
+                            <li>
+                                <a href="#onModalSave" >onModalSave</a>
+                            </li>
+                            <li>
+                                <a href="#openCommentModal" >openCommentModal</a>
+                            </li>
+                            <li>
+                                <a href="#scrollToHighlightedItem" >scrollToHighlightedItem</a>
+                            </li>
+                            <li>
+                                <a href="#toggleExpandState" >toggleExpandState</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activeItems" >activeItems</a>
+                            </li>
+                            <li>
+                                <a href="#annotations" >annotations</a>
+                            </li>
+                            <li>
+                                <a href="#badgeText" >badgeText</a>
+                            </li>
+                            <li>
+                                <a href="#connectedDropLists" >connectedDropLists</a>
+                            </li>
+                            <li>
+                                <a href="#dropListId" >dropListId</a>
+                            </li>
+                            <li>
+                                <a href="#hoveredPolygonId" >hoveredPolygonId</a>
+                            </li>
+                            <li>
+                                <a href="#iconPath" >iconPath</a>
+                            </li>
+                            <li>
+                                <a href="#isExpanded" >isExpanded</a>
+                            </li>
+                            <li>
+                                <a href="#priority" >priority</a>
+                            </li>
+                            <li>
+                                <a href="#title" >title</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#commentAdded" >commentAdded</a>
+                            </li>
+                            <li>
+                                <a href="#itemDrop" >itemDrop</a>
+                            </li>
+                            <li>
+                                <a href="#itemHover" >itemHover</a>
+                            </li>
+                            <li>
+                                <a href="#itemHoverEnd" >itemHoverEnd</a>
+                            </li>
+                            <li>
+                                <a href="#itemToggle" >itemToggle</a>
+                            </li>
+                            <li>
+                                <a href="#toggleExpand" >toggleExpand</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#categoryColorClasses" >categoryColorClasses</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(library: FaIconLibrary, keyboardService: <a href="../injectables/KeyboardService.html" target="_self">KeyboardService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:79</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>library</td>
+                                                  
+                                                        <td>
+                                                                    <code>FaIconLibrary</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>keyboardService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/KeyboardService.html" target="_self" >KeyboardService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="activeItems"></a>
+                        <b>activeItems</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:59</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="annotations"></a>
+                        <b>annotations</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:57</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="badgeText"></a>
+                        <b>badgeText</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:53</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="connectedDropLists"></a>
+                        <b>connectedDropLists</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:56</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dropListId"></a>
+                        <b>dropListId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:55</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hoveredPolygonId"></a>
+                        <b>hoveredPolygonId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:60</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="iconPath"></a>
+                        <b>iconPath</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;assets/icons/rectangle.svg&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:54</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isExpanded"></a>
+                        <b>isExpanded</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:58</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="priority"></a>
+                        <b>priority</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot; | &quot;none&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;none&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:52</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="title"></a>
+                        <b>title</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:51</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="commentAdded"></a>
+                        <b>commentAdded</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:67</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="itemDrop"></a>
+                        <b>itemDrop</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:62</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="itemHover"></a>
+                        <b>itemHover</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:63</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="itemHoverEnd"></a>
+                        <b>itemHoverEnd</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:64</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="itemToggle"></a>
+                        <b>itemToggle</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:65</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toggleExpand"></a>
+                        <b>toggleExpand</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:66</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isItemActive"></a>
+                    <span class="name">
+                        <span ><b>isItemActive</b></span>
+                        <a href="#isItemActive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isItemActive(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:171</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isItemHoveredFromCanvas"></a>
+                    <span class="name">
+                        <span ><b>isItemHoveredFromCanvas</b></span>
+                        <a href="#isItemHoveredFromCanvas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isItemHoveredFromCanvas(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="moveItemDown"></a>
+                    <span class="name">
+                        <span ><b>moveItemDown</b></span>
+                        <a href="#moveItemDown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>moveItemDown(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="222"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:222</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="moveItemUp"></a>
+                    <span class="name">
+                        <span ><b>moveItemUp</b></span>
+                        <a href="#moveItemUp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>moveItemUp(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="214"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:214</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: SimpleChanges)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                        <code>SimpleChanges</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onContainerEnter"></a>
+                    <span class="name">
+                        <span ><b>onContainerEnter</b></span>
+                        <a href="#onContainerEnter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onContainerEnter()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onContainerExit"></a>
+                    <span class="name">
+                        <span ><b>onContainerExit</b></span>
+                        <a href="#onContainerExit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onContainerExit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:183</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDragEnd"></a>
+                    <span class="name">
+                        <span ><b>onDragEnd</b></span>
+                        <a href="#onDragEnd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDragEnd()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:155</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDragStart"></a>
+                    <span class="name">
+                        <span ><b>onDragStart</b></span>
+                        <a href="#onDragStart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDragStart()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:151</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onItemDrop"></a>
+                    <span class="name">
+                        <span ><b>onItemDrop</b></span>
+                        <a href="#onItemDrop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onItemDrop(event: CdkDragDrop<any[]>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:146</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>CdkDragDrop&lt;any[]&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onItemHover"></a>
+                    <span class="name">
+                        <span ><b>onItemHover</b></span>
+                        <a href="#onItemHover"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onItemHover(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:159</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onItemHoverEnd"></a>
+                    <span class="name">
+                        <span ><b>onItemHoverEnd</b></span>
+                        <a href="#onItemHoverEnd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onItemHoverEnd()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onItemToggle"></a>
+                    <span class="name">
+                        <span ><b>onItemToggle</b></span>
+                        <a href="#onItemToggle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onItemToggle(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="167"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onModalClose"></a>
+                    <span class="name">
+                        <span ><b>onModalClose</b></span>
+                        <a href="#onModalClose"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onModalClose()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="238"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:238</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onModalSave"></a>
+                    <span class="name">
+                        <span ><b>onModalSave</b></span>
+                        <a href="#onModalSave"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onModalSave(commentData: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:246</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>commentData</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openCommentModal"></a>
+                    <span class="name">
+                        <span ><b>openCommentModal</b></span>
+                        <a href="#openCommentModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openCommentModal(item: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="230"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:230</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scrollToHighlightedItem"></a>
+                    <span class="name">
+                        <span ><b>scrollToHighlightedItem</b></span>
+                        <a href="#scrollToHighlightedItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>scrollToHighlightedItem()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:187</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleExpandState"></a>
+                    <span class="name">
+                        <span ><b>toggleExpandState</b></span>
+                        <a href="#toggleExpandState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleExpandState()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:141</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="annotationItems"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>annotationItems</b></span>
+                        <a href="#annotationItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>QueryList&lt;ElementRef&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChildren(&#x27;annotationItem&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="containerHasDrag"></a>
+                    <span class="name">
+                        <span ><b>containerHasDrag</b></span>
+                        <a href="#containerHasDrag"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enterPredicate"></a>
+                    <span class="name">
+                        <span ><b>enterPredicate</b></span>
+                        <a href="#enterPredicate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isDragging"></a>
+                    <span class="name">
+                        <span ><b>isDragging</b></span>
+                        <a href="#isDragging"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modalVisible"></a>
+                    <span class="name">
+                        <span ><b>modalVisible</b></span>
+                        <a href="#modalVisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scrollableContainer"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>scrollableContainer</b></span>
+                        <a href="#scrollableContainer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;scrollableContainer&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedItem"></a>
+                    <span class="name">
+                        <span ><b>selectedItem</b></span>
+                        <a href="#selectedItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="categoryColorClasses"></a>
+                        <span class="name"><b>categoryColorClasses</b><a href="#categoryColorClasses"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>categoryColorClasses()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/features/dashboard/user/studio/components/right-side-bar/annotation-category/annotation-category.component.ts:114</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+  ElementRef,
+  QueryList,
+  ViewChildren,
+  AfterViewInit,
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  CdkDragDrop,
+  DragDropModule,
+  CDK_DRAG_CONFIG,
+} from &#x27;@angular/cdk/drag-drop&#x27;;
+import { FontAwesomeModule } from &#x27;@fortawesome/angular-fontawesome&#x27;;
+import { FaIconLibrary } from &#x27;@fortawesome/angular-fontawesome&#x27;;
+import { fas } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+import { KeyboardService } from &#x27;../../../services/keyboard.service&#x27;;
+import { CommentModalComponent } from &#x27;../comment-modal/comment-modal.component&#x27;;
+
+@Component({
+  selector: &#x27;app-annotation-category&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    DragDropModule,
+    FontAwesomeModule,
+    CommentModalComponent,
+  ],
+  templateUrl: &#x27;./annotation-category.component.html&#x27;,
+  providers: [
+    {
+      provide: CDK_DRAG_CONFIG,
+      useValue: {
+        dragStartThreshold: 0,
+        pointerDirectionChangeThreshold: 1,
+      },
+    },
+  ],
+})
+export class AnnotationCategoryComponent
+  implements OnInit, OnDestroy, OnChanges, AfterViewInit
+{
+  @Input() title &#x3D; &#x27;&#x27;;
+  @Input() priority: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27; | &#x27;none&#x27; &#x3D; &#x27;none&#x27;;
+  @Input() badgeText &#x3D; &#x27;&#x27;;
+  @Input() iconPath &#x3D; &#x27;assets/icons/rectangle.svg&#x27;;
+  @Input() dropListId &#x3D; &#x27;&#x27;;
+  @Input() connectedDropLists: string[] &#x3D; [];
+  @Input() annotations: any[] &#x3D; [];
+  @Input() isExpanded &#x3D; true;
+  @Input() activeItems: { [key: string]: boolean } &#x3D; {};
+  @Input() hoveredPolygonId: string | null &#x3D; null;
+
+  @Output() itemDrop &#x3D; new EventEmitter&lt;CdkDragDrop&lt;any[]&gt;&gt;();
+  @Output() itemHover &#x3D; new EventEmitter&lt;string&gt;();
+  @Output() itemHoverEnd &#x3D; new EventEmitter&lt;void&gt;();
+  @Output() itemToggle &#x3D; new EventEmitter&lt;string&gt;();
+  @Output() toggleExpand &#x3D; new EventEmitter&lt;boolean&gt;();
+  @Output() commentAdded &#x3D; new EventEmitter&lt;{ id: string; comment: string }&gt;();
+
+  @ViewChild(&#x27;scrollableContainer&#x27;) scrollableContainer!: ElementRef;
+  @ViewChildren(&#x27;annotationItem&#x27;) annotationItems!: QueryList&lt;ElementRef&gt;;
+
+  isDragging &#x3D; false;
+
+  containerHasDrag &#x3D; false;
+
+  enterPredicate &#x3D; () &#x3D;&gt; true;
+
+  modalVisible &#x3D; false;
+  selectedItem: any &#x3D; null;
+
+  constructor(
+    library: FaIconLibrary,
+    private keyboardService: KeyboardService
+  ) {
+    library.addIconPacks(fas);
+  }
+
+  ngOnInit() {
+    // Initialization logic
+  }
+
+  ngOnDestroy() {
+    // Cleanup logic
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes[&#x27;hoveredPolygonId&#x27;]) {
+      if (this.hoveredPolygonId &amp;&amp; !this.isDragging) {
+        const matchingItem &#x3D; this.annotations.find(
+          (item) &#x3D;&gt; item.objectId &#x3D;&#x3D;&#x3D; this.hoveredPolygonId
+        );
+
+        if (matchingItem) {
+          setTimeout(() &#x3D;&gt; this.scrollToHighlightedItem(), 50);
+        }
+      }
+    }
+  }
+
+  ngAfterViewInit() {
+    // Initialize after view has been created
+  }
+
+  get categoryColorClasses() {
+    const baseClasses &#x3D; {
+      high: {
+        border: &#x27;border-l-red-500&#x27;,
+        badge: &#x27;bg-red-500 text-white&#x27;,
+        marker: &#x27;bg-red-500&#x27;,
+      },
+      medium: {
+        border: &#x27;border-l-yellow-500&#x27;,
+        badge: &#x27;bg-yellow-500 text-black&#x27;,
+        marker: &#x27;bg-yellow-500&#x27;,
+      },
+      low: {
+        border: &#x27;border-l-green-500&#x27;,
+        badge: &#x27;bg-green-500 text-white&#x27;,
+        marker: &#x27;bg-green-500&#x27;,
+      },
+      none: {
+        border: &#x27;border-l-gray-500&#x27;,
+        badge: &#x27;bg-gray-600 text-white&#x27;,
+        marker: &#x27;bg-gray-500&#x27;,
+      },
+    };
+
+    return baseClasses[this.priority] || baseClasses.none;
+  }
+
+  toggleExpandState() {
+    this.isExpanded &#x3D; !this.isExpanded;
+    this.toggleExpand.emit(this.isExpanded);
+  }
+
+  onItemDrop(event: CdkDragDrop&lt;any[]&gt;) {
+    this.isDragging &#x3D; false;
+    this.itemDrop.emit(event);
+  }
+
+  onDragStart() {
+    this.isDragging &#x3D; true;
+  }
+
+  onDragEnd() {
+    this.isDragging &#x3D; false;
+  }
+
+  onItemHover(id: string) {
+    this.itemHover.emit(id);
+  }
+
+  onItemHoverEnd() {
+    this.itemHoverEnd.emit();
+  }
+
+  onItemToggle(id: string) {
+    this.itemToggle.emit(id);
+  }
+
+  isItemActive(id: string): boolean {
+    return this.activeItems[id] &#x3D;&#x3D;&#x3D; true;
+  }
+
+  isItemHoveredFromCanvas(id: string): boolean {
+    return this.hoveredPolygonId &#x3D;&#x3D;&#x3D; id;
+  }
+
+  onContainerEnter() {
+    this.containerHasDrag &#x3D; true;
+  }
+
+  onContainerExit() {
+    this.containerHasDrag &#x3D; false;
+  }
+
+  scrollToHighlightedItem() {
+    if (!this.scrollableContainer || !this.isDragging) {
+      const container &#x3D; this.scrollableContainer.nativeElement;
+
+      const highlightedItem &#x3D; container.querySelector(
+        &#x60;[data-object-id&#x3D;&quot;${this.hoveredPolygonId}&quot;]&#x60;
+      );
+
+      if (highlightedItem) {
+        const containerRect &#x3D; container.getBoundingClientRect();
+        const itemRect &#x3D; highlightedItem.getBoundingClientRect();
+
+        const isFullyVisible &#x3D;
+          itemRect.top &gt;&#x3D; containerRect.top &amp;&amp;
+          itemRect.bottom &lt;&#x3D; containerRect.bottom;
+
+        if (!isFullyVisible) {
+          highlightedItem.scrollIntoView({
+            behavior: &#x27;smooth&#x27;,
+            block: &#x27;nearest&#x27;,
+          });
+        }
+      }
+    }
+  }
+
+  // Methods to reorder an item up or down in the list
+  moveItemUp(index: number) {
+    if (index &gt; 0) {
+      const item &#x3D; this.annotations[index];
+      this.annotations.splice(index, 1);
+      this.annotations.splice(index - 1, 0, item);
+    }
+  }
+
+  moveItemDown(index: number) {
+    if (index &lt; this.annotations.length - 1) {
+      const item &#x3D; this.annotations[index];
+      this.annotations.splice(index, 1);
+      this.annotations.splice(index + 1, 0, item);
+    }
+  }
+
+  openCommentModal(item: any): void {
+    // Disable space key detection when modal opens
+    this.keyboardService.disableSpaceKey();
+
+    this.selectedItem &#x3D; item;
+    this.modalVisible &#x3D; true;
+  }
+
+  onModalClose(): void {
+    this.modalVisible &#x3D; false;
+    this.selectedItem &#x3D; null;
+
+    // Re-enable space key detection
+    this.keyboardService.enableSpaceKey();
+  }
+
+  onModalSave(commentData: { id: string; comment: string }): void {
+    // Find the item and update its comment
+    const item &#x3D; this.annotations.find((a) &#x3D;&gt; a.objectId &#x3D;&#x3D;&#x3D; commentData.id);
+    if (item) {
+      item.comment &#x3D; commentData.comment;
+    }
+
+    // Emit the comment added event
+    this.commentAdded.emit(commentData);
+
+    // Close the modal
+    this.onModalClose();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;h-full flex flex-col overflow-hidden&quot;&gt;
+  &lt;div
+    (click)&#x3D;&quot;toggleExpandState()&quot;
+    class&#x3D;&quot;relative flex justify-between items-center h-10 px-4 cursor-pointer hover:bg-opacity-20 hover:bg-black transition-all duration-200&quot;
+    [class.bg-opacity-10]&#x3D;&quot;!isExpanded&quot;
+    [class.bg-opacity-20]&#x3D;&quot;isExpanded&quot;
+    [class.bg-black]&#x3D;&quot;true&quot;
+  &gt;
+    &lt;div
+      class&#x3D;&quot;absolute left-0 top-0 h-full w-1 transition-all duration-200 hover:w-1.5&quot;
+      [ngClass]&#x3D;&quot;categoryColorClasses.marker&quot;
+    &gt;&lt;/div&gt;
+    &lt;div class&#x3D;&quot;flex items-center font-bold&quot;&gt;
+      &lt;span&gt;{{ title }}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+      &lt;span
+        class&#x3D;&quot;text-xs px-2 py-0.5 rounded-full&quot;
+        [ngClass]&#x3D;&quot;categoryColorClasses.badge&quot;
+      &gt;
+        {{ badgeText }}
+      &lt;/span&gt;
+      &lt;img
+        src&#x3D;&quot;assets/icons/down.png&quot;
+        alt&#x3D;&quot;toggle&quot;
+        class&#x3D;&quot;w-4 h-4 ml-2 transition-transform duration-200&quot;
+        draggable&#x3D;&quot;false&quot;
+        style&#x3D;&quot;filter: brightness(0) invert(1)&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div
+    *ngIf&#x3D;&quot;isExpanded&quot;
+    cdkDropList
+    [id]&#x3D;&quot;dropListId&quot;
+    [cdkDropListData]&#x3D;&quot;annotations&quot;
+    [cdkDropListConnectedTo]&#x3D;&quot;connectedDropLists&quot;
+    cdkDropListSortingDisabled&#x3D;&quot;true&quot;
+    [cdkDropListEnterPredicate]&#x3D;&quot;enterPredicate&quot;
+    class&#x3D;&quot;p-2 flex-1 min-h-0 overflow-y-auto&quot;
+    #scrollableContainer
+    (cdkDropListDropped)&#x3D;&quot;onItemDrop($event)&quot;
+    (cdkDropListEntered)&#x3D;&quot;onContainerEnter()&quot;
+    (cdkDropListExited)&#x3D;&quot;onContainerExit()&quot;
+  &gt;
+    &lt;div
+      *ngFor&#x3D;&quot;let item of annotations; let i &#x3D; index&quot;
+      class&#x3D;&quot;flex justify-between items-center p-2 mb-1 border-l hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-all duration-200&quot;
+      [ngClass]&#x3D;&quot;[categoryColorClasses.border]&quot;
+      [class.bg-blue-700]&#x3D;&quot;hoveredPolygonId &#x3D;&#x3D;&#x3D; item.objectId&quot;
+      [class.bg-opacity-40]&#x3D;&quot;hoveredPolygonId &#x3D;&#x3D;&#x3D; item.objectId&quot;
+      [attr.data-object-id]&#x3D;&quot;item.objectId&quot;
+      cdkDrag
+      (mouseenter)&#x3D;&quot;onItemHover(item.objectId)&quot;
+      (mouseleave)&#x3D;&quot;onItemHoverEnd()&quot;
+      (cdkDragStarted)&#x3D;&quot;onDragStart()&quot;
+      (cdkDragEnded)&#x3D;&quot;onDragEnd()&quot;
+    &gt;
+      &lt;span class&#x3D;&quot;flex-1&quot;&gt;{{ item.label || &quot;Unnamed&quot; }}&lt;/span&gt;
+      &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+        &lt;!-- Up arrow --&gt;
+        &lt;fa-icon
+          [icon]&#x3D;&quot;[&#x27;fas&#x27;, &#x27;arrow-up&#x27;]&quot;
+          class&#x3D;&quot;cursor-pointer&quot;
+          (click)&#x3D;&quot;moveItemUp(i); $event.stopPropagation()&quot;
+        &gt;&lt;/fa-icon&gt;
+        &lt;!-- Down arrow --&gt;
+        &lt;fa-icon
+          [icon]&#x3D;&quot;[&#x27;fas&#x27;, &#x27;arrow-down&#x27;]&quot;
+          class&#x3D;&quot;cursor-pointer&quot;
+          (click)&#x3D;&quot;moveItemDown(i); $event.stopPropagation()&quot;
+        &gt;&lt;/fa-icon&gt;
+        &lt;!-- Comment button with improved styling --&gt;
+        &lt;fa-icon
+          [icon]&#x3D;&quot;[&#x27;fas&#x27;, &#x27;comment&#x27;]&quot;
+          class&#x3D;&quot;cursor-pointer&quot;
+          [class.text-gray-300]&#x3D;&quot;item.comment&quot;
+          [class.text-opacity-90]&#x3D;&quot;item.comment&quot;
+          [class.text-gray-600]&#x3D;&quot;!item.comment&quot;
+          [title]&#x3D;&quot;
+            item.comment ? &#x27;Edit comment: &#x27; + item.comment : &#x27;Add comment&#x27;
+          &quot;
+          (click)&#x3D;&quot;openCommentModal(item); $event.stopPropagation()&quot;
+        &gt;&lt;/fa-icon&gt;
+        &lt;!-- Existing eye icon --&gt;
+        &lt;fa-icon
+          [icon]&#x3D;&quot;isItemActive(item.objectId) ? &#x27;eye&#x27; : &#x27;eye-slash&#x27;&quot;
+          class&#x3D;&quot;text-white transition-all cursor-pointer&quot;
+          [class.text-opacity-40]&#x3D;&quot;!isItemActive(item.objectId)&quot;
+          [class.text-opacity-90]&#x3D;&quot;isItemActive(item.objectId)&quot;
+          (click)&#x3D;&quot;onItemToggle(item.objectId); $event.stopPropagation()&quot;
+        &gt;&lt;/fa-icon&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div
+      *ngIf&#x3D;&quot;annotations.length &#x3D;&#x3D;&#x3D; 0 &amp;&amp; !isDragging &amp;&amp; !containerHasDrag&quot;
+      class&#x3D;&quot;text-center py-4 text-gray-500 italic text-sm&quot;
+    &gt;
+      No annotations in this category
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;app-comment-modal
+    [item]&#x3D;&quot;selectedItem&quot;
+    [isVisible]&#x3D;&quot;modalVisible&quot;
+    (close)&#x3D;&quot;onModalClose()&quot;
+    (save)&#x3D;&quot;onModalSave($event)&quot;
+  &gt;&lt;/app-comment-modal&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="h-full flex flex-col overflow-hidden">  <div    (click)="toggleExpandState()"    class="relative flex justify-between items-center h-10 px-4 cursor-pointer hover:bg-opacity-20 hover:bg-black transition-all duration-200"    [class.bg-opacity-10]="!isExpanded"    [class.bg-opacity-20]="isExpanded"    [class.bg-black]="true"  >    <div      class="absolute left-0 top-0 h-full w-1 transition-all duration-200 hover:w-1.5"      [ngClass]="categoryColorClasses.marker"    ></div>    <div class="flex items-center font-bold">      <span>{{ title }}</span>    </div>    <div class="flex items-center">      <span        class="text-xs px-2 py-0.5 rounded-full"        [ngClass]="categoryColorClasses.badge"      >        {{ badgeText }}      </span>      <img        src="assets/icons/down.png"        alt="toggle"        class="w-4 h-4 ml-2 transition-transform duration-200"        draggable="false"        style="filter: brightness(0) invert(1)"      />    </div>  </div>  <div    *ngIf="isExpanded"    cdkDropList    [id]="dropListId"    [cdkDropListData]="annotations"    [cdkDropListConnectedTo]="connectedDropLists"    cdkDropListSortingDisabled="true"    [cdkDropListEnterPredicate]="enterPredicate"    class="p-2 flex-1 min-h-0 overflow-y-auto"    #scrollableContainer    (cdkDropListDropped)="onItemDrop($event)"    (cdkDropListEntered)="onContainerEnter()"    (cdkDropListExited)="onContainerExit()"  >    <div      *ngFor="let item of annotations; let i = index"      class="flex justify-between items-center p-2 mb-1 border-l hover:bg-black hover:bg-opacity-[0.13] cursor-move transition-all duration-200"      [ngClass]="[categoryColorClasses.border]"      [class.bg-blue-700]="hoveredPolygonId === item.objectId"      [class.bg-opacity-40]="hoveredPolygonId === item.objectId"      [attr.data-object-id]="item.objectId"      cdkDrag      (mouseenter)="onItemHover(item.objectId)"      (mouseleave)="onItemHoverEnd()"      (cdkDragStarted)="onDragStart()"      (cdkDragEnded)="onDragEnd()"    >      <span class="flex-1">{{ item.label || "Unnamed" }}</span>      <div class="flex items-center gap-2">        <!-- Up arrow -->        <fa-icon          [icon]="[\'fas\', \'arrow-up\']"          class="cursor-pointer"          (click)="moveItemUp(i); $event.stopPropagation()"        ></fa-icon>        <!-- Down arrow -->        <fa-icon          [icon]="[\'fas\', \'arrow-down\']"          class="cursor-pointer"          (click)="moveItemDown(i); $event.stopPropagation()"        ></fa-icon>        <!-- Comment button with improved styling -->        <fa-icon          [icon]="[\'fas\', \'comment\']"          class="cursor-pointer"          [class.text-gray-300]="item.comment"          [class.text-opacity-90]="item.comment"          [class.text-gray-600]="!item.comment"          [title]="            item.comment ? \'Edit comment: \' + item.comment : \'Add comment\'          "          (click)="openCommentModal(item); $event.stopPropagation()"        ></fa-icon>        <!-- Existing eye icon -->        <fa-icon          [icon]="isItemActive(item.objectId) ? \'eye\' : \'eye-slash\'"          class="text-white transition-all cursor-pointer"          [class.text-opacity-40]="!isItemActive(item.objectId)"          [class.text-opacity-90]="isItemActive(item.objectId)"          (click)="onItemToggle(item.objectId); $event.stopPropagation()"        ></fa-icon>      </div>    </div>    <div      *ngIf="annotations.length === 0 && !isDragging && !containerHasDrag"      class="text-center py-4 text-gray-500 italic text-sm"    >      No annotations in this category    </div>  </div>  <app-comment-modal    [item]="selectedItem"    [isVisible]="modalVisible"    (close)="onModalClose()"    (save)="onModalSave($event)"  ></app-comment-modal></div></div>'
+    var COMPONENTS = [{'name': 'AnnotationCategoryComponent', 'selector': 'app-annotation-category'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'CommentModalComponent', 'selector': 'app-comment-modal'},{'name': 'ControlBarComponent', 'selector': 'app-control-bar'},{'name': 'ControlBarItemComponent', 'selector': 'app-control-bar-item'},{'name': 'DashboardLayoutComponent', 'selector': 'app-dashboard-layout'},{'name': 'DatasetComponent', 'selector': 'app-dataset'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ImportComponent', 'selector': 'app-import'},{'name': 'LeftSideBarComponent', 'selector': 'app-left-side-bar'},{'name': 'LoadingOverlayComponent', 'selector': 'app-loading-overlay'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MetadataComponent', 'selector': 'app-metadata'},{'name': 'RightSideBarComponent', 'selector': 'app-right-side-bar'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StudioComponent', 'selector': 'app-studio'},{'name': 'TrafficSignsComponent', 'selector': 'app-traffic-signs'},{'name': 'VariantsComponent', 'selector': 'app-variants'},{'name': 'VehicleComponent', 'selector': 'app-vehicle'},{'name': 'WeatherComponent', 'selector': 'app-weather'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'AnnotationCategoryComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AnnotationCategoryComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

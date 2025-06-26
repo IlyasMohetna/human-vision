@@ -1,0 +1,955 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">app documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  VehicleComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/dashboard/user/studio/components/left-side-bar/components/vehicle/vehicle.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnChanges</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-vehicle</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./vehicle.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#directionText" >directionText</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#MAX_SPEED_DISPLAY" >MAX_SPEED_DISPLAY</a>
+                            </li>
+                            <li>
+                                <a href="#speedKmh" >speedKmh</a>
+                            </li>
+                            <li>
+                                <a href="#speedometerPercentage" >speedometerPercentage</a>
+                            </li>
+                            <li>
+                                <a href="#yawRateDegrees" >yawRateDegrees</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateCalculatedValues" >updateCalculatedValues</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#vehicle" >vehicle</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="vehicle"></a>
+                        <b>vehicle</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/components/vehicle/vehicle.component.ts:11</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: SimpleChanges)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/components/vehicle/vehicle.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                        <code>SimpleChanges</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateCalculatedValues"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateCalculatedValues</b></span>
+                        <a href="#updateCalculatedValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateCalculatedValues()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="26"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/components/vehicle/vehicle.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="directionText"></a>
+                    <span class="name">
+                        <span ><b>directionText</b></span>
+                        <a href="#directionText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Straight&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/components/vehicle/vehicle.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MAX_SPEED_DISPLAY"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>MAX_SPEED_DISPLAY</b></span>
+                        <a href="#MAX_SPEED_DISPLAY"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>100</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/components/vehicle/vehicle.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="speedKmh"></a>
+                    <span class="name">
+                        <span ><b>speedKmh</b></span>
+                        <a href="#speedKmh"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/components/vehicle/vehicle.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="speedometerPercentage"></a>
+                    <span class="name">
+                        <span ><b>speedometerPercentage</b></span>
+                        <a href="#speedometerPercentage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/components/vehicle/vehicle.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="yawRateDegrees"></a>
+                    <span class="name">
+                        <span ><b>yawRateDegrees</b></span>
+                        <a href="#yawRateDegrees"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/components/vehicle/vehicle.component.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+
+@Component({
+  selector: &#x27;app-vehicle&#x27;,
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: &#x27;./vehicle.component.html&#x27;,
+})
+export class VehicleComponent implements OnChanges {
+  @Input() vehicle: any &#x3D; {};
+
+  speedKmh: number &#x3D; 0;
+  yawRateDegrees: number &#x3D; 0;
+  speedometerPercentage: number &#x3D; 0;
+  directionText: string &#x3D; &#x27;Straight&#x27;;
+
+  readonly MAX_SPEED_DISPLAY &#x3D; 100;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes[&#x27;vehicle&#x27;]) {
+      this.updateCalculatedValues();
+    }
+  }
+
+  private updateCalculatedValues(): void {
+    if (this.vehicle &amp;&amp; typeof this.vehicle &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+      this.speedKmh &#x3D; this.vehicle.speed
+        ? parseFloat((this.vehicle.speed * 3.6).toFixed(1))
+        : 0;
+
+      this.speedometerPercentage &#x3D; Math.min(
+        100,
+        (this.speedKmh / this.MAX_SPEED_DISPLAY) * 100
+      );
+
+      this.yawRateDegrees &#x3D; this.vehicle.yawRate
+        ? parseFloat(((this.vehicle.yawRate * 180) / Math.PI).toFixed(1))
+        : 0;
+
+      if (this.yawRateDegrees &gt; 1) {
+        this.directionText &#x3D; &#x27;Turning Right&#x27;;
+      } else if (this.yawRateDegrees &lt; -1) {
+        this.directionText &#x3D; &#x27;Turning Left&#x27;;
+      } else {
+        this.directionText &#x3D; &#x27;Straight&#x27;;
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;text-white p-4&quot;&gt;
+  &lt;div
+    *ngIf&#x3D;&quot;
+      vehicle &amp;&amp; (vehicle.speed !&#x3D;&#x3D; undefined || vehicle.yawRate !&#x3D;&#x3D; undefined)
+    &quot;
+    class&#x3D;&quot;space-y-6&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;bg-[#333333] rounded-lg shadow-lg p-5&quot;&gt;
+      &lt;div class&#x3D;&quot;flex justify-between items-center mb-4&quot;&gt;
+        &lt;h3 class&#x3D;&quot;text-xl font-semibold text-blue-400&quot;&gt;Vehicle Speed&lt;/h3&gt;
+        &lt;div
+          class&#x3D;&quot;text-lg font-bold bg-gray-900 text-white px-4 py-1.5 rounded-lg border border-gray-700 shadow-inner&quot;
+        &gt;
+          &lt;span
+            class&#x3D;&quot;text-3xl&quot;
+            style&#x3D;&quot;text-shadow: 0 0 10px rgba(59, 130, 246, 0.5)&quot;
+            &gt;{{ speedKmh }}&lt;/span
+          &gt;
+          &lt;span class&#x3D;&quot;text-xs align-top ml-1&quot;&gt;km/h&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;relative flex justify-center mb-4&quot;&gt;
+        &lt;svg width&#x3D;&quot;280&quot; height&#x3D;&quot;160&quot; viewBox&#x3D;&quot;0 0 280 160&quot; class&#x3D;&quot;mx-auto&quot;&gt;
+          &lt;path
+            d&#x3D;&quot;M 10,150 A 130,130 0 0,1 270,150&quot;
+            stroke&#x3D;&quot;#374151&quot;
+            stroke-width&#x3D;&quot;16&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke-linecap&#x3D;&quot;round&quot;
+          /&gt;
+          &lt;path
+            d&#x3D;&quot;M 10,150 A 130,130 0 0,1 35,74&quot;
+            stroke&#x3D;&quot;#EF4444&quot;
+            stroke-width&#x3D;&quot;16&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke-linecap&#x3D;&quot;round&quot;
+          /&gt;
+          &lt;path
+            d&#x3D;&quot;M 35,74 A 130,130 0 0,1 100,26&quot;
+            stroke&#x3D;&quot;#F59E0B&quot;
+            stroke-width&#x3D;&quot;16&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke-linecap&#x3D;&quot;round&quot;
+          /&gt;
+          &lt;path
+            d&#x3D;&quot;M 100,26 A 130,130 0 0,1 180,26&quot;
+            stroke&#x3D;&quot;#FACC15&quot;
+            stroke-width&#x3D;&quot;16&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke-linecap&#x3D;&quot;round&quot;
+          /&gt;
+          &lt;path
+            d&#x3D;&quot;M 180,26 A 130,130 0 0,1 245,74&quot;
+            stroke&#x3D;&quot;#BEF264&quot;
+            stroke-width&#x3D;&quot;16&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke-linecap&#x3D;&quot;round&quot;
+          /&gt;
+          &lt;path
+            d&#x3D;&quot;M 245,74 A 130,130 0 0,1 270,150&quot;
+            stroke&#x3D;&quot;#22C55E&quot;
+            stroke-width&#x3D;&quot;16&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke-linecap&#x3D;&quot;round&quot;
+          /&gt;
+
+          &lt;g stroke&#x3D;&quot;white&quot; stroke-width&#x3D;&quot;2&quot;&gt;
+            &lt;line x1&#x3D;&quot;10&quot; y1&#x3D;&quot;150&quot; x2&#x3D;&quot;20&quot; y2&#x3D;&quot;150&quot; /&gt;
+            &lt;text x&#x3D;&quot;2&quot; y&#x3D;&quot;145&quot; fill&#x3D;&quot;white&quot; font-size&#x3D;&quot;12&quot;&gt;0&lt;/text&gt;
+
+            &lt;line x1&#x3D;&quot;35&quot; y1&#x3D;&quot;74&quot; x2&#x3D;&quot;43&quot; y2&#x3D;&quot;79&quot; /&gt;
+            &lt;text x&#x3D;&quot;30&quot; y&#x3D;&quot;70&quot; fill&#x3D;&quot;white&quot; font-size&#x3D;&quot;12&quot;&gt;20&lt;/text&gt;
+
+            &lt;line x1&#x3D;&quot;100&quot; y1&#x3D;&quot;26&quot; x2&#x3D;&quot;103&quot; y2&#x3D;&quot;36&quot; /&gt;
+            &lt;text x&#x3D;&quot;90&quot; y&#x3D;&quot;22&quot; fill&#x3D;&quot;white&quot; font-size&#x3D;&quot;12&quot;&gt;40&lt;/text&gt;
+
+            &lt;line x1&#x3D;&quot;180&quot; y1&#x3D;&quot;26&quot; x2&#x3D;&quot;177&quot; y2&#x3D;&quot;36&quot; /&gt;
+            &lt;text x&#x3D;&quot;170&quot; y&#x3D;&quot;22&quot; fill&#x3D;&quot;white&quot; font-size&#x3D;&quot;12&quot;&gt;60&lt;/text&gt;
+
+            &lt;line x1&#x3D;&quot;245&quot; y1&#x3D;&quot;74&quot; x2&#x3D;&quot;237&quot; y2&#x3D;&quot;79&quot; /&gt;
+            &lt;text x&#x3D;&quot;240&quot; y&#x3D;&quot;70&quot; fill&#x3D;&quot;white&quot; font-size&#x3D;&quot;12&quot;&gt;80&lt;/text&gt;
+
+            &lt;line x1&#x3D;&quot;270&quot; y1&#x3D;&quot;150&quot; x2&#x3D;&quot;260&quot; y2&#x3D;&quot;150&quot; /&gt;
+            &lt;text x&#x3D;&quot;265&quot; y&#x3D;&quot;145&quot; fill&#x3D;&quot;white&quot; font-size&#x3D;&quot;12&quot;&gt;100&lt;/text&gt;
+          &lt;/g&gt;
+
+          &lt;line
+            [attr.transform]&#x3D;&quot;
+              &#x27;rotate(&#x27; + (speedometerPercentage * 1.8 - 90) + &#x27;, 140, 150)&#x27;
+            &quot;
+            x1&#x3D;&quot;140&quot;
+            y1&#x3D;&quot;150&quot;
+            x2&#x3D;&quot;140&quot;
+            y2&#x3D;&quot;50&quot;
+            stroke&#x3D;&quot;#FF3B30&quot;
+            stroke-width&#x3D;&quot;3&quot;
+            stroke-linecap&#x3D;&quot;round&quot;
+          /&gt;
+
+          &lt;circle
+            cx&#x3D;&quot;140&quot;
+            cy&#x3D;&quot;150&quot;
+            r&#x3D;&quot;8&quot;
+            fill&#x3D;&quot;#2A2A2A&quot;
+            stroke&#x3D;&quot;#FF3B30&quot;
+            stroke-width&#x3D;&quot;2&quot;
+          /&gt;
+        &lt;/svg&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;flex flex-wrap justify-between gap-2 px-4 mt-2 mb-4&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+          &lt;div class&#x3D;&quot;w-5 h-2 rounded-full bg-red-500&quot;&gt;&lt;/div&gt;
+          &lt;p class&#x3D;&quot;text-xs text-gray-300&quot;&gt;0-20&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+          &lt;div class&#x3D;&quot;w-5 h-2 rounded-full bg-amber-500&quot;&gt;&lt;/div&gt;
+          &lt;p class&#x3D;&quot;text-xs text-gray-300&quot;&gt;20-40&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+          &lt;div class&#x3D;&quot;w-5 h-2 rounded-full bg-yellow-400&quot;&gt;&lt;/div&gt;
+          &lt;p class&#x3D;&quot;text-xs text-gray-300&quot;&gt;40-60&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+          &lt;div class&#x3D;&quot;w-5 h-2 rounded-full bg-lime-300&quot;&gt;&lt;/div&gt;
+          &lt;p class&#x3D;&quot;text-xs text-gray-300&quot;&gt;60-80&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+          &lt;div class&#x3D;&quot;w-5 h-2 rounded-full bg-green-500&quot;&gt;&lt;/div&gt;
+          &lt;p class&#x3D;&quot;text-xs text-gray-300&quot;&gt;80-100&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;mt-1 text-sm text-gray-400 flex justify-between&quot;&gt;
+        &lt;span&gt;Original Reading: {{ vehicle.speed?.toFixed(2) || 0 }} m/s&lt;/span&gt;
+        &lt;span
+          class&#x3D;&quot;px-2 py-1 rounded-full text-xs&quot;
+          [ngClass]&#x3D;&quot;{
+            &#x27;bg-red-900 text-red-100&#x27;: speedKmh &lt; 30,
+            &#x27;bg-yellow-900 text-yellow-100&#x27;: speedKmh &gt;&#x3D; 30 &amp;&amp; speedKmh &lt; 60,
+            &#x27;bg-green-900 text-green-100&#x27;: speedKmh &gt;&#x3D; 60
+          }&quot;
+        &gt;
+          {{ speedKmh &lt; 30 ? &quot;Slow&quot; : speedKmh &lt; 60 ? &quot;Moderate&quot; : &quot;Fast&quot; }}
+        &lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;bg-[#333333] rounded-lg shadow-lg p-5&quot;&gt;
+      &lt;div class&#x3D;&quot;flex justify-between items-center mb-4&quot;&gt;
+        &lt;h3 class&#x3D;&quot;text-xl font-semibold text-purple-400&quot;&gt;Vehicle Direction&lt;/h3&gt;
+        &lt;span
+          class&#x3D;&quot;text-2xl font-bold&quot;
+          [ngClass]&#x3D;&quot;{
+            &#x27;text-blue-300&#x27;: yawRateDegrees &gt; -1 &amp;&amp; yawRateDegrees &lt; 1,
+            &#x27;text-green-300&#x27;: yawRateDegrees &lt;&#x3D; -1,
+            &#x27;text-orange-300&#x27;: yawRateDegrees &gt;&#x3D; 1
+          }&quot;
+        &gt;
+          {{ directionText }}
+        &lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;flex items-center justify-center mb-4&quot; style&#x3D;&quot;height: 180px&quot;&gt;
+        &lt;div class&#x3D;&quot;relative&quot; style&#x3D;&quot;width: 150px; height: 150px&quot;&gt;
+          &lt;img
+            [style.transform]&#x3D;&quot;&#x27;rotate(&#x27; + yawRateDegrees * 4 + &#x27;deg)&#x27;&quot;
+            style&#x3D;&quot;
+              transition: transform 0.3s ease;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            &quot;
+            src&#x3D;&quot;https://png.pngtree.com/png-vector/20230110/ourmid/pngtree-car-top-view-image-png-image_6557068.png&quot;
+            alt&#x3D;&quot;Car&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;mt-4 text-sm text-gray-400 flex justify-between&quot;&gt;
+        &lt;span&gt;Yaw Rate: {{ yawRateDegrees }}°/s&lt;/span&gt;
+        &lt;span&gt;Original: {{ vehicle.yawRate?.toFixed(4) || 0 }} rad/s&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div
+    *ngIf&#x3D;&quot;
+      !vehicle || (vehicle.speed &#x3D;&#x3D;&#x3D; undefined &amp;&amp; vehicle.yawRate &#x3D;&#x3D;&#x3D; undefined)
+    &quot;
+    class&#x3D;&quot;flex flex-col items-center justify-center p-12 text-gray-400&quot;
+  &gt;
+    &lt;svg
+      class&#x3D;&quot;w-16 h-16 mb-4 text-gray-600&quot;
+      fill&#x3D;&quot;none&quot;
+      stroke&#x3D;&quot;currentColor&quot;
+      viewBox&#x3D;&quot;0 0 24 24&quot;
+    &gt;
+      &lt;path
+        stroke-linecap&#x3D;&quot;round&quot;
+        stroke-linejoin&#x3D;&quot;round&quot;
+        stroke-width&#x3D;&quot;2&quot;
+        d&#x3D;&quot;M12 8v4m0 4h.01M12 3a9 9 0 110 18 9 9 0 010-18z&quot;
+      /&gt;
+    &lt;/svg&gt;
+    &lt;div class&#x3D;&quot;text-lg&quot;&gt;No vehicle data available&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="text-white p-4">  <div    *ngIf="      vehicle && (vehicle.speed !== undefined || vehicle.yawRate !== undefined)    "    class="space-y-6"  >    <div class="bg-[#333333] rounded-lg shadow-lg p-5">      <div class="flex justify-between items-center mb-4">        <h3 class="text-xl font-semibold text-blue-400">Vehicle Speed</h3>        <div          class="text-lg font-bold bg-gray-900 text-white px-4 py-1.5 rounded-lg border border-gray-700 shadow-inner"        >          <span            class="text-3xl"            style="text-shadow: 0 0 10px rgba(59, 130, 246, 0.5)"            >{{ speedKmh }}</span          >          <span class="text-xs align-top ml-1">km/h</span>        </div>      </div>      <div class="relative flex justify-center mb-4">        <svg width="280" height="160" viewBox="0 0 280 160" class="mx-auto">          <path            d="M 10,150 A 130,130 0 0,1 270,150"            stroke="#374151"            stroke-width="16"            fill="none"            stroke-linecap="round"          />          <path            d="M 10,150 A 130,130 0 0,1 35,74"            stroke="#EF4444"            stroke-width="16"            fill="none"            stroke-linecap="round"          />          <path            d="M 35,74 A 130,130 0 0,1 100,26"            stroke="#F59E0B"            stroke-width="16"            fill="none"            stroke-linecap="round"          />          <path            d="M 100,26 A 130,130 0 0,1 180,26"            stroke="#FACC15"            stroke-width="16"            fill="none"            stroke-linecap="round"          />          <path            d="M 180,26 A 130,130 0 0,1 245,74"            stroke="#BEF264"            stroke-width="16"            fill="none"            stroke-linecap="round"          />          <path            d="M 245,74 A 130,130 0 0,1 270,150"            stroke="#22C55E"            stroke-width="16"            fill="none"            stroke-linecap="round"          />          <g stroke="white" stroke-width="2">            <line x1="10" y1="150" x2="20" y2="150" />            <text x="2" y="145" fill="white" font-size="12">0</text>            <line x1="35" y1="74" x2="43" y2="79" />            <text x="30" y="70" fill="white" font-size="12">20</text>            <line x1="100" y1="26" x2="103" y2="36" />            <text x="90" y="22" fill="white" font-size="12">40</text>            <line x1="180" y1="26" x2="177" y2="36" />            <text x="170" y="22" fill="white" font-size="12">60</text>            <line x1="245" y1="74" x2="237" y2="79" />            <text x="240" y="70" fill="white" font-size="12">80</text>            <line x1="270" y1="150" x2="260" y2="150" />            <text x="265" y="145" fill="white" font-size="12">100</text>          </g>          <line            [attr.transform]="              \'rotate(\' + (speedometerPercentage * 1.8 - 90) + \', 140, 150)\'            "            x1="140"            y1="150"            x2="140"            y2="50"            stroke="#FF3B30"            stroke-width="3"            stroke-linecap="round"          />          <circle            cx="140"            cy="150"            r="8"            fill="#2A2A2A"            stroke="#FF3B30"            stroke-width="2"          />        </svg>      </div>      <div class="flex flex-wrap justify-between gap-2 px-4 mt-2 mb-4">        <div class="flex items-center gap-2">          <div class="w-5 h-2 rounded-full bg-red-500"></div>          <p class="text-xs text-gray-300">0-20</p>        </div>        <div class="flex items-center gap-2">          <div class="w-5 h-2 rounded-full bg-amber-500"></div>          <p class="text-xs text-gray-300">20-40</p>        </div>        <div class="flex items-center gap-2">          <div class="w-5 h-2 rounded-full bg-yellow-400"></div>          <p class="text-xs text-gray-300">40-60</p>        </div>        <div class="flex items-center gap-2">          <div class="w-5 h-2 rounded-full bg-lime-300"></div>          <p class="text-xs text-gray-300">60-80</p>        </div>        <div class="flex items-center gap-2">          <div class="w-5 h-2 rounded-full bg-green-500"></div>          <p class="text-xs text-gray-300">80-100</p>        </div>      </div>      <div class="mt-1 text-sm text-gray-400 flex justify-between">        <span>Original Reading: {{ vehicle.speed?.toFixed(2) || 0 }} m/s</span>        <span          class="px-2 py-1 rounded-full text-xs"          [ngClass]="{            \'bg-red-900 text-red-100\': speedKmh < 30,            \'bg-yellow-900 text-yellow-100\': speedKmh >= 30 && speedKmh < 60,            \'bg-green-900 text-green-100\': speedKmh >= 60          }"        >          {{ speedKmh < 30 ? "Slow" : speedKmh < 60 ? "Moderate" : "Fast" }}        </span>      </div>    </div>    <div class="bg-[#333333] rounded-lg shadow-lg p-5">      <div class="flex justify-between items-center mb-4">        <h3 class="text-xl font-semibold text-purple-400">Vehicle Direction</h3>        <span          class="text-2xl font-bold"          [ngClass]="{            \'text-blue-300\': yawRateDegrees > -1 && yawRateDegrees < 1,            \'text-green-300\': yawRateDegrees <= -1,            \'text-orange-300\': yawRateDegrees >= 1          }"        >          {{ directionText }}        </span>      </div>      <div class="flex items-center justify-center mb-4" style="height: 180px">        <div class="relative" style="width: 150px; height: 150px">          <img            [style.transform]="\'rotate(\' + yawRateDegrees * 4 + \'deg)\'"            style="              transition: transform 0.3s ease;              width: 100%;              height: 100%;              object-fit: cover;            "            src="https://png.pngtree.com/png-vector/20230110/ourmid/pngtree-car-top-view-image-png-image_6557068.png"            alt="Car"          />        </div>      </div>      <div class="mt-4 text-sm text-gray-400 flex justify-between">        <span>Yaw Rate: {{ yawRateDegrees }}°/s</span>        <span>Original: {{ vehicle.yawRate?.toFixed(4) || 0 }} rad/s</span>      </div>    </div>  </div>  <div    *ngIf="      !vehicle || (vehicle.speed === undefined && vehicle.yawRate === undefined)    "    class="flex flex-col items-center justify-center p-12 text-gray-400"  >    <svg      class="w-16 h-16 mb-4 text-gray-600"      fill="none"      stroke="currentColor"      viewBox="0 0 24 24"    >      <path        stroke-linecap="round"        stroke-linejoin="round"        stroke-width="2"        d="M12 8v4m0 4h.01M12 3a9 9 0 110 18 9 9 0 010-18z"      />    </svg>    <div class="text-lg">No vehicle data available</div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AnnotationCategoryComponent', 'selector': 'app-annotation-category'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'CommentModalComponent', 'selector': 'app-comment-modal'},{'name': 'ControlBarComponent', 'selector': 'app-control-bar'},{'name': 'ControlBarItemComponent', 'selector': 'app-control-bar-item'},{'name': 'DashboardLayoutComponent', 'selector': 'app-dashboard-layout'},{'name': 'DatasetComponent', 'selector': 'app-dataset'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ImportComponent', 'selector': 'app-import'},{'name': 'LeftSideBarComponent', 'selector': 'app-left-side-bar'},{'name': 'LoadingOverlayComponent', 'selector': 'app-loading-overlay'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MetadataComponent', 'selector': 'app-metadata'},{'name': 'RightSideBarComponent', 'selector': 'app-right-side-bar'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StudioComponent', 'selector': 'app-studio'},{'name': 'TrafficSignsComponent', 'selector': 'app-traffic-signs'},{'name': 'VariantsComponent', 'selector': 'app-variants'},{'name': 'VehicleComponent', 'selector': 'app-vehicle'},{'name': 'WeatherComponent', 'selector': 'app-weather'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'VehicleComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'VehicleComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

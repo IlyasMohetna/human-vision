@@ -120,7 +120,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/features/dashboard/user/studio/components/control-bar-item/control-bar-item.component.ts</code>
+    <code>src/app/features/dashboard/user/studio/components/control-bar/components/control-bar-item/control-bar-item.component.ts</code>
 </p>
 
 
@@ -208,6 +208,12 @@
                             <li>
                                 <a href="#label" >label</a>
                             </li>
+                            <li>
+                                <a href="#showTooltip" >showTooltip</a>
+                            </li>
+                            <li>
+                                <a href="#tooltipText" >tooltipText</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -257,7 +263,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/features/dashboard/user/studio/components/control-bar-item/control-bar-item.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/features/dashboard/user/studio/components/control-bar/components/control-bar-item/control-bar-item.component.ts:13</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -283,7 +289,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/dashboard/user/studio/components/control-bar-item/control-bar-item.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/dashboard/user/studio/components/control-bar/components/control-bar-item/control-bar-item.component.ts:15</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -309,7 +315,59 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/dashboard/user/studio/components/control-bar-item/control-bar-item.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/dashboard/user/studio/components/control-bar/components/control-bar-item/control-bar-item.component.ts:14</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showTooltip"></a>
+                        <b>showTooltip</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/dashboard/user/studio/components/control-bar/components/control-bar-item/control-bar-item.component.ts:18</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="tooltipText"></a>
+                        <b>tooltipText</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/dashboard/user/studio/components/control-bar/components/control-bar-item/control-bar-item.component.ts:19</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -333,7 +391,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/dashboard/user/studio/components/control-bar-item/control-bar-item.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/dashboard/user/studio/components/control-bar/components/control-bar-item/control-bar-item.component.ts:16</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -363,6 +421,9 @@ export class ControlBarItemComponent {
   @Input() label &#x3D; &#x27;&#x27;;
   @Input() isActive &#x3D; false;
   @Output() clicked &#x3D; new EventEmitter&lt;void&gt;();
+
+  @Input() showTooltip: boolean &#x3D; false;
+  @Input() tooltipText: string &#x3D; &#x27;&#x27;;
 }
 </code></pre>
     </div>
@@ -410,7 +471,7 @@ export class ControlBarItemComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><button  [attr.aria-label]="label"  [class.bg-blue-600]="isActive"  class="p-1.5 rounded-md hover:bg-gray-600 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-500"  (click)="clicked.emit()">  <fa-icon [icon]="icon"></fa-icon></button></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ControlBarComponent', 'selector': 'app-control-bar'},{'name': 'ControlBarItemComponent', 'selector': 'app-control-bar-item'},{'name': 'DashboardLayoutComponent', 'selector': 'app-dashboard-layout'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LeftSideBarComponent', 'selector': 'app-left-side-bar'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StudioComponent', 'selector': 'app-studio'}];
+    var COMPONENTS = [{'name': 'AnnotationCategoryComponent', 'selector': 'app-annotation-category'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'CommentModalComponent', 'selector': 'app-comment-modal'},{'name': 'ControlBarComponent', 'selector': 'app-control-bar'},{'name': 'ControlBarItemComponent', 'selector': 'app-control-bar-item'},{'name': 'DashboardLayoutComponent', 'selector': 'app-dashboard-layout'},{'name': 'DatasetComponent', 'selector': 'app-dataset'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ImportComponent', 'selector': 'app-import'},{'name': 'LeftSideBarComponent', 'selector': 'app-left-side-bar'},{'name': 'LoadingOverlayComponent', 'selector': 'app-loading-overlay'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MetadataComponent', 'selector': 'app-metadata'},{'name': 'RightSideBarComponent', 'selector': 'app-right-side-bar'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StudioComponent', 'selector': 'app-studio'},{'name': 'TrafficSignsComponent', 'selector': 'app-traffic-signs'},{'name': 'VariantsComponent', 'selector': 'app-variants'},{'name': 'VehicleComponent', 'selector': 'app-vehicle'},{'name': 'WeatherComponent', 'selector': 'app-weather'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ControlBarItemComponent'};
 </script>

@@ -98,7 +98,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  PolygonData</li>
+  BoundingBox</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,7 +122,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/features/dashboard/user/studio/models/polygon.types.ts</code>
+            <code>src/app/features/dashboard/user/studio/components/left-side-bar/components/traffic-signs/traffic-signs.model.ts</code>
         </p>
 
 
@@ -141,22 +141,27 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#label" 
+                                        <a href="#x_max" 
 >
-                                            label
+                                            x_max
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#points" 
+                                        <a href="#x_min" 
 >
-                                            points
+                                            x_min
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#type" 
+                                        <a href="#y_max" 
 >
-                                            type
+                                            y_max
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#y_min" 
+>
+                                            y_min
                                         </a>
                                 </li>
                             </ul>
@@ -174,9 +179,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="label"></a>
-                                        <span class="name "><b>label</b>
-                                            <a href="#label">
+                                        <a name="x_max"></a>
+                                        <span class="name "><b>x_max</b>
+                                            <a href="#x_max">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -184,7 +189,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>label:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>x_max:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -192,45 +197,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="points"></a>
-                                        <span class="name "><b>points</b>
-                                            <a href="#points">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>points:     <code>literal type[]</code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>literal type[]</code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -245,9 +212,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="type"></a>
-                                        <span class="name "><b>type</b>
-                                            <a href="#type">
+                                        <a name="x_min"></a>
+                                        <span class="name "><b>x_min</b>
+                                            <a href="#x_min">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -255,7 +222,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>type:     <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+                                        <code>x_min:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -263,7 +230,73 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>&quot;high&quot; | &quot;medium&quot; | &quot;low&quot;</code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="y_max"></a>
+                                        <span class="name "><b>y_max</b>
+                                            <a href="#y_max">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>y_max:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="y_min"></a>
+                                        <span class="name "><b>y_min</b>
+                                            <a href="#y_min">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>y_min:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -279,14 +312,27 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface PolygonData {
-  points: { x: number; y: number }[];
-  type: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27;;
-  label?: string;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface TrafficSignResponse {
+  data: {
+    dataset_id: number;
+    image_path: string;
+    results: TrafficSignResult[];
+  };
 }
 
-export interface PolygonDataMap {
-  [id: string]: PolygonData;
+export interface TrafficSignResult {
+  objectId: string;
+  predicted_label: string;
+  accuracy: string;
+  bounding_box: BoundingBox;
+  crop_path: string;
+}
+
+export interface BoundingBox {
+  x_min: number;
+  y_min: number;
+  x_max: number;
+  y_max: number;
 }
 </code></pre>
     </div>
@@ -325,7 +371,7 @@ export interface PolygonDataMap {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'PolygonData.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'BoundingBox.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

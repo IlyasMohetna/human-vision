@@ -132,20 +132,33 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { DashboardLayoutComponent } from &#x27;./dashboard-layout/dashboard-layout.component&#x27;;
-import { HomeComponent } from &#x27;./user/home/home.component&#x27;;
-import { SettingsComponent } from &#x27;./user/settings/settings.component&#x27;;
-import { UserRoutingModule } from &#x27;./user/user-routing.module&#x27;;
+import { UserResolver } from &#x27;../../core/resolvers/user.resolver&#x27;;
+import { RoleGuard } from &#x27;../../core/guards/role.guard&#x27;;
+import { Role } from &#x27;../auth/enums/role&#x27;;
 
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
     component: DashboardLayoutComponent,
+    resolve: { user: UserResolver },
     children: [
       {
-        path: &#x27;&#x27;,
+        path: &#x27;admin&#x27;,
         loadChildren: () &#x3D;&gt;
-          &quot;import(&#x27;./user/user-routing.module&#x27;).then((m) &#x3D;&gt; m.UserRoutingModule)&quot;,
+          &quot;import(&#x27;./admin/admin.module&#x27;).then((m) &#x3D;&gt; m.AdminModule)&quot;,
+        canLoad: [RoleGuard],
+        data: { role: &#x27;admin&#x27; },
       },
+      {
+        path: &#x27;user&#x27;,
+        loadChildren: () &#x3D;&gt;
+          &quot;import(&#x27;./user/user.module&#x27;).then((m) &#x3D;&gt; m.UserModule)&quot;,
+        // canLoad: [RoleGuard],
+        data: { role: &#x27;user&#x27; },
+      },
+      // {
+      //   path: &#x27;setting&#x27;,
+      // }
     ],
   },
 ];
