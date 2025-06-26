@@ -7,9 +7,9 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	   <link rel="stylesheet" href="./styles/style.css">
-        <link rel="stylesheet" href="./styles/dark.css">
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
           <script>
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="./" class="navbar-brand">app documentation</a>
+                    <a href="../" class="navbar-brand">app documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -79,7 +79,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content package-dependencies">
+               <div class="content interface">
                    <div class="content-data">
 
 
@@ -94,65 +94,78 @@
 
 
 
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  PolygonDataMap</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/features/dashboard/user/studio/models/polygon.types.ts</code>
+        </p>
 
 
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">Dependencies</li>
-    </ol>
-    <ul class="dependencies-list">
-        <li>
-            <b>@angular/animations</b> : ^19.2.0</li>
-        <li>
-            <b>@angular/cdk</b> : ^19.2.3</li>
-        <li>
-            <b>@angular/common</b> : ^19.2.0</li>
-        <li>
-            <b>@angular/compiler</b> : ^19.2.0</li>
-        <li>
-            <b>@angular/core</b> : ^19.2.0</li>
-        <li>
-            <b>@angular/forms</b> : ^19.2.0</li>
-        <li>
-            <b>@angular/platform-browser</b> : ^19.2.0</li>
-        <li>
-            <b>@angular/platform-browser-dynamic</b> : ^19.2.0</li>
-        <li>
-            <b>@angular/router</b> : ^19.2.0</li>
-        <li>
-            <b>@fortawesome/angular-fontawesome</b> : ^1.0.0</li>
-        <li>
-            <b>@fortawesome/free-solid-svg-icons</b> : ^6.7.2</li>
-        <li>
-            <b>@primeng/themes</b> : ^19.0.9</li>
-        <li>
-            <b>@spartan-ng/brain</b> : ^0.0.1-alpha.420</li>
-        <li>
-            <b>@syncfusion/ej2-angular-image-editor</b> : ^28.2.3</li>
-        <li>
-            <b>class-variance-authority</b> : ^0.7.0</li>
-        <li>
-            <b>clsx</b> : ^2.1.1</li>
-        <li>
-            <b>fabric</b> : ^6.6.1</li>
-        <li>
-            <b>img-comparison-slider</b> : ^8.0.6</li>
-        <li>
-            <b>markerjs2</b> : ^2.32.3</li>
-        <li>
-            <b>ngx-image-zoom</b> : ^3.0.0</li>
-        <li>
-            <b>ngx-toastr</b> : ^19.0.0</li>
-        <li>
-            <b>primeng</b> : ^19.0.9</li>
-        <li>
-            <b>rxjs</b> : ~7.8.0</li>
-        <li>
-            <b>snapsvg-cjs</b> : ^0.0.6</li>
-        <li>
-            <b>tslib</b> : ^2.3.0</li>
-        <li>
-            <b>zone.js</b> : ~0.15.0</li>
-    </ul>
+
+
+
+
+            <section data-compodoc="block-indexables">
+    <h3 id="inputs">Indexable</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <code>[id: string]:        <code><a href="../interfaces/PolygonData.html" target="_self" >PolygonData</a></code>
+</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/features/dashboard/user/studio/models/polygon.types.ts:7</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface PolygonData {
+  points: { x: number; y: number }[];
+  type: &#x27;high&#x27; | &#x27;medium&#x27; | &#x27;low&#x27;;
+  label?: string;
+}
+
+export interface PolygonDataMap {
+  [id: string]: PolygonData;
+}
+</code></pre>
+    </div>
+</div>
+
 
 
 
@@ -184,9 +197,9 @@
           </label>
 
        <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'package-dependencies';
-            var COMPODOC_CURRENT_PAGE_URL = 'dependencies.html';
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'PolygonDataMap.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
@@ -203,30 +216,30 @@
                }
           </script>
 
-       <script src="./js/libs/custom-elements.min.js"></script>
-       <script src="./js/libs/lit-html.js"></script>
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
 
-       <script src="./js/menu-wc.js" defer></script>
-       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
-       <script src="./js/libs/bootstrap-native.js"></script>
+       <script src="../js/libs/bootstrap-native.js"></script>
 
-       <script src="./js/libs/es6-shim.min.js"></script>
-       <script src="./js/libs/EventDispatcher.js"></script>
-       <script src="./js/libs/promise.min.js"></script>
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
 
-       <script src="./js/compodoc.js"></script>
+       <script src="../js/compodoc.js"></script>
 
-       <script src="./js/tabs.js"></script>
-       <script src="./js/menu.js"></script>
-       <script src="./js/libs/clipboard.min.js"></script>
-       <script src="./js/libs/prism.js"></script>
-       <script src="./js/sourceCode.js"></script>
-          <script src="./js/search/search.js"></script>
-          <script src="./js/search/lunr.min.js"></script>
-          <script src="./js/search/search-lunr.js"></script>
-          <script src="./js/search/search_index.js"></script>
-       <script src="./js/lazy-load-graphs.js"></script>
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
 
 
     </body>

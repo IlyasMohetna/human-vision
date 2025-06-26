@@ -126,6 +126,13 @@
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnChanges</code>
+    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -158,6 +165,13 @@
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>CommonModule</code>
+                            <code>HttpClientModule</code>
+                                <code><a href="../components/MapComponent.html" target="_self" >MapComponent</a></code>
+                                <code><a href="../components/MetadataComponent.html" target="_self" >MetadataComponent</a></code>
+                                <code><a href="../components/VariantsComponent.html" target="_self" >VariantsComponent</a></code>
+                                <code><a href="../components/VehicleComponent.html" target="_self" >VehicleComponent</a></code>
+                                <code><a href="../components/WeatherComponent.html" target="_self" >WeatherComponent</a></code>
+                                <code><a href="../components/TrafficSignsComponent.html" target="_self" >TrafficSignsComponent</a></code>
                 </td>
             </tr>
 
@@ -197,7 +211,22 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier"></span>
+                                <a href="#geminiIframe" >geminiIframe</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#mapCoordinates" >mapCoordinates</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#mapHeading" >mapHeading</a>
+                            </li>
+                            <li>
                                 <a href="#selectedSidebarItem" >selectedSidebarItem</a>
+                            </li>
+                            <li>
+                                <a href="#showMapModal" >showMapModal</a>
                             </li>
                             <li>
                                 <a href="#sidebarNavItems" >sidebarNavItems</a>
@@ -215,13 +244,75 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#closeMapModal" >closeMapModal</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onIframeLoad" >onIframeLoad</a>
+                            </li>
+                            <li>
                                 <a href="#selectSidebarItem" >selectSidebarItem</a>
+                            </li>
+                            <li>
+                                <a href="#selectVariant" >selectVariant</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateMapData" >updateMapData</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#currentImageUrl" >currentImageUrl</a>
+                            </li>
+                            <li>
+                                <a href="#datasetId" >datasetId</a>
+                            </li>
+                            <li>
+                                <a href="#metadata" >metadata</a>
+                            </li>
+                            <li>
+                                <a href="#variants" >variants</a>
+                            </li>
+                            <li>
+                                <a href="#vehicle" >vehicle</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#signHovered" >signHovered</a>
+                            </li>
+                            <li>
+                                <a href="#variantSelected" >variantSelected</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -230,8 +321,184 @@
 </section>
 
 
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentImageUrl"></a>
+                        <b>currentImageUrl</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:41</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="datasetId"></a>
+                        <b>datasetId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:42</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="metadata"></a>
+                        <b>metadata</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:39</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="variants"></a>
+                        <b>variants</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:38</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="vehicle"></a>
+                        <b>vehicle</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:40</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="signHovered"></a>
+                        <b>signHovered</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:45</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="variantSelected"></a>
+                        <b>variantSelected</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:44</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
 
 
     <section data-compodoc="block-methods">
@@ -243,24 +510,61 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="selectSidebarItem"></a>
+                    <a name="closeMapModal"></a>
                     <span class="name">
-                        <span ><b>selectSidebarItem</b></span>
-                        <a href="#selectSidebarItem"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>closeMapModal</b></span>
+                        <a href="#closeMapModal"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>selectSidebarItem(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+<code>closeMapModal()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="20"
-                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:20</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:120</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: SimpleChanges)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -281,9 +585,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>index</td>
+                                                <td>changes</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        <code>SimpleChanges</code>
                                             </td>
 
                                             <td>
@@ -306,12 +610,359 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onIframeLoad"></a>
+                    <span class="name">
+                        <span ><b>onIframeLoad</b></span>
+                        <a href="#onIframeLoad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onIframeLoad()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectSidebarItem"></a>
+                    <span class="name">
+                        <span ><b>selectSidebarItem</b></span>
+                        <a href="#selectSidebarItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectSidebarItem(item: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectVariant"></a>
+                    <span class="name">
+                        <span ><b>selectVariant</b></span>
+                        <a href="#selectVariant"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectVariant(variant: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:124</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>variant</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateMapData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateMapData</b></span>
+                        <a href="#updateMapData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateMapData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section data-compodoc="block-properties">
     
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="geminiIframe"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>geminiIframe</b></span>
+                        <a href="#geminiIframe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLIFrameElement&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;geminiIframe&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mapCoordinates"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>mapCoordinates</b></span>
+                        <a href="#mapCoordinates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mapHeading"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>mapHeading</b></span>
+                        <a href="#mapHeading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -331,12 +982,37 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>1</code>
+                        <i>Default value : </i><code>0</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showMapModal"></a>
+                    <span class="name">
+                        <span ><b>showMapModal</b></span>
+                        <a href="#showMapModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -363,15 +1039,19 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>[
-    { label: &#x27;Images&#x27; },
+    { label: &#x27;Variants&#x27; },
+    { label: &#x27;Vehicle&#x27; },
+    { label: &#x27;Weather&#x27; },
+    { label: &#x27;Maps&#x27; },
     { label: &#x27;Traffic sign&#x27; },
+    { label: &#x27;Meta data&#x27; },
     { label: &#x27;IA&#x27; },
   ]</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/dashboard/user/studio/components/left-side-bar/left-side-bar.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -384,27 +1064,132 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+  ElementRef,
+} from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
+import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
+import { MapComponent } from &#x27;./components/map/map.component&#x27;;
+import { MetadataComponent } from &#x27;./components/metadata/metadata.component&#x27;;
+import { VariantsComponent } from &#x27;./components/variants/variants.component&#x27;;
+import { VehicleComponent } from &#x27;./components/vehicle/vehicle.component&#x27;;
+import { WeatherComponent } from &#x27;./components/weather/weather.component&#x27;;
+import { TrafficSignsComponent } from &#x27;./components/traffic-signs/traffic-signs.component&#x27;;
 
 @Component({
   selector: &#x27;app-left-side-bar&#x27;,
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    MapComponent,
+    MetadataComponent,
+    VariantsComponent,
+    VehicleComponent,
+    WeatherComponent,
+    TrafficSignsComponent,
+  ],
   templateUrl: &#x27;./left-side-bar.component.html&#x27;,
   styleUrls: [&#x27;./left-side-bar.component.css&#x27;],
 })
-export class LeftSideBarComponent {
-  selectedSidebarItem &#x3D; 1;
+export class LeftSideBarComponent implements OnInit, OnChanges {
+  @Input() variants: any[] &#x3D; [];
+  @Input() metadata: any &#x3D; {};
+  @Input() vehicle: any &#x3D; {};
+  @Input() currentImageUrl: string &#x3D; &#x27;&#x27;;
+  @Input() datasetId: number &#x3D; 1;
+
+  @Output() variantSelected &#x3D; new EventEmitter&lt;any&gt;();
+  @Output() signHovered &#x3D; new EventEmitter&lt;string | null&gt;();
+
+  @ViewChild(&#x27;geminiIframe&#x27;) geminiIframe!: ElementRef&lt;HTMLIFrameElement&gt;;
+
+  public mapCoordinates: string &#x3D; &#x27;&#x27;;
+  public mapHeading: number | null &#x3D; null;
+
+  selectedSidebarItem &#x3D; 0;
+  showMapModal &#x3D; false;
 
   sidebarNavItems &#x3D; [
-    { label: &#x27;Images&#x27; },
+    { label: &#x27;Variants&#x27; },
+    { label: &#x27;Vehicle&#x27; },
+    { label: &#x27;Weather&#x27; },
+    { label: &#x27;Maps&#x27; },
     { label: &#x27;Traffic sign&#x27; },
+    { label: &#x27;Meta data&#x27; },
     { label: &#x27;IA&#x27; },
   ];
 
-  selectSidebarItem(index: number) {
-    this.selectedSidebarItem &#x3D; index;
+  ngOnInit() {
+    const originalImage &#x3D; this.variants.find(
+      (variant) &#x3D;&gt; variant.type &#x3D;&#x3D;&#x3D; &#x27;Original Image&#x27;
+    );
+    if (originalImage) {
+      this.selectVariant(originalImage);
+    }
+
+    this.updateMapData();
+  }
+
+  onIframeLoad() {
+    // By the time we reach here, the iframe is fully loaded.
+    console.log(&#x27;iframe load event triggered.&#x27;);
+
+    // Double check that we have the reference
+    if (this.geminiIframe?.nativeElement?.contentWindow) {
+      // Example of sending a postMessage
+      this.geminiIframe.nativeElement.contentWindow.postMessage(
+        &#x27;Hello from parent after load event!&#x27;,
+        &#x27;*&#x27;
+      );
+    } else {
+      console.warn(&#x27;geminiIframe or contentWindow is not available.&#x27;);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes[&#x27;vehicle&#x27;]) {
+      this.updateMapData();
+    }
+  }
+
+  private updateMapData() {
+    if (this.vehicle &amp;&amp; typeof this.vehicle &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+      if (this.vehicle.gpsLatitude &amp;&amp; this.vehicle.gpsLongitude) {
+        this.mapCoordinates &#x3D; &#x60;${this.vehicle.gpsLatitude},${this.vehicle.gpsLongitude}&#x60;;
+        this.mapHeading &#x3D; this.vehicle.gpsHeading || 0;
+      } else {
+        console.warn(
+          &#x27;Vehicle object exists but is missing GPS coordinates:&#x27;,
+          this.vehicle
+        );
+      }
+    }
+  }
+
+  selectSidebarItem(item: any): void {
+    if (item &#x3D;&#x3D;&#x3D; 3) {
+      this.showMapModal &#x3D; true;
+    } else {
+      this.selectedSidebarItem &#x3D; item;
+    }
+  }
+
+  closeMapModal() {
+    this.showMapModal &#x3D; false;
+  }
+
+  selectVariant(variant: any) {
+    this.currentImageUrl &#x3D; variant.path;
+    this.variantSelected.emit(variant);
   }
 }
 </code></pre>
@@ -424,37 +1209,71 @@ export class LeftSideBarComponent {
     &lt;/div&gt;
   &lt;/div&gt;
 
-  &lt;div class&#x3D;&quot;NavigationBarContentWrapper&quot;&gt;
+  &lt;div
+    class&#x3D;&quot;persistent-iframe&quot;
+    [style.display]&#x3D;&quot;selectedSidebarItem &#x3D;&#x3D;&#x3D; 6 ? &#x27;block&#x27; : &#x27;none&#x27;&quot;
+  &gt;
+    &lt;iframe
+      #geminiIframe
+      src&#x3D;&quot;https://gemini.google.com&quot;
+      class&#x3D;&quot;mobile-view-iframe&quot;
+    &gt;&lt;/iframe&gt;
+  &lt;/div&gt;
+
+  &lt;div [style.display]&#x3D;&quot;selectedSidebarItem &#x3D;&#x3D;&#x3D; 6 ? &#x27;none&#x27; : &#x27;block&#x27;&quot;&gt;
     &lt;ng-container [ngSwitch]&#x3D;&quot;selectedSidebarItem&quot;&gt;
-      &lt;div *ngSwitchCase&#x3D;&quot;0&quot; class&#x3D;&quot;ContentPanel&quot;&gt;
-        &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Project&lt;/h2&gt;
-        &lt;nav class&#x3D;&quot;MenuItems&quot;&gt;
-          &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;MenuItem&quot;&gt;Dashboard&lt;/a&gt;
-          &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;MenuItem&quot;&gt;Settings&lt;/a&gt;
-          &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;MenuItem&quot;&gt;Export&lt;/a&gt;
-        &lt;/nav&gt;
+      &lt;div *ngSwitchCase&#x3D;&quot;0&quot;&gt;
+        &lt;app-variants
+          [variants]&#x3D;&quot;variants&quot;
+          [currentImageUrl]&#x3D;&quot;currentImageUrl&quot;
+          (variantSelected)&#x3D;&quot;selectVariant($event)&quot;
+        &gt;&lt;/app-variants&gt;
       &lt;/div&gt;
 
-      &lt;div *ngSwitchCase&#x3D;&quot;1&quot; class&#x3D;&quot;ContentPanel&quot;&gt;
-        &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Tools&lt;/h2&gt;
-        &lt;p&gt;Blabla&lt;/p&gt;
+      &lt;div *ngSwitchCase&#x3D;&quot;1&quot; class&#x3D;&quot;ContentPanel !p-0&quot;&gt;
+        &lt;h2 class&#x3D;&quot;PanelTitle p-3&quot;&gt;Vehicle Information&lt;/h2&gt;
+        &lt;app-vehicle [vehicle]&#x3D;&quot;vehicle&quot;&gt;&lt;/app-vehicle&gt;
       &lt;/div&gt;
 
       &lt;div *ngSwitchCase&#x3D;&quot;2&quot; class&#x3D;&quot;ContentPanel&quot;&gt;
-        &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Zoom Controls&lt;/h2&gt;
-        &lt;p&gt;Ok&lt;/p&gt;
+        &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Météo&lt;/h2&gt;
+        &lt;app-weather
+          [datasetId]&#x3D;&quot;datasetId&quot;
+          [outsideTemperature]&#x3D;&quot;vehicle?.outsideTemperature&quot;
+        &gt;&lt;/app-weather&gt;
       &lt;/div&gt;
 
       &lt;div *ngSwitchCase&#x3D;&quot;3&quot; class&#x3D;&quot;ContentPanel&quot;&gt;
-        &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Annotations&lt;/h2&gt;
-        &lt;p&gt;oKKK&lt;/p&gt;
+        &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Maps&lt;/h2&gt;
+        &lt;p&gt;Maps information&lt;/p&gt;
       &lt;/div&gt;
 
       &lt;div *ngSwitchCase&#x3D;&quot;4&quot; class&#x3D;&quot;ContentPanel&quot;&gt;
-        &lt;h2 class&#x3D;&quot;PanelTitle&quot;&gt;Images&lt;/h2&gt;
+        &lt;h2 class&#x3D;&quot;PanelTitle p-3&quot;&gt;Traffic sign&lt;/h2&gt;
+        &lt;app-traffic-signs
+          [datasetId]&#x3D;&quot;datasetId&quot;
+          (hoverSign)&#x3D;&quot;signHovered.emit($event)&quot;
+        &gt;&lt;/app-traffic-signs&gt;
+      &lt;/div&gt;
+
+      &lt;div *ngSwitchCase&#x3D;&quot;5&quot; class&#x3D;&quot;ContentPanel !p-0&quot;&gt;
+        &lt;h2 class&#x3D;&quot;PanelTitle p-3&quot;&gt;Meta data&lt;/h2&gt;
+        &lt;app-metadata [metadata]&#x3D;&quot;metadata&quot;&gt;&lt;/app-metadata&gt;
+      &lt;/div&gt;
+
+      &lt;div *ngSwitchCase&#x3D;&quot;6&quot; class&#x3D;&quot;ContentPanel !p-0 flex flex-col h-full&quot;&gt;
+        &lt;!-- Just a placeholder, actual content is in the persistent-iframe div --&gt;
       &lt;/div&gt;
     &lt;/ng-container&gt;
   &lt;/div&gt;
+
+  &lt;app-map
+    [isOpen]&#x3D;&quot;showMapModal&quot;
+    [coordinates]&#x3D;&quot;mapCoordinates&quot;
+    [heading]&#x3D;&quot;mapHeading ?? 0&quot;
+    (closeModalEvent)&#x3D;&quot;closeMapModal()&quot;
+  &gt;
+  &lt;/app-map&gt;
 &lt;/aside&gt;
 </code></pre>
     </div>
@@ -463,31 +1282,34 @@ export class LeftSideBarComponent {
                 <p class="comment">
                     <code>./left-side-bar.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">/* All left sidebar styles moved from studio component */
-.SideNavigationBar {
+                <pre class="line-numbers"><code class="language-scss">.SideNavigationBar {
   display: flex;
-  width: 300px; /* Increased fixed width */
-  min-width: 300px; /* Ensure it never shrinks below this width */
+  width: 400px;
+  min-width: 300px;
   background-color: #282828;
   border-right: 1px solid #3a3a3a;
   height: 100%;
-  overflow: hidden; /* Prevent any overflow */
-  flex-shrink: 0; /* Prevent sidebar from shrinking */
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.SideNavigationBar.left {
+  height: 100%;
 }
 
 .CompanionBar {
-  width: 50px; /* Slightly wider for better readability */
+  width: 50px;
   min-width: 50px;
-  flex-shrink: 0; /* Prevent from shrinking */
+  flex-shrink: 0;
   background-color: #1e1e1e;
   border-right: 1px solid #333;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Prevent scroll */
+  overflow: hidden;
 }
 
 .VerticalEditorButton {
-  height: 90px; /* Taller buttons */
+  height: 90px;
   padding: 8px 0;
   color: #b3b3b3;
   cursor: pointer;
@@ -497,13 +1319,12 @@ export class LeftSideBarComponent {
   position: relative;
 }
 
-/* Create vertical text */
 .nav-text {
   writing-mode: vertical-lr;
   transform: rotate(180deg);
   text-orientation: mixed;
   white-space: nowrap;
-  font-size: 14px; /* Larger font */
+  font-size: 14px;
   position: absolute;
   left: 50%;
   top: 0;
@@ -519,7 +1340,7 @@ export class LeftSideBarComponent {
   background-color: #383838;
   color: white;
   border-left: 3px solid #0078d7;
-  padding-left: 3px; /* Adjusted for the border */
+  padding-left: 3px;
 }
 
 .VerticalEditorButton:hover {
@@ -527,24 +1348,36 @@ export class LeftSideBarComponent {
 }
 
 .NavigationBarContentWrapper {
-  width: 250px; /* Fixed width: 300px total - 50px CompanionBar */
+  width: 250px;
   min-width: 250px;
-  flex-shrink: 0; /* Prevent shrinking */
+  flex-shrink: 0;
   overflow-y: auto;
-  overflow-x: hidden; /* Hide horizontal overflow */
+  overflow-x: hidden;
   background-color: #282828;
-  border-left: none; /* Remove any internal border */
+  border-left: none;
 }
 
 .ContentPanel {
   width: 100%;
   padding: 16px;
-  box-sizing: border-box; /* Include padding in width calculation */
-  background-color: #282828; /* Same as wrapper background */
+  box-sizing: border-box;
+  background-color: #282828;
+  /* height: calc(100vh - 90px); Keep this to ensure proper scrolling area */
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex; /* Add flex display */
+  flex-direction: column; /* Arrange children vertically */
 }
 
-.ContentPanel * {
+.ContentPanel.flex.flex-col.h-full {
+  flex: 1;
+  display: flex;
+}
+
+.ContentPanel &gt; * {
   max-width: 100%;
+  flex-grow: 1; /* Allow children to grow and take available space */
 }
 
 .PanelTitle {
@@ -681,7 +1514,6 @@ export class LeftSideBarComponent {
   background-color: #43a047;
 }
 
-/* Image list styling */
 .ImagesList {
   width: 100%;
   display: grid;
@@ -739,6 +1571,24 @@ export class LeftSideBarComponent {
   border-radius: 4px;
   text-align: center;
 }
+
+.persistent-iframe {
+  flex: 1;
+  width: calc(100% - 50px);
+  height: 100%;
+  background-color: #282828;
+  overflow: hidden;
+}
+
+.mobile-view-iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  max-width: none !important;
+  transform: none !important;
+}
 </code></pre>
     </div>
 
@@ -767,8 +1617,8 @@ export class LeftSideBarComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><aside class="SideNavigationBar left">  <div class="CompanionBar">    <div      *ngFor="let item of sidebarNavItems; let i = index"      class="VerticalEditorButton"      [class.active]="selectedSidebarItem === i"      (click)="selectSidebarItem(i)"      [attr.title]="item.label"    >      <span class="nav-text">{{ item.label }}</span>    </div>  </div>  <div class="NavigationBarContentWrapper">    <ng-container [ngSwitch]="selectedSidebarItem">      <div *ngSwitchCase="0" class="ContentPanel">        <h2 class="PanelTitle">Project</h2>        <nav class="MenuItems">          <a href="#" class="MenuItem">Dashboard</a>          <a href="#" class="MenuItem">Settings</a>          <a href="#" class="MenuItem">Export</a>        </nav>      </div>      <div *ngSwitchCase="1" class="ContentPanel">        <h2 class="PanelTitle">Tools</h2>        <p>Blabla</p>      </div>      <div *ngSwitchCase="2" class="ContentPanel">        <h2 class="PanelTitle">Zoom Controls</h2>        <p>Ok</p>      </div>      <div *ngSwitchCase="3" class="ContentPanel">        <h2 class="PanelTitle">Annotations</h2>        <p>oKKK</p>      </div>      <div *ngSwitchCase="4" class="ContentPanel">        <h2 class="PanelTitle">Images</h2>      </div>    </ng-container>  </div></aside></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ControlBarComponent', 'selector': 'app-control-bar'},{'name': 'ControlBarItemComponent', 'selector': 'app-control-bar-item'},{'name': 'DashboardLayoutComponent', 'selector': 'app-dashboard-layout'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LeftSideBarComponent', 'selector': 'app-left-side-bar'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StudioComponent', 'selector': 'app-studio'}];
+        var COMPONENT_TEMPLATE = '<div><aside class="SideNavigationBar left">  <div class="CompanionBar">    <div      *ngFor="let item of sidebarNavItems; let i = index"      class="VerticalEditorButton"      [class.active]="selectedSidebarItem === i"      (click)="selectSidebarItem(i)"      [attr.title]="item.label"    >      <span class="nav-text">{{ item.label }}</span>    </div>  </div>  <div    class="persistent-iframe"    [style.display]="selectedSidebarItem === 6 ? \'block\' : \'none\'"  >    <iframe      #geminiIframe      src="https://gemini.google.com"      class="mobile-view-iframe"    ></iframe>  </div>  <div [style.display]="selectedSidebarItem === 6 ? \'none\' : \'block\'">    <ng-container [ngSwitch]="selectedSidebarItem">      <div *ngSwitchCase="0">        <app-variants          [variants]="variants"          [currentImageUrl]="currentImageUrl"          (variantSelected)="selectVariant($event)"        ></app-variants>      </div>      <div *ngSwitchCase="1" class="ContentPanel !p-0">        <h2 class="PanelTitle p-3">Vehicle Information</h2>        <app-vehicle [vehicle]="vehicle"></app-vehicle>      </div>      <div *ngSwitchCase="2" class="ContentPanel">        <h2 class="PanelTitle">Météo</h2>        <app-weather          [datasetId]="datasetId"          [outsideTemperature]="vehicle?.outsideTemperature"        ></app-weather>      </div>      <div *ngSwitchCase="3" class="ContentPanel">        <h2 class="PanelTitle">Maps</h2>        <p>Maps information</p>      </div>      <div *ngSwitchCase="4" class="ContentPanel">        <h2 class="PanelTitle p-3">Traffic sign</h2>        <app-traffic-signs          [datasetId]="datasetId"          (hoverSign)="signHovered.emit($event)"        ></app-traffic-signs>      </div>      <div *ngSwitchCase="5" class="ContentPanel !p-0">        <h2 class="PanelTitle p-3">Meta data</h2>        <app-metadata [metadata]="metadata"></app-metadata>      </div>      <div *ngSwitchCase="6" class="ContentPanel !p-0 flex flex-col h-full">        <!-- Just a placeholder, actual content is in the persistent-iframe div -->      </div>    </ng-container>  </div>  <app-map    [isOpen]="showMapModal"    [coordinates]="mapCoordinates"    [heading]="mapHeading ?? 0"    (closeModalEvent)="closeMapModal()"  >  </app-map></aside></div>'
+    var COMPONENTS = [{'name': 'AnnotationCategoryComponent', 'selector': 'app-annotation-category'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'CommentModalComponent', 'selector': 'app-comment-modal'},{'name': 'ControlBarComponent', 'selector': 'app-control-bar'},{'name': 'ControlBarItemComponent', 'selector': 'app-control-bar-item'},{'name': 'DashboardLayoutComponent', 'selector': 'app-dashboard-layout'},{'name': 'DatasetComponent', 'selector': 'app-dataset'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ImportComponent', 'selector': 'app-import'},{'name': 'LeftSideBarComponent', 'selector': 'app-left-side-bar'},{'name': 'LoadingOverlayComponent', 'selector': 'app-loading-overlay'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MetadataComponent', 'selector': 'app-metadata'},{'name': 'RightSideBarComponent', 'selector': 'app-right-side-bar'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StudioComponent', 'selector': 'app-studio'},{'name': 'TrafficSignsComponent', 'selector': 'app-traffic-signs'},{'name': 'VariantsComponent', 'selector': 'app-variants'},{'name': 'VehicleComponent', 'selector': 'app-vehicle'},{'name': 'WeatherComponent', 'selector': 'app-weather'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LeftSideBarComponent'};
 </script>
